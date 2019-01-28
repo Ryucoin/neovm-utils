@@ -1,7 +1,7 @@
 # neovmUtils
 
 [![CI Status](https://img.shields.io/travis/WyattMufson/neovmUtils.svg?style=flat)](https://travis-ci.com/Ryucoin/neovm-utils)
-[![Coverage Status](https://coveralls.io/repos/github/Ryucoin/neovm-utils/badge.svg?branch=master)](https://coveralls.io/github/Ryucoin/neovm-utils?branch=master)
+[![codecov](https://codecov.io/gh/Ryucoin/neovm-utils/branch/master/graph/badge.svg)](https://codecov.io/gh/Ryucoin/neovm-utils)
 [![Version](https://img.shields.io/cocoapods/v/neovmUtils.svg?style=flat)](https://cocoapods.org/pods/neovmUtils)
 [![License](https://img.shields.io/cocoapods/l/neovmUtils.svg?style=flat)](https://cocoapods.org/pods/neovmUtils)
 [![Platform](https://img.shields.io/cocoapods/p/neovmUtils.svg?style=flat)](https://cocoapods.org/pods/neovmUtils)
