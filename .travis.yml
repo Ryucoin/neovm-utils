@@ -1,14 +1,6 @@
-# references:
-# * https://www.objc.io/issues/6-build-tools/travis-ci/
-# * https://github.com/supermarin/xcpretty#usage
-os: osx
-osx_image: xcode10.1
 language: objective-c
-# cache: cocoapods
-podfile: Example/Podfile
-# before_install:
-- gem install cocoapods
-- pod install --project-directory=Example
+osx_image: xcode10.1
+
 script:
-- set -o pipefail && xcodebuild clean test -enableCodeCoverage YES -workspace Example/neovmUtils.xcworkspace -scheme neovmUtils-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty
+- xcodebuild clean build test -enableCodeCoverage YES -workspace Example/neovmUtils.xcworkspace -scheme neovmUtils-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
 - pod lib lint
