@@ -2,7 +2,7 @@ language: objective-c
 osx_image: xcode10.1
 
 script:
-- xcodebuild clean build test -enableCodeCoverage YES -workspace Example/neovmUtils.xcworkspace -scheme neovmUtils-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+- xcodebuild clean build test -enableCodeCoverage YES -workspace Example/neovmUtils.xcworkspace -scheme neovmUtils-Example -destination 'platform=iOS Simulator,name=iPhone 6,OS=12.1' ONLY_ACTIVE_ARCH=NO
 - pod lib lint
 
 after_success:
