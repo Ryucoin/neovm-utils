@@ -1,5 +1,5 @@
 import XCTest
-import neovmUtils
+import Neoutils
 
 class Tests: XCTestCase {
     
@@ -18,11 +18,46 @@ class Tests: XCTestCase {
         XCTAssert(true, "Pass")
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure() {
-            // Put the code you want to measure the time of here.
+    func testBuildOntologyInvocation(){
+        let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
+        let method = "put"
+        let argDict : [[String:Any]] = [["T":"Address", "V":""], ["T":"String", "V":"Hello!"]]
+        
+        do {
+            let data =  try JSONSerialization.data(withJSONObject: argDict, options: .prettyPrinted)
+            let args = String(data: data, encoding: String.Encoding.utf8)
+            let gasPrice = 500
+            let gasLimit = 20000
+            let wif = ""
+            let err = NSErrorPointer(nilLiteral: ())
+            let res = NeoutilsBuildOntologyInvocationTransaction(contractHash, method, args, gasPrice, gasLimit, wif, err)
+            XCTAssertNil(err)
+            XCTAssertNotNil(res)
+            print("Response: \(res ?? "ERROR")")
+        } catch let error {
+            XCTFail("Failed to cast JSON: \(error)")
         }
     }
     
+    func testOntologyInvocation(){
+        let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
+        let method = "put"
+        let argDict : [[String:Any]] = [["T":"Address", "V":""], ["T":"String", "V":"Hello!"]]
+        
+        do {
+            let data =  try JSONSerialization.data(withJSONObject: argDict, options: .prettyPrinted)
+            let args = String(data: data, encoding: String.Encoding.utf8)
+            let gasPrice = 500
+            let gasLimit = 20000
+            let endpoint = "http://polaris2.ont.io:20336"
+            let wif = ""
+            let err = NSErrorPointer(nilLiteral: ())
+            let res = NeoutilsOntologyInvoke(endpoint, contractHash, method, args, gasPrice, gasLimit, wif, err)
+            XCTAssertNil(err)
+            XCTAssertNotNil(res)
+            print("Response: \(res ?? "ERROR")")
+        } catch let error {
+            XCTFail("Failed to cast JSON: \(error)")
+        }
+    }
 }

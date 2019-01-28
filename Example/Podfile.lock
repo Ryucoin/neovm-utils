@@ -1,0 +1,16 @@
+PODS:
+  - neovmUtils (0.1.0)
+
+DEPENDENCIES:
+  - neovmUtils (from `../`)
+
+EXTERNAL SOURCES:
+  neovmUtils:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  neovmUtils: f9caa23f0f55efaf8d7f198765a4293d278fa965
+
+PODFILE CHECKSUM: ac5fda355374afed7f3bb9974cad68260b7d21fd
+
+COCOAPODS: 1.5.3
