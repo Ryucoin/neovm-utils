@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  neovmUtils: f9caa23f0f55efaf8d7f198765a4293d278fa965
+  neovmUtils: 17fada6b955484af84cf43d94cb7f2eb55ea70cb
 
-PODFILE CHECKSUM: ac5fda355374afed7f3bb9974cad68260b7d21fd
+PODFILE CHECKSUM: faf48c551be973d1e1cb51044844c3aeaaad1fbb
 
 COCOAPODS: 1.5.3

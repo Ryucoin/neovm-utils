@@ -2,5 +2,4 @@ use_frameworks!
 target 'neovmUtils_Tests' do
   pod 'neovmUtils', :path => '../'
   
-  
 end

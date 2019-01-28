@@ -2,7 +2,7 @@
   "name": "neovmUtils",
   "version": "0.1.0",
   "summary": "Useful functions for the NEO and Ontology blockchains for iOS.",
-  "homepage": "https://github.com/Ryucoin/neovmUtils",
+  "homepage": "https://github.com/Ryucoin/neovm-utils",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -11,12 +11,13 @@
     "WyattMufson": "wyatt@ryucoin.com"
   },
   "source": {
-    "git": "https://github.com/Ryucoin/neovmUtils.git",
+    "git": "https://github.com/Ryucoin/neovm-utils.git",
     "tag": "0.1.0"
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "12.0"
   },
+  "swift_version": "4.2",
   "source_files": "neovmUtils/**/*/*.swift",
   "vendored_frameworks": "Example/neoutils.framework"
 }

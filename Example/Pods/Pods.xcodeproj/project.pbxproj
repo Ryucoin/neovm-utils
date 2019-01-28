@@ -7,57 +7,89 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		18985DBF80F4EA5F7F2F12F840E09DC7 /* Pods-neovmUtils_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D9D973F6A6727189FC2D9F6F7BCFB943 /* Pods-neovmUtils_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5A3E02EB9F2655F2BB74C2B0B35A226C /* Pods-neovmUtils_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 537CF9DC71D7FA12825CDE09FB07D70A /* Pods-neovmUtils_Tests-dummy.m */; };
-		DC47C390C356C7D2450D3372AC9A50DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6DFF15000AFE2A371BF499E7AFDA808 /* Foundation.framework */; };
+		0E807ACA66967D9283EC4486081A39C1 /* Pods-neovmUtils_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 537CF9DC71D7FA12825CDE09FB07D70A /* Pods-neovmUtils_Tests-dummy.m */; };
+		47ED6258B6BA930B7197D9B36B142EA6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6DFF15000AFE2A371BF499E7AFDA808 /* Foundation.framework */; };
+		5DDB70E0D3ED5E80364A41A67D9FF2BF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6DFF15000AFE2A371BF499E7AFDA808 /* Foundation.framework */; };
+		97635FEF80956B6294B7DC7E459AD991 /* neovmUtils-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FA07FCA1AEA7C542D7B3425D85AF7E82 /* neovmUtils-dummy.m */; };
+		B2DAD282A3859154C4084472B96460E4 /* neovm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9389C22FDC7580A914748EF12162AE78 /* neovm.swift */; };
+		B8AF94D016C3D1EDF60428FB58C6DCF5 /* Pods-neovmUtils_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D9D973F6A6727189FC2D9F6F7BCFB943 /* Pods-neovmUtils_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D56F4C7F4E87BE70076356B0A95D6BC4 /* neovmUtils-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A8F5F175C27A1F1BDF82FBFB01865352 /* neovmUtils-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2995A1F51BE2F8D56E841473A2ADAEF4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0B82D384F0EFBD4D53664F481F83D413;
+			remoteInfo = neovmUtils;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0851FDA6F0C6DF9BFF7BC28E1823910A /* Pods-neovmUtils_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-neovmUtils_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		11F8607C8583776EE6B900A0FAB582EE /* Pods_neovmUtils_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_neovmUtils_Tests.framework; path = "Pods-neovmUtils_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		33FE13020A65CAB608DE7C04FBA3FB99 /* Pods-neovmUtils_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-neovmUtils_Tests-resources.sh"; sourceTree = "<group>"; };
+		439312E7589B62F5B517D28E75FD002A /* Pods_neovmUtils_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_neovmUtils_Tests.framework; path = "Pods-neovmUtils_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A0357CD80E7670FEF7945CF7C378CCB /* neovmUtils.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = neovmUtils.modulemap; sourceTree = "<group>"; };
 		537CF9DC71D7FA12825CDE09FB07D70A /* Pods-neovmUtils_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-neovmUtils_Tests-dummy.m"; sourceTree = "<group>"; };
-		604C88A2D1AA27BCCA62D866D37C9006 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
-		762B17D1BD546CC84DEAFAB475D8C46A /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
-		843BD19A8279FC1BD29B23A3C9533131 /* neovmUtils.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = neovmUtils.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		602BA64E9D1784C7E6AA32CD92C6CE4F /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		794BF7102303D0D17CF0E10D41708C71 /* neovmUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = neovmUtils.framework; path = neovmUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B9DE5BE3C4BB0E960E690D0273792C8 /* neovmUtils-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "neovmUtils-prefix.pch"; sourceTree = "<group>"; };
+		887461166BA1F442016EFD7DD57059CF /* neoutils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = neoutils.framework; path = Example/neoutils.framework; sourceTree = "<group>"; };
+		9389C22FDC7580A914748EF12162AE78 /* neovm.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = neovm.swift; path = neovmUtils/Classes/neovm.swift; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9E2F97FFCFEF5F797D1EB2D1DEF59E0C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A15F3820C472C35F8C6D4BCF06781303 /* Pods-neovmUtils_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-neovmUtils_Tests-frameworks.sh"; sourceTree = "<group>"; };
+		A8B0C6A394EC4C5E77B1F961D96D40DF /* neovmUtils.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = neovmUtils.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A8F5F175C27A1F1BDF82FBFB01865352 /* neovmUtils-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "neovmUtils-umbrella.h"; sourceTree = "<group>"; };
 		B7281485E1FA42CA2E31B9E356FEA500 /* Pods-neovmUtils_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-neovmUtils_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		BB695EF7D421712C0863BF8790A752F8 /* neoutils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = neoutils.framework; path = Example/neoutils.framework; sourceTree = "<group>"; };
 		BEA112C71F49CD1509720475D66E199F /* Pods-neovmUtils_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-neovmUtils_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		C790AD697D8C36DA6924F38B1CC12FBC /* Pods-neovmUtils_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-neovmUtils_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
+		D0CF599E5C4D59E7A920B407F8CCF9CA /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		D61EB69DBD88F8956BCE53AEE26EDCCC /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6DFF15000AFE2A371BF499E7AFDA808 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		D9D973F6A6727189FC2D9F6F7BCFB943 /* Pods-neovmUtils_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-neovmUtils_Tests-umbrella.h"; sourceTree = "<group>"; };
 		F70B624708FFAF02C041EB83B9F63D10 /* Pods-neovmUtils_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-neovmUtils_Tests.modulemap"; sourceTree = "<group>"; };
+		FA07FCA1AEA7C542D7B3425D85AF7E82 /* neovmUtils-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "neovmUtils-dummy.m"; sourceTree = "<group>"; };
+		FC6AFA55A1DEADD9F1340975439B2925 /* neovmUtils.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = neovmUtils.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		179F1676CB47ACA1DE87F75A9C23E7AF /* Frameworks */ = {
+		3474E90C3F6B6EF76861658A728491B4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC47C390C356C7D2450D3372AC9A50DB /* Foundation.framework in Frameworks */,
+				47ED6258B6BA930B7197D9B36B142EA6 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E74BFE6A9CD81055BA911CC2BDFE03D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5DDB70E0D3ED5E80364A41A67D9FF2BF /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2171D80F422566E3039A76E2C84A9741 /* Frameworks */ = {
+		065F85610E146AE68CDD0F6836681319 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BB695EF7D421712C0863BF8790A752F8 /* neoutils.framework */,
+				887461166BA1F442016EFD7DD57059CF /* neoutils.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		2F83DA95806758BBFD1B543CB39F8D4A /* Products */ = {
+		1BC90905EA2D158791BBF8FEA15176EB /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				11F8607C8583776EE6B900A0FAB582EE /* Pods_neovmUtils_Tests.framework */,
+				D0CF599E5C4D59E7A920B407F8CCF9CA /* LICENSE */,
+				A8B0C6A394EC4C5E77B1F961D96D40DF /* neovmUtils.podspec */,
+				602BA64E9D1784C7E6AA32CD92C6CE4F /* README.md */,
 			);
-			name = Products;
+			name = Pod;
 			sourceTree = "<group>";
 		};
 		44D5347904CF754D6785B84253F2574A /* iOS */ = {
@@ -68,43 +100,46 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		78633433F79F92AB5C3AC62A1D6DC0A5 /* neovmUtils */ = {
+		718BF8BDFA253084577D2902DDE63E66 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2171D80F422566E3039A76E2C84A9741 /* Frameworks */,
-				AEA5A6F4E9A82ABD8EF5E764F2268272 /* Pod */,
+				794BF7102303D0D17CF0E10D41708C71 /* neovmUtils.framework */,
+				439312E7589B62F5B517D28E75FD002A /* Pods_neovmUtils_Tests.framework */,
 			);
-			name = neovmUtils;
-			path = ../..;
+			name = Products;
+			sourceTree = "<group>";
+		};
+		79F01353FAAD41CCF2AD067C24456A03 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				D61EB69DBD88F8956BCE53AEE26EDCCC /* Info.plist */,
+				4A0357CD80E7670FEF7945CF7C378CCB /* neovmUtils.modulemap */,
+				FC6AFA55A1DEADD9F1340975439B2925 /* neovmUtils.xcconfig */,
+				FA07FCA1AEA7C542D7B3425D85AF7E82 /* neovmUtils-dummy.m */,
+				7B9DE5BE3C4BB0E960E690D0273792C8 /* neovmUtils-prefix.pch */,
+				A8F5F175C27A1F1BDF82FBFB01865352 /* neovmUtils-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/neovmUtils";
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				8695876FDDD1F3D7C457BBAC68536305 /* Development Pods */,
+				A503A31E104684803BFD3E3CCE509A5E /* Development Pods */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				2F83DA95806758BBFD1B543CB39F8D4A /* Products */,
+				718BF8BDFA253084577D2902DDE63E66 /* Products */,
 				C131646D5EB00F26728DA6880C406E2C /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		8695876FDDD1F3D7C457BBAC68536305 /* Development Pods */ = {
+		A503A31E104684803BFD3E3CCE509A5E /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				78633433F79F92AB5C3AC62A1D6DC0A5 /* neovmUtils */,
+				DDF602BD04F87044F9578F06EE402A7D /* neovmUtils */,
 			);
 			name = "Development Pods";
-			sourceTree = "<group>";
-		};
-		AEA5A6F4E9A82ABD8EF5E764F2268272 /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				604C88A2D1AA27BCCA62D866D37C9006 /* LICENSE */,
-				843BD19A8279FC1BD29B23A3C9533131 /* neovmUtils.podspec */,
-				762B17D1BD546CC84DEAFAB475D8C46A /* README.md */,
-			);
-			name = Pod;
 			sourceTree = "<group>";
 		};
 		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
@@ -141,36 +176,75 @@
 			path = "Target Support Files/Pods-neovmUtils_Tests";
 			sourceTree = "<group>";
 		};
+		DDF602BD04F87044F9578F06EE402A7D /* neovmUtils */ = {
+			isa = PBXGroup;
+			children = (
+				9389C22FDC7580A914748EF12162AE78 /* neovm.swift */,
+				065F85610E146AE68CDD0F6836681319 /* Frameworks */,
+				1BC90905EA2D158791BBF8FEA15176EB /* Pod */,
+				79F01353FAAD41CCF2AD067C24456A03 /* Support Files */,
+			);
+			name = neovmUtils;
+			path = ../..;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		46F9C086F8BB9F9E00C80D7AFCD6CA23 /* Headers */ = {
+		A582BA38EFF6B498B102FE2E6959648C /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18985DBF80F4EA5F7F2F12F840E09DC7 /* Pods-neovmUtils_Tests-umbrella.h in Headers */,
+				D56F4C7F4E87BE70076356B0A95D6BC4 /* neovmUtils-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7998BF75AD871643DF7E6579AABE4B6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B8AF94D016C3D1EDF60428FB58C6DCF5 /* Pods-neovmUtils_Tests-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		8BEC9C13A880E948AA9C0B91E288D808 /* Pods-neovmUtils_Tests */ = {
+		0B82D384F0EFBD4D53664F481F83D413 /* neovmUtils */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F2404F79529D5965527F218127147BCC /* Build configuration list for PBXNativeTarget "Pods-neovmUtils_Tests" */;
+			buildConfigurationList = E5999D67DBC3F66C5904C3F7AD71FABB /* Build configuration list for PBXNativeTarget "neovmUtils" */;
 			buildPhases = (
-				46F9C086F8BB9F9E00C80D7AFCD6CA23 /* Headers */,
-				ACE198277B42C742DB556294CD10B4CD /* Sources */,
-				179F1676CB47ACA1DE87F75A9C23E7AF /* Frameworks */,
-				E0C1AD0EBC1C4B8B7630106E862C8646 /* Resources */,
+				A582BA38EFF6B498B102FE2E6959648C /* Headers */,
+				208D2D919C79915E8C286CFBAC3FB009 /* Sources */,
+				3474E90C3F6B6EF76861658A728491B4 /* Frameworks */,
+				837A89063C589C527356ABA6396C842C /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
+			name = neovmUtils;
+			productName = neovmUtils;
+			productReference = 794BF7102303D0D17CF0E10D41708C71 /* neovmUtils.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		63413CD888D1BCAF021D59A7CECCAFD8 /* Pods-neovmUtils_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F114948327EF283FCA9AA25041B7BABA /* Build configuration list for PBXNativeTarget "Pods-neovmUtils_Tests" */;
+			buildPhases = (
+				A7998BF75AD871643DF7E6579AABE4B6 /* Headers */,
+				2AA3B7514A01465FB37FD53EB2C634E5 /* Sources */,
+				6E74BFE6A9CD81055BA911CC2BDFE03D /* Frameworks */,
+				FD56E6A78158FC63FB3E226F9F1E59F4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F6AD6CF3C75E66E877A9A917B3810870 /* PBXTargetDependency */,
+			);
 			name = "Pods-neovmUtils_Tests";
 			productName = "Pods-neovmUtils_Tests";
-			productReference = 11F8607C8583776EE6B900A0FAB582EE /* Pods_neovmUtils_Tests.framework */;
+			productReference = 439312E7589B62F5B517D28E75FD002A /* Pods_neovmUtils_Tests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -190,17 +264,25 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 2F83DA95806758BBFD1B543CB39F8D4A /* Products */;
+			productRefGroup = 718BF8BDFA253084577D2902DDE63E66 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8BEC9C13A880E948AA9C0B91E288D808 /* Pods-neovmUtils_Tests */,
+				0B82D384F0EFBD4D53664F481F83D413 /* neovmUtils */,
+				63413CD888D1BCAF021D59A7CECCAFD8 /* Pods-neovmUtils_Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		E0C1AD0EBC1C4B8B7630106E862C8646 /* Resources */ = {
+		837A89063C589C527356ABA6396C842C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FD56E6A78158FC63FB3E226F9F1E59F4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -210,22 +292,106 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		ACE198277B42C742DB556294CD10B4CD /* Sources */ = {
+		208D2D919C79915E8C286CFBAC3FB009 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A3E02EB9F2655F2BB74C2B0B35A226C /* Pods-neovmUtils_Tests-dummy.m in Sources */,
+				B2DAD282A3859154C4084472B96460E4 /* neovm.swift in Sources */,
+				97635FEF80956B6294B7DC7E459AD991 /* neovmUtils-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2AA3B7514A01465FB37FD53EB2C634E5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E807ACA66967D9283EC4486081A39C1 /* Pods-neovmUtils_Tests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		F6AD6CF3C75E66E877A9A917B3810870 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = neovmUtils;
+			target = 0B82D384F0EFBD4D53664F481F83D413 /* neovmUtils */;
+			targetProxy = 2995A1F51BE2F8D56E841473A2ADAEF4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
-		25872FEFB77ADC1B138411F6213ED134 /* Debug */ = {
+		0E40B482E9FC2067FD92BFB028A896BD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FC6AFA55A1DEADD9F1340975439B2925 /* neovmUtils.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/neovmUtils/neovmUtils-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/neovmUtils/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/neovmUtils/neovmUtils.modulemap";
+				PRODUCT_MODULE_NAME = neovmUtils;
+				PRODUCT_NAME = neovmUtils;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		755FDFB676B09BC29DCC7E1681CA58E2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FC6AFA55A1DEADD9F1340975439B2925 /* neovmUtils.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/neovmUtils/neovmUtils-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/neovmUtils/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/neovmUtils/neovmUtils.modulemap";
+				PRODUCT_MODULE_NAME = neovmUtils;
+				PRODUCT_NAME = neovmUtils;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		7857D99FBC10E19D0FD55C0324843682 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BEA112C71F49CD1509720475D66E199F /* Pods-neovmUtils_Tests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -237,7 +403,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Target Support Files/Pods-neovmUtils_Tests/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-neovmUtils_Tests/Pods-neovmUtils_Tests.modulemap";
@@ -254,7 +420,7 @@
 			};
 			name = Debug;
 		};
-		50646285DD9FD95AF390BDA3FB1948EA /* Debug */ = {
+		98E98810EEEB96C99CB95CB91F4ADE0A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -307,7 +473,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -320,7 +486,7 @@
 			};
 			name = Debug;
 		};
-		58DCB2BA7C34E84C00C38CEF18A96D11 /* Release */ = {
+		B97A7F6ACE1216BB5A2307CA83FC93C5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -370,7 +536,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -382,11 +548,12 @@
 			};
 			name = Release;
 		};
-		A44A6E0C88BEE703BD83FE0531FD540D /* Release */ = {
+		F23C612D29B3A7A7337DC94E0C7E3EE0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B7281485E1FA42CA2E31B9E356FEA500 /* Pods-neovmUtils_Tests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -398,7 +565,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Target Support Files/Pods-neovmUtils_Tests/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-neovmUtils_Tests/Pods-neovmUtils_Tests.modulemap";
@@ -422,17 +589,26 @@
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				50646285DD9FD95AF390BDA3FB1948EA /* Debug */,
-				58DCB2BA7C34E84C00C38CEF18A96D11 /* Release */,
+				98E98810EEEB96C99CB95CB91F4ADE0A /* Debug */,
+				B97A7F6ACE1216BB5A2307CA83FC93C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F2404F79529D5965527F218127147BCC /* Build configuration list for PBXNativeTarget "Pods-neovmUtils_Tests" */ = {
+		E5999D67DBC3F66C5904C3F7AD71FABB /* Build configuration list for PBXNativeTarget "neovmUtils" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				25872FEFB77ADC1B138411F6213ED134 /* Debug */,
-				A44A6E0C88BEE703BD83FE0531FD540D /* Release */,
+				755FDFB676B09BC29DCC7E1681CA58E2 /* Debug */,
+				0E40B482E9FC2067FD92BFB028A896BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F114948327EF283FCA9AA25041B7BABA /* Build configuration list for PBXNativeTarget "Pods-neovmUtils_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7857D99FBC10E19D0FD55C0324843682 /* Debug */,
+				F23C612D29B3A7A7337DC94E0C7E3EE0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

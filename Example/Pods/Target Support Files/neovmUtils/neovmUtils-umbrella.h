@@ -10,10 +10,6 @@
 #endif
 #endif
 
-#import "Neoutils.h"
-#import "Neoutils.objc.h"
-#import "ref.h"
-#import "Universe.objc.h"
 
 FOUNDATION_EXPORT double neovmUtilsVersionNumber;
 FOUNDATION_EXPORT const unsigned char neovmUtilsVersionString[];
