@@ -5,14 +5,11 @@
 [![License](https://img.shields.io/cocoapods/l/neovmUtils.svg?style=flat)](https://cocoapods.org/pods/neovmUtils)
 [![Platform](https://img.shields.io/cocoapods/p/neovmUtils.svg?style=flat)](https://cocoapods.org/pods/neovmUtils)
 
-
 neovmUtils is a native iOS framework for interacting with the NEO and Ontology blockchains. It is a compiled version of the [neo-utils](https://github.com/O3Labs/neo-utils) project by O3 Labs.
 
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
 
 ## Installation
 
@@ -26,6 +23,7 @@ pod 'neovmUtils'
 ## Authors
 
 neo-utils - Apisit Toompakdee, apisit@o3.network
+
 neovmUtils - WyattMufson, wyatt@ryucoin.com
 
 ## License

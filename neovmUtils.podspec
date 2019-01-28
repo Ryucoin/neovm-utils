@@ -11,10 +11,10 @@ Pod::Spec.new do |s|
   s.version          = '0.1.0'
   s.summary          = 'Useful functions for the NEO and Ontology blockchains for iOS.'
 
-  s.homepage         = 'https://github.com/Ryucoin/neovmUtils'
+  s.homepage         = 'https://github.com/Ryucoin/neovm-utils'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'WyattMufson' => 'wyatt@ryucoin.com' }
-  s.source           = { :git => 'https://github.com/Ryucoin/neovmUtils.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/Ryucoin/neovm-utils.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '8.0'
 
