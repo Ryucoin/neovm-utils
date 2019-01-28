@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '12.0'
   s.swift_version = '4.2'
 
-  s.source_files = 'neovmUtils/**/*/*.swift'
+  s.source_files = 'neovmUtils/Classes/**/*'
   s.vendored_frameworks = 'Example/neoutils.framework'
 
 end

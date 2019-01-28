@@ -18,6 +18,6 @@
     "ios": "12.0"
   },
   "swift_version": "4.2",
-  "source_files": "neovmUtils/**/*/*.swift",
+  "source_files": "neovmUtils/Classes/**/*",
   "vendored_frameworks": "Example/neoutils.framework"
 }

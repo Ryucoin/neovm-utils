@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  neovmUtils: 17fada6b955484af84cf43d94cb7f2eb55ea70cb
+  neovmUtils: ca64a88714aca2168817e0a7fd5dd28544b2ac3f
 
 PODFILE CHECKSUM: faf48c551be973d1e1cb51044844c3aeaaad1fbb
 

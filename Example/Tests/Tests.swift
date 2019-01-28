@@ -1,7 +1,11 @@
 import XCTest
 import Neoutils
+import neovmUtils
 
 class Tests: XCTestCase {
+    
+    let exampleWif = ""
+    let exampleAddress = ""
     
     override func setUp() {
         super.setUp()
@@ -21,14 +25,14 @@ class Tests: XCTestCase {
     func testBuildOntologyInvocation(){
         let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
         let method = "put"
-        let argDict : [[String:Any]] = [["T":"Address", "V":""], ["T":"String", "V":"Hello!"]]
+        let argDict : [[String:Any]] = [["T":"Address", "V":exampleAddress], ["T":"String", "V":"Hello!"]]
         
         do {
             let data =  try JSONSerialization.data(withJSONObject: argDict, options: .prettyPrinted)
             let args = String(data: data, encoding: String.Encoding.utf8)
             let gasPrice = 500
             let gasLimit = 20000
-            let wif = ""
+            let wif = exampleWif
             let err = NSErrorPointer(nilLiteral: ())
             let res = NeoutilsBuildOntologyInvocationTransaction(contractHash, method, args, gasPrice, gasLimit, wif, err)
             XCTAssertNil(err)
@@ -42,7 +46,7 @@ class Tests: XCTestCase {
     func testOntologyInvocation(){
         let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
         let method = "put"
-        let argDict : [[String:Any]] = [["T":"Address", "V":""], ["T":"String", "V":"Hello!"]]
+        let argDict : [[String:Any]] = [["T":"Address", "V":exampleAddress], ["T":"String", "V":"Hello!"]]
         
         do {
             let data =  try JSONSerialization.data(withJSONObject: argDict, options: .prettyPrinted)
@@ -50,7 +54,7 @@ class Tests: XCTestCase {
             let gasPrice = 500
             let gasLimit = 20000
             let endpoint = "http://polaris2.ont.io:20336"
-            let wif = ""
+            let wif = exampleWif
             let err = NSErrorPointer(nilLiteral: ())
             let res = NeoutilsOntologyInvoke(endpoint, contractHash, method, args, gasPrice, gasLimit, wif, err)
             XCTAssertNil(err)
@@ -59,5 +63,31 @@ class Tests: XCTestCase {
         } catch let error {
             XCTFail("Failed to cast JSON: \(error)")
         }
+    }
+    
+    func testBuildOntologyInvocationHelper(){
+        let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
+        let method = "put"
+        let args : [[String:Any]] = [["T":"Address", "V":exampleAddress], ["T":"String", "V":"Hello!"]]
+        let gasPrice = 500
+        let gasLimit = 20000
+        let wif = exampleWif
+        
+        let res = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
+        XCTAssertNotNil(res)
+        print("Response: \(res ?? "ERROR")")
+    }
+    
+    func testOntologyInvocationHelper(){
+        let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
+        let method = "put"
+        let args : [[String:Any]] = [["T":"Address", "V":exampleAddress], ["T":"String", "V":"Hello!"]]
+        let gasPrice = 500
+        let gasLimit = 20000
+        let wif = exampleWif
+        
+        let res = ontologyInvoke(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
+        XCTAssertNotNil(res)
+        print("Response: \(res ?? "ERROR")")
     }
 }
