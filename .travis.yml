@@ -1,6 +1,9 @@
-language: objective-c
+language: swift
 osx_image: xcode10.1
 
 script:
 - xcodebuild clean build test -enableCodeCoverage YES -workspace Example/neovmUtils.xcworkspace -scheme neovmUtils-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
 - pod lib lint
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
