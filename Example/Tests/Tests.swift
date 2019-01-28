@@ -4,12 +4,17 @@ import neovmUtils
 
 class Tests: XCTestCase {
     
-    let exampleWif = ""
-    let exampleAddress = ""
+    var exampleWif = ""
+    var exampleAddress = ""
     
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        let err = NSErrorPointer(nilLiteral: ())
+        if let w = NeoutilsNewWallet(err) {
+            exampleWif = w.wif()
+            exampleAddress = w.address()
+        }
     }
     
     override func tearDown() {
