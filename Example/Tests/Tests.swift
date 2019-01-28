@@ -68,7 +68,7 @@ class Tests: XCTestCase {
     func testBuildOntologyInvocationHelper(){
         let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
         let method = "put"
-        let args : [[String:Any]] = [["T":"Address", "V":exampleAddress], ["T":"String", "V":"Hello!"]]
+        let args : [OntologyParameter] = [createOntParam(type: .Address, value: exampleAddress), createOntParam(type: .String, value: "Hello!")]
         let gasPrice = 500
         let gasLimit = 20000
         let wif = exampleWif
@@ -81,7 +81,7 @@ class Tests: XCTestCase {
     func testOntologyInvocationHelper(){
         let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
         let method = "put"
-        let args : [[String:Any]] = [["T":"Address", "V":exampleAddress], ["T":"String", "V":"Hello!"]]
+        let args : [OntologyParameter] = [createOntParam(type: .Address, value: exampleAddress), createOntParam(type: .String, value: "Hello!")]
         let gasPrice = 500
         let gasLimit = 20000
         let wif = exampleWif
