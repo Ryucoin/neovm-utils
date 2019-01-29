@@ -10,8 +10,7 @@ class Tests: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        let err = NSErrorPointer(nilLiteral: ())
-        if let w = NeoutilsNewWallet(err) {
+        if let w = newWallet() {
             exampleWif = w.wif()
             exampleAddress = w.address()
         }
@@ -94,5 +93,11 @@ class Tests: XCTestCase {
         let res = ontologyInvoke(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
         XCTAssertNotNil(res)
         print("Response: \(res ?? "ERROR")")
+    }
+
+    func testGenerateWifHelper(){
+        if let _ = generateFromWif(wif: exampleWif) {
+            print("Created wallet")
+        }
     }
 }

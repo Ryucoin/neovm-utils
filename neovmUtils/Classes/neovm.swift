@@ -71,3 +71,21 @@ public func ontologyInvoke(endpoint: String = "http://polaris2.ont.io:20336", co
     let params = convertParamArray(params: args)
     return ontologyInvokeHelper(endpoint: endpoint, contractHash: contractHash, method: method, args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
 }
+
+public func newWallet() -> NeoutilsWallet? {
+    let err = NSErrorPointer(nilLiteral: ())
+    let wallet = NeoutilsNewWallet(err)
+    if err != nil {
+        print("There was an error creating a new wallet: \(err!)")
+    }
+    return wallet
+}
+
+public func generateFromWif(wif: String) -> NeoutilsWallet? {
+    let err = NSErrorPointer(nilLiteral: ())
+    let account = NeoutilsGenerateFromWIF(wif, err)
+    if err != nil {
+        print("There was an error generating a wallet from the provided wif: \(err!)")
+    }
+    return account
+}
