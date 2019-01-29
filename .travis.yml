@@ -10,3 +10,4 @@ script:
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) -cF ios -J neovmUtils
+  - rm Pods_neovmUtils_Tests.framework.coverage.txt

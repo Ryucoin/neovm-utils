@@ -7,6 +7,3 @@ coverage:
     project: true
     patch: true
     changes: true
-
-  ignore:
-    - "Pods_neovmUtils_Tests.framework/*"
