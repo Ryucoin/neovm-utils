@@ -25,7 +25,7 @@ pod 'neovmUtils'
 
 neo-utils - Apisit Toompakdee, apisit@o3.network
 
-neovmUtils - WyattMufson, wyatt@ryucoin.com
+neovmUtils - Wyatt Mufson, wyatt@ryucoin.com
 
 ## License
 
