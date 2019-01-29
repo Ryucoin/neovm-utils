@@ -170,4 +170,38 @@ class Tests: XCTestCase {
         XCTAssert(original == decryptedString)
     }
     
+    func testSharedSecret(){
+        guard let a = generateFromPrivateKey(privateKey: examplePrivateKey) else {
+            XCTFail()
+            return
+        }
+        
+        guard let b = newWallet() else {
+            XCTFail()
+            return
+        }
+        
+        let publicKey : Data = a.publicKey()
+        guard let publicKeyStr : String = a.publicKeyString else {
+            XCTFail()
+            return
+        }
+        
+        guard let shared = computeSharedSecret(wallet: b, publicKey: publicKey) else {
+            XCTFail()
+            return
+        }
+        
+        guard let shared2 = computeSharedSecret(wallet: b, publicKey: publicKeyStr) else {
+            XCTFail()
+            return
+        }
+    
+        XCTAssertEqual(shared, shared2)
+    }
+    
+    func testIsValidAddress(){
+        XCTAssertTrue(exampleAddress.isValidAddress)
+    }
+    
 }

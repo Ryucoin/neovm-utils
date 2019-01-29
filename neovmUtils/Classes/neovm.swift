@@ -74,38 +74,22 @@ public func ontologyInvoke(endpoint: String = "http://polaris2.ont.io:20336", co
 
 public func newWallet() -> NeoutilsWallet? {
     let err = NSErrorPointer(nilLiteral: ())
-    let wallet = NeoutilsNewWallet(err)
-    if err != nil {
-        print("There was an error creating a new wallet: \(err!)")
-    }
-    return wallet
+    return NeoutilsNewWallet(err)
 }
 
 public func generateFromWIF(wif: String) -> NeoutilsWallet? {
     let err = NSErrorPointer(nilLiteral: ())
-    let wallet = NeoutilsGenerateFromWIF(wif, err)
-    if err != nil {
-        print("There was an error generating a wallet from the provided wif: \(err!)")
-    }
-    return wallet
+    return NeoutilsGenerateFromWIF(wif, err)
 }
 
 public func generateFromPrivateKey(privateKey: String) -> NeoutilsWallet? {
     let err = NSErrorPointer(nilLiteral: ())
-    let wallet = NeoutilsGenerateFromPrivateKey(privateKey, err)
-    if err != nil {
-        print("There was an error generating a wallet from the provided private key: \(err!)")
-    }
-    return wallet
+    return NeoutilsGenerateFromPrivateKey(privateKey, err)
 }
 
 public func generateFromPrivateKey(privateKey: Data) -> NeoutilsWallet? {
     let err = NSErrorPointer(nilLiteral: ())
-    let wallet = NeoutilsGenerateFromPrivateKey(privateKey.bytesToHex, err)
-    if err != nil {
-        print("There was an error generating a wallet from the provided private key: \(err!)")
-    }
-    return wallet
+    return NeoutilsGenerateFromPrivateKey(privateKey.bytesToHex, err)
 }
 
 public extension Data {
