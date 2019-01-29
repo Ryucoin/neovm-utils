@@ -8,10 +8,6 @@
 
 neovmUtils is a native iOS framework for interacting with the NEO and Ontology blockchains. It is a compiled version of the [neo-utils](https://github.com/O3Labs/neo-utils) project by O3 Labs written in Go.
 
-## Example
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
 ## Installation
 
 `neovmUtils` is available through [CocoaPods](https://cocoapods.org). To install
@@ -23,14 +19,16 @@ pod 'neovmUtils'
 
 ## Usage
 
-You can import the compiled `neo-utils` Go library as well as the `neovmUtils` helper functions built on-top written in Swift.
+You must import the `neovmUtils` pod as well as the compiled `neo-utils` Go framework.
 
 ```
-import Neoutils
 import neovmUtils
+import Neoutils
 ```
 
-**Note:** the functions imported by `Neoutils` are used slightly differently than their implementations in Go. Additionally, there are functions supplied by `neovmUtils` that further simplify the compiled code.
+**Note:** the functions imported by `Neoutils` are used slightly differently than their implementations in Go. Additionally, the functions supplied by `neovmUtils` further simplify the compiled code.
+
+#### Example
 
 `neo-utils` (Go implementation):
 
