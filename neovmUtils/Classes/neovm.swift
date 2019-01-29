@@ -93,23 +93,27 @@ public func generateFromPrivateKey(privateKey: Data) -> NeoutilsWallet? {
 }
 
 public extension Data {
-    var bytesToHex: String? {
+    public var bytesToHex: String? {
         return NeoutilsBytesToHex(self)
     }
 }
 
-fileprivate extension String {
-    var hexToBytes: Data? {
+public extension String {
+    public var hexToBytes: Data? {
         return NeoutilsHexTobytes(self)
+    }
+    
+    public var isValidAddress: Bool {
+        return NeoutilsValidateNEOAddress(self)
     }
 }
 
 public extension NeoutilsWallet {
-    var privateKeyString: String? {
+    public var privateKeyString: String? {
         return self.privateKey()?.bytesToHex
     }
     
-    var publicKeyString: String? {
+    public var publicKeyString: String? {
         return self.publicKey()?.bytesToHex
     }
 }
@@ -120,8 +124,6 @@ public func signMessage(message: String, wallet: NeoutilsWallet) -> String? {
     if let privateKey = wallet.privateKeyString {
         if let sign_data = NeoutilsSign(data, privateKey, error) {
             return sign_data.bytesToHex
-        } else {
-            print("Failed to sign message: \(error!)")
         }
     }
     return nil
@@ -149,10 +151,4 @@ public func computeSharedSecret(wallet: NeoutilsWallet, publicKey: Data) -> Data
 
 public func computeSharedSecret(wallet: NeoutilsWallet, publicKey: String) -> Data? {
     return wallet.computeSharedSecret(publicKey.hexToBytes)
-}
-
-public extension String {
-    public var isValidAddress: Bool {
-        return NeoutilsValidateNEOAddress(self)
-    }
 }
