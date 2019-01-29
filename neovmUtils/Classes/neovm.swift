@@ -81,11 +81,94 @@ public func newWallet() -> NeoutilsWallet? {
     return wallet
 }
 
-public func generateFromWif(wif: String) -> NeoutilsWallet? {
+public func generateFromWIF(wif: String) -> NeoutilsWallet? {
     let err = NSErrorPointer(nilLiteral: ())
-    let account = NeoutilsGenerateFromWIF(wif, err)
+    let wallet = NeoutilsGenerateFromWIF(wif, err)
     if err != nil {
         print("There was an error generating a wallet from the provided wif: \(err!)")
     }
-    return account
+    return wallet
+}
+
+public func generateFromPrivateKey(privateKey: String) -> NeoutilsWallet? {
+    let err = NSErrorPointer(nilLiteral: ())
+    let wallet = NeoutilsGenerateFromPrivateKey(privateKey, err)
+    if err != nil {
+        print("There was an error generating a wallet from the provided private key: \(err!)")
+    }
+    return wallet
+}
+
+public func generateFromPrivateKey(privateKey: Data) -> NeoutilsWallet? {
+    let err = NSErrorPointer(nilLiteral: ())
+    let wallet = NeoutilsGenerateFromPrivateKey(privateKey.bytesToHex, err)
+    if err != nil {
+        print("There was an error generating a wallet from the provided private key: \(err!)")
+    }
+    return wallet
+}
+
+public extension Data {
+    var bytesToHex: String? {
+        return NeoutilsBytesToHex(self)
+    }
+}
+
+fileprivate extension String {
+    var hexToBytes: Data? {
+        return NeoutilsHexTobytes(self)
+    }
+}
+
+public extension NeoutilsWallet {
+    var privateKeyString: String? {
+        return self.privateKey()?.bytesToHex
+    }
+    
+    var publicKeyString: String? {
+        return self.publicKey()?.bytesToHex
+    }
+}
+
+public func signMessage(message: String, wallet: NeoutilsWallet) -> String? {
+    let error = NSErrorPointer(nilLiteral: ())
+    let data = message.data(using: .utf8)
+    if let privateKey = wallet.privateKeyString {
+        if let sign_data = NeoutilsSign(data, privateKey, error) {
+            return sign_data.bytesToHex
+        } else {
+            print("Failed to sign message: \(error!)")
+        }
+    }
+    return nil
+}
+
+public func encrypt(message: String, key: Data) -> String? {
+    return NeoutilsEncrypt(key, message)
+}
+
+public func encrypt(message: String, key: String) -> String? {
+    return NeoutilsEncrypt(key.hexToBytes, message)
+}
+
+public func decrypt(encrypted: String, key: Data) -> String? {
+    return NeoutilsDecrypt(key, encrypted)
+}
+
+public func decrypt(encrypted: String, key: String) -> String? {
+    return NeoutilsDecrypt(key.hexToBytes, encrypted)
+}
+
+public func computeSharedSecret(wallet: NeoutilsWallet, publicKey: Data) -> Data? {
+    return wallet.computeSharedSecret(publicKey)
+}
+
+public func computeSharedSecret(wallet: NeoutilsWallet, publicKey: String) -> Data? {
+    return wallet.computeSharedSecret(publicKey.hexToBytes)
+}
+
+public extension String {
+    public var isValidAddress: Bool {
+        return NeoutilsValidateNEOAddress(self)
+    }
 }

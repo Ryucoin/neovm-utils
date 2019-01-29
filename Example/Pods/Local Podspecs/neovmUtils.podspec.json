@@ -1,6 +1,6 @@
 {
   "name": "neovmUtils",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "summary": "Useful functions for the NEO and Ontology blockchains for iOS.",
   "homepage": "https://github.com/Ryucoin/neovm-utils",
   "license": {
@@ -12,7 +12,7 @@
   },
   "source": {
     "git": "https://github.com/Ryucoin/neovm-utils.git",
-    "tag": "0.1.0"
+    "tag": "0.1.1"
   },
   "platforms": {
     "ios": "12.0"

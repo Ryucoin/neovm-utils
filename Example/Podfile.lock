@@ -1,5 +1,5 @@
 PODS:
-  - neovmUtils (0.1.0)
+  - neovmUtils (0.1.1)
 
 DEPENDENCIES:
   - neovmUtils (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  neovmUtils: ca64a88714aca2168817e0a7fd5dd28544b2ac3f
+  neovmUtils: cafa13a0209bc2d44f02910ea861e684f72fbaf3
 
 PODFILE CHECKSUM: 5a5542a5f8b68e95ae52b5425c5d354f55bed2ab
 

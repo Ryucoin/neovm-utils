@@ -6,6 +6,8 @@ class Tests: XCTestCase {
     
     var exampleWif = ""
     var exampleAddress = ""
+    var examplePrivateKey = Data()
+    var examplePublicKey = Data()
     
     override func setUp() {
         super.setUp()
@@ -13,6 +15,8 @@ class Tests: XCTestCase {
         if let w = newWallet() {
             exampleWif = w.wif()
             exampleAddress = w.address()
+            examplePrivateKey = w.privateKey()
+            examplePublicKey = w.publicKey()
         }
     }
     
@@ -95,9 +99,76 @@ class Tests: XCTestCase {
         print("Response: \(res ?? "ERROR")")
     }
 
-    func testGenerateWifHelper(){
-        if let _ = generateFromWif(wif: exampleWif) {
-            print("Created wallet")
+    func testGenerateFromWIF(){
+        guard let _ = generateFromWIF(wif: exampleWif) else {
+            XCTFail()
+            return
         }
     }
+    
+    func testGenerateFromPK(){
+        guard let wallet = generateFromPrivateKey(privateKey: examplePrivateKey) else {
+            XCTFail()
+            return
+        }
+        
+        guard let strPrivateKey = wallet.privateKeyString else {
+            XCTFail()
+            return
+        }
+        
+        guard let _ = generateFromPrivateKey(privateKey: strPrivateKey) else {
+            XCTFail()
+            return
+        }
+    }
+    
+    func testSign(){
+        guard let wallet = generateFromPrivateKey(privateKey: examplePrivateKey) else {
+            XCTFail()
+            return
+        }
+        
+        let message = "Hello, world"
+        let signature = signMessage(message: message, wallet: wallet)
+        XCTAssertNotNil(signature)
+    }
+    
+    func testEncryptDecrypt(){
+        let original = "Hello, world"
+        guard let encrypted = encrypt(message: original, key: examplePrivateKey) else {
+            XCTFail()
+            return
+        }
+        
+        guard let decrypted = decrypt(encrypted: encrypted, key: examplePrivateKey) else {
+            XCTFail()
+            return
+        }
+        
+        XCTAssert(original == decrypted)
+        
+        guard let wallet = generateFromPrivateKey(privateKey: examplePrivateKey) else {
+            XCTFail()
+            return
+        }
+        
+        guard let strPrivateKey = wallet.privateKeyString else {
+            XCTFail()
+            return
+        }
+        
+        guard let encryptedString = encrypt(message: original, key: strPrivateKey) else {
+            XCTFail()
+            return
+        }
+        
+        guard let decryptedString = decrypt(encrypted: encryptedString, key: strPrivateKey) else {
+            XCTFail()
+            return
+        }
+     
+        XCTAssert(original == decryptedString)
+    }
+    
 }

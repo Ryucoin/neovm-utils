@@ -57,7 +57,7 @@ if err != nil {
 
 ```
 let wif = "<SOME VALID WIF>"
-let account = generateFromWif(wif: wif) // account is of type NeoutilsWallet?
+let account = generateFromWIF(wif: wif) // account is of type NeoutilsWallet?
 ```
 
 The full implementation of the `neovmUtils` abstraction is available [here](https://github.com/Ryucoin/neovm-utils/blob/master/neovmUtils/Classes/neovm.swift). Not all of the functions and types made available by importing `Neoutils` are simplified by importing `neovmUtils`.
