@@ -20,6 +20,6 @@ Pod::Spec.new do |s|
   s.swift_version = '4.2'
 
   s.source_files = 'neovmUtils/Classes/**/*'
-  s.vendored_frameworks = 'Example/neoutils.framework'
+  s.vendored_frameworks = 'neoutils.framework'
 
 end

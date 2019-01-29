@@ -1,6 +1,5 @@
 import XCTest
 import Neoutils
-import neovmUtils
 
 class Tests: XCTestCase {
     

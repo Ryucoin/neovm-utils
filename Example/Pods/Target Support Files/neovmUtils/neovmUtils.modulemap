@@ -1,6 +1,0 @@
-framework module neovmUtils {
-  umbrella header "neovmUtils-umbrella.h"
-
-  export *
-  module * { export * }
-}
