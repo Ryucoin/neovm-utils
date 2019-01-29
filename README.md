@@ -36,7 +36,7 @@ import neovmUtils
 
 ```
 wif := "<SOME VALID WIF>"
-account, err = neoutils.GenerateFromWIF(wif)
+account, err := neoutils.GenerateFromWIF(wif)
 if err != nil {
   log.Printf("There was an error: %v", err)
 }
