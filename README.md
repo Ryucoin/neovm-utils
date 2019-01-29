@@ -64,9 +64,9 @@ Documentation for the Go implementation is available [here](https://github.com/O
 
 ## Authors
 
-`neo-utils` - Apisit Toompakdee, apisit@o3.network
-
 `neovmUtils` - Wyatt Mufson, wyatt@ryucoin.com
+
+`neo-utils` - Apisit Toompakdee, apisit@o3.network
 
 ## License
 
