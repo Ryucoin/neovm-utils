@@ -9,6 +9,4 @@ coverage:
     changes: true
 
   ignore:
-    - Examples/*
     - Tests/*
-    - Pods/*
