@@ -5,7 +5,7 @@ install:
   - gem install xcpretty
 
 script:
-- xcodebuild clean build test -enableCodeCoverage YES -workspace Example/neovmUtils.xcworkspace -scheme neovmUtils-Example -destination 'platform=iOS Simulator,name=iPhone 8,OS=12.0' CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO | xcpretty -c
+- xcodebuild clean build test -enableCodeCoverage YES -workspace Example/neovmUtils.xcworkspace -scheme neovmUtils-Example -destination 'platform=iOS Simulator,name=iPhone 8,OS=12.1' CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO | xcpretty -c
 - pod lib lint
 
 after_success:
