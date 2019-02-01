@@ -41,7 +41,7 @@ private func convertParamArray(params: [OntologyParameter]) -> [String: [[String
 
 private func buildOntologyInvocationTransactionHelper(contractHash: String, method: String, args: [String: [[String:Any]]], gasPrice: Int, gasLimit: Int, wif: String) -> String? {
     do {
-        let data =  try JSONSerialization.data(withJSONObject: args, options: .prettyPrinted)
+        let data =  try JSONSerialization.data(withJSONObject: args)
         let params = String(data: data, encoding: String.Encoding.utf8)
         let err = NSErrorPointer(nilLiteral: ())
         let res = NeoutilsBuildOntologyInvocationTransaction(contractHash, method, params, gasPrice, gasLimit, wif, err)
@@ -53,7 +53,7 @@ private func buildOntologyInvocationTransactionHelper(contractHash: String, meth
 
 private func ontologyInvokeHelper(endpoint: String, contractHash: String, method: String, args: [String: [[String:Any]]], gasPrice: Int, gasLimit: Int, wif: String) -> String? {
     do {
-        let data =  try JSONSerialization.data(withJSONObject: args, options: .prettyPrinted)
+        let data =  try JSONSerialization.data(withJSONObject: args)
         let args = String(data: data, encoding: String.Encoding.utf8)
         let err = NSErrorPointer(nilLiteral: ())
         let res = NeoutilsOntologyInvoke(endpoint, contractHash, method, args, gasPrice, gasLimit, wif, err)
