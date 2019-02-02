@@ -18,6 +18,7 @@
 @class NeoutilsNativeAsset;
 @class NeoutilsNeonJSTransaction;
 @class NeoutilsNodeList;
+@class NeoutilsOntologyBalances;
 @class NeoutilsRawTransaction;
 @class NeoutilsSeedNodeResponse;
 @class NeoutilsSharedSecret;
@@ -178,6 +179,18 @@
 - (instancetype)init;
 // skipped field NodeList.URL with unsupported type: []string
 
+@end
+
+@interface NeoutilsOntologyBalances : NSObject <goSeqRefInterface> {
+}
+@property(strong, readonly) id _ref;
+
+- (instancetype)initWithRef:(id)ref;
+- (instancetype)init;
+- (NSString*)ont;
+- (void)setOnt:(NSString*)v;
+- (NSString*)ong;
+- (void)setOng:(NSString*)v;
 @end
 
 @interface NeoutilsRawTransaction : NSObject <goSeqRefInterface> {
@@ -378,10 +391,27 @@ FOUNDATION_EXPORT NeoutilsNEP2* NeoutilsNEP2Encrypt(NSString* wif, NSString* pas
  */
 FOUNDATION_EXPORT NeoutilsWallet* NeoutilsNewWallet(NSError** error);
 
+FOUNDATION_EXPORT NeoutilsOntologyBalances* NeoutilsOntologyGetBalance(NSString* endpoint, NSString* address, NSError** error);
+
+FOUNDATION_EXPORT BOOL NeoutilsOntologyGetBlockCount(NSString* endpoint, long* ret0_, NSError** error);
+
+FOUNDATION_EXPORT NSString* NeoutilsOntologyGetBlockWithHash(NSString* endpoint, NSString* blockHash, NSError** error);
+
+FOUNDATION_EXPORT NSString* NeoutilsOntologyGetBlockWithHeight(NSString* endpoint, long blockHeight, NSError** error);
+
+FOUNDATION_EXPORT NSString* NeoutilsOntologyGetRawTransaction(NSString* endpoint, NSString* txID, NSError** error);
+
+// skipped function OntologyGetSmartCodeEvent with unsupported parameter or return types
+
+
+FOUNDATION_EXPORT NSString* NeoutilsOntologyGetStorage(NSString* endpoint, NSString* scriptHash, NSString* key, NSError** error);
+
 /**
  * OntologyInvoke : Invoke a neovm contract in Ontology
  */
 FOUNDATION_EXPORT NSString* NeoutilsOntologyInvoke(NSString* endpoint, NSString* contract, NSString* method, NSString* args, long gasPrice, long gasLimit, NSString* wif, NSError** error);
+
+FOUNDATION_EXPORT NSString* NeoutilsOntologySendRawTransaction(NSString* endpoint, NSString* raw, NSError** error);
 
 FOUNDATION_EXPORT NSString* NeoutilsOntologyTransfer(NSString* endpoint, long gasPrice, long gasLimit, NSString* wif, NSString* asset, NSString* to, double amount, NSError** error);
 
