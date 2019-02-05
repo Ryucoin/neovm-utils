@@ -270,4 +270,34 @@ class Tests: XCTestCase {
         XCTAssertTrue(s1)
         XCTAssertTrue(s2)
     }
+    
+    func testBuildJoinTransaction() {
+        let contractHash = "6b21a978e40e681c8439e2fb9cb39424920bf3e1"
+        let address = exampleAddress
+        let gid = "G1"
+        let mid = "M1"
+        let entry = 10.0
+        let max : Int = 1
+        
+        let target = createOntParam(type: .Address, value: address)
+        let gameId = createOntParam(type: .String, value: gid)
+        let matchId = createOntParam(type: .String, value: mid)
+        let fee = createOntParam(type: .Fixed8, value: entry)
+        let mx = createOntParam(type: .Integer, value: max)
+        
+        let args = [target, gameId, matchId, fee, mx]
+        
+        let method = "join"
+        
+        let gasPrice = 500
+        let gasLimit = 20000
+        
+        guard let tx = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWif) else {
+            print("Failed to build the transaction")
+            return
+        }
+        
+        print(tx)
+        XCTAssertNotEqual(tx, "")
+    }
 }
