@@ -319,7 +319,7 @@
 
 FOUNDATION_EXPORT NSString* const NeoutilsVERSION;
 
-FOUNDATION_EXPORT NSString* NeoutilsBuildOntologyInvocationTransaction(NSString* contract, NSString* method, NSString* args, long gasPrice, long gasLimit, NSString* wif, NSError** error);
+FOUNDATION_EXPORT NSString* NeoutilsBuildOntologyInvocationTransaction(NSString* contract, NSString* method, NSString* args, long gasPrice, long gasLimit, NSString* wif, NSString* payer, NSError** error);
 
 /**
  * Simple bytes to Hex
@@ -409,7 +409,7 @@ FOUNDATION_EXPORT NSString* NeoutilsOntologyGetStorage(NSString* endpoint, NSStr
 /**
  * OntologyInvoke : Invoke a neovm contract in Ontology
  */
-FOUNDATION_EXPORT NSString* NeoutilsOntologyInvoke(NSString* endpoint, NSString* contract, NSString* method, NSString* args, long gasPrice, long gasLimit, NSString* wif, NSError** error);
+FOUNDATION_EXPORT NSString* NeoutilsOntologyInvoke(NSString* endpoint, NSString* contract, NSString* method, NSString* args, long gasPrice, long gasLimit, NSString* wif, NSString* payer, NSError** error);
 
 FOUNDATION_EXPORT NSString* NeoutilsOntologySendRawTransaction(NSString* endpoint, NSString* raw, NSError** error);
 

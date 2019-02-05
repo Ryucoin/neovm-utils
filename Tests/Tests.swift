@@ -41,7 +41,7 @@ class Tests: XCTestCase {
             let gasLimit = 20000
             let wif = exampleWif
             let err = NSErrorPointer(nilLiteral: ())
-            let res = NeoutilsBuildOntologyInvocationTransaction(contractHash, method, args, gasPrice, gasLimit, wif, err)
+            let res = NeoutilsBuildOntologyInvocationTransaction(contractHash, method, args, gasPrice, gasLimit, wif, exampleAddress, err)
             XCTAssertNil(err)
             XCTAssertNotNil(res)
             print("Response: \(res ?? "ERROR")")
@@ -63,7 +63,7 @@ class Tests: XCTestCase {
             let endpoint = "http://polaris2.ont.io:20336"
             let wif = exampleWif
             let err = NSErrorPointer(nilLiteral: ())
-            let res = NeoutilsOntologyInvoke(endpoint, contractHash, method, args, gasPrice, gasLimit, wif, err)
+            let res = NeoutilsOntologyInvoke(endpoint, contractHash, method, args, gasPrice, gasLimit, wif, exampleAddress, err)
             XCTAssertNil(err)
             XCTAssertNotNil(res)
             print("Response: \(res ?? "ERROR")")
@@ -80,7 +80,7 @@ class Tests: XCTestCase {
         let gasLimit = 20000
         let wif = exampleWif
 
-        let res = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
+        let res = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif, payer: exampleAddress)
         XCTAssertNotNil(res)
         print("Response: \(res ?? "ERROR")")
     }
@@ -93,7 +93,7 @@ class Tests: XCTestCase {
         let gasLimit = 20000
         let wif = exampleWif
         
-        let res = ontologyInvoke(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
+        let res = ontologyInvoke(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif, payer: exampleAddress)
         XCTAssertNotNil(res)
         print("Response: \(res ?? "ERROR")")
     }
@@ -230,7 +230,7 @@ class Tests: XCTestCase {
         let gasLimit = 20000
         let wif = exampleWif
 
-        guard let res = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif) else {
+        guard let res = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif, payer: exampleAddress) else {
             XCTFail()
             return
         }
@@ -292,7 +292,7 @@ class Tests: XCTestCase {
         let gasPrice = 500
         let gasLimit = 20000
         
-        guard let tx = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWif) else {
+        guard let tx = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWif, payer: exampleAddress) else {
             print("Failed to build the transaction")
             return
         }
