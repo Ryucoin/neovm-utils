@@ -5,8 +5,6 @@ coverage:
 
   status:
     project: true
-    patch: true
-    changes: true
 
   ignore:
     - Tests/*
