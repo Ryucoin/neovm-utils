@@ -18,6 +18,7 @@
 @class NeoutilsNativeAsset;
 @class NeoutilsNeonJSTransaction;
 @class NeoutilsNodeList;
+@class NeoutilsONTAccount;
 @class NeoutilsOntologyBalances;
 @class NeoutilsRawTransaction;
 @class NeoutilsSeedNodeResponse;
@@ -179,6 +180,22 @@
 - (instancetype)init;
 // skipped field NodeList.URL with unsupported type: []string
 
+@end
+
+@interface NeoutilsONTAccount : NSObject <goSeqRefInterface> {
+}
+@property(strong, readonly) id _ref;
+
+- (instancetype)initWithRef:(id)ref;
+- (instancetype)init;
+- (NSString*)address;
+- (void)setAddress:(NSString*)v;
+- (NSString*)wif;
+- (void)setWIF:(NSString*)v;
+- (NSData*)privateKey;
+- (void)setPrivateKey:(NSData*)v;
+- (NSData*)publicKey;
+- (void)setPublicKey:(NSData*)v;
 @end
 
 @interface NeoutilsOntologyBalances : NSObject <goSeqRefInterface> {
@@ -390,6 +407,12 @@ FOUNDATION_EXPORT NeoutilsNEP2* NeoutilsNEP2Encrypt(NSString* wif, NSString* pas
  * Create a new wallet.
  */
 FOUNDATION_EXPORT NeoutilsWallet* NeoutilsNewWallet(NSError** error);
+
+FOUNDATION_EXPORT NeoutilsONTAccount* NeoutilsONTAccountFromPrivateKey(NSData* privateKeyBytes);
+
+FOUNDATION_EXPORT NeoutilsONTAccount* NeoutilsONTAccountFromWIF(NSString* wif);
+
+FOUNDATION_EXPORT NeoutilsONTAccount* NeoutilsONTCreateAccount(void);
 
 FOUNDATION_EXPORT NeoutilsOntologyBalances* NeoutilsOntologyGetBalance(NSString* endpoint, NSString* address, NSError** error);
 

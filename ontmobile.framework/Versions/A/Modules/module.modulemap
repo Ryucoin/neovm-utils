@@ -1,8 +1,0 @@
-framework module "Ontmobile" {
-	header "ref.h"
-    header "Ontmobile.objc.h"
-    header "Universe.objc.h"
-    header "Ontmobile.h"
-
-    export *
-}
