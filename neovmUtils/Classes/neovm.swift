@@ -63,15 +63,24 @@ private func ontologyInvokeHelper(endpoint: String, contractHash: String, method
     }
 }
 
-public func buildOntologyInvocationTransaction(contractHash: String, method: String, args: [OntologyParameter], gasPrice: Int, gasLimit: Int, wif: String, payer: String) -> String? {
-    let params = convertParamArray(params: args)
-    return buildOntologyInvocationTransactionHelper(contractHash: contractHash, method: method, args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif, payer: payer)
+private func addressFromWif(wif: String) -> String? {
+    guard let wallet = walletFromWIF(wif: wif) else {
+        return nil
+    }
+    return wallet.address
 }
 
-public func ontologyInvoke(endpoint: String = ontologyTestNodes.bestNode.rawValue, contractHash: String, method: String, args: [OntologyParameter], gasPrice: Int, gasLimit: Int, wif: String, payer: String) -> String? {
+public func buildOntologyInvocationTransaction(contractHash: String, method: String, args: [OntologyParameter], gasPrice: Int = 0, gasLimit: Int = 0, wif: String, payer: String = "") -> String? {
+    let params = convertParamArray(params: args)
+    let p = payer == "" ? addressFromWif(wif: wif) ?? "" : payer
+    return buildOntologyInvocationTransactionHelper(contractHash: contractHash, method: method, args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif, payer: p)
+}
+
+public func ontologyInvoke(endpoint: String = ontologyTestNodes.bestNode.rawValue, contractHash: String, method: String, args: [OntologyParameter], gasPrice: Int = 0, gasLimit: Int = 0, wif: String, payer: String = "") -> String? {
     let e = getEndpoint(def: endpoint)
     let params = convertParamArray(params: args)
-    return ontologyInvokeHelper(endpoint: e, contractHash: contractHash, method: method, args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif, payer: payer)
+    let p = payer == "" ? addressFromWif(wif: wif) ?? "" : payer
+    return ontologyInvokeHelper(endpoint: e, contractHash: contractHash, method: method, args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif, payer: p)
 }
 
 public extension Data {
@@ -266,58 +275,58 @@ public class Wallet {
     }
 }
 
-private func walletFromOntAccount(ontAccount: NeoutilsONTAccount) -> Wallet {
+private func walletFromOntAccount(ontAccount: NeoutilsONTAccount) -> Wallet? {
     guard let a = ontAccount.address() else {
         print("Failed to get address from new ont account")
-        return Wallet()
+        return nil
     }
     guard let wif = ontAccount.wif() else {
         print("Failed to get wif from new ont account")
-        return Wallet()
+        return nil
     }
     guard let prK = ontAccount.privateKey() else {
         print("Failed to get private key from new ont account")
-        return Wallet()
+        return nil
     }
     guard let pbK = ontAccount.publicKey() else {
         print("Failed to get public key from new ont account")
-        return Wallet()
+        return nil
     }
     let w = Wallet(address: a, wif: wif, privateKey: prK, publicKey: pbK)
     return w
 }
 
-public func newWallet() -> Wallet {
+public func newWallet() -> Wallet? {
     guard let ontAccount = NeoutilsONTCreateAccount() else {
         print("Failed to generate new ont account")
-        return Wallet()
+        return nil
     }
     let wallet = walletFromOntAccount(ontAccount: ontAccount)
     return wallet
 }
 
-public func walletFromWIF(wif: String) -> Wallet {
+public func walletFromWIF(wif: String) -> Wallet? {
     guard let ontAccount = NeoutilsONTAccountFromWIF(wif) else {
         print("Failed to generate new ont account")
-        return Wallet()
+        return nil
     }
     let wallet = walletFromOntAccount(ontAccount: ontAccount)
     return wallet
 }
 
-public func walletFromPrivateKey(privateKey: String) -> Wallet {
+public func walletFromPrivateKey(privateKey: String) -> Wallet? {
     guard let ontAccount = NeoutilsONTAccountFromPrivateKey(privateKey.hexToBytes) else {
         print("Failed to generate new ont account")
-        return Wallet()
+        return nil
     }
     let wallet = walletFromOntAccount(ontAccount: ontAccount)
     return wallet
 }
 
-public func walletFromPrivateKey(privateKey: Data) -> Wallet {
+public func walletFromPrivateKey(privateKey: Data) -> Wallet? {
     guard let ontAccount = NeoutilsONTAccountFromPrivateKey(privateKey) else {
         print("Failed to generate new ont account")
-        return Wallet()
+        return nil
     }
     let wallet = walletFromOntAccount(ontAccount: ontAccount)
     return wallet

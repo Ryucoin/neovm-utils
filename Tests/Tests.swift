@@ -11,11 +11,12 @@ class Tests: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        let w = newWallet()
-        exampleWif = w.wif
-        exampleAddress = w.address
-        examplePrivateKey = w.privateKey
-        examplePublicKey = w.publicKey
+        if let w = newWallet() {
+            exampleWif = w.wif
+            exampleAddress = w.address
+            examplePrivateKey = w.privateKey
+            examplePublicKey = w.publicKey
+        }
     }
 
     override func tearDown() {
@@ -90,7 +91,7 @@ class Tests: XCTestCase {
         let gasPrice = 500
         let gasLimit = 20000
         
-        let res = ontologyInvoke(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWif, payer: exampleAddress)
+        let res = ontologyInvoke(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWif)
         XCTAssertNotNil(res)
         print("Response: \(res ?? "ERROR")")
     }
@@ -102,7 +103,7 @@ class Tests: XCTestCase {
     func testwalletFromPK(){
         let wallet = walletFromPrivateKey(privateKey: examplePrivateKey)
 
-        guard let strPrivateKey = wallet.privateKeyString else {
+        guard let strPrivateKey = wallet?.privateKeyString else {
             XCTFail()
             return
         }
@@ -111,7 +112,10 @@ class Tests: XCTestCase {
     }
 
     func testSign(){
-        let wallet = walletFromPrivateKey(privateKey: examplePrivateKey)
+        guard let wallet = walletFromPrivateKey(privateKey: examplePrivateKey) else {
+            XCTFail()
+            return
+        }
 
         let message = "Hello, world"
         let signature = signMessage(message: message, wallet: wallet)
@@ -133,8 +137,15 @@ class Tests: XCTestCase {
 //    }
 
     func testSharedSecret(){
-        let a = walletFromPrivateKey(privateKey: examplePrivateKey)
-        let b = newWallet()
+        guard let a = walletFromPrivateKey(privateKey: examplePrivateKey) else {
+            XCTFail()
+            return
+        }
+
+        guard let b = newWallet() else {
+            XCTFail()
+            return
+        }
 
         let publicKey : Data = a.publicKey
         guard let publicKeyStr : String = a.publicKeyString else {
