@@ -118,8 +118,14 @@ class Tests: XCTestCase {
         }
 
         let message = "Hello, world"
-        let signature = signMessage(message: message, wallet: wallet)
+        guard let signature = wallet.signMessage(message: message) else {
+            XCTFail()
+            return
+        }
         XCTAssertNotNil(signature)
+        // TODO: - Verify still not working
+//        let verified = wallet.verifySignature(signature: signature, message: message)
+//        XCTAssertTrue(verified)
     }
 
     // TODO: - Encrypt/Decrypt needs to be fixed
@@ -147,18 +153,12 @@ class Tests: XCTestCase {
             return
         }
 
-        let publicKey : Data = a.publicKey
-        guard let publicKeyStr : String = a.publicKeyString else {
+        guard let shared = b.computeSharedSecret(publicKey: a.publicKey) else {
             XCTFail()
             return
         }
 
-        guard let shared = computeSharedSecret(wallet: b, publicKey: publicKey) else {
-            XCTFail()
-            return
-        }
-
-        guard let shared2 = computeSharedSecret(wallet: b, publicKey: publicKeyStr) else {
+        guard let shared2 = b.computeSharedSecret(publicKey: a.publicKeyString) else {
             XCTFail()
             return
         }

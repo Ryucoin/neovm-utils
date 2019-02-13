@@ -7,6 +7,7 @@
 
 import Foundation
 import Neoutils
+import CommonCrypto
 
 public enum OntologyParameterType: String {
     case Address
@@ -256,6 +257,14 @@ public func ontologyGetBlockWithHeight(endpoint: String = ontologyTestNodes.best
     return result ?? ""
 }
 
+func sha256(data : Data) -> Data {
+    var hash = [UInt8](repeating: 0,  count: Int(CC_SHA256_DIGEST_LENGTH))
+    data.withUnsafeBytes {
+        _ = CC_SHA256($0, CC_LONG(data.count), &hash)
+    }
+    return Data(bytes: hash)
+}
+
 public class Wallet {
     public var address : String!
     public var wif : String!
@@ -272,6 +281,33 @@ public class Wallet {
         self.publicKey = publicKey
         self.privateKeyString = privateKey.bytesToHex
         self.publicKeyString = publicKey.bytesToHex
+    }
+
+    private func neoWallet() -> NeoutilsWallet? {
+        let err = NSErrorPointer(nilLiteral: ())
+        guard let neoWallet = NeoutilsGenerateFromWIF(wif, err) else {
+            print("Failed to create neotuils wallet")
+            return nil
+        }
+        return neoWallet
+    }
+
+    public func signMessage(message: String) -> String? {
+        let error = NSErrorPointer(nilLiteral: ())
+        let data = message.data(using: .utf8)
+        return NeoutilsSign(data, privateKeyString, error)?.bytesToHex
+    }
+
+    public func verifySignature(signature: String, message: String) -> Bool {
+        return NeoutilsVerify(publicKey, signature.hexToBytes, sha256(data: message.data(using: .utf8)!))
+    }
+
+    public func computeSharedSecret(publicKey: Data) -> Data? {
+        return neoWallet()?.computeSharedSecret(publicKey)
+    }
+
+    public func computeSharedSecret(publicKey: String) -> Data? {
+        return neoWallet()?.computeSharedSecret(publicKey.hexToBytes)
     }
 }
 
@@ -342,35 +378,6 @@ public func wifFromEncryptedKey(encrypted: String, password: String) -> String? 
     let error = NSErrorPointer(nilLiteral: ())
     let wif = NeoutilsNEP2Decrypt(encrypted, password, error)
     return wif
-}
-
-public func signMessage(message: String, wallet: Wallet) -> String? {
-    let error = NSErrorPointer(nilLiteral: ())
-    let data = message.data(using: .utf8)
-    if let privateKey = wallet.privateKeyString {
-        if let sign_data = NeoutilsSign(data, privateKey, error) {
-            return sign_data.bytesToHex
-        }
-    }
-    return nil
-}
-
-public func computeSharedSecret(wallet: Wallet, publicKey: Data) -> Data? {
-    let err = NSErrorPointer(nilLiteral: ())
-    guard let neoWallet = NeoutilsGenerateFromWIF(wallet.wif, err) else {
-        print("Failed to create neotuils wallet")
-        return nil
-    }
-    return neoWallet.computeSharedSecret(publicKey)
-}
-
-public func computeSharedSecret(wallet: Wallet, publicKey: String) -> Data? {
-    let err = NSErrorPointer(nilLiteral: ())
-    guard let neoWallet = NeoutilsGenerateFromWIF(wallet.wif, err) else {
-        print("Failed to create neotuils wallet")
-        return nil
-    }
-    return neoWallet.computeSharedSecret(publicKey.hexToBytes)
 }
 
 public enum OntAsset: String {
