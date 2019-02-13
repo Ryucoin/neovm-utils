@@ -349,6 +349,11 @@ FOUNDATION_EXPORT NSString* NeoutilsClaimONG(NSString* endpoint, long gasPrice, 
 
 
 /**
+ * Verify signed data using public key
+ */
+FOUNDATION_EXPORT BOOL NeoutilsDataVerify(NSData* publicKey, NSData* signature, NSData* data);
+
+/**
  * Decrypt AES encrypted string in base64 format to decrypted string
  */
 FOUNDATION_EXPORT NSString* NeoutilsDecrypt(NSData* key, NSString* encryptedText);

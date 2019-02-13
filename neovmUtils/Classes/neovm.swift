@@ -257,14 +257,6 @@ public func ontologyGetBlockWithHeight(endpoint: String = ontologyTestNodes.best
     return result ?? ""
 }
 
-func sha256(data : Data) -> Data {
-    var hash = [UInt8](repeating: 0,  count: Int(CC_SHA256_DIGEST_LENGTH))
-    data.withUnsafeBytes {
-        _ = CC_SHA256($0, CC_LONG(data.count), &hash)
-    }
-    return Data(bytes: hash)
-}
-
 public class Wallet {
     public var address : String!
     public var wif : String!
@@ -294,12 +286,18 @@ public class Wallet {
 
     public func signMessage(message: String) -> String? {
         let error = NSErrorPointer(nilLiteral: ())
-        let data = message.data(using: .utf8)
-        return NeoutilsSign(data, privateKeyString, error)?.bytesToHex
+        guard let data = message.data(using: .utf8) else {
+            return nil
+        }
+        return NeoutilsSign(data, privateKeyString, error).bytesToHex
     }
 
+    // TODO: - Fix
     public func verifySignature(signature: String, message: String) -> Bool {
-        return NeoutilsVerify(publicKey, signature.hexToBytes, sha256(data: message.data(using: .utf8)!))
+        guard let data = message.data(using: .utf8) else {
+            return false
+        }
+        return NeoutilsVerify(publicKey, signature.hexToBytes, data)
     }
 
     public func computeSharedSecret(publicKey: Data) -> Data? {
