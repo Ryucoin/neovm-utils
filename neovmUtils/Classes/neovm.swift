@@ -360,3 +360,28 @@ public func computeSharedSecret(wallet: Wallet, publicKey: String) -> Data? {
     }
     return neoWallet.computeSharedSecret(publicKey.hexToBytes)
 }
+
+public enum OntAsset: String {
+    case ONT
+    case ONG
+}
+
+public func sendOntologyTransfer(endpoint: String = ontologyTestNodes.bestNode.rawValue, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String, asset: OntAsset, toAddress: String, amount: Double) -> String? {
+    let error = NSErrorPointer(nilLiteral: ())
+    let txID = NeoutilsOntologyTransfer(endpoint, gasPrice, gasLimit, wif, asset.rawValue, toAddress, amount, error)
+    if error != nil {
+        print("There was an error transferring \(amount) \(asset.rawValue)")
+        return nil
+    }
+    return txID
+}
+
+public func claimONG(endpoint: String = ontologyTestNodes.bestNode.rawValue, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String? {
+    let error = NSErrorPointer(nilLiteral: ())
+    let txID = NeoutilsClaimONG(endpoint, gasPrice, gasLimit, wif, error)
+    if error != nil {
+        print("There was an error claiming ONG")
+        return nil
+    }
+    return txID
+}
