@@ -21,5 +21,6 @@ Pod::Spec.new do |s|
 
   s.source_files = 'neovmUtils/Classes/**/*'
   s.vendored_frameworks = 'neoutils.framework'
+  s.vendored_frameworks = 'ontmobile.framework'
 
 end

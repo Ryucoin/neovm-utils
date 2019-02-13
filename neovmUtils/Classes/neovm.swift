@@ -7,6 +7,7 @@
 
 import Foundation
 import Neoutils
+import Ontmobile
 
 public enum OntologyParameterType: String {
     case Address
