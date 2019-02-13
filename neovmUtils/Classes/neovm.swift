@@ -332,6 +332,18 @@ public func walletFromPrivateKey(privateKey: Data) -> Wallet? {
     return wallet
 }
 
+public func newEncryptedKey(wif: String, password: String) -> String? {
+    let error = NSErrorPointer(nilLiteral: ())
+    let nep2 = NeoutilsNEP2Encrypt(wif, password, error)
+    return nep2?.encryptedKey()
+}
+
+public func wifFromEncryptedKey(encrypted: String, password: String) -> String? {
+    let error = NSErrorPointer(nilLiteral: ())
+    let wif = NeoutilsNEP2Decrypt(encrypted, password, error)
+    return wif
+}
+
 public func signMessage(message: String, wallet: Wallet) -> String? {
     let error = NSErrorPointer(nilLiteral: ())
     let data = message.data(using: .utf8)

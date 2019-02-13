@@ -263,4 +263,17 @@ class Tests: XCTestCase {
         print(tx)
         XCTAssertNotEqual(tx, "")
     }
+
+    func testNEP2() {
+        let password = "12345678"
+        guard let e = newEncryptedKey(wif: exampleWif, password: password) else {
+            XCTFail()
+            return
+        }
+        guard let w = wifFromEncryptedKey(encrypted: e, password: password) else {
+            XCTFail()
+            return
+        }
+        XCTAssertTrue(w == exampleWif)
+    }
 }
