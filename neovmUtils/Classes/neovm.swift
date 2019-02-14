@@ -100,22 +100,6 @@ public extension String {
     }
 }
 
-public func encrypt(message: String, key: Data) -> String {
-    return NeoutilsEncrypt(key, message)
-}
-
-public func encrypt(message: String, key: String) -> String {
-    return NeoutilsEncrypt(key.hexToBytes, message)
-}
-
-public func decrypt(encrypted: String, key: Data) -> String {
-    return NeoutilsDecrypt(key, encrypted)
-}
-
-public func decrypt(encrypted: String, key: String) -> String {
-    return NeoutilsDecrypt(key.hexToBytes, encrypted)
-}
-
 // Ontology RPC
 
 public enum ontologyTestNodes: String {
@@ -257,6 +241,12 @@ public func ontologyGetBlockWithHeight(endpoint: String = ontologyTestNodes.best
     return result ?? ""
 }
 
+private func sha256(_ data: Data) -> Data? {
+    guard let res = NSMutableData(length: Int(CC_SHA256_DIGEST_LENGTH)) else { return nil }
+    CC_SHA256((data as NSData).bytes, CC_LONG(data.count), res.mutableBytes.assumingMemoryBound(to: UInt8.self))
+    return res as Data
+}
+
 public class Wallet {
     public var address : String!
     public var wif : String!
@@ -289,15 +279,24 @@ public class Wallet {
         guard let data = message.data(using: .utf8) else {
             return nil
         }
-        return NeoutilsSign(data, privateKeyString, error).bytesToHex
+        guard let neoPrKeyString = neoWallet()?.privateKey()?.bytesToHex else {
+            return nil
+        }
+        let sig = NeoutilsSign(data, neoPrKeyString, error).bytesToHex
+        if error != nil {
+            return nil
+        }
+        return sig
     }
 
-    // TODO: - Fix
     public func verifySignature(signature: String, message: String) -> Bool {
         guard let data = message.data(using: .utf8) else {
             return false
         }
-        return NeoutilsVerify(publicKey, signature.hexToBytes, data)
+        guard let hash = sha256(data) else {
+            return false
+        }
+        return NeoutilsVerify(publicKey, signature.hexToBytes, hash)
     }
 
     public func computeSharedSecret(publicKey: Data) -> Data? {
@@ -306,6 +305,24 @@ public class Wallet {
 
     public func computeSharedSecret(publicKey: String) -> Data? {
         return neoWallet()?.computeSharedSecret(publicKey.hexToBytes)
+    }
+    
+    public func privateEncrypt(message: String) -> String {
+        return NeoutilsEncrypt(neoWallet()?.privateKey(), message)
+    }
+    
+    public func privateDecrypt(encrypted: String) -> String {
+        return NeoutilsDecrypt(neoWallet()?.privateKey(), encrypted)
+    }
+    
+    public func sharedEncrypt(message: String, publicKey: Data) -> String {
+        let secretKey = computeSharedSecret(publicKey: publicKey)
+        return NeoutilsEncrypt(secretKey, message)
+    }
+    
+    public func sharedDecrypt(encrypted: String, publicKey: Data) -> String {
+        let secretKey = computeSharedSecret(publicKey: publicKey)
+        return NeoutilsDecrypt(secretKey, encrypted)
     }
 }
 
@@ -348,7 +365,7 @@ public func walletFromWIF(wif: String) -> Wallet? {
     return wallet
 }
 
-public func walletFromPrivateKey(privateKey: String) -> Wallet? {
+public func walletFromONTPrivateKey(privateKey: String) -> Wallet? {
     guard let ontAccount = NeoutilsONTAccountFromPrivateKey(privateKey.hexToBytes) else {
         print("Failed to generate new ont account")
         return nil
@@ -357,7 +374,7 @@ public func walletFromPrivateKey(privateKey: String) -> Wallet? {
     return wallet
 }
 
-public func walletFromPrivateKey(privateKey: Data) -> Wallet? {
+public func walletFromONTPrivateKey(privateKey: Data) -> Wallet? {
     guard let ontAccount = NeoutilsONTAccountFromPrivateKey(privateKey) else {
         print("Failed to generate new ont account")
         return nil

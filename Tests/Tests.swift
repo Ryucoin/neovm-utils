@@ -101,18 +101,18 @@ class Tests: XCTestCase {
     }
 
     func testwalletFromPK(){
-        let wallet = walletFromPrivateKey(privateKey: examplePrivateKey)
+        let wallet = walletFromONTPrivateKey(privateKey: examplePrivateKey)
 
         guard let strPrivateKey = wallet?.privateKeyString else {
             XCTFail()
             return
         }
 
-        let _ = walletFromPrivateKey(privateKey: strPrivateKey)
+        let _ = walletFromONTPrivateKey(privateKey: strPrivateKey)
     }
 
     func testSign(){
-        guard let wallet = walletFromPrivateKey(privateKey: examplePrivateKey) else {
+        guard let wallet = walletFromONTPrivateKey(privateKey: examplePrivateKey) else {
             XCTFail()
             return
         }
@@ -124,26 +124,28 @@ class Tests: XCTestCase {
         }
         XCTAssertNotNil(signature)
         // TODO: - Verify still not working
-//        let verified = wallet.verifySignature(signature: signature, message: message)
-//        XCTAssertTrue(verified)
+        let verified = wallet.verifySignature(signature: signature, message: message)
+        XCTAssertTrue(verified)
     }
 
-    // TODO: - Encrypt/Decrypt needs to be fixed
-//    func testEncryptDecrypt(){
-//        let original = "Hello, world"
-//        let wallet = walletFromPrivateKey(privateKey: examplePrivateKey)
-//
-//        let encrypted = encrypt(message: original, key: examplePrivateKey)
-//        let decrypted = decrypt(encrypted: encrypted, key: examplePrivateKey)
-//        let encryptedString = encrypt(message: original, key: wallet.privateKeyString)
-//        let decryptedString = decrypt(encrypted: encryptedString, key: wallet.privateKeyString)
-//
-//        XCTAssert(original == decrypted)
-//        XCTAssert(original == decryptedString)
-//    }
+    func testEncryptDecrypt(){
+        let original = "Hello, world"
+        guard let wallet = walletFromONTPrivateKey(privateKey: examplePrivateKey) else {
+            XCTFail()
+            return
+        }
+
+        let encrypted = wallet.privateEncrypt(message: original)
+        let decrypted = wallet.privateDecrypt(encrypted: encrypted)
+        let encryptedString = wallet.privateEncrypt(message: original)
+        let decryptedString = wallet.privateDecrypt(encrypted: encryptedString)
+
+        XCTAssert(original == decrypted)
+        XCTAssert(original == decryptedString)
+    }
 
     func testSharedSecret(){
-        guard let a = walletFromPrivateKey(privateKey: examplePrivateKey) else {
+        guard let a = walletFromONTPrivateKey(privateKey: examplePrivateKey) else {
             XCTFail()
             return
         }
@@ -164,6 +166,11 @@ class Tests: XCTestCase {
         }
 
         XCTAssertEqual(shared, shared2)
+        
+        let original = "Hello, world"
+        let encrypted = a.sharedEncrypt(message: original, publicKey: b.publicKey)
+        let decrypted = a.sharedDecrypt(encrypted: encrypted, publicKey: b.publicKey)
+        XCTAssertEqual(original, decrypted)
     }
 
     func testIsValidAddress(){
