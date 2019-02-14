@@ -318,24 +318,19 @@ public class Wallet {
 
 private func walletFromOntAccount(ontAccount: NeoutilsONTAccount) -> Wallet? {
     guard let a = ontAccount.address() else {
-        print("Failed to get address from new ont account")
         return nil
     }
     guard let wif = ontAccount.wif() else {
-        print("Failed to get wif from new ont account")
         return nil
     }
     guard let prK = ontAccount.privateKey() else {
-        print("Failed to get private key from new ont account")
         return nil
     }
     guard let pbK = ontAccount.publicKey() else {
-        print("Failed to get public key from new ont account")
         return nil
     }
     let err = NSErrorPointer(nilLiteral: ())
     guard let neoWallet = NeoutilsGenerateFromWIF(wif, err) else {
-        print("Failed to create neotuils wallet")
         return nil
     }
     let w = Wallet(address: a, wif: wif, privateKey: prK, publicKey: pbK, neoWallet: neoWallet)
@@ -344,7 +339,6 @@ private func walletFromOntAccount(ontAccount: NeoutilsONTAccount) -> Wallet? {
 
 public func newWallet() -> Wallet? {
     guard let ontAccount = NeoutilsONTCreateAccount() else {
-        print("Failed to generate new ont account")
         return nil
     }
     let wallet = walletFromOntAccount(ontAccount: ontAccount)
@@ -353,7 +347,6 @@ public func newWallet() -> Wallet? {
 
 public func walletFromWIF(wif: String) -> Wallet? {
     guard let ontAccount = NeoutilsONTAccountFromWIF(wif) else {
-        print("Failed to generate new ont account")
         return nil
     }
     let wallet = walletFromOntAccount(ontAccount: ontAccount)
@@ -362,7 +355,6 @@ public func walletFromWIF(wif: String) -> Wallet? {
 
 public func walletFromONTPrivateKey(privateKey: String) -> Wallet? {
     guard let ontAccount = NeoutilsONTAccountFromPrivateKey(privateKey.hexToBytes) else {
-        print("Failed to generate new ont account")
         return nil
     }
     let wallet = walletFromOntAccount(ontAccount: ontAccount)
@@ -371,7 +363,6 @@ public func walletFromONTPrivateKey(privateKey: String) -> Wallet? {
 
 public func walletFromONTPrivateKey(privateKey: Data) -> Wallet? {
     guard let ontAccount = NeoutilsONTAccountFromPrivateKey(privateKey) else {
-        print("Failed to generate new ont account")
         return nil
     }
     let wallet = walletFromOntAccount(ontAccount: ontAccount)
@@ -395,22 +386,14 @@ public enum OntAsset: String {
     case ONG
 }
 
-public func sendOntologyTransfer(endpoint: String = ontologyTestNodes.bestNode.rawValue, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String, asset: OntAsset, toAddress: String, amount: Double) -> String? {
+public func sendOntologyTransfer(endpoint: String = ontologyTestNodes.bestNode.rawValue, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String, asset: OntAsset, toAddress: String, amount: Double) -> String {
     let error = NSErrorPointer(nilLiteral: ())
     let txID = NeoutilsOntologyTransfer(endpoint, gasPrice, gasLimit, wif, asset.rawValue, toAddress, amount, error)
-    if error != nil {
-        print("There was an error transferring \(amount) \(asset.rawValue)")
-        return nil
-    }
-    return txID
+    return txID ?? ""
 }
 
-public func claimONG(endpoint: String = ontologyTestNodes.bestNode.rawValue, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String? {
+public func claimONG(endpoint: String = ontologyTestNodes.bestNode.rawValue, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
     let error = NSErrorPointer(nilLiteral: ())
     let txID = NeoutilsClaimONG(endpoint, gasPrice, gasLimit, wif, error)
-    if error != nil {
-        print("There was an error claiming ONG")
-        return nil
-    }
-    return txID
+    return txID ?? ""
 }

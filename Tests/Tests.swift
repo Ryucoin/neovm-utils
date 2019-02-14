@@ -289,16 +289,12 @@ class Tests: XCTestCase {
             XCTFail()
             return
         }
-        guard let tx = sendOntologyTransfer(wif: exampleWif, asset: .ONT, toAddress: b.address, amount: 10) else {
-            return
-        }
+        let tx = sendOntologyTransfer(wif: exampleWif, asset: .ONT, toAddress: b.address, amount: 10)
         print(tx)
     }
 
     func testClaimONG() {
-        guard let tx = claimONG(wif: exampleWif) else {
-            return
-        }
+        let tx = claimONG(wif: exampleWif)
         print(tx)
     }
 }
