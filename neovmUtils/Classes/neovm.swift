@@ -8,6 +8,7 @@
 import Foundation
 import Neoutils
 import CommonCrypto
+import TrezorCrypto
 
 public enum OntologyParameterType: String {
     case Address
@@ -396,4 +397,13 @@ public func claimONG(endpoint: String = ontologyTestNodes.bestNode.rawValue, gas
     let error = NSErrorPointer(nilLiteral: ())
     let txID = NeoutilsClaimONG(endpoint, gasPrice, gasLimit, wif, error)
     return txID ?? ""
+}
+
+public func privateKeyFromMnemonic() {
+    let raw = mnemonic_generate(128)!
+    let mnemonic = String(cString: raw)
+    var seed = Data(repeating: 0, count: 512 / 8)
+    seed.withUnsafeMutableBytes { seedPtr in
+        mnemonic_to_seed(mnemonic, "", seedPtr, nil)
+    }
 }

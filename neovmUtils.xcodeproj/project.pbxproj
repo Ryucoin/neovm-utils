@@ -11,6 +11,12 @@
 		7F3AD4302200627E00B45C16 /* neovm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3AD42F2200627E00B45C16 /* neovm.swift */; };
 		7F725CE821FF04CA00850C2D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F725CE721FF04CA00850C2D /* Foundation.framework */; };
 		7F78B99C2214BD4C0028B76D /* neoutils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F78B99B2214BD4C0028B76D /* neoutils.framework */; };
+		7FD0FC1D2215DF2900F52C0F /* memzero.c in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC0E2215DF2900F52C0F /* memzero.c */; };
+		7FD0FC1E2215DF2900F52C0F /* hmac.c in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC102215DF2900F52C0F /* hmac.c */; };
+		7FD0FC1F2215DF2900F52C0F /* sha2.c in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC142215DF2900F52C0F /* sha2.c */; };
+		7FD0FC202215DF2900F52C0F /* rand.c in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC172215DF2900F52C0F /* rand.c */; };
+		7FD0FC212215DF2900F52C0F /* pbkdf2.c in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC182215DF2900F52C0F /* pbkdf2.c */; };
+		7FD0FC222215DF2900F52C0F /* bip39.c in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC192215DF2900F52C0F /* bip39.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +27,21 @@
 		7F3AD42F2200627E00B45C16 /* neovm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = neovm.swift; sourceTree = "<group>"; };
 		7F725CE721FF04CA00850C2D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7F78B99B2214BD4C0028B76D /* neoutils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = neoutils.framework; sourceTree = "<group>"; };
+		7FD0FC0E2215DF2900F52C0F /* memzero.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = memzero.c; path = TrezorCrypto/memzero.c; sourceTree = SOURCE_ROOT; };
+		7FD0FC0F2215DF2900F52C0F /* pbkdf2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pbkdf2.h; path = TrezorCrypto/pbkdf2.h; sourceTree = SOURCE_ROOT; };
+		7FD0FC102215DF2900F52C0F /* hmac.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = hmac.c; path = TrezorCrypto/hmac.c; sourceTree = SOURCE_ROOT; };
+		7FD0FC112215DF2900F52C0F /* rand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = rand.h; path = TrezorCrypto/rand.h; sourceTree = SOURCE_ROOT; };
+		7FD0FC122215DF2900F52C0F /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = TrezorCrypto/module.modulemap; sourceTree = SOURCE_ROOT; };
+		7FD0FC132215DF2900F52C0F /* bip39.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bip39.h; path = TrezorCrypto/bip39.h; sourceTree = SOURCE_ROOT; };
+		7FD0FC142215DF2900F52C0F /* sha2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sha2.c; path = TrezorCrypto/sha2.c; sourceTree = SOURCE_ROOT; };
+		7FD0FC152215DF2900F52C0F /* memzero.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = memzero.h; path = TrezorCrypto/memzero.h; sourceTree = SOURCE_ROOT; };
+		7FD0FC162215DF2900F52C0F /* TrezorCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrezorCrypto.h; path = TrezorCrypto/TrezorCrypto.h; sourceTree = SOURCE_ROOT; };
+		7FD0FC172215DF2900F52C0F /* rand.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = rand.c; path = TrezorCrypto/rand.c; sourceTree = SOURCE_ROOT; };
+		7FD0FC182215DF2900F52C0F /* pbkdf2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pbkdf2.c; path = TrezorCrypto/pbkdf2.c; sourceTree = SOURCE_ROOT; };
+		7FD0FC192215DF2900F52C0F /* bip39.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bip39.c; path = TrezorCrypto/bip39.c; sourceTree = SOURCE_ROOT; };
+		7FD0FC1A2215DF2900F52C0F /* sha2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sha2.h; path = TrezorCrypto/sha2.h; sourceTree = SOURCE_ROOT; };
+		7FD0FC1B2215DF2900F52C0F /* hmac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hmac.h; path = TrezorCrypto/hmac.h; sourceTree = SOURCE_ROOT; };
+		7FD0FC1C2215DF2900F52C0F /* options.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = options.h; path = TrezorCrypto/options.h; sourceTree = SOURCE_ROOT; };
 		BC6F233EC5E38887EC244709 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		F2BFC57897958F36981CB9D5 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -41,6 +62,7 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
+				7FD0FC0D2215DF1A00F52C0F /* C Files */,
 				7F3AD42E2200627700B45C16 /* Classes */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACE81AFB9204008FA782 /* Tests */,
@@ -93,6 +115,28 @@
 			path = neovmUtils/Classes;
 			sourceTree = "<group>";
 		};
+		7FD0FC0D2215DF1A00F52C0F /* C Files */ = {
+			isa = PBXGroup;
+			children = (
+				7FD0FC192215DF2900F52C0F /* bip39.c */,
+				7FD0FC132215DF2900F52C0F /* bip39.h */,
+				7FD0FC102215DF2900F52C0F /* hmac.c */,
+				7FD0FC1B2215DF2900F52C0F /* hmac.h */,
+				7FD0FC0E2215DF2900F52C0F /* memzero.c */,
+				7FD0FC152215DF2900F52C0F /* memzero.h */,
+				7FD0FC122215DF2900F52C0F /* module.modulemap */,
+				7FD0FC1C2215DF2900F52C0F /* options.h */,
+				7FD0FC182215DF2900F52C0F /* pbkdf2.c */,
+				7FD0FC0F2215DF2900F52C0F /* pbkdf2.h */,
+				7FD0FC172215DF2900F52C0F /* rand.c */,
+				7FD0FC112215DF2900F52C0F /* rand.h */,
+				7FD0FC142215DF2900F52C0F /* sha2.c */,
+				7FD0FC1A2215DF2900F52C0F /* sha2.h */,
+				7FD0FC162215DF2900F52C0F /* TrezorCrypto.h */,
+			);
+			path = "C Files";
+			sourceTree = "<group>";
+		};
 		BB75E40C24537D4E61108C25 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,7 +178,7 @@
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = 6RN58493KK;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1010;
 					};
 				};
 			};
@@ -161,8 +205,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FD0FC1F2215DF2900F52C0F /* sha2.c in Sources */,
+				7FD0FC212215DF2900F52C0F /* pbkdf2.c in Sources */,
+				7FD0FC1E2215DF2900F52C0F /* hmac.c in Sources */,
+				7FD0FC1D2215DF2900F52C0F /* memzero.c in Sources */,
 				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
+				7FD0FC202215DF2900F52C0F /* rand.c in Sources */,
 				7F3AD4302200627E00B45C16 /* neovm.swift in Sources */,
+				7FD0FC222215DF2900F52C0F /* bip39.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,9 +268,12 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LIBRARY_SEARCH_PATHS = "";
+				MODULEMAP_FILE = "$(SRCROOT)/TrezorCrypto/module.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_INCLUDE_PATHS = "${SRCROOT}/TrezorCrypto/**";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -267,8 +320,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LIBRARY_SEARCH_PATHS = "";
+				MODULEMAP_FILE = "$(SRCROOT)/TrezorCrypto/module.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_INCLUDE_PATHS = "${SRCROOT}/TrezorCrypto/**";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -278,23 +334,30 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = 6RN58493KK;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SRCROOT)/**",
-					"$(PROJECT_DIR)/**",
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = "${inherited}/**";
 				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
+				MODULEMAP_FILE = "$(SRCROOT)/TrezorCrypto/module.modulemap";
+				MODULEMAP_PRIVATE_FILE = "";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = NO;
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
@@ -304,19 +367,25 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = 6RN58493KK;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SRCROOT)/**",
-					"$(PROJECT_DIR)/**",
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
+				HEADER_SEARCH_PATHS = "${inherited}/**";
 				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
+				MODULEMAP_FILE = "$(SRCROOT)/TrezorCrypto/module.modulemap";
+				MODULEMAP_PRIVATE_FILE = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = NO;
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
