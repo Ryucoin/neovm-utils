@@ -166,7 +166,7 @@ class Tests: XCTestCase {
         }
 
         XCTAssertEqual(shared, shared2)
-        
+
         let original = "Hello, world"
         let encrypted = a.sharedEncrypt(message: original, publicKey: b.publicKey)
         let decrypted = a.sharedDecrypt(encrypted: encrypted, publicKey: b.publicKey)
@@ -254,19 +254,19 @@ class Tests: XCTestCase {
         let matchId = createOntParam(type: .String, value: mid)
         let fee = createOntParam(type: .Fixed8, value: entry)
         let mx = createOntParam(type: .Integer, value: max)
-        
+
         let args = [target, gameId, matchId, fee, mx]
-        
+
         let method = "join"
-        
+
         let gasPrice = 500
         let gasLimit = 20000
-        
+
         guard let tx = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWif, payer: exampleAddress) else {
             print("Failed to build the transaction")
             return
         }
-        
+
         print(tx)
         XCTAssertNotEqual(tx, "")
     }
@@ -282,5 +282,23 @@ class Tests: XCTestCase {
             return
         }
         XCTAssertTrue(w == exampleWif)
+    }
+
+    func testTransferONT() {
+        guard let b = newWallet() else {
+            XCTFail()
+            return
+        }
+        guard let tx = sendOntologyTransfer(wif: exampleWif, asset: .ONT, toAddress: b.address, amount: 10) else {
+            return
+        }
+        print(tx)
+    }
+
+    func testClaimONG() {
+        guard let tx = claimONG(wif: exampleWif) else {
+            return
+        }
+        print(tx)
     }
 }
