@@ -254,8 +254,9 @@ public class Wallet {
     public var publicKey : Data!
     public var privateKeyString : String!
     public var publicKeyString : String!
+    private var neoWallet : NeoutilsWallet!
 
-    convenience init(address: String, wif: String, privateKey: Data, publicKey: Data) {
+    convenience init(address: String, wif: String, privateKey: Data, publicKey: Data, neoWallet: NeoutilsWallet) {
         self.init()
         self.address = address
         self.wif = wif
@@ -263,15 +264,7 @@ public class Wallet {
         self.publicKey = publicKey
         self.privateKeyString = privateKey.bytesToHex
         self.publicKeyString = publicKey.bytesToHex
-    }
-
-    private func neoWallet() -> NeoutilsWallet? {
-        let err = NSErrorPointer(nilLiteral: ())
-        guard let neoWallet = NeoutilsGenerateFromWIF(wif, err) else {
-            print("Failed to create neotuils wallet")
-            return nil
-        }
-        return neoWallet
+        self.neoWallet = neoWallet
     }
 
     public func signMessage(message: String) -> String? {
@@ -279,10 +272,7 @@ public class Wallet {
         guard let data = message.data(using: .utf8) else {
             return nil
         }
-        guard let neoPrKeyString = neoWallet()?.privateKey()?.bytesToHex else {
-            return nil
-        }
-        let sig = NeoutilsSign(data, neoPrKeyString, error).bytesToHex
+        let sig = NeoutilsSign(data, neoWallet.privateKey()?.bytesToHex, error).bytesToHex
         if error != nil {
             return nil
         }
@@ -300,19 +290,19 @@ public class Wallet {
     }
 
     public func computeSharedSecret(publicKey: Data) -> Data? {
-        return neoWallet()?.computeSharedSecret(publicKey)
+        return neoWallet.computeSharedSecret(publicKey)
     }
 
     public func computeSharedSecret(publicKey: String) -> Data? {
-        return neoWallet()?.computeSharedSecret(publicKey.hexToBytes)
+        return neoWallet.computeSharedSecret(publicKey.hexToBytes)
     }
     
     public func privateEncrypt(message: String) -> String {
-        return NeoutilsEncrypt(neoWallet()?.privateKey(), message)
+        return NeoutilsEncrypt(neoWallet.privateKey(), message)
     }
     
     public func privateDecrypt(encrypted: String) -> String {
-        return NeoutilsDecrypt(neoWallet()?.privateKey(), encrypted)
+        return NeoutilsDecrypt(neoWallet.privateKey(), encrypted)
     }
     
     public func sharedEncrypt(message: String, publicKey: Data) -> String {
@@ -343,7 +333,12 @@ private func walletFromOntAccount(ontAccount: NeoutilsONTAccount) -> Wallet? {
         print("Failed to get public key from new ont account")
         return nil
     }
-    let w = Wallet(address: a, wif: wif, privateKey: prK, publicKey: pbK)
+    let err = NSErrorPointer(nilLiteral: ())
+    guard let neoWallet = NeoutilsGenerateFromWIF(wif, err) else {
+        print("Failed to create neotuils wallet")
+        return nil
+    }
+    let w = Wallet(address: a, wif: wif, privateKey: prK, publicKey: pbK, neoWallet: neoWallet)
     return w
 }
 
