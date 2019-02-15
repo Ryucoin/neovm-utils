@@ -2,20 +2,13 @@ import XCTest
 import Neoutils
 
 class Tests: XCTestCase {
-
-    var exampleWif : String!
-    var exampleAddress : String!
-    var examplePrivateKey : Data!
-    var examplePublicKey : Data!
+    var exampleWallet : Wallet!
 
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
         if let w = newWallet() {
-            exampleWif = w.wif
-            exampleAddress = w.address
-            examplePrivateKey = w.privateKey
-            examplePublicKey = w.publicKey
+            exampleWallet = w
         }
     }
 
@@ -32,16 +25,16 @@ class Tests: XCTestCase {
     func testBuildOntologyInvocation(){
         let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
         let method = "put"
-        let argDict : [[String:Any]] = [["T":"Address", "V":exampleAddress], ["T":"String", "V":"Hello!"]]
+        let argDict : [[String:Any]] = [["T":"Address", "V":exampleWallet.address], ["T":"String", "V":"Hello!"]]
 
         do {
             let data =  try JSONSerialization.data(withJSONObject: argDict, options: .prettyPrinted)
             let args = String(data: data, encoding: String.Encoding.utf8)
             let gasPrice = 500
             let gasLimit = 20000
-            let wif = exampleWif
+            let wif = exampleWallet.wif
             let err = NSErrorPointer(nilLiteral: ())
-            let res = NeoutilsBuildOntologyInvocationTransaction(contractHash, method, args, gasPrice, gasLimit, wif, exampleAddress, err)
+            let res = NeoutilsBuildOntologyInvocationTransaction(contractHash, method, args, gasPrice, gasLimit, wif, exampleWallet.address, err)
             XCTAssertNil(err)
             XCTAssertNotNil(res)
             print("Response: \(res ?? "ERROR")")
@@ -53,7 +46,7 @@ class Tests: XCTestCase {
     func testOntologyInvocation(){
         let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
         let method = "put"
-        let argDict : [[String:Any]] = [["T":"Address", "V":exampleAddress], ["T":"String", "V":"Hello!"]]
+        let argDict : [[String:Any]] = [["T":"Address", "V":exampleWallet.address], ["T":"String", "V":"Hello!"]]
 
         do {
             let data =  try JSONSerialization.data(withJSONObject: argDict, options: .prettyPrinted)
@@ -61,9 +54,9 @@ class Tests: XCTestCase {
             let gasPrice = 500
             let gasLimit = 20000
             let endpoint = "http://polaris2.ont.io:20336"
-            let wif = exampleWif
+            let wif = exampleWallet.wif
             let err = NSErrorPointer(nilLiteral: ())
-            let res = NeoutilsOntologyInvoke(endpoint, contractHash, method, args, gasPrice, gasLimit, wif, exampleAddress, err)
+            let res = NeoutilsOntologyInvoke(endpoint, contractHash, method, args, gasPrice, gasLimit, wif, exampleWallet.address, err)
             XCTAssertNil(err)
             XCTAssertNotNil(res)
             print("Response: \(res ?? "ERROR")")
@@ -75,11 +68,11 @@ class Tests: XCTestCase {
     func testBuildOntologyInvocationHelper(){
         let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
         let method = "put"
-        let args : [OntologyParameter] = [createOntParam(type: .Address, value: exampleAddress), createOntParam(type: .String, value: "Hello!")]
+        let args : [OntologyParameter] = [createOntParam(type: .Address, value: exampleWallet.address), createOntParam(type: .String, value: "Hello!")]
         let gasPrice = 500
         let gasLimit = 20000
 
-        let res = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWif, payer: exampleAddress)
+        let res = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWallet.wif, payer: exampleWallet.address)
         XCTAssertNotNil(res)
         print("Response: \(res ?? "ERROR")")
     }
@@ -87,32 +80,32 @@ class Tests: XCTestCase {
     func testOntologyInvocationHelper(){
         let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
         let method = "put"
-        let args : [OntologyParameter] = [createOntParam(type: .Address, value: exampleAddress), createOntParam(type: .String, value: "Hello!")]
+        let args : [OntologyParameter] = [createOntParam(type: .Address, value: exampleWallet.address), createOntParam(type: .String, value: "Hello!")]
         let gasPrice = 500
         let gasLimit = 20000
         
-        let res = ontologyInvoke(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWif)
+        let res = ontologyInvoke(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWallet.wif)
         XCTAssertNotNil(res)
         print("Response: \(res ?? "ERROR")")
     }
 
     func testwalletFromWIF(){
-        let _ = walletFromWIF(wif: exampleWif)
+        let _ = walletFromWIF(wif: exampleWallet.wif)
     }
 
     func testwalletFromPK(){
-        let wallet = walletFromONTPrivateKey(privateKey: examplePrivateKey)
+        let wallet = walletFromPrivateKey(privateKey: exampleWallet.privateKey)
 
         guard let strPrivateKey = wallet?.privateKeyString else {
             XCTFail()
             return
         }
 
-        let _ = walletFromONTPrivateKey(privateKey: strPrivateKey)
+        let _ = walletFromPrivateKey(privateKey: strPrivateKey)
     }
 
     func testSign(){
-        guard let wallet = walletFromONTPrivateKey(privateKey: examplePrivateKey) else {
+        guard let wallet = walletFromPrivateKey(privateKey: exampleWallet.privateKey) else {
             XCTFail()
             return
         }
@@ -130,7 +123,7 @@ class Tests: XCTestCase {
 
     func testEncryptDecrypt(){
         let original = "Hello, world"
-        guard let wallet = walletFromONTPrivateKey(privateKey: examplePrivateKey) else {
+        guard let wallet = walletFromPrivateKey(privateKey: exampleWallet.privateKey) else {
             XCTFail()
             return
         }
@@ -145,7 +138,7 @@ class Tests: XCTestCase {
     }
 
     func testSharedSecret(){
-        guard let a = walletFromONTPrivateKey(privateKey: examplePrivateKey) else {
+        guard let a = walletFromPrivateKey(privateKey: exampleWallet.privateKey) else {
             XCTFail()
             return
         }
@@ -174,7 +167,7 @@ class Tests: XCTestCase {
     }
 
     func testIsValidAddress(){
-        XCTAssertTrue(exampleAddress.isValidAddress)
+        XCTAssertTrue(exampleWallet.address.isValidAddress)
     }
 
     func testGetBlockCount(){
@@ -198,11 +191,11 @@ class Tests: XCTestCase {
     func testSendRawTransaction() {
         let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
         let method = "put"
-        let args : [OntologyParameter] = [createOntParam(type: .Address, value: exampleAddress), createOntParam(type: .String, value: "Hello!")]
+        let args : [OntologyParameter] = [createOntParam(type: .Address, value: exampleWallet.address), createOntParam(type: .String, value: "Hello!")]
         let gasPrice = 500
         let gasLimit = 20000
 
-        guard let res = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWif, payer: exampleAddress) else {
+        guard let res = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWallet.wif, payer: exampleWallet.address) else {
             XCTFail()
             return
         }
@@ -213,7 +206,7 @@ class Tests: XCTestCase {
 
     func testGetStorage() {
         let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
-        let result = ontologyGetStorage(scriptHash: contractHash, key: exampleAddress)
+        let result = ontologyGetStorage(scriptHash: contractHash, key: exampleWallet.address)
         print("Result for getStorage: \(result)")
     }
 
@@ -249,7 +242,7 @@ class Tests: XCTestCase {
         let entry = 10.0
         let max : Int = 1
         
-        let target = createOntParam(type: .Address, value: exampleAddress)
+        let target = createOntParam(type: .Address, value: exampleWallet.address)
         let gameId = createOntParam(type: .String, value: gid)
         let matchId = createOntParam(type: .String, value: mid)
         let fee = createOntParam(type: .Fixed8, value: entry)
@@ -262,7 +255,7 @@ class Tests: XCTestCase {
         let gasPrice = 500
         let gasLimit = 20000
 
-        guard let tx = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWif, payer: exampleAddress) else {
+        guard let tx = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWallet.wif, payer: exampleWallet.address) else {
             print("Failed to build the transaction")
             return
         }
@@ -273,7 +266,7 @@ class Tests: XCTestCase {
 
     func testNEP2() {
         let password = "12345678"
-        guard let e = newEncryptedKey(wif: exampleWif, password: password) else {
+        guard let e = newEncryptedKey(wif: exampleWallet.wif, password: password) else {
             XCTFail()
             return
         }
@@ -281,7 +274,7 @@ class Tests: XCTestCase {
             XCTFail()
             return
         }
-        XCTAssertTrue(w == exampleWif)
+        XCTAssertTrue(w == exampleWallet.wif)
     }
 
     func testTransferONT() {
@@ -289,12 +282,81 @@ class Tests: XCTestCase {
             XCTFail()
             return
         }
-        let tx = sendOntologyTransfer(wif: exampleWif, asset: .ONT, toAddress: b.address, amount: 10)
+        let tx = sendOntologyTransfer(wif: exampleWallet.wif, asset: .ONT, toAddress: b.address, amount: 10)
         print(tx)
     }
 
     func testClaimONG() {
-        let tx = claimONG(wif: exampleWif)
+        let tx = claimONG(wif: exampleWallet.wif)
         print(tx)
+    }
+
+    func testComparePrivateKeys() {
+        for _ in 0..<5 {
+            guard let wallet = newWallet() else {
+                XCTFail()
+                return
+            }
+            let ont = wallet.privateKey.count
+            let neo = wallet.neoPrivateKey.count
+            if (neo > ont) {
+                XCTFail()
+                return
+            }
+        }
+    }
+
+    func testCompareWallet() {
+        guard let a = walletFromWIF(wif: exampleWallet.wif) else {
+            XCTFail()
+            return
+        }
+
+        guard let ont = exampleWallet.privateKey else {
+            XCTFail()
+            return
+        }
+        let neo = exampleWallet.neoPrivateKey
+
+        guard let b = walletFromPrivateKey(privateKey: ont) else {
+            XCTFail()
+            return
+        }
+
+        guard let c = walletFromPrivateKey(privateKey: neo) else {
+            XCTFail()
+            return
+        }
+
+        guard let d = walletFromPrivateKey(privateKey: exampleWallet.privateKeyString) else {
+            XCTFail()
+            return
+        }
+
+        guard let n = neo.bytesToHex else {
+            XCTFail()
+            return
+        }
+
+        guard let e = walletFromPrivateKey(privateKey: n) else {
+            XCTFail()
+            return
+        }
+
+        let a1 = a.address
+        let a2 = b.address
+        let a3 = c.address
+        let a4 = d.address
+        let a5 = e.address
+
+        XCTAssert(a1 == a2)
+        XCTAssert(a1 == a3)
+        XCTAssert(a1 == a4)
+        XCTAssert(a1 == a5)
+        XCTAssertNotNil(a1)
+        XCTAssertNotNil(a2)
+        XCTAssertNotNil(a3)
+        XCTAssertNotNil(a4)
+        XCTAssertNotNil(a5)
     }
 }

@@ -256,6 +256,9 @@ public class Wallet {
     public var privateKeyString : String!
     public var publicKeyString : String!
     private var neoWallet : NeoutilsWallet!
+    public var neoPrivateKey : Data {
+        return neoWallet.privateKey()
+    }
 
     convenience init(address: String, wif: String, privateKey: Data, publicKey: Data, neoWallet: NeoutilsWallet) {
         self.init()
@@ -354,7 +357,38 @@ public func walletFromWIF(wif: String) -> Wallet? {
     return wallet
 }
 
-public func walletFromONTPrivateKey(privateKey: String) -> Wallet? {
+private func walletFromNEOPrivateKey(privateKey: String) -> Wallet? {
+    let err = NSErrorPointer(nilLiteral: ())
+    guard let neoWallet = NeoutilsGenerateFromPrivateKey(privateKey, err) else {
+        return nil
+    }
+    guard let ontAccount = NeoutilsONTAccountFromWIF(neoWallet.wif()) else {
+        return nil
+    }
+    guard let a = ontAccount.address() else {
+        return nil
+    }
+    guard let wif = ontAccount.wif() else {
+        return nil
+    }
+    guard let prK = ontAccount.privateKey() else {
+        return nil
+    }
+    guard let pbK = ontAccount.publicKey() else {
+        return nil
+    }
+    let w = Wallet(address: a, wif: wif, privateKey: prK, publicKey: pbK, neoWallet: neoWallet)
+    return w
+}
+
+private func walletFromNEOPrivateKey(privateKey: Data) -> Wallet? {
+    guard let p = privateKey.bytesToHex else {
+        return nil
+    }
+    return walletFromNEOPrivateKey(privateKey: p)
+}
+
+private func walletFromONTPrivateKey(privateKey: String) -> Wallet? {
     guard let ontAccount = NeoutilsONTAccountFromPrivateKey(privateKey.hexToBytes) else {
         return nil
     }
@@ -362,12 +396,30 @@ public func walletFromONTPrivateKey(privateKey: String) -> Wallet? {
     return wallet
 }
 
-public func walletFromONTPrivateKey(privateKey: Data) -> Wallet? {
+private func walletFromONTPrivateKey(privateKey: Data) -> Wallet? {
     guard let ontAccount = NeoutilsONTAccountFromPrivateKey(privateKey) else {
         return nil
     }
     let wallet = walletFromOntAccount(ontAccount: ontAccount)
     return wallet
+}
+
+public func walletFromPrivateKey(privateKey: Data) -> Wallet? {
+    let count = privateKey.count
+    if count == 32 {
+        return walletFromNEOPrivateKey(privateKey: privateKey)
+    } else if count == 67 {
+        return walletFromONTPrivateKey(privateKey: privateKey)
+    } else {
+        return nil
+    }
+}
+
+public func walletFromPrivateKey(privateKey: String) -> Wallet? {
+    guard let p = privateKey.hexToBytes else {
+        return nil
+    }
+    return walletFromPrivateKey(privateKey: p)
 }
 
 public func newEncryptedKey(wif: String, password: String) -> String? {
