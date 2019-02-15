@@ -388,14 +388,6 @@ private func walletFromNEOPrivateKey(privateKey: Data) -> Wallet? {
     return walletFromNEOPrivateKey(privateKey: p)
 }
 
-private func walletFromONTPrivateKey(privateKey: String) -> Wallet? {
-    guard let ontAccount = NeoutilsONTAccountFromPrivateKey(privateKey.hexToBytes) else {
-        return nil
-    }
-    let wallet = walletFromOntAccount(ontAccount: ontAccount)
-    return wallet
-}
-
 private func walletFromONTPrivateKey(privateKey: Data) -> Wallet? {
     guard let ontAccount = NeoutilsONTAccountFromPrivateKey(privateKey) else {
         return nil
