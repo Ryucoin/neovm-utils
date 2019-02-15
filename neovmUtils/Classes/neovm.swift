@@ -443,11 +443,18 @@ public func claimONG(endpoint: String = ontologyTestNodes.bestNode.rawValue, gas
     return txID ?? ""
 }
 
-public func privateKeyFromMnemonic() {
+public struct Mnemonic {
+    let value: String
+    let seed: Data
+}
+
+public func createMnemonic() -> Mnemonic {
     let raw = mnemonic_generate(128)!
     let mnemonic = String(cString: raw)
-    var seed = Data(repeating: 0, count: 512 / 8)
+    var seed = Data(repeating: 0, count: 64)
     seed.withUnsafeMutableBytes { seedPtr in
         mnemonic_to_seed(mnemonic, "", seedPtr, nil)
     }
+    let m = Mnemonic(value: mnemonic, seed: seed)
+    return m
 }
