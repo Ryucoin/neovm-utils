@@ -443,9 +443,19 @@ public func claimONG(endpoint: String = ontologyTestNodes.bestNode.rawValue, gas
     return txID ?? ""
 }
 
-public struct Mnemonic {
-    let value: String
-    let seed: Data
+public class Mnemonic {
+    public var value: String!
+    public var seed: Data!
+
+    convenience init(value: String, seed: Data) {
+        self.init()
+        self.value = value
+        self.seed = seed
+    }
+
+    public func isValid() -> Bool {
+        return mnemonic_check(value) != 0
+    }
 }
 
 public func createMnemonic() -> Mnemonic {

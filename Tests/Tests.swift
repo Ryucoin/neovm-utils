@@ -359,4 +359,14 @@ class Tests: XCTestCase {
         XCTAssertNotNil(a4)
         XCTAssertNotNil(a5)
     }
+
+    func testCreateMnemonic() {
+        let mnemonic = createMnemonic()
+        guard let phrase = mnemonic.value else {
+            XCTFail()
+            return
+        }
+        print(phrase)
+        XCTAssertTrue(mnemonic.isValid())
+    }
 }
