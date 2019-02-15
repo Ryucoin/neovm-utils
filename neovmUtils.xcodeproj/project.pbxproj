@@ -38,7 +38,7 @@
 		7FD0FC162215DF2900F52C0F /* TrezorCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrezorCrypto.h; path = TrezorCrypto/TrezorCrypto.h; sourceTree = SOURCE_ROOT; };
 		7FD0FC172215DF2900F52C0F /* rand.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = rand.c; path = TrezorCrypto/rand.c; sourceTree = SOURCE_ROOT; };
 		7FD0FC182215DF2900F52C0F /* pbkdf2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pbkdf2.c; path = TrezorCrypto/pbkdf2.c; sourceTree = SOURCE_ROOT; };
-		7FD0FC192215DF2900F52C0F /* bip39.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bip39.c; path = TrezorCrypto/bip39.c; sourceTree = SOURCE_ROOT; };
+		7FD0FC192215DF2900F52C0F /* bip39.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bip39.c; sourceTree = "<group>"; };
 		7FD0FC1A2215DF2900F52C0F /* sha2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sha2.h; path = TrezorCrypto/sha2.h; sourceTree = SOURCE_ROOT; };
 		7FD0FC1B2215DF2900F52C0F /* hmac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hmac.h; path = TrezorCrypto/hmac.h; sourceTree = SOURCE_ROOT; };
 		7FD0FC1C2215DF2900F52C0F /* options.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = options.h; path = TrezorCrypto/options.h; sourceTree = SOURCE_ROOT; };
@@ -62,7 +62,7 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
-				7FD0FC0D2215DF1A00F52C0F /* C Files */,
+				7FD0FC0D2215DF1A00F52C0F /* TrezorCrypto */,
 				7F3AD42E2200627700B45C16 /* Classes */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACE81AFB9204008FA782 /* Tests */,
@@ -115,7 +115,7 @@
 			path = neovmUtils/Classes;
 			sourceTree = "<group>";
 		};
-		7FD0FC0D2215DF1A00F52C0F /* C Files */ = {
+		7FD0FC0D2215DF1A00F52C0F /* TrezorCrypto */ = {
 			isa = PBXGroup;
 			children = (
 				7FD0FC192215DF2900F52C0F /* bip39.c */,
@@ -134,7 +134,7 @@
 				7FD0FC1A2215DF2900F52C0F /* sha2.h */,
 				7FD0FC162215DF2900F52C0F /* TrezorCrypto.h */,
 			);
-			path = "C Files";
+			path = TrezorCrypto;
 			sourceTree = "<group>";
 		};
 		BB75E40C24537D4E61108C25 /* Frameworks */ = {
@@ -251,7 +251,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)/**";
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -273,7 +273,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				SWIFT_INCLUDE_PATHS = "${SRCROOT}/TrezorCrypto/**";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -310,7 +310,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)/**";
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -324,7 +324,7 @@
 				MODULEMAP_FILE = "$(SRCROOT)/TrezorCrypto/module.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_INCLUDE_PATHS = "${SRCROOT}/TrezorCrypto/**";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -338,12 +338,12 @@
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = 6RN58493KK;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				HEADER_SEARCH_PATHS = "${inherited}/**";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -371,8 +371,8 @@
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = 6RN58493KK;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
-				HEADER_SEARCH_PATHS = "${inherited}/**";
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

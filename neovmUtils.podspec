@@ -23,7 +23,6 @@ Pod::Spec.new do |s|
   s.vendored_frameworks = 'neoutils.framework'
   s.source_files = 'TrezorCrypto/*.{c,h}'
   s.public_header_files = 'TrezorCrypto/*.h'
-  s.pod_target_xcconfig = {'SWIFT_INCLUDE_PATHS' => '$(SRCROOT)/TrezorCrypto/**','LIBRARY_SEARCH_PATHS' => '$(SRCROOT)/TrezorCrypto'}
   s.preserve_paths  = 'TrezorCrypto/module.modulemap'
 
 end
