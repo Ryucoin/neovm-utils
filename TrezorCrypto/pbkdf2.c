@@ -21,6 +21,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#pragma GCC diagnostic ignored "-Wshorten-64-to-32"
+
 #include <string.h>
 #include "pbkdf2.h"
 #include "hmac.h"

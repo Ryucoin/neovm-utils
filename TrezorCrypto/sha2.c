@@ -28,6 +28,8 @@
  * SUCH DAMAGE.
  */
 
+#pragma GCC diagnostic ignored "-Wshorten-64-to-32"
+
 #include <string.h>
 #include <stdint.h>
 #include "sha2.h"
