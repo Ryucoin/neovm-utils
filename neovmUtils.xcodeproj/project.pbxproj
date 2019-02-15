@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
-		7F3AD4302200627E00B45C16 /* neovm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3AD42F2200627E00B45C16 /* neovm.swift */; };
 		7F725CE821FF04CA00850C2D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F725CE721FF04CA00850C2D /* Foundation.framework */; };
 		7F78B99C2214BD4C0028B76D /* neoutils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F78B99B2214BD4C0028B76D /* neoutils.framework */; };
 		7FD0FC1D2215DF2900F52C0F /* memzero.c in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC0E2215DF2900F52C0F /* memzero.c */; };
@@ -17,6 +16,11 @@
 		7FD0FC202215DF2900F52C0F /* rand.c in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC172215DF2900F52C0F /* rand.c */; };
 		7FD0FC212215DF2900F52C0F /* pbkdf2.c in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC182215DF2900F52C0F /* pbkdf2.c */; };
 		7FD0FC222215DF2900F52C0F /* bip39.c in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC192215DF2900F52C0F /* bip39.c */; };
+		7FD0FC242216F96B00F52C0F /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC232216F96B00F52C0F /* Crypto.swift */; };
+		7FD0FC262216F99400F52C0F /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC252216F99400F52C0F /* Wallet.swift */; };
+		7FD0FC282216FA8000F52C0F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC272216FA8000F52C0F /* Utils.swift */; };
+		7FD0FC2A2216FAC500F52C0F /* OntologyRPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC292216FAC500F52C0F /* OntologyRPC.swift */; };
+		7FD0FC2C2216FB3300F52C0F /* OntologyInvocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC2B2216FB3300F52C0F /* OntologyInvocation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,7 +28,6 @@
 		607FACE51AFB9204008FA782 /* neovmUtils_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = neovmUtils_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
-		7F3AD42F2200627E00B45C16 /* neovm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = neovm.swift; sourceTree = "<group>"; };
 		7F725CE721FF04CA00850C2D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7F78B99B2214BD4C0028B76D /* neoutils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = neoutils.framework; sourceTree = "<group>"; };
 		7FD0FC0E2215DF2900F52C0F /* memzero.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = memzero.c; path = TrezorCrypto/memzero.c; sourceTree = SOURCE_ROOT; };
@@ -42,6 +45,11 @@
 		7FD0FC1A2215DF2900F52C0F /* sha2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sha2.h; path = TrezorCrypto/sha2.h; sourceTree = SOURCE_ROOT; };
 		7FD0FC1B2215DF2900F52C0F /* hmac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hmac.h; path = TrezorCrypto/hmac.h; sourceTree = SOURCE_ROOT; };
 		7FD0FC1C2215DF2900F52C0F /* options.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = options.h; path = TrezorCrypto/options.h; sourceTree = SOURCE_ROOT; };
+		7FD0FC232216F96B00F52C0F /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
+		7FD0FC252216F99400F52C0F /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
+		7FD0FC272216FA8000F52C0F /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		7FD0FC292216FAC500F52C0F /* OntologyRPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OntologyRPC.swift; sourceTree = "<group>"; };
+		7FD0FC2B2216FB3300F52C0F /* OntologyInvocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OntologyInvocation.swift; sourceTree = "<group>"; };
 		BC6F233EC5E38887EC244709 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		F2BFC57897958F36981CB9D5 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -109,7 +117,11 @@
 		7F3AD42E2200627700B45C16 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				7F3AD42F2200627E00B45C16 /* neovm.swift */,
+				7FD0FC232216F96B00F52C0F /* Crypto.swift */,
+				7FD0FC2B2216FB3300F52C0F /* OntologyInvocation.swift */,
+				7FD0FC292216FAC500F52C0F /* OntologyRPC.swift */,
+				7FD0FC272216FA8000F52C0F /* Utils.swift */,
+				7FD0FC252216F99400F52C0F /* Wallet.swift */,
 			);
 			name = Classes;
 			path = neovmUtils/Classes;
@@ -173,7 +185,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 1010;
-				ORGANIZATIONNAME = CocoaPods;
+				ORGANIZATIONNAME = "Ryu Blockchain Technologies";
 				TargetAttributes = {
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -205,13 +217,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FD0FC262216F99400F52C0F /* Wallet.swift in Sources */,
 				7FD0FC1F2215DF2900F52C0F /* sha2.c in Sources */,
+				7FD0FC2C2216FB3300F52C0F /* OntologyInvocation.swift in Sources */,
 				7FD0FC212215DF2900F52C0F /* pbkdf2.c in Sources */,
 				7FD0FC1E2215DF2900F52C0F /* hmac.c in Sources */,
+				7FD0FC2A2216FAC500F52C0F /* OntologyRPC.swift in Sources */,
+				7FD0FC242216F96B00F52C0F /* Crypto.swift in Sources */,
 				7FD0FC1D2215DF2900F52C0F /* memzero.c in Sources */,
 				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
+				7FD0FC282216FA8000F52C0F /* Utils.swift in Sources */,
 				7FD0FC202215DF2900F52C0F /* rand.c in Sources */,
-				7F3AD4302200627E00B45C16 /* neovm.swift in Sources */,
 				7FD0FC222215DF2900F52C0F /* bip39.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
