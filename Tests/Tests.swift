@@ -369,4 +369,20 @@ class Tests: XCTestCase {
         print(phrase)
         XCTAssertTrue(mnemonic.isValid())
     }
+
+    func testInvalidKeys() {
+        let p = "NOT A VALID PRIVATE KEY"
+        let w = "NOT A VALID WIF"
+        let data = Data()
+
+        let a = walletFromPrivateKey(privateKey: p)
+        let b = walletFromWIF(wif: w)
+        let c = walletFromPrivateKey(privateKey: data)
+        let addr = addressFromWif(wif: w)
+
+        XCTAssertNil(a)
+        XCTAssertNil(b)
+        XCTAssertNil(c)
+        XCTAssertNil(addr)
+    }
 }

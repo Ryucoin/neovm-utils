@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		7F725CE821FF04CA00850C2D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F725CE721FF04CA00850C2D /* Foundation.framework */; };
-		7F78B99C2214BD4C0028B76D /* neoutils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F78B99B2214BD4C0028B76D /* neoutils.framework */; };
 		7FD0FC1D2215DF2900F52C0F /* memzero.c in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC0E2215DF2900F52C0F /* memzero.c */; };
 		7FD0FC1E2215DF2900F52C0F /* hmac.c in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC102215DF2900F52C0F /* hmac.c */; };
 		7FD0FC1F2215DF2900F52C0F /* sha2.c in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC142215DF2900F52C0F /* sha2.c */; };
@@ -21,6 +20,7 @@
 		7FD0FC282216FA8000F52C0F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC272216FA8000F52C0F /* Utils.swift */; };
 		7FD0FC2A2216FAC500F52C0F /* OntologyRPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC292216FAC500F52C0F /* OntologyRPC.swift */; };
 		7FD0FC2C2216FB3300F52C0F /* OntologyInvocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC2B2216FB3300F52C0F /* OntologyInvocation.swift */; };
+		7FD0FC2E2216FD5400F52C0F /* neoutils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FD0FC2D2216FD5400F52C0F /* neoutils.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +29,6 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		7F725CE721FF04CA00850C2D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		7F78B99B2214BD4C0028B76D /* neoutils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = neoutils.framework; sourceTree = "<group>"; };
 		7FD0FC0E2215DF2900F52C0F /* memzero.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = memzero.c; path = TrezorCrypto/memzero.c; sourceTree = SOURCE_ROOT; };
 		7FD0FC0F2215DF2900F52C0F /* pbkdf2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pbkdf2.h; path = TrezorCrypto/pbkdf2.h; sourceTree = SOURCE_ROOT; };
 		7FD0FC102215DF2900F52C0F /* hmac.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = hmac.c; path = TrezorCrypto/hmac.c; sourceTree = SOURCE_ROOT; };
@@ -50,6 +49,7 @@
 		7FD0FC272216FA8000F52C0F /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		7FD0FC292216FAC500F52C0F /* OntologyRPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OntologyRPC.swift; sourceTree = "<group>"; };
 		7FD0FC2B2216FB3300F52C0F /* OntologyInvocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OntologyInvocation.swift; sourceTree = "<group>"; };
+		7FD0FC2D2216FD5400F52C0F /* neoutils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = neoutils.framework; sourceTree = "<group>"; };
 		BC6F233EC5E38887EC244709 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		F2BFC57897958F36981CB9D5 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -60,7 +60,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F725CE821FF04CA00850C2D /* Foundation.framework in Frameworks */,
-				7F78B99C2214BD4C0028B76D /* neoutils.framework in Frameworks */,
+				7FD0FC2E2216FD5400F52C0F /* neoutils.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,7 +152,7 @@
 		BB75E40C24537D4E61108C25 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7F78B99B2214BD4C0028B76D /* neoutils.framework */,
+				7FD0FC2D2216FD5400F52C0F /* neoutils.framework */,
 				7F725CE721FF04CA00850C2D /* Foundation.framework */,
 			);
 			name = Frameworks;
@@ -354,7 +354,10 @@
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = 6RN58493KK;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -387,7 +390,10 @@
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = 6RN58493KK;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
