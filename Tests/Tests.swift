@@ -385,4 +385,22 @@ class Tests: XCTestCase {
         XCTAssertNil(c)
         XCTAssertNil(addr)
     }
+
+    func testMnemonic() {
+        let m = createMnemonic()
+        guard let w = walletFromMnemonicPhrase(mnemonic: m.value!) else {
+            XCTFail()
+            return
+        }
+        let hd = createHDKeyPair(mnemonic: m)
+        let p1 = hd.privateKeyHex
+        let p2 = w.neoPrivateKey.bytesToHex!
+        XCTAssertEqual(p1, p2)
+
+        guard let w2 = walletFromPrivateKey(privateKey: hd.privateKeyHex) else {
+            XCTFail()
+            return
+        }
+        XCTAssertEqual(w.wif, w2.wif)
+    }
 }

@@ -67,6 +67,15 @@ public func createMnemonic() -> Mnemonic {
     return m
 }
 
+public func mnemonicFromPhrase(phrase: String) -> Mnemonic {
+    var seed = Data(repeating: 0, count: 512 / 8)
+    seed.withUnsafeMutableBytes { seedPtr in
+        mnemonic_to_seed(phrase, "", seedPtr, nil)
+    }
+    let m = Mnemonic(value: phrase, seed: seed)
+    return m
+}
+
 public func createHDKeyPair(mnemonic:Mnemonic) -> HDKeyPair {
     var node = HDNode()
     _ = mnemonic.seed.withUnsafeBytes { dataPtr in

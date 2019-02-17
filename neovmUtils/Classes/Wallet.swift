@@ -137,6 +137,13 @@ public func addressFromWif(wif: String) -> String? {
     return wallet.address
 }
 
+public func walletFromMnemonicPhrase(mnemonic: String) -> Wallet? {
+    let m = mnemonicFromPhrase(phrase: mnemonic)
+    let kp = createHDKeyPair(mnemonic: m)
+    let w = walletFromPrivateKey(privateKey: kp.privateKey)
+    return w
+}
+
 // MARK: - PRIVATE FUNCTIONS
 
 private func sha256(_ data: Data) -> Data? {
