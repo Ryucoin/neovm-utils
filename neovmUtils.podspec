@@ -21,8 +21,6 @@ Pod::Spec.new do |s|
 
   s.source_files = 'neovmUtils/Classes/**/*'
   s.vendored_frameworks = 'neoutils.framework'
-  s.source_files = 'TrezorCrypto/*.{c,h}'
-  s.public_header_files = 'TrezorCrypto/*.h'
-  s.preserve_paths  = 'TrezorCrypto/module.modulemap'
+  s.dependency 'TrezorCrypto', '~> 0.0.9'
 
 end

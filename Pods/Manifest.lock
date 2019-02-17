@@ -1,0 +1,16 @@
+PODS:
+  - TrezorCrypto (0.0.9)
+
+DEPENDENCIES:
+  - TrezorCrypto
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - TrezorCrypto
+
+SPEC CHECKSUMS:
+  TrezorCrypto: bfeea47a052dca2c77d4a39e1e183865e52de14d
+
+PODFILE CHECKSUM: 09b2e2aab0e6158d8740137f2721535338a91b30
+
+COCOAPODS: 1.5.3
