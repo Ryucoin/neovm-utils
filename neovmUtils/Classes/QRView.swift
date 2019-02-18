@@ -9,7 +9,6 @@
 import UIKit
 
 public class QRView: UIView {
-    lazy var filter = CIFilter(name: "CIQRCodeGenerator")
     lazy var imageView = UIImageView()
     public var code: String = ""
 
@@ -29,29 +28,25 @@ public class QRView: UIView {
     }
 
     public func generateCode(_ string: String, foregroundColor: UIColor = .black, backgroundColor: UIColor = .white) {
-        guard let filter = filter,
-            let data = string.data(using: .isoLatin1, allowLossyConversion: false) else {
-                return
+        if let filter = CIFilter(name: "CIQRCodeGenerator") {
+            let data = Data(string.utf8)
+            filter.setValue(data, forKey: "inputMessage")
+            if let ciImage = filter.outputImage {
+                let transformed = ciImage.transformed(by: CGAffineTransform.init(scaleX: 10, y: 10))
+                let invertFilter = CIFilter(name: "CIColorInvert")
+                invertFilter?.setValue(transformed, forKey: kCIInputImageKey)
+
+                let alphaFilter = CIFilter(name: "CIMaskToAlpha")
+                alphaFilter?.setValue(invertFilter?.outputImage, forKey: kCIInputImageKey)
+
+                if let outputImage = alphaFilter?.outputImage {
+                    imageView.tintColor = foregroundColor
+                    imageView.backgroundColor = backgroundColor
+                    imageView.image = UIImage(ciImage: outputImage, scale: 2.0, orientation: .up)
+                        .withRenderingMode(.alwaysTemplate)
+                }
+                code = string
+            }
         }
-
-        filter.setValue(data, forKey: "inputMessage")
-
-        guard let ciImage = filter.outputImage else {
-            return
-        }
-        let transformed = ciImage.transformed(by: CGAffineTransform.init(scaleX: 10, y: 10))
-        let invertFilter = CIFilter(name: "CIColorInvert")
-        invertFilter?.setValue(transformed, forKey: kCIInputImageKey)
-
-        let alphaFilter = CIFilter(name: "CIMaskToAlpha")
-        alphaFilter?.setValue(invertFilter?.outputImage, forKey: kCIInputImageKey)
-
-        if let outputImage = alphaFilter?.outputImage {
-            imageView.tintColor = foregroundColor
-            imageView.backgroundColor = backgroundColor
-            imageView.image = UIImage(ciImage: outputImage, scale: 2.0, orientation: .up)
-                .withRenderingMode(.alwaysTemplate)
-        }
-        code = string
     }
 }
