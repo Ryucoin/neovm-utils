@@ -35,20 +35,15 @@ public class Wallet {
     
     public func signMessage(message: String) -> String? {
         let error = NSErrorPointer(nilLiteral: ())
-        guard let data = message.data(using: .utf8) else {
-            return nil
-        }
+        let data = Data(message.utf8)
         let sig = NeoutilsSign(data, neoWallet.privateKey()?.bytesToHex, error).bytesToHex
         return sig
     }
     
     public func verifySignature(signature: String, message: String) -> Bool {
-        if let data = message.data(using: .utf8) {
-            if let hash = sha256(data) {
-                return NeoutilsVerify(publicKey, signature.hexToBytes, hash)
-            }
-        }
-        return false
+        let data = Data(message.utf8)
+        let hash = sha256(data)
+        return NeoutilsVerify(publicKey, signature.hexToBytes, hash)
     }
     
     public func computeSharedSecret(publicKey: Data) -> Data? {
@@ -184,8 +179,8 @@ public func walletFromMnemonicPhrase(mnemonic: String) -> Wallet? {
 
 // MARK: - PRIVATE FUNCTIONS
 
-private func sha256(_ data: Data) -> Data? {
-    guard let res = NSMutableData(length: Int(CC_SHA256_DIGEST_LENGTH)) else { return nil }
+private func sha256(_ data: Data) -> Data {
+    let res = NSMutableData(length: Int(CC_SHA256_DIGEST_LENGTH))!
     CC_SHA256((data as NSData).bytes, CC_LONG(data.count), res.mutableBytes.assumingMemoryBound(to: UInt8.self))
     return res as Data
 }
@@ -200,11 +195,17 @@ private func walletFromOntAccount(ontAccount: NeoutilsONTAccount) -> Wallet {
     return w
 }
 
-private func walletFromNEOPrivateKey(privateKey: String) -> Wallet? {
-    let err = NSErrorPointer(nilLiteral: ())
-    guard let neoWallet = NeoutilsGenerateFromPrivateKey(privateKey, err) else {
+private func walletFromNEOPrivateKey(privateKey: Data) -> Wallet? {
+    guard let p = privateKey.bytesToHex else {
         return nil
     }
+    return walletFromNEOPrivateKey(privateKey: p)
+}
+
+private func walletFromNEOPrivateKey(privateKey: String) -> Wallet? {
+    let err = NSErrorPointer(nilLiteral: ())
+    // The private key format has already been checked so we can force-cast
+    let neoWallet = NeoutilsGenerateFromPrivateKey(privateKey, err)!
     let ontAccount = NeoutilsONTAccountFromWIF(neoWallet.wif())!
     let w = Wallet(address: ontAccount.address(),
                    wif: ontAccount.wif(),
@@ -212,13 +213,6 @@ private func walletFromNEOPrivateKey(privateKey: String) -> Wallet? {
                    publicKey: ontAccount.publicKey(),
                    neoWallet: neoWallet)
     return w
-}
-
-private func walletFromNEOPrivateKey(privateKey: Data) -> Wallet? {
-    guard let p = privateKey.bytesToHex else {
-        return nil
-    }
-    return walletFromNEOPrivateKey(privateKey: p)
 }
 
 private func walletFromONTPrivateKey(privateKey: Data) -> Wallet? {
