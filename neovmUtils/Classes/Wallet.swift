@@ -112,10 +112,7 @@ public enum KeyType {
 // MARK: - PUBLIC FUNCTIONS
 
 public func newWallet() -> Wallet? {
-    guard let ontAccount = NeoutilsONTCreateAccount() else {
-        return nil
-    }
-    let wallet = walletFromOntAccount(ontAccount: ontAccount)
+    let wallet = walletFromOntAccount(ontAccount: NeoutilsONTCreateAccount())
     return wallet
 }
 

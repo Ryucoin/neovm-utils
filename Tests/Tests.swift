@@ -415,6 +415,8 @@ class Tests: XCTestCase {
         XCTAssertNotNil(signature)
         let verified = wallet.verifySignature(signature: signature, message: message)
         XCTAssertTrue(verified)
+        let notVerified = wallet.verifySignature(signature: signature, message: "\(message)1")
+        XCTAssertFalse(notVerified)
     }
 
     func testTransferONT() {
