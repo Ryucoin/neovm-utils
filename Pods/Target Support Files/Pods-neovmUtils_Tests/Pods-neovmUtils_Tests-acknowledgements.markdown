@@ -1,7 +1,7 @@
 # Acknowledgements
 This application makes use of the following third party libraries:
 
-## TrezorCrypto
+## RyuCrypto
 
 The MIT License (MIT)
 

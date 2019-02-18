@@ -21,6 +21,6 @@ Pod::Spec.new do |s|
 
   s.source_files = 'neovmUtils/Classes/**/*'
   s.vendored_frameworks = 'neoutils.framework'
-  s.dependency 'TrezorCrypto', '~> 0.0.9'
+  s.dependency 'RyuCrypto', '~> 0.0.1'
 
 end

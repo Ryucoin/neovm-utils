@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import TrezorCrypto
+import RyuCrypto
 
 public class Mnemonic {
     public var value: String!
