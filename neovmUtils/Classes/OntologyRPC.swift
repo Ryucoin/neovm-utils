@@ -33,54 +33,31 @@ public enum network {
 
 public func getBestNode(net:network) -> String {
     var bestNode = ""
-    var bestCount = 0
-    if net == .testNet {
-        let count1 = ontologyGetBlockCount(endpoint: ontologyTestNodes.polaris1.rawValue)
-        bestNode = ontologyTestNodes.polaris1.rawValue
-        bestCount = count1
-        let count2 = ontologyGetBlockCount(endpoint: ontologyTestNodes.polaris2.rawValue)
-        if count2 > bestCount {
-            bestNode = ontologyTestNodes.polaris2.rawValue
-            bestCount = count2
-        }
-        let count3 = ontologyGetBlockCount(endpoint: ontologyTestNodes.polaris3.rawValue)
-        if count3 > bestCount {
-            bestNode = ontologyTestNodes.polaris3.rawValue
-            bestCount = count3
-        }
-        let count4 = ontologyGetBlockCount(endpoint: ontologyTestNodes.polaris4.rawValue)
-        if count4 > bestCount {
-            bestNode = ontologyTestNodes.polaris4.rawValue
-            bestCount = count4
+    var bestCount = -1
+    switch net {
+    case .testNet:
+        let nodes : [ontologyTestNodes] = [.polaris1, .polaris2, .polaris3, .polaris4]
+        for node in nodes {
+            let count = ontologyGetBlockCount(endpoint: node.rawValue)
+            bestNode = node.rawValue
+            if count > bestCount {
+                bestNode = node.rawValue
+                bestCount = count
+            }
         }
         return bestNode
-    } else if net == .mainNet {
-        let count1 = ontologyGetBlockCount(endpoint: ontologyMainNodes.seed1.rawValue)
-        bestNode = ontologyMainNodes.seed1.rawValue
-        bestCount = count1
-        let count2 = ontologyGetBlockCount(endpoint: ontologyMainNodes.seed2.rawValue)
-        if count2 > bestCount {
-            bestNode = ontologyMainNodes.seed2.rawValue
-            bestCount = count2
-        }
-        let count3 = ontologyGetBlockCount(endpoint: ontologyMainNodes.seed3.rawValue)
-        if count3 > bestCount {
-            bestNode = ontologyMainNodes.seed3.rawValue
-            bestCount = count3
-        }
-        let count4 = ontologyGetBlockCount(endpoint: ontologyMainNodes.seed4.rawValue)
-        if count4 > bestCount {
-            bestNode = ontologyMainNodes.seed4.rawValue
-            bestCount = count4
-        }
-        let count5 = ontologyGetBlockCount(endpoint: ontologyMainNodes.seed5.rawValue)
-        if count5 > bestCount {
-            bestNode = ontologyMainNodes.seed5.rawValue
-            bestCount = count5
+    case .mainNet:
+        let nodes : [ontologyMainNodes] = [.seed1, .seed2, .seed3, .seed4, .seed5]
+        for node in nodes {
+            let count = ontologyGetBlockCount(endpoint: node.rawValue)
+            bestNode = node.rawValue
+            if count > bestCount {
+                bestNode = node.rawValue
+                bestCount = count
+            }
         }
         return bestNode
     }
-    return ""
 }
 
 public func getEndpoint(def:String) -> String {
