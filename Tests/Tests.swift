@@ -313,24 +313,32 @@ class Tests: XCTestCase {
         print("Response: \(res ?? "ERROR")")
     }
 
-    func testQRGenerator() {
-        guard let wallet = walletFromPrivateKey(privateKey: exampleWallet.privateKey) else {
+    func testPublicKeyFrom() {
+        guard let p1 = publicKeyFromWif(wif: exampleWallet.wif) else {
             XCTFail()
             return
         }
+        guard let p2 = publicKeyFromPrivateKey(privateKey: exampleWallet.privateKeyString) else {
+            XCTFail()
+            return
+        }
+        XCTAssertEqual(p1, p2)
+    }
+
+    func testQRGenerator() {
         let passphrase = "Hello, world!"
-        let q1 = wallet.exportQR(key: .PrivateKey)
-        let q2 = wallet.exportQR(key: .NEOPrivateKey)
-        let q3 = wallet.exportQR(key: .NEP2, passphrase: passphrase)
-        let q4 = wallet.exportQR(key: .WIF)
-        let q5 = wallet.exportQR(key: .Address)
-        let q6 = wallet.exportQR(key: .PublicKey)
-        XCTAssertEqual(q1.code, wallet.privateKeyString)
-        XCTAssertEqual(q2.code, wallet.neoPrivateKey.bytesToHex!)
-        XCTAssertEqual(q3.code, newEncryptedKey(wif: wallet.wif, password: passphrase) ?? "")
-        XCTAssertEqual(q4.code, wallet.wif)
-        XCTAssertEqual(q5.code, wallet.address)
-        XCTAssertEqual(q6.code, wallet.publicKeyString)
+        let q1 = exampleWallet.exportQR(key: .PrivateKey)
+        let q2 = exampleWallet.exportQR(key: .NEOPrivateKey)
+        let q3 = exampleWallet.exportQR(key: .NEP2, passphrase: passphrase)
+        let q4 = exampleWallet.exportQR(key: .WIF)
+        let q5 = exampleWallet.exportQR(key: .Address)
+        let q6 = exampleWallet.exportQR(key: .PublicKey)
+        XCTAssertEqual(q1.code, exampleWallet.privateKeyString)
+        XCTAssertEqual(q2.code, exampleWallet.neoPrivateKey.bytesToHex!)
+        XCTAssertEqual(q3.code, newEncryptedKey(wif: exampleWallet.wif, password: passphrase) ?? "")
+        XCTAssertEqual(q4.code, exampleWallet.wif)
+        XCTAssertEqual(q5.code, exampleWallet.address)
+        XCTAssertEqual(q6.code, exampleWallet.publicKeyString)
     }
 
     func testSendRawTransaction() {
@@ -404,7 +412,7 @@ class Tests: XCTestCase {
         print(tx)
     }
 
-    func testwalletFromPK() {
+    func testWalletFromPK() {
         let wallet = walletFromPrivateKey(privateKey: exampleWallet.privateKey)
 
         guard let strPrivateKey = wallet?.privateKeyString else {
@@ -415,7 +423,7 @@ class Tests: XCTestCase {
         let _ = walletFromPrivateKey(privateKey: strPrivateKey)
     }
 
-    func testwalletFromWIF() {
+    func testWalletFromWIF() {
         let _ = walletFromWIF(wif: exampleWallet.wif)
     }
 }

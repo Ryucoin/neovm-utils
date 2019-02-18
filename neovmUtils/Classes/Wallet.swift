@@ -168,6 +168,20 @@ public func addressFromWif(wif: String) -> String? {
     return wallet.address
 }
 
+public func publicKeyFromWif(wif: String) -> String? {
+    guard let wallet = walletFromWIF(wif: wif) else {
+        return nil
+    }
+    return wallet.publicKeyString
+}
+
+public func publicKeyFromPrivateKey(privateKey: String) -> String? {
+    guard let wallet = walletFromPrivateKey(privateKey: privateKey) else {
+        return nil
+    }
+    return wallet.publicKeyString
+}
+
 public func walletFromMnemonicPhrase(mnemonic: String) -> Wallet? {
     let m = mnemonicFromPhrase(phrase: mnemonic)
     let kp = createHDKeyPair(mnemonic: m)
