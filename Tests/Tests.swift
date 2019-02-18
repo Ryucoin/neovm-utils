@@ -313,9 +313,14 @@ class Tests: XCTestCase {
         let gasPrice = 500
         let gasLimit = 20000
 
-        let res = ontologyInvoke(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWallet.wif)
+        let res = ontologyInvoke(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWallet.wif, payer: exampleWallet.address)
         XCTAssertNotNil(res)
-        print("Response: \(res ?? "ERROR")")
+
+        let res2 = ontologyInvoke(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWallet.wif)
+        XCTAssertNotNil(res2)
+
+        let res3 = ontologyInvoke(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: "123")
+        XCTAssertNil(res3)
     }
 
     func testPublicKeyFrom() {
