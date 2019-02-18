@@ -46,7 +46,7 @@ class Tests: XCTestCase {
         XCTAssertNotEqual(tx, "")
     }
 
-    func testBuildOntologyInvocation(){
+    func testBuildOntologyInvocation() {
         let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
         let method = "put"
         let argDict : [[String:Any]] = [["T":"Address", "V":exampleWallet.address], ["T":"String", "V":"Hello!"]]
@@ -67,7 +67,7 @@ class Tests: XCTestCase {
         }
     }
 
-    func testBuildOntologyInvocationHelper(){
+    func testBuildOntologyInvocationHelper() {
         let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
         let method = "put"
         let args : [OntologyParameter] = [createOntParam(type: .Address, value: exampleWallet.address), createOntParam(type: .String, value: "Hello!")]
@@ -163,7 +163,7 @@ class Tests: XCTestCase {
         XCTAssertTrue(mnemonic.isValid())
     }
 
-    func testEncryptDecrypt(){
+    func testEncryptDecrypt() {
         let original = "Hello, world"
         guard let wallet = walletFromPrivateKey(privateKey: exampleWallet.privateKey) else {
             XCTFail()
@@ -179,7 +179,7 @@ class Tests: XCTestCase {
         XCTAssert(original == decryptedString)
     }
 
-    func testGetBalances(){
+    func testGetBalances() {
         let (ont, ong) = ontologyGetBalances(address: "AcNZnTKFx1cA53H7DHcU9T6ErdVMzTrwSq")
         print("Ont: \(ont), Ong: \(ong)")
         let none = ont == 0 && ong == 0
@@ -209,7 +209,7 @@ class Tests: XCTestCase {
         XCTAssertTrue(s2)
     }
 
-    func testGetBlockCount(){
+    func testGetBlockCount() {
         let blockCount = ontologyGetBlockCount()
         print("Block count: \(blockCount)")
         XCTAssertNotEqual(blockCount, -1)
@@ -244,7 +244,7 @@ class Tests: XCTestCase {
         XCTAssertNil(addr)
     }
 
-    func testIsValidAddress(){
+    func testIsValidAddress() {
         XCTAssertTrue(exampleWallet.address.isValidAddress)
     }
 
@@ -279,7 +279,7 @@ class Tests: XCTestCase {
         XCTAssertTrue(w == exampleWallet.wif)
     }
 
-    func testOntologyInvocation(){
+    func testOntologyInvocation() {
         let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
         let method = "put"
         let argDict : [[String:Any]] = [["T":"Address", "V":exampleWallet.address], ["T":"String", "V":"Hello!"]]
@@ -301,7 +301,7 @@ class Tests: XCTestCase {
         }
     }
 
-    func testOntologyInvocationHelper(){
+    func testOntologyInvocationHelper() {
         let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
         let method = "put"
         let args : [OntologyParameter] = [createOntParam(type: .Address, value: exampleWallet.address), createOntParam(type: .String, value: "Hello!")]
@@ -311,6 +311,26 @@ class Tests: XCTestCase {
         let res = ontologyInvoke(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWallet.wif)
         XCTAssertNotNil(res)
         print("Response: \(res ?? "ERROR")")
+    }
+
+    func testQRGenerator() {
+        guard let wallet = walletFromPrivateKey(privateKey: exampleWallet.privateKey) else {
+            XCTFail()
+            return
+        }
+        let passphrase = "Hello, world!"
+        let q1 = wallet.exportQR(key: .PrivateKey)
+        let q2 = wallet.exportQR(key: .NEOPrivateKey)
+        let q3 = wallet.exportQR(key: .NEP2, passphrase: passphrase)
+        let q4 = wallet.exportQR(key: .WIF)
+        let q5 = wallet.exportQR(key: .Address)
+        let q6 = wallet.exportQR(key: .PublicKey)
+        XCTAssertEqual(q1.code, wallet.privateKeyString)
+        XCTAssertEqual(q2.code, wallet.neoPrivateKey.bytesToHex!)
+        XCTAssertEqual(q3.code, newEncryptedKey(wif: wallet.wif, password: passphrase) ?? "")
+        XCTAssertEqual(q4.code, wallet.wif)
+        XCTAssertEqual(q5.code, wallet.address)
+        XCTAssertEqual(q6.code, wallet.publicKeyString)
     }
 
     func testSendRawTransaction() {
@@ -329,7 +349,7 @@ class Tests: XCTestCase {
         print(txId)
     }
 
-    func testSharedSecret(){
+    func testSharedSecret() {
         guard let a = walletFromPrivateKey(privateKey: exampleWallet.privateKey) else {
             XCTFail()
             return
@@ -358,7 +378,7 @@ class Tests: XCTestCase {
         XCTAssertEqual(original, decrypted)
     }
 
-    func testSign(){
+    func testSign() {
         guard let wallet = walletFromPrivateKey(privateKey: exampleWallet.privateKey) else {
             XCTFail()
             return
@@ -384,7 +404,7 @@ class Tests: XCTestCase {
         print(tx)
     }
 
-    func testwalletFromPK(){
+    func testwalletFromPK() {
         let wallet = walletFromPrivateKey(privateKey: exampleWallet.privateKey)
 
         guard let strPrivateKey = wallet?.privateKeyString else {
@@ -395,7 +415,7 @@ class Tests: XCTestCase {
         let _ = walletFromPrivateKey(privateKey: strPrivateKey)
     }
 
-    func testwalletFromWIF(){
+    func testwalletFromWIF() {
         let _ = walletFromWIF(wif: exampleWallet.wif)
     }
 }

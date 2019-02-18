@@ -6,7 +6,7 @@
 //  Copyright © 2019 Ryu Blockchain Technologies. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import Neoutils
 import CommonCrypto
 
@@ -80,6 +80,37 @@ public class Wallet {
         let secretKey = computeSharedSecret(publicKey: publicKey)
         return NeoutilsDecrypt(secretKey, encrypted)
     }
+
+    public func exportQR(key: KeyType, frame: CGRect = CGRect(x: 0, y: 0, width: 230, height: 230), passphrase: String = "") -> QRView {
+        let qrView = QRView(frame: frame)
+        var code : String = ""
+        switch key {
+        case .PrivateKey:
+            code = privateKeyString
+        case .NEOPrivateKey:
+            code = neoPrivateKey.bytesToHex!
+        case .NEP2:
+            code = newEncryptedKey(wif: wif, password: passphrase) ?? ""
+        case .WIF:
+            code = wif
+        case .Address:
+            code = address
+        case .PublicKey:
+            code = publicKeyString
+        }
+        qrView.generateCode(code)
+        return qrView
+    }
+}
+
+// MARK: - ENUMs
+public enum KeyType {
+    case PrivateKey
+    case NEOPrivateKey
+    case NEP2
+    case WIF
+    case Address
+    case PublicKey
 }
 
 // MARK: - PUBLIC FUNCTIONS
