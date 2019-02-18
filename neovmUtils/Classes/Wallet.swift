@@ -184,8 +184,8 @@ public func publicKeyFromPrivateKey(privateKey: String) -> String? {
 
 public func walletFromMnemonicPhrase(mnemonic: String) -> Wallet? {
     let m = mnemonicFromPhrase(phrase: mnemonic)
-    let kp = createHDKeyPair(mnemonic: m)
-    let w = walletFromPrivateKey(privateKey: kp.privateKey)
+    let privateKey = privateKeyFromMnemonic(mnemonic: m)
+    let w = walletFromPrivateKey(privateKey: privateKey)
     return w
 }
 

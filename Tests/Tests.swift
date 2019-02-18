@@ -254,12 +254,13 @@ class Tests: XCTestCase {
             XCTFail()
             return
         }
-        let hd = createHDKeyPair(mnemonic: m)
-        let p1 = hd.privateKeyHex
-        let p2 = w.neoPrivateKey.bytesToHex!
+        XCTAssertTrue(m.isValid())
+
+        let p1 = privateKeyFromMnemonic(mnemonic: m)
+        let p2 = w.neoPrivateKey
         XCTAssertEqual(p1, p2)
 
-        guard let w2 = walletFromPrivateKey(privateKey: hd.privateKeyHex) else {
+        guard let w2 = walletFromPrivateKey(privateKey: p1) else {
             XCTFail()
             return
         }

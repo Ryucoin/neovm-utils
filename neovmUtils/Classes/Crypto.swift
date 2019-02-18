@@ -24,38 +24,6 @@ public class Mnemonic {
     }
 }
 
-public final class HDKeyPair {
-    var node: HDNode
-    
-    init(node: HDNode) {
-        self.node = node
-    }
-    
-    public var privateKeyHex: String {
-        return self.privateKey.bytesToHex!
-    }
-    
-    public var publicKeyHex: String {
-        return self.publicKey.bytesToHex!
-    }
-    
-    public var privateKey: Data {
-        return Data(bytes: withUnsafeBytes(of: &node.private_key) { ptr in
-            return ptr.map({ $0 })
-        })
-    }
-    
-    public var publicKey: Data {
-        var key = Data(repeating: 0, count: 65)
-        privateKey.withUnsafeBytes { ptr in
-            key.withUnsafeMutableBytes { keyPtr in
-                ecdsa_get_public_key65(node.curve.pointee.params, ptr, keyPtr)
-            }
-        }
-        return key
-    }
-}
-
 public func createMnemonic() -> Mnemonic {
     let raw = mnemonic_generate(128)!
     let mnemonic = String(cString: raw)
@@ -76,12 +44,12 @@ public func mnemonicFromPhrase(phrase: String) -> Mnemonic {
     return m
 }
 
-public func createHDKeyPair(mnemonic:Mnemonic) -> HDKeyPair {
+public func privateKeyFromMnemonic(mnemonic:Mnemonic) -> Data {
     var node = HDNode()
     _ = mnemonic.seed.withUnsafeBytes { dataPtr in
         hdnode_from_seed(dataPtr, Int32(mnemonic.seed.count), "secp256k1", &node)
     }
-    
-    let keyPair = HDKeyPair(node: node)
-    return keyPair
+    return Data(bytes: withUnsafeBytes(of: &node.private_key) { ptr in
+        return ptr.map({ $0 })
+    })
 }
