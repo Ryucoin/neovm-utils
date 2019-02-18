@@ -7,9 +7,7 @@ class Tests: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        if let w = newWallet() {
-            exampleWallet = w
-        }
+        exampleWallet = newWallet()
     }
 
     override func tearDown() {
@@ -90,10 +88,7 @@ class Tests: XCTestCase {
 
     func testComparePrivateKeys() {
         for _ in 0..<5 {
-            guard let wallet = newWallet() else {
-                XCTFail()
-                return
-            }
+            let wallet = newWallet()
             let ont = wallet.privateKey.count
             let neo = wallet.neoPrivateKey.count
             if (neo > ont) {
@@ -378,10 +373,7 @@ class Tests: XCTestCase {
             return
         }
 
-        guard let b = newWallet() else {
-            XCTFail()
-            return
-        }
+        let b = newWallet()
 
         guard let shared = b.computeSharedSecret(publicKey: a.publicKey) else {
             XCTFail()
@@ -420,10 +412,7 @@ class Tests: XCTestCase {
     }
 
     func testTransferONT() {
-        guard let b = newWallet() else {
-            XCTFail()
-            return
-        }
+        let b = newWallet()
         let tx = sendOntologyTransfer(wif: exampleWallet.wif, asset: .ONT, toAddress: b.address, amount: 10)
         print(tx)
     }

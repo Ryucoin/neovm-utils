@@ -86,7 +86,7 @@ public class Wallet {
         case .NEOPrivateKey:
             code = neoPrivateKey.bytesToHex!
         case .NEP2:
-            code = newEncryptedKey(wif: wif, password: passphrase) ?? ""
+            code = newEncryptedKey(wif: wif, password: passphrase)!
         case .WIF:
             code = wif
         case .Address:
@@ -111,7 +111,7 @@ public enum KeyType {
 
 // MARK: - PUBLIC FUNCTIONS
 
-public func newWallet() -> Wallet? {
+public func newWallet() -> Wallet {
     let wallet = walletFromOntAccount(ontAccount: NeoutilsONTCreateAccount())
     return wallet
 }
@@ -190,24 +190,13 @@ private func sha256(_ data: Data) -> Data? {
     return res as Data
 }
 
-private func walletFromOntAccount(ontAccount: NeoutilsONTAccount) -> Wallet? {
-    guard let a = ontAccount.address() else {
-        return nil
-    }
-    guard let wif = ontAccount.wif() else {
-        return nil
-    }
-    guard let prK = ontAccount.privateKey() else {
-        return nil
-    }
-    guard let pbK = ontAccount.publicKey() else {
-        return nil
-    }
+private func walletFromOntAccount(ontAccount: NeoutilsONTAccount) -> Wallet {
     let err = NSErrorPointer(nilLiteral: ())
-    guard let neoWallet = NeoutilsGenerateFromWIF(wif, err) else {
-        return nil
-    }
-    let w = Wallet(address: a, wif: wif, privateKey: prK, publicKey: pbK, neoWallet: neoWallet)
+    let w = Wallet(address: ontAccount.address(),
+                   wif: ontAccount.wif(),
+                   privateKey: ontAccount.privateKey(),
+                   publicKey: ontAccount.publicKey(),
+                   neoWallet: NeoutilsGenerateFromWIF(ontAccount.wif(), err)!)
     return w
 }
 
@@ -216,9 +205,7 @@ private func walletFromNEOPrivateKey(privateKey: String) -> Wallet? {
     guard let neoWallet = NeoutilsGenerateFromPrivateKey(privateKey, err) else {
         return nil
     }
-    guard let ontAccount = NeoutilsONTAccountFromWIF(neoWallet.wif()) else {
-        return nil
-    }
+    let ontAccount = NeoutilsONTAccountFromWIF(neoWallet.wif())!
     let w = Wallet(address: ontAccount.address(),
                    wif: ontAccount.wif(),
                    privateKey: ontAccount.privateKey(),
