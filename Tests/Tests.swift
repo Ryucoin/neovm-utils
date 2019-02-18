@@ -353,6 +353,7 @@ class Tests: XCTestCase {
         XCTAssertEqual(q4.code, exampleWallet.wif)
         XCTAssertEqual(q5.code, exampleWallet.address)
         XCTAssertEqual(q6.code, exampleWallet.publicKeyString)
+        q1.layoutSubviews()
     }
 
     func testSendRawTransaction() {
