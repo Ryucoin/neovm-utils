@@ -6,7 +6,9 @@
 [![License](https://img.shields.io/cocoapods/l/neovmUtils.svg?style=flat)](https://cocoapods.org/pods/neovmUtils)
 [![Platform](https://img.shields.io/cocoapods/p/neovmUtils.svg?style=flat)](https://cocoapods.org/pods/neovmUtils)
 
-neovmUtils is a native iOS framework for interacting with the NEO and Ontology blockchains. It is a compiled version of the [neo-utils](https://github.com/O3Labs/neo-utils) project by O3 Labs written in Go.
+`neovmUtils` is a native iOS framework for interacting with the NEO and Ontology blockchains. It is a compiled version of the [neo-utils](https://github.com/O3Labs/neo-utils) project by O3 Labs written in Go.
+
+`neovmUtils` implements BIP39 mnemonic phrases to generate wallets using an iOS wrapper of the [Trezor Crypto library](https://github.com/Ryucoin/trezor-crypto-ios).
 
 ## Installation
 
@@ -19,7 +21,7 @@ pod 'neovmUtils'
 
 ## Usage
 
-You must import the `neovmUtils` pod as well as the compiled `neo-utils` Go framework.
+You can import the `neovmUtils` pod as well as the compiled `neo-utils` Go framework.
 
 ```
 import neovmUtils
