@@ -61,7 +61,6 @@ class Tests: XCTestCase {
             let res = NeoutilsBuildOntologyInvocationTransaction(contractHash, method, args, gasPrice, gasLimit, wif, exampleWallet.address, err)
             XCTAssertNil(err)
             XCTAssertNotNil(res)
-            print("Response: \(res ?? "ERROR")")
         } catch let error {
             XCTFail("Failed to cast JSON: \(error)")
         }
@@ -76,7 +75,12 @@ class Tests: XCTestCase {
 
         let res = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWallet.wif, payer: exampleWallet.address)
         XCTAssertNotNil(res)
-        print("Response: \(res ?? "ERROR")")
+        
+        let res2 = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWallet.wif, payer: exampleWallet.address)
+        XCTAssertNotNil(res2)
+
+        let res3 = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: "123")
+        XCTAssertNil(res3)
     }
 
     func testClaimONG() {
