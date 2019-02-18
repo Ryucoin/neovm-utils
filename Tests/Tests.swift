@@ -333,6 +333,10 @@ class Tests: XCTestCase {
             return
         }
         XCTAssertEqual(p1, p2)
+        let p3 = publicKeyFromWif(wif: "123")
+        let p4 = publicKeyFromPrivateKey(privateKey: "123")
+        XCTAssertNil(p3)
+        XCTAssertNil(p4)
     }
 
     func testQRGenerator() {
@@ -408,7 +412,6 @@ class Tests: XCTestCase {
             return
         }
         XCTAssertNotNil(signature)
-        // TODO: - Verify still not working
         let verified = wallet.verifySignature(signature: signature, message: message)
         XCTAssertTrue(verified)
     }
@@ -424,13 +427,13 @@ class Tests: XCTestCase {
 
     func testWalletFromPK() {
         let wallet = walletFromPrivateKey(privateKey: exampleWallet.privateKey)
-
-        guard let strPrivateKey = wallet?.privateKeyString else {
-            XCTFail()
-            return
-        }
-
-        let _ = walletFromPrivateKey(privateKey: strPrivateKey)
+        XCTAssertNotNil(wallet)
+        let w = walletFromPrivateKey(privateKey: exampleWallet.privateKeyString)
+        XCTAssertNotNil(w)
+        let str = "123456789012345678901234567890"
+        let data = str.data(using: .utf8)!
+        let a = walletFromPrivateKey(privateKey: data)
+        XCTAssertNil(a)
     }
 
     func testWalletFromWIF() {

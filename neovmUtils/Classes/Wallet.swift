@@ -39,20 +39,16 @@ public class Wallet {
             return nil
         }
         let sig = NeoutilsSign(data, neoWallet.privateKey()?.bytesToHex, error).bytesToHex
-        if error != nil {
-            return nil
-        }
         return sig
     }
     
     public func verifySignature(signature: String, message: String) -> Bool {
-        guard let data = message.data(using: .utf8) else {
-            return false
+        if let data = message.data(using: .utf8) {
+            if let hash = sha256(data) {
+                return NeoutilsVerify(publicKey, signature.hexToBytes, hash)
+            }
         }
-        guard let hash = sha256(data) else {
-            return false
-        }
-        return NeoutilsVerify(publicKey, signature.hexToBytes, hash)
+        return false
     }
     
     public func computeSharedSecret(publicKey: Data) -> Data? {
@@ -226,19 +222,11 @@ private func walletFromNEOPrivateKey(privateKey: String) -> Wallet? {
     guard let ontAccount = NeoutilsONTAccountFromWIF(neoWallet.wif()) else {
         return nil
     }
-    guard let a = ontAccount.address() else {
-        return nil
-    }
-    guard let wif = ontAccount.wif() else {
-        return nil
-    }
-    guard let prK = ontAccount.privateKey() else {
-        return nil
-    }
-    guard let pbK = ontAccount.publicKey() else {
-        return nil
-    }
-    let w = Wallet(address: a, wif: wif, privateKey: prK, publicKey: pbK, neoWallet: neoWallet)
+    let w = Wallet(address: ontAccount.address(),
+                   wif: ontAccount.wif(),
+                   privateKey: ontAccount.privateKey(),
+                   publicKey: ontAccount.publicKey(),
+                   neoWallet: neoWallet)
     return w
 }
 
