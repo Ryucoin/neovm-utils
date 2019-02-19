@@ -24,6 +24,7 @@
 @class NeoutilsSeedNodeResponse;
 @class NeoutilsSharedSecret;
 @class NeoutilsSimplifiedNEP9;
+@class NeoutilsSmartCodeEvent;
 @class NeoutilsSmartContract;
 @class NeoutilsSmartContractInfo;
 @class NeoutilsWallet;
@@ -265,6 +266,20 @@
 - (void)setAmount:(double)v;
 @end
 
+@interface NeoutilsSmartCodeEvent : NSObject <goSeqRefInterface> {
+}
+@property(strong, readonly) id _ref;
+
+- (instancetype)initWithRef:(id)ref;
+- (instancetype)init;
+- (NSString*)txHash;
+- (void)setTxHash:(NSString*)v;
+- (long)state;
+- (void)setState:(long)v;
+- (long)gasConsumed;
+- (void)setGasConsumed:(long)v;
+@end
+
 @interface NeoutilsSmartContract : NSObject <goSeqRefInterface, NeoutilsSmartContractInterface> {
 }
 @property(strong, readonly) id _ref;
@@ -424,10 +439,11 @@ FOUNDATION_EXPORT NSString* NeoutilsOntologyGetBlockWithHeight(NSString* endpoin
 
 FOUNDATION_EXPORT NSString* NeoutilsOntologyGetRawTransaction(NSString* endpoint, NSString* txID, NSError** error);
 
-// skipped function OntologyGetSmartCodeEvent with unsupported parameter or return types
-
+FOUNDATION_EXPORT NeoutilsSmartCodeEvent* NeoutilsOntologyGetSmartCodeEvent(NSString* endpoint, NSString* txHash, NSError** error);
 
 FOUNDATION_EXPORT NSString* NeoutilsOntologyGetStorage(NSString* endpoint, NSString* scriptHash, NSString* key, NSError** error);
+
+FOUNDATION_EXPORT NSString* NeoutilsOntologyGetUnboundONG(NSString* endpoint, NSString* address, NSError** error);
 
 /**
  * OntologyInvoke : Invoke a neovm contract in Ontology

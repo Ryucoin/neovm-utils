@@ -11,7 +11,6 @@
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		690E103E6A4FE287E583687B /* Pods_neovmUtilsExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1B185E068026CC4121840E7 /* Pods_neovmUtilsExample.framework */; };
 		7F6EF749221AFF8C00B20AA7 /* QRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EF748221AFF8C00B20AA7 /* QRView.swift */; };
-		7F6EF74B221B4E6400B20AA7 /* neoutils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6EF74A221B4E6400B20AA7 /* neoutils.framework */; };
 		7F6EF753221C0CCA00B20AA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EF752221C0CCA00B20AA7 /* AppDelegate.swift */; };
 		7F6EF755221C0CCA00B20AA7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EF754221C0CCA00B20AA7 /* ViewController.swift */; };
 		7F6EF758221C0CCA00B20AA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F6EF756221C0CCA00B20AA7 /* Main.storyboard */; };
@@ -30,8 +29,9 @@
 		7F6EF779221C0D9D00B20AA7 /* QRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EF748221AFF8C00B20AA7 /* QRView.swift */; };
 		7F6EF77A221C0D9D00B20AA7 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC272216FA8000F52C0F /* Utils.swift */; };
 		7F6EF77B221C0D9D00B20AA7 /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC252216F99400F52C0F /* Wallet.swift */; };
-		7F6EF77C221C0DB200B20AA7 /* neoutils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6EF74A221B4E6400B20AA7 /* neoutils.framework */; };
-		7F6EF77D221C0DB200B20AA7 /* neoutils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6EF74A221B4E6400B20AA7 /* neoutils.framework */; };
+		7F6EF77F221C514100B20AA7 /* neoutils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6EF77E221C514100B20AA7 /* neoutils.framework */; };
+		7F6EF780221C514100B20AA7 /* neoutils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6EF77E221C514100B20AA7 /* neoutils.framework */; };
+		7F6EF781221C514100B20AA7 /* neoutils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6EF77E221C514100B20AA7 /* neoutils.framework */; };
 		7F725CE821FF04CA00850C2D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F725CE721FF04CA00850C2D /* Foundation.framework */; };
 		7FD0FC242216F96B00F52C0F /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC232216F96B00F52C0F /* Crypto.swift */; };
 		7FD0FC262216F99400F52C0F /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC252216F99400F52C0F /* Wallet.swift */; };
@@ -61,7 +61,6 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		7F6EF748221AFF8C00B20AA7 /* QRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRView.swift; sourceTree = "<group>"; };
-		7F6EF74A221B4E6400B20AA7 /* neoutils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = neoutils.framework; sourceTree = "<group>"; };
 		7F6EF750221C0CCA00B20AA7 /* neovmUtilsExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = neovmUtilsExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F6EF752221C0CCA00B20AA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7F6EF754221C0CCA00B20AA7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -72,6 +71,7 @@
 		7F6EF763221C0CCD00B20AA7 /* neovmUtilsExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = neovmUtilsExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F6EF767221C0CCD00B20AA7 /* neovmUtilsExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = neovmUtilsExampleUITests.swift; sourceTree = "<group>"; };
 		7F6EF769221C0CCD00B20AA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7F6EF77E221C514100B20AA7 /* neoutils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = neoutils.framework; sourceTree = "<group>"; };
 		7F725CE721FF04CA00850C2D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7FD0FC232216F96B00F52C0F /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
 		7FD0FC252216F99400F52C0F /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
@@ -94,7 +94,7 @@
 			files = (
 				7F725CE821FF04CA00850C2D /* Foundation.framework in Frameworks */,
 				23A5A664E1604A98B30A541C /* Pods_neovmUtils_Tests.framework in Frameworks */,
-				7F6EF74B221B4E6400B20AA7 /* neoutils.framework in Frameworks */,
+				7F6EF77F221C514100B20AA7 /* neoutils.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,8 +102,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F6EF77C221C0DB200B20AA7 /* neoutils.framework in Frameworks */,
 				690E103E6A4FE287E583687B /* Pods_neovmUtilsExample.framework in Frameworks */,
+				7F6EF780221C514100B20AA7 /* neoutils.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,8 +111,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F6EF77D221C0DB200B20AA7 /* neoutils.framework in Frameworks */,
 				E767D1BAF7D9A2C815AB40C9 /* Pods_neovmUtilsExampleUITests.framework in Frameworks */,
+				7F6EF781221C514100B20AA7 /* neoutils.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,7 +222,7 @@
 		BB75E40C24537D4E61108C25 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7F6EF74A221B4E6400B20AA7 /* neoutils.framework */,
+				7F6EF77E221C514100B20AA7 /* neoutils.framework */,
 				7F725CE721FF04CA00850C2D /* Foundation.framework */,
 				F456429103DFD18E76CEF465 /* Pods_neovmUtils_Tests.framework */,
 				F1B185E068026CC4121840E7 /* Pods_neovmUtilsExample.framework */,
