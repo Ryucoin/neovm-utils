@@ -27,9 +27,9 @@ public class QRView: UIView {
         imageView.frame = bounds
     }
 
-    public func generateCode(_ string: String, foregroundColor: UIColor = .black, backgroundColor: UIColor = .white) {
+    public func generate(code: String, foregroundColor: UIColor = .black, backgroundColor: UIColor = .white) {
         if let filter = CIFilter(name: "CIQRCodeGenerator") {
-            let data = Data(string.utf8)
+            let data = Data(code.utf8)
             filter.setValue(data, forKey: "inputMessage")
             if let ciImage = filter.outputImage {
                 let transformed = ciImage.transformed(by: CGAffineTransform.init(scaleX: 10, y: 10))
@@ -45,7 +45,7 @@ public class QRView: UIView {
                     imageView.image = UIImage(ciImage: outputImage, scale: 2.0, orientation: .up)
                         .withRenderingMode(.alwaysTemplate)
                 }
-                code = string
+                self.code = code
             }
         }
     }

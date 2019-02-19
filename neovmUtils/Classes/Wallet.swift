@@ -89,7 +89,7 @@ public class Wallet {
         case .PublicKey:
             code = publicKeyString
         }
-        qrView.generateCode(code)
+        qrView.generate(code: code)
         return qrView
     }
 }
