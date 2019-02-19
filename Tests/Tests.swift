@@ -237,10 +237,29 @@ class Tests: XCTestCase {
         XCTAssertNotEqual(raw, unknown)
     }
 
+    func testGetSmartCodeEvent() {
+        let hash = "9dbb87d079221dc0abc003bd164ec8703729106b3a2452c705b9a4a8f6dc3840"
+        guard let _ = ontologyGetSmartCodeEvent(txHash: hash) else {
+            XCTFail()
+            return
+        }
+//        XCTAssertEqual(0, result.gasConsumed())
+//        XCTAssertEqual(1, result.state())
+//        XCTAssertEqual(hash, result.txHash())
+    }
+
     func testGetStorage() {
         let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
         let result = ontologyGetStorage(scriptHash: contractHash, key: exampleWallet.address)
         print("Result for getStorage: \(result)")
+    }
+
+    func testGetUnboundONG() {
+        let res = getUnboundONG(address: exampleWallet.address)
+        XCTAssertEqual(res, "0")
+
+        let res2 = getUnboundONG(address: "123")
+        XCTAssertEqual(res2, "")
     }
 
     func testInvalidKeys() {

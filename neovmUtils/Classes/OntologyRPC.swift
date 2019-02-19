@@ -90,6 +90,13 @@ public func ontologyGetBalances(endpoint: String = ontologyTestNodes.bestNode.ra
     return (ont, ong)
 }
 
+public func ontologyGetSmartCodeEvent(endpoint: String = ontologyTestNodes.bestNode.rawValue, txHash: String) -> NeoutilsSmartCodeEvent? {
+    let e = getEndpoint(def: endpoint)
+    let error = NSErrorPointer(nilLiteral: ())
+    let res = NeoutilsOntologyGetSmartCodeEvent(e, txHash, error)
+    return res
+}
+
 public func ontologySendRawTransaction(endpoint: String = ontologyTestNodes.bestNode.rawValue, raw: String) -> String {
     let e = getEndpoint(def: endpoint)
     let error = NSErrorPointer(nilLiteral: ())
@@ -132,12 +139,21 @@ public enum OntAsset: String {
 
 public func sendOntologyTransfer(endpoint: String = ontologyTestNodes.bestNode.rawValue, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String, asset: OntAsset, toAddress: String, amount: Double) -> String {
     let error = NSErrorPointer(nilLiteral: ())
-    let txID = NeoutilsOntologyTransfer(endpoint, gasPrice, gasLimit, wif, asset.rawValue, toAddress, amount, error)
+    let e = getEndpoint(def: endpoint)
+    let txID = NeoutilsOntologyTransfer(e, gasPrice, gasLimit, wif, asset.rawValue, toAddress, amount, error)
     return txID ?? ""
 }
 
 public func claimONG(endpoint: String = ontologyTestNodes.bestNode.rawValue, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
     let error = NSErrorPointer(nilLiteral: ())
-    let txID = NeoutilsClaimONG(endpoint, gasPrice, gasLimit, wif, error)
+    let e = getEndpoint(def: endpoint)
+    let txID = NeoutilsClaimONG(e, gasPrice, gasLimit, wif, error)
     return txID ?? ""
+}
+
+public func getUnboundONG(endpoint: String = ontologyTestNodes.bestNode.rawValue, address: String) -> String {
+    let error = NSErrorPointer(nilLiteral: ())
+    let e = getEndpoint(def: endpoint)
+    let res = NeoutilsOntologyGetUnboundONG(e, address, error)
+    return res ?? ""
 }
