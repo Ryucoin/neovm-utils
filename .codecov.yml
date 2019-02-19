@@ -7,6 +7,6 @@ coverage:
     project: true
 
   ignore:
-    - Tests/*
-    - neovmUtilsExample/**/*
-    - neovmUtilsExampleUITests/*
+    - Tests
+    - neovmUtilsExample
+    - neovmUtilsExampleUITests
