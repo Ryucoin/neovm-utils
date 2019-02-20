@@ -6,9 +6,19 @@
 [![License](https://img.shields.io/cocoapods/l/neovmUtils.svg?style=flat)](https://cocoapods.org/pods/neovmUtils)
 [![Platform](https://img.shields.io/cocoapods/p/neovmUtils.svg?style=flat)](https://cocoapods.org/pods/neovmUtils)
 
-`neovmUtils` is a native iOS framework for interacting with the NEO and Ontology blockchains. It is a compiled version of the [neo-utils](https://github.com/O3Labs/neo-utils) project by O3 Labs written in Go.
+- [Overview](#overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Authors](#authors)
+- [License](#license)
 
-`neovmUtils` implements BIP39 mnemonic phrases to generate wallets using an iOS wrapper of the [Trezor Crypto library](https://github.com/Ryucoin/trezor-crypto-ios).
+## Overview
+
+`neovmUtils` is a native iOS framework for interacting with the NEO and Ontology blockchains. It includes a compiled version of the [neo-utils](https://github.com/O3Labs/neo-utils) project by O3 Labs written in Go.
+
+`neovmUtils` also implements BIP39 mnemonic phrases to generate wallets using an iOS wrapper of the [Trezor Crypto library](https://github.com/Ryucoin/trezor-crypto-ios).
+
+Documentation for the Go implementation is available [here](https://github.com/O3Labs/neo-utils/blob/master/neoutils/README.md).
 
 ## Installation
 
@@ -19,32 +29,30 @@ it, simply add the following line to your Podfile:
 pod 'neovmUtils'
 ```
 
-## Usage
-
-You can import the `neovmUtils` pod as well as the compiled `neo-utils` Go framework.
+And import it into your project with:
 
 ```
 import neovmUtils
-import Neoutils
 ```
 
-**Note:** the functions imported by `Neoutils` are used slightly differently than their implementations in Go. Additionally, the functions supplied by `neovmUtils` further simplify the compiled code.
+## Usage
 
-#### Example
+`neovmUtils` offers:
+- [NEO/ONT Wallet](docs/wallet.md)
+- [ONT RPC Methods](docs/ont-rpc.md)
+- [ONT Transactions](docs/ont-trans.md)
+- [QR View](docs/qr-view.md)
+- [Mnemonic Creation](docs/mnemonic.md)
 
-`neo-utils` (Go implementation):
+#### Improvements
 
-```
-wif := "<SOME VALID WIF>"
-account, err := neoutils.GenerateFromWIF(wif)
-if err != nil {
-  log.Printf("There was an error: %v", err)
-}
-```  
+The compiled `neo-utils` sdk is a little complicated to use, so a lot of it has been improved in native Swift.
 
-`Neoutils` (Compiled Swift):
+For example, wallet creation can be done like the following:
 
-```
+`import Neoutils` (Compiled Swift):
+
+``` swift
 let wif = "<SOME VALID WIF>"
 let err = NSErrorPointer(nilLiteral: ())
 let account = NeoutilsGenerateFromWIF(wif, err) // account is of type NeoutilsWallet?
@@ -53,16 +61,14 @@ if err != nil {
 }
 ```
 
-`neovmUtils` (Swift Abstraction):
+Or it can be done like this:
 
-```
+`import neovmUtils` (Swift Abstraction):
+
+``` swift
 let wif = "<SOME VALID WIF>"
 let account = walletFromWIF(wif: wif) // account is of type Wallet?
 ```
-
-The full implementation of the `neovmUtils` abstraction is available [here](https://github.com/Ryucoin/neovm-utils/blob/master/neovmUtils/Classes/neovm.swift). Not all of the functions and types made available by importing `Neoutils` are simplified by importing `neovmUtils`.
-
-Documentation for the Go implementation is available [here](https://github.com/O3Labs/neo-utils/blob/master/neoutils/README.md).
 
 ## Authors
 
