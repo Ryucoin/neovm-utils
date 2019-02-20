@@ -464,7 +464,7 @@ class Tests: XCTestCase {
 
     func testTransferONT() {
         let b = newWallet()
-        let tx = sendOntologyTransfer(wif: exampleWallet.wif, asset: .ONT, toAddress: b.address, amount: 10)
+        let tx = ontologyTransfer(wif: exampleWallet.wif, asset: .ONT, toAddress: b.address, amount: 10)
         print(tx)
     }
 

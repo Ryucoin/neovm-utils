@@ -137,7 +137,7 @@ public enum OntAsset: String {
     case ONG
 }
 
-public func sendOntologyTransfer(endpoint: String = ontologyTestNodes.bestNode.rawValue, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String, asset: OntAsset, toAddress: String, amount: Double) -> String {
+public func ontologyTransfer(endpoint: String = ontologyTestNodes.bestNode.rawValue, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String, asset: OntAsset, toAddress: String, amount: Double) -> String {
     let error = NSErrorPointer(nilLiteral: ())
     let e = getEndpoint(def: endpoint)
     let txID = NeoutilsOntologyTransfer(e, gasPrice, gasLimit, wif, asset.rawValue, toAddress, amount, error)

@@ -109,12 +109,12 @@ exportQR(key: KeyType, frame: CGRect = CGRect(x: 0, y: 0, width: 230, height: 23
 #### Key Type
 ``` swift
 public enum KeyType {
-    case PrivateKey
-    case NEOPrivateKey
-    case NEP2
-    case WIF
-    case Address
-    case PublicKey
+  case PrivateKey
+  case NEOPrivateKey
+  case NEP2
+  case WIF
+  case Address
+  case PublicKey
 }
 ```
 
