@@ -72,9 +72,9 @@ let account = walletFromWIF(wif: wif) // account is of type Wallet?
 
 ## Authors
 
-`neovmUtils` - Wyatt Mufson, wyatt@ryucoin.com
+`neovmUtils` - Wyatt Mufson from Ryu Coin, wyatt@ryucoin.com
 
-`neo-utils` - Apisit Toompakdee, apisit@o3.network
+`neo-utils` - Apisit Toompakdee from O3 Labs, apisit@o3.network
 
 ## License
 
