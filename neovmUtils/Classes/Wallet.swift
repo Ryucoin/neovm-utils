@@ -40,10 +40,10 @@ public class Wallet {
         return sig
     }
     
-    public func verifySignature(signature: String, message: String) -> Bool {
+    public func verifySignature(pubKey: Data, signature: String, message: String) -> Bool {
         let data = Data(message.utf8)
         let hash = sha256(data)
-        return NeoutilsVerify(publicKey, signature.hexToBytes, hash)
+        return NeoutilsVerify(pubKey, signature.hexToBytes, hash)
     }
     
     public func computeSharedSecret(publicKey: Data) -> Data? {

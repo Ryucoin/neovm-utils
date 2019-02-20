@@ -456,9 +456,9 @@ class Tests: XCTestCase {
             return
         }
         XCTAssertNotNil(signature)
-        let verified = wallet.verifySignature(signature: signature, message: message)
+        let verified = wallet.verifySignature(pubKey: exampleWallet.publicKey, signature: signature, message: message)
         XCTAssertTrue(verified)
-        let notVerified = wallet.verifySignature(signature: signature, message: "\(message)1")
+        let notVerified = wallet.verifySignature(pubKey: exampleWallet.publicKey, signature: signature, message: "\(message)1")
         XCTAssertFalse(notVerified)
     }
 
