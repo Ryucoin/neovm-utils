@@ -18,8 +18,6 @@
 
 `neovmUtils` also implements BIP39 mnemonic phrases to generate wallets using an iOS wrapper of the [Trezor Crypto library](https://github.com/Ryucoin/trezor-crypto-ios).
 
-Documentation for the Go implementation is available [here](https://github.com/O3Labs/neo-utils/blob/master/neoutils/README.md).
-
 ## Installation
 
 `neovmUtils` is available through [CocoaPods](https://cocoapods.org). To install
@@ -43,6 +41,13 @@ import neovmUtils
 - [ONT Transactions](docs/ont-trans.md)
 - [QR View](docs/qr-view.md)
 - [Mnemonic Creation](docs/mnemonic.md)
+- [Compiled neo-utils golang](#golang)
+
+### golang
+
+The full `neo-utils` golang SDK is available for use with this pod. Simply import it with `import Neoutils`.
+
+Documentation for the Go implementation is available [here](https://github.com/O3Labs/neo-utils/blob/master/neoutils/README.md).
 
 #### Improvements
 
