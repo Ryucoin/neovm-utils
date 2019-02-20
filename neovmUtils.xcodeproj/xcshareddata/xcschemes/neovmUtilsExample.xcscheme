@@ -20,6 +20,20 @@
                ReferencedContainer = "container:neovmUtils.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7F6EF762221C0CCD00B20AA7"
+               BuildableName = "neovmUtilsExampleUITests.xctest"
+               BlueprintName = "neovmUtilsExampleUITests"
+               ReferencedContainer = "container:neovmUtils.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
