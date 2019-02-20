@@ -238,14 +238,14 @@ class Tests: XCTestCase {
     }
 
     func testGetSmartCodeEvent() {
-        let hash = "9dbb87d079221dc0abc003bd164ec8703729106b3a2452c705b9a4a8f6dc3840"
-        guard let _ = ontologyGetSmartCodeEvent(txHash: hash) else {
+        let txHash = "41ee265bf50952cd0445d0f612bf2574af523b741c9cc82617bd27c0f7404b14"
+        guard let result = ontologyGetSmartCodeEvent(txHash: txHash) else {
             XCTFail()
             return
         }
-//        XCTAssertEqual(0, result.gasConsumed())
-//        XCTAssertEqual(1, result.state())
-//        XCTAssertEqual(hash, result.txHash())
+        XCTAssertEqual(10852500, result.gasConsumed())
+        XCTAssertEqual(1, result.state())
+        XCTAssertEqual(txHash, result.txHash())
     }
 
     func testGetStorage() {
