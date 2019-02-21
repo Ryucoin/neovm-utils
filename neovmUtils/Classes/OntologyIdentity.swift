@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Neoutils
 
 public class Identity {
     public var label: String = ""
@@ -54,13 +55,12 @@ public func sendRegister(endpoint: String = ontologyTestNodes.bestNode.rawValue,
     } else {
         wif = ident.wif
     }
-    let raw = wif // TODO: - Replace with:
-    /*
-     let err = NSErrorPointer(nilLiteral: ())
-     guard let raw = NeoutilsMakeRegister(gasPrice, gasLimit, wif, payAcct.wif!, err) else {
+
+    let err = NSErrorPointer(nilLiteral: ())
+    guard let raw = NeoutilsOntologyMakeRegister(gasPrice, gasLimit, wif, payerAcct.wif!, err) else {
         return ""
-     }
-    */
+    }
+
     let response = ontologySendRawTransaction(endpoint: endpoint, raw: raw)
     return response
 }

@@ -429,6 +429,8 @@ FOUNDATION_EXPORT NeoutilsONTAccount* NeoutilsONTAccountFromWIF(NSString* wif);
 
 FOUNDATION_EXPORT NeoutilsONTAccount* NeoutilsONTCreateAccount(void);
 
+FOUNDATION_EXPORT NSString* NeoutilsOntologyBuildGetDDO(NSString* ontid, NSError** error);
+
 FOUNDATION_EXPORT NeoutilsOntologyBalances* NeoutilsOntologyGetBalance(NSString* endpoint, NSString* address, NSError** error);
 
 FOUNDATION_EXPORT BOOL NeoutilsOntologyGetBlockCount(NSString* endpoint, long* ret0_, NSError** error);
@@ -449,6 +451,10 @@ FOUNDATION_EXPORT NSString* NeoutilsOntologyGetUnboundONG(NSString* endpoint, NS
  * OntologyInvoke : Invoke a neovm contract in Ontology
  */
 FOUNDATION_EXPORT NSString* NeoutilsOntologyInvoke(NSString* endpoint, NSString* contract, NSString* method, NSString* args, long gasPrice, long gasLimit, NSString* wif, NSString* payer, NSError** error);
+
+FOUNDATION_EXPORT NSString* NeoutilsOntologyMakeRegister(long gasPrice, long gasLimit, NSString* ontidWif, NSString* payerWif, NSError** error);
+
+FOUNDATION_EXPORT NSString* NeoutilsOntologySendPreExecRawTransaction(NSString* endpoint, NSString* raw, NSError** error);
 
 FOUNDATION_EXPORT NSString* NeoutilsOntologySendRawTransaction(NSString* endpoint, NSString* raw, NSError** error);
 

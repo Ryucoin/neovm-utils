@@ -320,8 +320,8 @@ class Tests: XCTestCase {
         let identity2 = createIdentity(password: "1234")
         let res2 = sendRegister(ident: identity2, password: "1234", payerAcct: exampleWallet)
         let res3 = sendRegister(ident: identity2, password: "12345", payerAcct: exampleWallet)
-        XCTAssertEqual(res, "")     // TODO: - XCTAssertNotEqual
-        XCTAssertEqual(res2, "")    // TODO: - XCTAssertNotEqual
+        XCTAssertNotEqual(res, "")
+        XCTAssertNotEqual(res2, "")
         XCTAssertEqual(res3, "")
     }
 
