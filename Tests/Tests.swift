@@ -413,6 +413,13 @@ class Tests: XCTestCase {
         q1.layoutSubviews()
     }
 
+    func testSendGetDDO() {
+        let ontid = ""
+        let response = sendGetDDO(ontid: ontid)
+        XCTAssertNotEqual(response, "did:ont:ATJEoWVjzTTuXRu5aRZWyoAP4kCeKSQCVi")
+        print(response)
+    }
+
     func testSendRawTransaction() {
         let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
         let method = "put"

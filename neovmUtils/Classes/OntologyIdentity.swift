@@ -60,7 +60,25 @@ public func sendRegister(endpoint: String = ontologyTestNodes.bestNode.rawValue,
     guard let raw = NeoutilsOntologyMakeRegister(gasPrice, gasLimit, wif, payerAcct.wif!, err) else {
         return ""
     }
+    let e = getEndpoint(def: endpoint)
+    let response = ontologySendRawTransaction(endpoint: e, raw: raw)
+    return response
+}
 
-    let response = ontologySendRawTransaction(endpoint: endpoint, raw: raw)
+public func sendGetDDO(endpoint: String = ontologyTestNodes.bestNode.rawValue, ontid: String) -> String {
+    let err = NSErrorPointer(nilLiteral: ())
+    guard let raw = NeoutilsOntologyBuildGetDDO(ontid, err) else {
+        return ""
+    }
+    let response = ontologySendPreExecRawTransaction(endpoint: endpoint, raw: raw)
+    return response
+}
+
+public func sendGetDDO(endpoint: String = ontologyTestNodes.bestNode.rawValue, ident: Identity) -> String {
+    let err = NSErrorPointer(nilLiteral: ())
+    guard let raw = NeoutilsOntologyBuildGetDDO(ident.ontid, err) else {
+        return ""
+    }
+    let response = ontologySendPreExecRawTransaction(endpoint: endpoint, raw: raw)
     return response
 }

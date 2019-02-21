@@ -104,6 +104,13 @@ public func ontologySendRawTransaction(endpoint: String = ontologyTestNodes.best
     return txId ?? ""
 }
 
+public func ontologySendPreExecRawTransaction(endpoint: String = ontologyTestNodes.bestNode.rawValue, raw: String) -> String {
+    let e = getEndpoint(def: endpoint)
+    let error = NSErrorPointer(nilLiteral: ())
+    let response = NeoutilsOntologySendPreExecRawTransaction(e, raw, error)
+    return response ?? ""
+}
+
 public func ontologyGetStorage(endpoint: String = ontologyTestNodes.bestNode.rawValue, scriptHash: String, key: String) -> String {
     let e = getEndpoint(def: endpoint)
     let error = NSErrorPointer(nilLiteral: ())
