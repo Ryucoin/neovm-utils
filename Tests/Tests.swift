@@ -314,6 +314,17 @@ class Tests: XCTestCase {
         XCTAssertTrue(w == exampleWallet.wif)
     }
 
+    func testOID() {
+        let identity = createIdentity()
+        let res = sendRegister(ident: identity, payerAcct: exampleWallet)
+        let identity2 = createIdentity(password: "1234")
+        let res2 = sendRegister(ident: identity2, password: "1234", payerAcct: exampleWallet)
+        let res3 = sendRegister(ident: identity2, password: "12345", payerAcct: exampleWallet)
+        XCTAssertEqual(res, "")     // TODO: - XCTAssertNotEqual
+        XCTAssertEqual(res2, "")    // TODO: - XCTAssertNotEqual
+        XCTAssertEqual(res3, "")
+    }
+
     func testOntologyInvocation() {
         let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
         let method = "put"
