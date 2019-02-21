@@ -414,9 +414,9 @@ class Tests: XCTestCase {
     }
 
     func testSendGetDDO() {
-        let ontid = ""
+        let ontid = "did:ont:ATJEoWVjzTTuXRu5aRZWyoAP4kCeKSQCVi"
         let response = sendGetDDO(ontid: ontid)
-        XCTAssertNotEqual(response, "did:ont:ATJEoWVjzTTuXRu5aRZWyoAP4kCeKSQCVi")
+        XCTAssertNotEqual(response, "")
         print(response)
     }
 
