@@ -415,9 +415,16 @@ class Tests: XCTestCase {
 
     func testSendGetDDO() {
         let ontid = "did:ont:ATJEoWVjzTTuXRu5aRZWyoAP4kCeKSQCVi"
-        let response = sendGetDDO(ontid: ontid)
-        XCTAssertNotEqual(response, "")
-        print(response)
+        guard let ddo = sendGetDDO(ontid: ontid) else {
+            XCTFail()
+            return
+        }
+        let pk = ddo.publicKeys
+        let attr = ddo.attributes
+        let recovery = ddo.recovery
+        print(pk)
+        print(attr)
+        print(recovery)
     }
 
     func testSendRawTransaction() {

@@ -65,20 +65,91 @@ public func sendRegister(endpoint: String = ontologyTestNodes.bestNode.rawValue,
     return response
 }
 
-public func sendGetDDO(endpoint: String = ontologyTestNodes.bestNode.rawValue, ontid: String) -> String {
-    let err = NSErrorPointer(nilLiteral: ())
-    guard let raw = NeoutilsOntologyBuildGetDDO(ontid, err) else {
-        return ""
+public class DDOAttribute {
+    var key: String = ""
+    var type: String = ""
+    var value: String = ""
+
+    fileprivate convenience init(key: String, type: String, value: String) {
+        self.init()
+        self.key = key
+        self.type = type
+        self.value = value
     }
-    let response = ontologySendPreExecRawTransaction(endpoint: endpoint, raw: raw)
-    return response
 }
 
-public func sendGetDDO(endpoint: String = ontologyTestNodes.bestNode.rawValue, ident: Identity) -> String {
+private func parseDDOAttribute(hex: String) -> [DDOAttribute] {
+    let attributes: [DDOAttribute] = []
+    return attributes
+}
+
+public class PublicKeyWithId {
+    var id: Int = 0
+    var pk: Data = Data()
+
+    fileprivate convenience init(id: Int, pk: Data) {
+        self.init()
+        self.id = id
+        self.pk = pk
+    }
+}
+
+private func parsePublicKeys(hex: String) -> [PublicKeyWithId] {
+    let publicKeys: [PublicKeyWithId] = []
+    return publicKeys
+}
+
+public class OntidDescriptionObject {
+    var ontid: String = ""
+    var publicKeys: [PublicKeyWithId] = []
+    var attributes: [DDOAttribute] = []
+    var recovery: String = ""
+
+    fileprivate convenience init(ontid: String, publicKeys: [PublicKeyWithId], attributes: [DDOAttribute], recovery: String) {
+        self.init()
+        self.ontid = ontid
+        self.publicKeys = publicKeys
+        self.attributes = attributes
+        self.recovery = recovery
+    }
+}
+
+private func parseDDO(ontid: String, hex: String) -> OntidDescriptionObject {
+    let step = 2
+    let pkLen = hex[0..<step]
+    let pkValue = UInt8(pkLen, radix: 16)! * 2
+    let pkUpper = step + Int(pkValue)
+    let pk = String(hex[step..<pkUpper])
+
+    let attrLen = hex[pkUpper..<pkUpper + step]
+    let attrValue = UInt8(attrLen, radix: 16)! * 2
+    let attrUpper = pkUpper + step + Int(attrValue)
+    let attr = String(hex[pkUpper + step..<attrUpper])
+
+    let recoveryLen = hex[attrUpper..<attrUpper + step]
+    let recoveryValue = UInt8(recoveryLen, radix: 16)! * 2
+    let recoveryUpper = attrUpper + step + Int(recoveryValue)
+    let recovery = String(hex[attrUpper + step..<recoveryUpper])
+
+    let publicKeys = parsePublicKeys(hex: pk)
+    let attributes = parseDDOAttribute(hex: attr)
+    return OntidDescriptionObject(ontid: ontid, publicKeys: publicKeys, attributes: attributes, recovery: recovery)
+}
+
+public func sendGetDDO(endpoint: String = ontologyTestNodes.bestNode.rawValue, ontid: String) -> OntidDescriptionObject? {
     let err = NSErrorPointer(nilLiteral: ())
-    guard let raw = NeoutilsOntologyBuildGetDDO(ident.ontid, err) else {
-        return ""
+    guard let raw = NeoutilsOntologyBuildGetDDO(ontid, err) else {
+        return nil
     }
     let response = ontologySendPreExecRawTransaction(endpoint: endpoint, raw: raw)
-    return response
+    return parseDDO(ontid: ontid, hex: response)
+}
+
+public func sendGetDDO(endpoint: String = ontologyTestNodes.bestNode.rawValue, ident: Identity) -> OntidDescriptionObject? {
+    let err = NSErrorPointer(nilLiteral: ())
+    guard let raw = NeoutilsOntologyBuildGetDDO(ident.ontid, err) else {
+        return nil
+    }
+    let response = ontologySendPreExecRawTransaction(endpoint: endpoint, raw: raw)
+    return parseDDO(ontid: ident.ontid, hex: response)
 }
