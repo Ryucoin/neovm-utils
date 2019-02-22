@@ -229,18 +229,20 @@ private func parseDDO(ontid: String, hex: String) -> OntidDescriptionObject {
 
 public func sendGetDDO(endpoint: String = ontologyTestNodes.bestNode.rawValue, ontid: String) -> OntidDescriptionObject? {
     let err = NSErrorPointer(nilLiteral: ())
-    guard let raw = NeoutilsOntologyBuildGetDDO(ontid, err) else {
+    let raw = NeoutilsOntologyBuildGetDDO(ontid, err) ?? ""
+    let response = ontologySendPreExecRawTransaction(endpoint: endpoint, raw: raw)
+    if response == "" {
         return nil
     }
-    let response = ontologySendPreExecRawTransaction(endpoint: endpoint, raw: raw)
     return parseDDO(ontid: ontid, hex: response)
 }
 
 public func sendGetDDO(endpoint: String = ontologyTestNodes.bestNode.rawValue, ident: Identity) -> OntidDescriptionObject? {
     let err = NSErrorPointer(nilLiteral: ())
-    guard let raw = NeoutilsOntologyBuildGetDDO(ident.ontid, err) else {
+    let raw = NeoutilsOntologyBuildGetDDO(ident.ontid, err) ?? ""
+    let response = ontologySendPreExecRawTransaction(endpoint: endpoint, raw: raw)
+    if response == "" {
         return nil
     }
-    let response = ontologySendPreExecRawTransaction(endpoint: endpoint, raw: raw)
     return parseDDO(ontid: ident.ontid, hex: response)
 }

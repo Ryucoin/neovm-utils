@@ -18,6 +18,7 @@ class Tests: XCTestCase {
     func testAddressFromPublicKey() {
         XCTAssertEqual(exampleWallet.address, addressFromPublicKey(publicKey: exampleWallet.publicKeyString))
         XCTAssertEqual("", addressFromPublicKey(publicKey: "1234"))
+        XCTAssertEqual("", addressFromPublicKey(publicKey: ""))
     }
 
     func testBuildJoinTransaction() {
@@ -328,6 +329,10 @@ class Tests: XCTestCase {
         XCTAssertNotEqual(res, "")
         XCTAssertNotEqual(res2, "")
         XCTAssertEqual(res3, "")
+        let identity3 = createIdentity()
+        identity3.wif = ""
+        let res4 = sendRegister(ident: identity3, payerAcct: exampleWallet)
+        XCTAssertEqual(res4, "")
     }
 
     func testOntologyInvocation() {
@@ -470,6 +475,16 @@ class Tests: XCTestCase {
             XCTFail()
         }
         XCTAssertEqual(recoveryA, "")
+    }
+
+    func testSendGetDDOInvalid() {
+        let ontid = "ATJEoWVjzTTuXRu5aRZWyoAP4kCeKSQCVi"
+        let ddo = sendGetDDO(ontid: ontid)
+        XCTAssertNil(ddo)
+        let identity = createIdentity()
+        identity.ontid = ontid
+        let ddo2 = sendGetDDO(ident: identity)
+        XCTAssertNil(ddo2)
     }
 
     func testSendRawTransaction() {
