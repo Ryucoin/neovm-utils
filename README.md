@@ -37,6 +37,7 @@ import neovmUtils
 
 `neovmUtils` offers:
 - [NEO/ONT Wallet](docs/wallet.md)
+- [ONT Identity](docs/ontid.md)
 - [ONT RPC Methods](docs/ont-rpc.md)
 - [ONT Transactions](docs/ont-trans.md)
 - [QR View](docs/qr-view.md)
