@@ -9,7 +9,7 @@
 - [Overview](#overview)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Authors](#authors)
+- [Contributing](#contributing)
 - [License](#license)
 
 ## Overview
@@ -76,11 +76,17 @@ let wif = "<SOME VALID WIF>"
 let account = walletFromWIF(wif: wif) // account is of type Wallet?
 ```
 
-## Authors
+## Contributing
 
-`neovmUtils` - Wyatt Mufson from Ryu Coin, wyatt@ryucoin.com
+We welcome contributors to `neovmUtils`. Before beginning, please take a look at our [contributing guidelines](./CONTRIBUTING.md).
 
-`neo-utils` - Apisit Toompakdee from O3 Labs, apisit@o3.network
+It follows the [ontio-community sdk specifications doc](https://github.com/ontio-community/specifications/blob/master/sdk_dev_standard/en/ontology-sdk-dev.md) for its Ontology integration.
+
+#### Primary Authors
+
+`neovmUtils` - [Wyatt Mufson](mailto:wyatt@ryucoin.com) from Ryu Coin
+
+`neo-utils` - [Apisit Toompakdee](mailto:apisit@o3.network) from O3 Labs
 
 ## License
 
