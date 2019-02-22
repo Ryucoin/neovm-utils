@@ -440,6 +440,36 @@ class Tests: XCTestCase {
         }
         let recoveryR = ddoR.recovery
         XCTAssertNotEqual(recoveryR, "")
+
+        let ontidA = "did:ont:AdzkzvG9ekuAjFh589UmVrbtgbGmz1eNdU"
+        guard let ddoA = sendGetDDO(ontid: ontidA) else {
+            XCTFail()
+            return
+        }
+        let pkA = ddoA.publicKeys
+        let attrA = ddoA.attributes
+        let recoveryA = ddoA.recovery
+        let formattedPkA = pkA.map { $0.getFull() }
+        let formattedAttrA = attrA.map { $0.getFull() }
+        if formattedPkA.count == 1 {
+            let formatedPublicKey = formattedPkA[0]
+            XCTAssertEqual(formatedPublicKey["Curve"], "P256")
+            XCTAssertEqual(formatedPublicKey["Type"], "ECDSA")
+            XCTAssertEqual(formatedPublicKey["PubKeyId"], "did:ont:AdzkzvG9ekuAjFh589UmVrbtgbGmz1eNdU#keys-1")
+            XCTAssertEqual(formatedPublicKey["Value"], "0314ef57dfcbff4b7fdb157d3eefeedc126fbec532579ee7c77a20a53f59d9d311")
+        } else {
+            XCTFail()
+        }
+
+        if formattedAttrA.count == 1 {
+            let formatedAttributte = formattedAttrA[0]
+            XCTAssertEqual(formatedAttributte["Type"], "string")
+            XCTAssertEqual(formatedAttributte["Key"], "hello")
+            XCTAssertEqual(formatedAttributte["Value"], "attribute")
+        } else {
+            XCTFail()
+        }
+        XCTAssertEqual(recoveryA, "")
     }
 
     func testSendRawTransaction() {
