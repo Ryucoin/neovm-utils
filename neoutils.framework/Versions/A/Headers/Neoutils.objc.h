@@ -427,6 +427,8 @@ FOUNDATION_EXPORT NeoutilsONTAccount* NeoutilsONTAccountFromPrivateKey(NSData* p
 
 FOUNDATION_EXPORT NeoutilsONTAccount* NeoutilsONTAccountFromWIF(NSString* wif);
 
+FOUNDATION_EXPORT NSString* NeoutilsONTAddressFromPublicKey(NSData* publicKey);
+
 FOUNDATION_EXPORT NeoutilsONTAccount* NeoutilsONTCreateAccount(void);
 
 FOUNDATION_EXPORT NSString* NeoutilsOntologyBuildGetDDO(NSString* ontid, NSError** error);

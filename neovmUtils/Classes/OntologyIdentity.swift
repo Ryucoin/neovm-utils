@@ -66,15 +66,35 @@ public func sendRegister(endpoint: String = ontologyTestNodes.bestNode.rawValue,
 }
 
 public class DDOAttribute {
-    var key: String = ""
-    var type: String = ""
-    var value: String = ""
+    private var key: String = ""
+    private var type: String = ""
+    private var value: String = ""
 
     fileprivate convenience init(key: String, type: String, value: String) {
         self.init()
         self.key = key
         self.type = type
         self.value = value
+    }
+
+    public func getKey() -> String {
+        return key
+    }
+
+    public func getType() -> String {
+        return type
+    }
+
+    public func getValue() -> String {
+        return value
+    }
+
+    public func getFull() -> [String: String] {
+        var full: [String: String] = [:]
+        full["Key"] = getKey()
+        full["Type"] = getType()
+        full["Value"] = getValue()
+        return full
     }
 }
 
@@ -84,26 +104,72 @@ private func parseDDOAttribute(hex: String) -> [DDOAttribute] {
 }
 
 public class PublicKeyWithId {
-    var id: Int = 0
-    var pk: Data = Data()
+    private var id: Int = 0
+    private var pk: String = ""
+    private var ontid: String = ""
+    private var type: String = ""
+    private var curve: String = ""
 
-    fileprivate convenience init(id: Int, pk: Data) {
+    fileprivate convenience init(id: Int, pk: String, ontid: String) {
         self.init()
         self.id = id
         self.pk = pk
+        self.ontid = ontid
+        self.type = "ECDSA"
+        self.curve = "P256"
+    }
+
+    public func getValue() -> String {
+        return pk
+    }
+
+    public func getId() -> String {
+        return "\(ontid)#keys-\(id)"
+    }
+
+    public func getType() -> String {
+        return type
+    }
+
+    public func getCurve() -> String {
+        return curve
+    }
+
+    public func getFull() -> [String: String] {
+        var full: [String: String] = [:]
+        full["Type"] = getType()
+        full["Curve"] = getCurve()
+        full["Value"] = getValue()
+        full["PubKeyId"] = getId()
+        return full
     }
 }
 
-private func parsePublicKeys(hex: String) -> [PublicKeyWithId] {
-    let publicKeys: [PublicKeyWithId] = []
+private func parsePublicKeys(hex: String, ontid: String) -> [PublicKeyWithId] {
+    var publicKeys: [PublicKeyWithId] = []
+    var index = 0
+    let count = hex.count
+    while index < count {
+        let original = UInt32(hex[index..<index+8], radix: 16)!
+        let str = UInt32(littleEndian: original)
+        let reversed = String(format:"%08X", str.bigEndian)
+        let i = Int(reversed)!
+
+        let length = hex[index+8..<index+10]
+        let val = Int(UInt8(length, radix: 16)! * 2)
+        let data = String(hex[index+10..<index+10+val])
+        let pk = PublicKeyWithId(id: i, pk: data, ontid: ontid)
+        publicKeys.append(pk)
+        index += (10 + val)
+    }
     return publicKeys
 }
 
 public class OntidDescriptionObject {
-    var ontid: String = ""
-    var publicKeys: [PublicKeyWithId] = []
-    var attributes: [DDOAttribute] = []
-    var recovery: String = ""
+    public var ontid: String = ""
+    public var publicKeys: [PublicKeyWithId] = []
+    public var attributes: [DDOAttribute] = []
+    public var recovery: String = ""
 
     fileprivate convenience init(ontid: String, publicKeys: [PublicKeyWithId], attributes: [DDOAttribute], recovery: String) {
         self.init()
@@ -131,7 +197,7 @@ private func parseDDO(ontid: String, hex: String) -> OntidDescriptionObject {
     let recoveryUpper = attrUpper + step + Int(recoveryValue)
     let recovery = String(hex[attrUpper + step..<recoveryUpper])
 
-    let publicKeys = parsePublicKeys(hex: pk)
+    let publicKeys = parsePublicKeys(hex: pk, ontid: ontid)
     let attributes = parseDDOAttribute(hex: attr)
     return OntidDescriptionObject(ontid: ontid, publicKeys: publicKeys, attributes: attributes, recovery: recovery)
 }

@@ -15,6 +15,11 @@ class Tests: XCTestCase {
         super.tearDown()
     }
 
+    func testAddressFromPublicKey() {
+        XCTAssertEqual(exampleWallet.address, addressFromPublicKey(publicKey: exampleWallet.publicKeyString))
+        XCTAssertEqual("", addressFromPublicKey(publicKey: "1234"))
+    }
+
     func testBuildJoinTransaction() {
         let contractHash = "6b21a978e40e681c8439e2fb9cb39424920bf3e1"
         let gid = "G1"
@@ -422,9 +427,19 @@ class Tests: XCTestCase {
         let pk = ddo.publicKeys
         let attr = ddo.attributes
         let recovery = ddo.recovery
-        print(pk)
-        print(attr)
-        print(recovery)
+        let formattedPk = pk.map { $0.getFull() }
+        let formattedAttr = attr.map { $0.getFull() }
+        XCTAssertEqual(formattedPk.count, 2)
+        XCTAssertEqual(formattedAttr.count, 0)
+        XCTAssertEqual(recovery, "")
+        let identity = createIdentity(password: "1234")
+        identity.ontid = "did:ont:AUh7JcTVhh5W26Ch9tpdJoD4vnJANzHBhH"
+        guard let ddoR = sendGetDDO(ident: identity) else {
+            XCTFail()
+            return
+        }
+        let recoveryR = ddoR.recovery
+        XCTAssertNotEqual(recoveryR, "")
     }
 
     func testSendRawTransaction() {

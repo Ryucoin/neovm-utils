@@ -177,6 +177,17 @@ public func walletFromMnemonicPhrase(mnemonic: String) -> Wallet? {
     return w
 }
 
+public func addressFromPublicKey(publicKey: Data) -> String {
+    return NeoutilsONTAddressFromPublicKey(publicKey)
+}
+
+public func addressFromPublicKey(publicKey: String) -> String {
+    guard let p = publicKey.hexToBytes else {
+        return ""
+    }
+    return addressFromPublicKey(publicKey: p)
+}
+
 // MARK: - PRIVATE FUNCTIONS
 
 private func sha256(_ data: Data) -> Data {
