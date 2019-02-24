@@ -12,12 +12,12 @@ public class QRView: UIView {
     lazy var imageView = UIImageView()
     public var code: String = ""
 
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(imageView)
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         addSubview(imageView)
     }
