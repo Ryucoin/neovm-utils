@@ -11,12 +11,12 @@ import Neoutils
 import CommonCrypto
 
 public class Wallet {
-    public var address : String!
-    public var wif : String!
-    public var privateKey : Data!
-    public var publicKey : Data!
-    public var privateKeyString : String!
-    public var publicKeyString : String!
+    public var address : String = ""
+    public var wif : String = ""
+    public var privateKey : Data = Data()
+    public var publicKey : Data = Data()
+    public var privateKeyString : String = ""
+    public var publicKeyString : String = ""
     private var neoWallet : NeoutilsWallet!
     public var neoPrivateKey : Data {
         return neoWallet.privateKey()
@@ -28,8 +28,8 @@ public class Wallet {
         self.wif = wif
         self.privateKey = privateKey
         self.publicKey = publicKey
-        self.privateKeyString = privateKey.bytesToHex
-        self.publicKeyString = publicKey.bytesToHex
+        self.privateKeyString = privateKey.bytesToHex ?? ""
+        self.publicKeyString = publicKey.bytesToHex ?? ""
         self.neoWallet = neoWallet
     }
     

@@ -32,10 +32,10 @@ public class Identity {
 
 public func createIdentity(label: String = "", password: String = "") -> Identity {
     let account = newWallet()
-    let ontid = "did:ont:\(account.address!)"
-    let publicKey = account.publicKeyString!
-    var privateKey = account.privateKeyString!
-    var wif = account.wif!
+    let ontid = "did:ont:\(account.address)"
+    let publicKey = account.publicKeyString
+    var privateKey = account.privateKeyString
+    var wif = account.wif
     var enc = ""
     if password != "" {
         enc = newEncryptedKey(wif: wif, password: password)!
@@ -57,7 +57,7 @@ public func sendRegister(endpoint: String = ontologyTestNodes.bestNode.rawValue,
     }
 
     let err = NSErrorPointer(nilLiteral: ())
-    guard let raw = NeoutilsOntologyMakeRegister(gasPrice, gasLimit, wif, payerAcct.wif!, err) else {
+    guard let raw = NeoutilsOntologyMakeRegister(gasPrice, gasLimit, wif, payerAcct.wif, err) else {
         return ""
     }
     let e = getEndpoint(def: endpoint)

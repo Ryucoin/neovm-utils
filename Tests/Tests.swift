@@ -126,10 +126,7 @@ class Tests: XCTestCase {
             return
         }
 
-        guard let ont = exampleWallet.privateKey else {
-            XCTFail()
-            return
-        }
+        let ont = exampleWallet.privateKey
         let neo = exampleWallet.neoPrivateKey
 
         guard let b = walletFromPrivateKey(privateKey: ont) else {
