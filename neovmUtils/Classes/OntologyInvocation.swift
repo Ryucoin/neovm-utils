@@ -19,13 +19,15 @@ public enum OntologyParameterType: String {
     case Unknown
 }
 
-public struct OntologyParameter {
-    public var type : OntologyParameterType = .Unknown
-    public var value : Any = ""
-}
-
-public func createOntParam(type:OntologyParameterType, value:Any) -> OntologyParameter {
-    return OntologyParameter(type: type, value: value)
+public class OntologyParameter {
+    public var type: OntologyParameterType = .Unknown
+    public var value: Any = ""
+    
+    public convenience init(type: OntologyParameterType, value: Any) {
+        self.init()
+        self.type = type
+        self.value = value
+    }
 }
 
 private func convertParamArray(params: [OntologyParameter]) -> [String: [[String:Any]]] {
