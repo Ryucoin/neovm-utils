@@ -4,16 +4,22 @@ Implemented in [OntologyInvocation.swift](https://github.com/Ryucoin/neovm-utils
 
 - [Parameters](#parameters)
 - [Functions](#functions)
-  - [createOntParam](#create-parameter)
   - [buildOntologyInvocationTransaction](#build-invocation-transaction)
   - [ontologyInvoke](#invoke)
+  - [ontologyInvokeRead](#read)
 
 ### Parameters
 
 ``` swift
-public struct OntologyParameter {
-  public var type : OntologyParameterType = .Unknown
-  public var value : Any = ""
+public class OntologyParameter {
+  public var type: OntologyParameterType = .Unknown
+  public var value: Any = ""
+
+  public convenience init(type: OntologyParameterType, value: Any) {
+    self.init()
+    self.type = type
+    self.value = value
+  }
 }
 ```
 
@@ -33,14 +39,6 @@ public enum OntologyParameterType: String {
 
 ### Functions
 
-#### Create Parameter
-
-Create an `OntologyParameter` for a given type and value
-
-``` swift
-createOntParam(type:OntologyParameterType, value:Any) -> OntologyParameter
-```
-
 #### Build Invocation Transaction
 
 Builds a raw transaction
@@ -55,4 +53,12 @@ Invokes a transaction
 
 ``` swift
 ontologyInvoke(endpoint: String = ontologyTestNodes.bestNode.rawValue, contractHash: String, method: String, args: [OntologyParameter], gasPrice: Int = 0, gasLimit: Int = 0, wif: String, payer: String = "") -> String?
+```
+
+#### Read
+
+Pre-executes a transaction
+
+``` swift
+ontologyInvokeRead(endpoint: String = ontologyTestNodes.bestNode.rawValue, contractHash: String, method: String, args: [OntologyParameter]) -> String?
 ```
