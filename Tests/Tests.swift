@@ -73,7 +73,7 @@ class Tests: XCTestCase {
     func testBuildOntologyInvocationHelper() {
         let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
         let method = "put"
-        let args : [OntologyParameter] = [createOntParam(type: .Address, value: exampleWallet.address), createOntParam(type: .String, value: "Hello!")]
+        let args: [OntologyParameter] = [createOntParam(type: .Address, value: exampleWallet.address), createOntParam(type: .String, value: "Hello!")]
         let gasPrice = 500
         let gasLimit = 20000
 
@@ -95,7 +95,7 @@ class Tests: XCTestCase {
             bytes: [0xD8, 0x00] as [UInt8],
             encoding: String.Encoding.utf16BigEndian)!
 
-        let args : [OntologyParameter] = [createOntParam(type: .Address, value: exampleWallet.address), createOntParam(type: .String, value: badStr)]
+        let args: [OntologyParameter] = [createOntParam(type: .Address, value: exampleWallet.address), createOntParam(type: .String, value: badStr)]
         let gasPrice = 500
         let gasLimit = 20000
 
@@ -357,7 +357,7 @@ class Tests: XCTestCase {
     func testOntologyInvocationHelper() {
         let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
         let method = "put"
-        let args : [OntologyParameter] = [createOntParam(type: .Address, value: exampleWallet.address), createOntParam(type: .String, value: "Hello!")]
+        let args: [OntologyParameter] = [createOntParam(type: .Address, value: exampleWallet.address), createOntParam(type: .String, value: "Hello!")]
         let gasPrice = 500
         let gasLimit = 20000
 
@@ -379,12 +379,26 @@ class Tests: XCTestCase {
             bytes: [0xD8, 0x00] as [UInt8],
             encoding: String.Encoding.utf16BigEndian)!
 
-        let args : [OntologyParameter] = [createOntParam(type: .Address, value: exampleWallet.address), createOntParam(type: .String, value: badStr)]
+        let args: [OntologyParameter] = [createOntParam(type: .Address, value: exampleWallet.address), createOntParam(type: .String, value: badStr)]
         let gasPrice = 500
         let gasLimit = 20000
 
         let res = ontologyInvoke(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWallet.wif, payer: exampleWallet.address)
         XCTAssertNil(res)
+    }
+
+    func testOntologyInvocationRead() {
+        let contractHash = "23e18245a3028a14dfdd25e4a6d8d05eea871e23"
+        let method = "hasJoined"
+
+        let gid = createOntParam(type: .String, value: "G31n2c4a21345678ffa1cc2b452f118aa")
+        let mid = createOntParam(type: .String, value: "M1551904081075")
+        let addr = createOntParam(type: .Address, value: "AXJzwkVNmzAadANqsgW5iJvPGFPWUJEhK9")
+
+        let args: [OntologyParameter] = [gid, mid, addr]
+        let res = ontologyInvokeRead(contractHash: contractHash, method: method, args: args)
+        XCTAssertNotNil(res)
+        print(res ?? "Error")
     }
 
     func testPublicKeyFrom() {
@@ -487,7 +501,7 @@ class Tests: XCTestCase {
     func testSendRawTransaction() {
         let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
         let method = "put"
-        let args : [OntologyParameter] = [createOntParam(type: .Address, value: exampleWallet.address), createOntParam(type: .String, value: "Hello!")]
+        let args: [OntologyParameter] = [createOntParam(type: .Address, value: exampleWallet.address), createOntParam(type: .String, value: "Hello!")]
         let gasPrice = 500
         let gasLimit = 20000
 

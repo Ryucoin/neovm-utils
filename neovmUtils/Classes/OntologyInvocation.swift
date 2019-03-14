@@ -29,7 +29,7 @@ public func createOntParam(type:OntologyParameterType, value:Any) -> OntologyPar
 }
 
 private func convertParamArray(params: [OntologyParameter]) -> [String: [[String:Any]]] {
-    var args : [[String:Any]] = []
+    var args: [[String:Any]] = []
     for i in 0..<params.count {
         let item = params[i]
         let type = item.type.rawValue
@@ -75,4 +75,11 @@ public func ontologyInvoke(endpoint: String = ontologyTestNodes.bestNode.rawValu
     let params = convertParamArray(params: args)
     let p = payer == "" ? addressFromWif(wif: wif) ?? "" : payer
     return ontologyInvokeHelper(endpoint: e, contractHash: contractHash, method: method, args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif, payer: p)
+}
+
+public func ontologyInvokeRead(endpoint: String = ontologyTestNodes.bestNode.rawValue, contractHash: String, method: String, args: [OntologyParameter]) -> String? {
+    let wallet = newWallet()
+    let raw = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: 500, gasLimit: 20000, wif: wallet.wif, payer: wallet.address) ?? ""
+    let res = ontologySendPreExecRawTransaction(endpoint: endpoint, raw: raw)
+    return res
 }
