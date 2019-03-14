@@ -111,6 +111,12 @@ public func newWallet() -> Wallet {
     return wallet
 }
 
+public func newWalletMnemonicPair() -> (Wallet, Mnemonic) {
+    let mnemonic = createMnemonic()
+    let wallet = walletFromMnemonicPhrase(mnemonic: mnemonic.value)!
+    return (wallet, mnemonic)
+}
+
 public func walletFromWIF(wif: String) -> Wallet? {
     guard let ontAccount = NeoutilsONTAccountFromWIF(wif) else {
         return nil

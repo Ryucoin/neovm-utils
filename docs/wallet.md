@@ -15,6 +15,7 @@ Implemented in [Wallet.swift](https://github.com/Ryucoin/neovm-utils/blob/master
 - [Helpers](#helpers)
   - [keyType](#key-type)
   - [newWallet](#new-wallet)
+  - [newWalletMnemonicPair](#new-wallet-mnemonic-pair)
   - [walletFromWIF](#wallet-from-wif)
   - [walletFromPrivateKey](#wallet-from-privatekey)
   - [newEncryptedKey](#new-encryptedkey)
@@ -126,6 +127,14 @@ Creates a new `Wallet`
 
 ``` swift
 newWallet() -> Wallet
+```
+
+#### New Wallet Mnemonic Pair
+
+Creates a new `Wallet` and corresponding `Mnemonic`
+
+``` swift
+newWalletMnemonicPair() -> (Wallet, Mnemonic)
 ```
 
 #### Wallet From WIF

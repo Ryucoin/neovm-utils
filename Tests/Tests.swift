@@ -303,6 +303,20 @@ class Tests: XCTestCase {
         XCTAssertEqual(w.wif, w2.wif)
     }
 
+    func testMnemonicPair() {
+        let pair = newWalletMnemonicPair()
+        let wallet = pair.0
+        let mnemonic = pair.1
+
+        XCTAssertTrue(mnemonic.isValid())
+        XCTAssertEqual(mnemonic.seed, mnemonicFromPhrase(phrase: mnemonic.value).seed)
+        guard let w = walletFromMnemonicPhrase(mnemonic: mnemonic.value) else {
+            XCTFail()
+            return
+        }
+        XCTAssertEqual(wallet.address, w.address)
+    }
+
     func testNEP2() {
         let password = "12345678"
         guard let e = newEncryptedKey(wif: exampleWallet.wif, password: password) else {

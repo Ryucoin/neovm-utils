@@ -31,6 +31,7 @@ public func createMnemonic() -> Mnemonic {
     seed.withUnsafeMutableBytes { seedPtr in
         mnemonic_to_seed(mnemonic, "", seedPtr, nil)
     }
+
     let m = Mnemonic(value: mnemonic, seed: seed)
     return m
 }
@@ -40,6 +41,7 @@ public func mnemonicFromPhrase(phrase: String) -> Mnemonic {
     seed.withUnsafeMutableBytes { seedPtr in
         mnemonic_to_seed(phrase, "", seedPtr, nil)
     }
+
     let m = Mnemonic(value: phrase, seed: seed)
     return m
 }
@@ -49,6 +51,7 @@ public func privateKeyFromMnemonic(mnemonic:Mnemonic) -> Data {
     _ = mnemonic.seed.withUnsafeBytes { dataPtr in
         hdnode_from_seed(dataPtr, Int32(mnemonic.seed.count), "secp256k1", &node)
     }
+
     return Data(bytes: withUnsafeBytes(of: &node.private_key) { ptr in
         return ptr.map({ $0 })
     })
