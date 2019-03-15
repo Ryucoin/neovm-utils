@@ -22,6 +22,5 @@ class ViewController: UIViewController {
         let w = newWallet()
         qrView.generate(code: w.privateKeyString)
     }
-    
 }
 
