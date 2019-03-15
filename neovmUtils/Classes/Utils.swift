@@ -19,7 +19,7 @@ public extension String {
     public var hexToBytes: Data? {
         return NeoutilsHexTobytes(self)
     }
-    
+
     public var isValidAddress: Bool {
         return NeoutilsValidateNEOAddress(self)
     }
