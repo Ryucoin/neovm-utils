@@ -330,6 +330,58 @@ class Tests: XCTestCase {
         XCTAssertTrue(w == exampleWallet.wif)
     }
 
+    func testOEP4() {
+        let oep4 = OEP4Interface(contractHash: "25277b421a58cfc2ef5836767e54eb7abdd31afd", endpoint: ontologyTestNodes.bestNode.rawValue)
+        let address = "ATrApQ3w4xLnc2yDkEDXw1zAk9Ue544Csz"
+
+        XCTAssertEqual(oep4.getName(), "LUCKY")
+        XCTAssertEqual(oep4.getSymbol(), "LCY")
+        XCTAssertEqual(oep4.getDecimals(), "09")
+        XCTAssertEqual(oep4.getTotalSupply(), "0000e8890423c78a00")
+        XCTAssertEqual(oep4.getBalance(address: address), "")
+    }
+
+    func testOEP8() {
+        let oep8 = OEP8Interface(contractHash: "edf64937ca304ea8180fa92e2de36dc0a33cc712")
+        let address = "AHDP1jtfMA1vMpy3Gy41vMfyVWQym4eTwu"
+
+        XCTAssertEqual(oep8.getName(tokenId: 1), "redpumpkin")
+        XCTAssertEqual(oep8.getName(tokenId: 2), "orangepumpkin")
+        XCTAssertEqual(oep8.getName(tokenId: 3), "yellowpumpkin")
+        XCTAssertEqual(oep8.getName(tokenId: 4), "greenpumpkin")
+        XCTAssertEqual(oep8.getName(tokenId: 5), "indigopumpkin")
+        XCTAssertEqual(oep8.getName(tokenId: 6), "bluepumpkin")
+        XCTAssertEqual(oep8.getName(tokenId: 7), "purplepumpkin")
+        XCTAssertEqual(oep8.getName(tokenId: 8), "glodpumpkin")
+
+        XCTAssertEqual(oep8.getSymbol(tokenId: 1), "REP")
+        XCTAssertEqual(oep8.getSymbol(tokenId: 2), "ORP")
+        XCTAssertEqual(oep8.getSymbol(tokenId: 3), "YEP")
+        XCTAssertEqual(oep8.getSymbol(tokenId: 4), "GRP")
+        XCTAssertEqual(oep8.getSymbol(tokenId: 5), "INP")
+        XCTAssertEqual(oep8.getSymbol(tokenId: 6), "BLP")
+        XCTAssertEqual(oep8.getSymbol(tokenId: 7), "PUP")
+        XCTAssertEqual(oep8.getSymbol(tokenId: 8), "GLP")
+
+        XCTAssertEqual(oep8.getTotalSupply(tokenId: 1), "400d03")
+        XCTAssertEqual(oep8.getTotalSupply(tokenId: 2), "50c300")
+        XCTAssertEqual(oep8.getTotalSupply(tokenId: 3), "400d03")
+        XCTAssertEqual(oep8.getTotalSupply(tokenId: 4), "400d03")
+        XCTAssertEqual(oep8.getTotalSupply(tokenId: 5), "400d03")
+        XCTAssertEqual(oep8.getTotalSupply(tokenId: 6), "400d03")
+        XCTAssertEqual(oep8.getTotalSupply(tokenId: 7), "400d03")
+        XCTAssertEqual(oep8.getTotalSupply(tokenId: 8), "")
+
+        XCTAssertEqual(oep8.getBalance(address: address, tokenId: 1), "400d03")
+        XCTAssertEqual(oep8.getBalance(address: address, tokenId: 2), "50c300")
+        XCTAssertEqual(oep8.getBalance(address: address, tokenId: 3), "400d03")
+        XCTAssertEqual(oep8.getBalance(address: address, tokenId: 4), "400d03")
+        XCTAssertEqual(oep8.getBalance(address: address, tokenId: 5), "400d03")
+        XCTAssertEqual(oep8.getBalance(address: address, tokenId: 6), "400d03")
+        XCTAssertEqual(oep8.getBalance(address: address, tokenId: 7), "400d03")
+        XCTAssertEqual(oep8.getBalance(address: address, tokenId: 8), "")
+    }
+
     func testOID() {
         let identity = createIdentity()
         let res = sendRegister(ident: identity, payerAcct: exampleWallet)
@@ -410,8 +462,7 @@ class Tests: XCTestCase {
 
         let args: [OntologyParameter] = [gid, mid, addr]
         let res = ontologyInvokeRead(contractHash: contractHash, method: method, args: args)
-        XCTAssertNotNil(res)
-        print(res ?? "Error")
+        XCTAssertNotEqual(res, "")
     }
 
     func testPublicKeyFrom() {
@@ -419,10 +470,12 @@ class Tests: XCTestCase {
             XCTFail()
             return
         }
+
         guard let p2 = publicKeyFromPrivateKey(privateKey: exampleWallet.privateKeyString) else {
             XCTFail()
             return
         }
+
         XCTAssertEqual(p1, p2)
         let p3 = publicKeyFromWif(wif: "123")
         let p4 = publicKeyFromPrivateKey(privateKey: "123")

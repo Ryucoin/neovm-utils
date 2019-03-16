@@ -79,7 +79,7 @@ public func ontologyInvoke(endpoint: String = ontologyTestNodes.bestNode.rawValu
     return ontologyInvokeHelper(endpoint: e, contractHash: contractHash, method: method, args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif, payer: p)
 }
 
-public func ontologyInvokeRead(endpoint: String = ontologyTestNodes.bestNode.rawValue, contractHash: String, method: String, args: [OntologyParameter]) -> String? {
+public func ontologyInvokeRead(endpoint: String = ontologyTestNodes.bestNode.rawValue, contractHash: String, method: String, args: [OntologyParameter]) -> String {
     let wallet = newWallet()
     let raw = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: 500, gasLimit: 20000, wif: wallet.wif, payer: wallet.address) ?? ""
     let res = ontologySendPreExecRawTransaction(endpoint: endpoint, raw: raw)
