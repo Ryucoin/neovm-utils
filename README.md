@@ -33,6 +33,8 @@ And import it into your project with:
 import neovmUtils
 ```
 
+**Note:** `neovmUtils` requires iOS 12.0 or higher. Bitcode must also be disabled.
+
 An example `Podfile` would look like this:
 
 ```
@@ -41,6 +43,15 @@ platform :ios, '12.0'
 
 target :'My_App' do
   pod 'neovmUtils'
+end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['ENABLE_BITCODE'] = 'NO'
+            config.build_settings['DEBUG_INFORMATION_FORMAT'] = 'dwarf'
+        end
+    end
 end
 ```
 
