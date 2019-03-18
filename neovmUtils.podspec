@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'neovmUtils'
-  s.version          = '0.2.2'
+  s.version          = '0.2.3'
   s.summary          = 'Useful functions for the NEO and Ontology blockchains for iOS.'
 
   s.homepage         = 'https://github.com/Ryucoin/neovm-utils'
