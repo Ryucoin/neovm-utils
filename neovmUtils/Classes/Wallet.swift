@@ -11,14 +11,14 @@ import Neoutils
 import CommonCrypto
 
 public class Wallet {
-    public var address : String = ""
-    public var wif : String = ""
-    public var privateKey : Data = Data()
-    public var publicKey : Data = Data()
-    public var privateKeyString : String = ""
-    public var publicKeyString : String = ""
-    private var neoWallet : NeoutilsWallet!
-    public var neoPrivateKey : Data {
+    public var address: String = ""
+    public var wif: String = ""
+    public var privateKey: Data = Data()
+    public var publicKey: Data = Data()
+    public var privateKeyString: String = ""
+    public var publicKeyString: String = ""
+    private var neoWallet: NeoutilsWallet!
+    public var neoPrivateKey: Data {
         return neoWallet.privateKey()
     }
     
@@ -74,7 +74,7 @@ public class Wallet {
 
     public func exportQR(key: KeyType, frame: CGRect = CGRect(x: 0, y: 0, width: 230, height: 230), passphrase: String = "") -> QRView {
         let qrView = QRView(frame: frame)
-        var code : String = ""
+        var code: String = ""
         switch key {
         case .PrivateKey:
             code = privateKeyString

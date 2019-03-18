@@ -2,6 +2,7 @@
 
 Implemented in [Wallet.swift](https://github.com/Ryucoin/neovm-utils/blob/master/neovmUtils/Classes/Wallet.swift)
 
+- [Wallet Class](#wallet-class)
 - [Properties](#properties)
 - [Methods](#methods)
   - [signMessage](#sign-message)
@@ -25,16 +26,24 @@ Implemented in [Wallet.swift](https://github.com/Ryucoin/neovm-utils/blob/master
   - [publicKeyFromPrivateKey](#PublicKey-from-privatekey)
   - [walletFromMnemonicPhrase](#wallet-from-mnemonic-phrase)
 
+### Wallet Class
+
+The `Wallet` class is used to manage funds on the NEO and Ontology blockchains.
+
+``` swift
+public class Wallet
+```
+
 ### Properties:
 
 ``` swift
-var address : String!
-var wif : String!
-var privateKey : Data!
-var publicKey : Data!
-var privateKeyString : String!
-var publicKeyString : String!
-var neoPrivateKey : Data
+var address: String!
+var wif: String!
+var privateKey: Data!
+var publicKey: Data!
+var privateKeyString: String!
+var publicKeyString: String!
+var neoPrivateKey: Data
 ```
 
 ### Methods:

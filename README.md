@@ -63,6 +63,8 @@ end
 - [ONT Transactions](docs/ont-trans.md)
 - [QR View](docs/qr-view.md)
 - [Mnemonic Creation](docs/mnemonic.md)
+- [OEP4 Interface](docs/oep4.md)
+- [OEP8 Interface](docs/oep8.md)
 - [Compiled neo-utils golang](#golang)
 
 ### golang

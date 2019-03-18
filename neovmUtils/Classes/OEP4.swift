@@ -19,8 +19,9 @@ public class OEP4Interface: NSObject {
         self.endpoint = endpoint
     }
 
-    public func getTotalSupply() -> String? {
-        return ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "totalSupply", args: [])
+    public func getName() -> String? {
+        let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "name", args: [])
+        return hexToAscii(text: hex)
     }
 
     public func getSymbol() -> String? {
@@ -32,9 +33,8 @@ public class OEP4Interface: NSObject {
         return ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "decimals", args: [])
     }
 
-    public func getName() -> String? {
-        let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "name", args: [])
-        return hexToAscii(text: hex)
+    public func getTotalSupply() -> String? {
+        return ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "totalSupply", args: [])
     }
 
     public func getBalance(address: String) -> String? {

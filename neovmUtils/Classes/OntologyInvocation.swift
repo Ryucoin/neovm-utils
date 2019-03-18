@@ -36,7 +36,7 @@ private func convertParamArray(params: [OntologyParameter]) -> [String: [[String
         let item = params[i]
         let type = item.type.rawValue
         let value = item.value
-        let arg : [String:Any] = ["type": type, "value": value]
+        let arg: [String:Any] = ["type": type, "value": value]
         args.append(arg)
     }
     return ["array": args]

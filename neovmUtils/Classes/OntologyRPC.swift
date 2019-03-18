@@ -36,7 +36,7 @@ public func getBestNode(net:network) -> String {
     var bestCount = -1
     switch net {
     case .testNet:
-        let nodes : [ontologyTestNodes] = [.polaris1, .polaris2, .polaris3, .polaris4]
+        let nodes: [ontologyTestNodes] = [.polaris1, .polaris2, .polaris3, .polaris4]
         for node in nodes {
             let count = ontologyGetBlockCount(endpoint: node.rawValue)
             bestNode = node.rawValue
@@ -47,7 +47,7 @@ public func getBestNode(net:network) -> String {
         }
         return bestNode
     case .mainNet:
-        let nodes : [ontologyMainNodes] = [.seed1, .seed2, .seed3, .seed4, .seed5]
+        let nodes: [ontologyMainNodes] = [.seed1, .seed2, .seed3, .seed4, .seed5]
         for node in nodes {
             let count = ontologyGetBlockCount(endpoint: node.rawValue)
             bestNode = node.rawValue
@@ -72,7 +72,7 @@ public func getEndpoint(def:String) -> String {
 public func ontologyGetBlockCount(endpoint: String = ontologyTestNodes.bestNode.rawValue) -> Int {
     let e = getEndpoint(def: endpoint)
     let error = NSErrorPointer(nilLiteral: ())
-    var count : Int = 0
+    var count: Int = 0
     NeoutilsOntologyGetBlockCount(e, &count, error)
     if error != nil {
         return -1

@@ -4,7 +4,7 @@ Implemented in [OntologyIdentity.swift](https://github.com/Ryucoin/neovm-utils/b
 
 The Ontology DID Protocol is further defined here in the [official documentation](https://github.com/ontio/ontology-DID). The Swift implementation is based off the [Java SDK's implementation](https://github.com/ontio/ontology-java-sdk/blob/master/docs/en/identity_claim.md) and the [TS SDK's implementation](https://github.com/ontio/ontology-ts-sdk/blob/master/docs/en/identity_claim.md).
 
-- [Types](#types)
+- [Classes](#classes)
   - [Identity](#identity)
   - [DDO Attribute](#ddo-attribute)
   - [PublicKeyWithId](#public-key-with-id)
@@ -14,9 +14,11 @@ The Ontology DID Protocol is further defined here in the [official documentation
   - [sendRegister](#send-register)
   - [sendGetDDO](#send-get-ddo)
 
-### Types
+### Classes
 
 #### Identity
+
+The `Identity` class stores information for a given Ontology DID.
 
 ``` swift
 public class Identity {
@@ -31,6 +33,8 @@ public class Identity {
 ```
 
 #### DDO Attribute
+
+A `DDOAttribute` is used to store key/value pairs of information on an Ontology DID.
 
 ``` swift
 public class DDOAttribute {
@@ -50,6 +54,8 @@ getFull() -> [String: String]
 ```
 
 #### Public Key With Id
+
+A `PublicKeyWithId` is used to store an Ontology DID's public key.
 
 ``` swift
 public class PublicKeyWithId {
@@ -72,6 +78,8 @@ getFull() -> [String: String]
 ```
 
 #### Ontid Description Object
+
+A `OntidDescriptionObject` is used to store all of the information for an Ontology DID.
 
 ``` swift
 public class OntidDescriptionObject {

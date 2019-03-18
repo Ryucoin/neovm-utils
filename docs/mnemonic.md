@@ -2,6 +2,7 @@
 
 Implemented in [Crypto.swift](https://github.com/Ryucoin/neovm-utils/blob/master/neovmUtils/Classes/Crypto.swift)
 
+- [Mnemonic Class](#mnemonic-class)
 - [Properties](#properties)
 - [Methods](#methods)
   - [isValid](#is-valid)
@@ -9,6 +10,15 @@ Implemented in [Crypto.swift](https://github.com/Ryucoin/neovm-utils/blob/master
   - [createMnemonic](#create-mnemonic)
   - [mnemonicFromPhrase](#mnemonic-from-phrase)
   - [privateKeyFromMnemonic](#privatekey-from-mnemonic)
+
+
+### Mnemonic Class
+
+The `Mnemonic` class is used to generate 12 word mnemonic phrases. These can be used to seed the creation of wallets.
+
+``` swift
+public class Mnemonic
+```
 
 ### Properties:
 
