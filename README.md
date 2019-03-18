@@ -33,6 +33,17 @@ And import it into your project with:
 import neovmUtils
 ```
 
+An example `Podfile` would look like this:
+
+```
+use_frameworks!
+platform :ios, '12.0'
+
+target :'My_App' do
+  pod 'neovmUtils'
+end
+```
+
 ## Usage
 
 `neovmUtils` offers:
