@@ -29,9 +29,11 @@ As outlined in Keavy McMinn's article ["How to write the perfect pull request"](
 Issues
 ------
 
-Feel free to submit issues and enhancement requests [here](https://github.com/Ryucoin/neovm-utils/issues).
+Feel free to submit issues and enhancement requests [here](https://github.com/Ryucoin/neovm-utils/issues). Before you do so please take a look at [the usage documentation](https://github.com/Ryucoin/neovm-utils#usage). Please consider [how to ask a good question](https://stackoverflow.com/help/how-to-ask) and take the time to research your issue before asking for help.
 
-Any unrelated comments or questions can be sent to the main author of `neovmUtils`, [Wyatt Mufson](mailto:wyatt@ryucoin.com).
+Duplicate questions will be closed.
+
+Any unrelated comments or questions can be sent to the main author of `neovmUtils`, [Wyatt Mufson](mailto:wyatt@ryu.games).
 
 Copyright and Licensing
 -----------------------
