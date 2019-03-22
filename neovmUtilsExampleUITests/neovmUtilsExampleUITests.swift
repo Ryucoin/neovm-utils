@@ -24,7 +24,7 @@ class neovmUtilsExampleUITests: XCTestCase {
     func testQR() {
         let expectation = XCTestExpectation(description: "Test qr")
         XCUIApplication().buttons["Generate"].tap()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 5.1)

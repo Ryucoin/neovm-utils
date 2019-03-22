@@ -1,16 +1,24 @@
 PODS:
+  - neovmUtils (0.2.3):
+    - RyuCrypto (~> 0.0.1)
   - RyuCrypto (0.0.1)
 
 DEPENDENCIES:
+  - neovmUtils (from `./`)
   - RyuCrypto
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - RyuCrypto
 
+EXTERNAL SOURCES:
+  neovmUtils:
+    :path: "./"
+
 SPEC CHECKSUMS:
+  neovmUtils: 647403fa83cf8d61ce0708f2ca4018a545693cf9
   RyuCrypto: 4395cd6eba1e291c5ad6b819feb73bc35cdd9402
 
-PODFILE CHECKSUM: c439c81021b29a830fa948159f9a39e15e75ee26
+PODFILE CHECKSUM: 3a76598d4222d635488357ea0df900168259ce82
 
 COCOAPODS: 1.6.1
