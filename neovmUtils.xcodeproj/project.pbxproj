@@ -60,12 +60,12 @@
 		7F6EF769221C0CCD00B20AA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7F6EF79E221EE62A00B20AA7 /* OntologyIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OntologyIdentity.swift; sourceTree = "<group>"; };
 		7F725CE721FF04CA00850C2D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7F95D5BA2244B20300DEAF90 /* neoutils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = neoutils.framework; sourceTree = "<group>"; };
 		7FD0FC232216F96B00F52C0F /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
 		7FD0FC252216F99400F52C0F /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
 		7FD0FC272216FA8000F52C0F /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		7FD0FC292216FAC500F52C0F /* OntologyRPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OntologyRPC.swift; sourceTree = "<group>"; };
 		7FD0FC2B2216FB3300F52C0F /* OntologyInvocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OntologyInvocation.swift; sourceTree = "<group>"; };
-		7FDB22D222445C5A0057875D /* neoutils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = neoutils.framework; sourceTree = "<group>"; };
 		BBBB5BA3FC5B0631497C3D8E /* Pods-neovmUtils_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-neovmUtils_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-neovmUtils_Tests/Pods-neovmUtils_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		BC6F233EC5E38887EC244709 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		CEE1B85670C5A8A3A335B23E /* Pods-neovmUtils_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-neovmUtils_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-neovmUtils_Tests/Pods-neovmUtils_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -207,7 +207,7 @@
 		BB75E40C24537D4E61108C25 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7FDB22D222445C5A0057875D /* neoutils.framework */,
+				7F95D5BA2244B20300DEAF90 /* neoutils.framework */,
 				7F725CE721FF04CA00850C2D /* Foundation.framework */,
 				F456429103DFD18E76CEF465 /* Pods_neovmUtils_Tests.framework */,
 				F1B185E068026CC4121840E7 /* Pods_neovmUtilsExample.framework */,
@@ -618,6 +618,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = 6RN58493KK;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(PROJECT_DIR)",
@@ -654,6 +655,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = 6RN58493KK;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(PROJECT_DIR)",
@@ -754,6 +756,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 6RN58493KK;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -785,6 +788,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6RN58493KK;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
