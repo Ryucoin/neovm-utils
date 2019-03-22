@@ -42,7 +42,7 @@ private func convertParamArray(params: [OntologyParameter]) -> [String: [[String
     return ["array": args]
 }
 
-private func buildOntologyInvocationTransactionHelper(contractHash: String, method: String, args: [String: [[String:Any]]], gasPrice: Int, gasLimit: Int, wif: String, payer: String) -> String? {
+private func buildOntologyInvocationTransactionHelper(contractHash: String, method: String, args: [String: [[String:Any]]], gasPrice: Int, gasLimit: Int, wif: String, payer: String) -> String {
     do {
         let data = try JSONSerialization.data(withJSONObject: args)
         let params = String(data: data, encoding: .utf8)
@@ -50,11 +50,11 @@ private func buildOntologyInvocationTransactionHelper(contractHash: String, meth
         let res = NeoutilsBuildOntologyInvocationTransaction(contractHash, method, params, gasPrice, gasLimit, wif, payer, err)
         return res
     } catch {
-        return nil
+        return ""
     }
 }
 
-private func ontologyInvokeHelper(endpoint: String, contractHash: String, method: String, args: [String: [[String:Any]]], gasPrice: Int, gasLimit: Int, wif: String, payer: String) -> String? {
+private func ontologyInvokeHelper(endpoint: String, contractHash: String, method: String, args: [String: [[String:Any]]], gasPrice: Int, gasLimit: Int, wif: String, payer: String) -> String {
     do {
         let data = try JSONSerialization.data(withJSONObject: args)
         let args = String(data: data, encoding: .utf8)
@@ -62,17 +62,17 @@ private func ontologyInvokeHelper(endpoint: String, contractHash: String, method
         let res = NeoutilsOntologyInvoke(endpoint, contractHash, method, args, gasPrice, gasLimit, wif, payer, err)
         return res
     } catch {
-        return nil
+        return ""
     }
 }
 
-public func buildOntologyInvocationTransaction(contractHash: String, method: String, args: [OntologyParameter], gasPrice: Int = 0, gasLimit: Int = 0, wif: String, payer: String = "") -> String? {
+public func buildOntologyInvocationTransaction(contractHash: String, method: String, args: [OntologyParameter], gasPrice: Int = 0, gasLimit: Int = 0, wif: String, payer: String = "") -> String {
     let params = convertParamArray(params: args)
     let p = payer == "" ? addressFromWif(wif: wif) ?? "" : payer
     return buildOntologyInvocationTransactionHelper(contractHash: contractHash, method: method, args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif, payer: p)
 }
 
-public func ontologyInvoke(endpoint: String = ontologyTestNodes.bestNode.rawValue, contractHash: String, method: String, args: [OntologyParameter], gasPrice: Int = 0, gasLimit: Int = 0, wif: String, payer: String = "") -> String? {
+public func ontologyInvoke(endpoint: String = ontologyTestNodes.bestNode.rawValue, contractHash: String, method: String, args: [OntologyParameter], gasPrice: Int = 0, gasLimit: Int = 0, wif: String, payer: String = "") -> String {
     let e = getEndpoint(def: endpoint)
     let params = convertParamArray(params: args)
     let p = payer == "" ? addressFromWif(wif: wif) ?? "" : payer
@@ -81,7 +81,7 @@ public func ontologyInvoke(endpoint: String = ontologyTestNodes.bestNode.rawValu
 
 public func ontologyInvokeRead(endpoint: String = ontologyTestNodes.bestNode.rawValue, contractHash: String, method: String, args: [OntologyParameter]) -> String {
     let wallet = newWallet()
-    let raw = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: 500, gasLimit: 20000, wif: wallet.wif, payer: wallet.address) ?? ""
+    let raw = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: 500, gasLimit: 20000, wif: wallet.wif, payer: wallet.address)
     let res = ontologySendPreExecRawTransaction(endpoint: endpoint, raw: raw)
     return res
 }

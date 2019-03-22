@@ -84,8 +84,8 @@ public func ontologyGetBalances(endpoint: String = ontologyTestNodes.bestNode.ra
     let e = getEndpoint(def: endpoint)
     let error = NSErrorPointer(nilLiteral: ())
     let balances = NeoutilsOntologyGetBalance(e, address, error)
-    let ont = Int(balances?.ont() ?? "0") ?? 0
-    var ong = Double(balances?.ong() ?? "0") ?? 0
+    let ont = Int(balances?.ont ?? "0") ?? 0
+    var ong = Double(balances?.ong ?? "0") ?? 0
     ong = ong / 1000000000.0
     return (ont, ong)
 }
@@ -101,42 +101,42 @@ public func ontologySendRawTransaction(endpoint: String = ontologyTestNodes.best
     let e = getEndpoint(def: endpoint)
     let error = NSErrorPointer(nilLiteral: ())
     let txId = NeoutilsOntologySendRawTransaction(e, raw, error)
-    return txId ?? ""
+    return txId
 }
 
 public func ontologySendPreExecRawTransaction(endpoint: String = ontologyTestNodes.bestNode.rawValue, raw: String) -> String {
     let e = getEndpoint(def: endpoint)
     let error = NSErrorPointer(nilLiteral: ())
     let response = NeoutilsOntologySendPreExecRawTransaction(e, raw, error)
-    return response ?? ""
+    return response
 }
 
 public func ontologyGetStorage(endpoint: String = ontologyTestNodes.bestNode.rawValue, scriptHash: String, key: String) -> String {
     let e = getEndpoint(def: endpoint)
     let error = NSErrorPointer(nilLiteral: ())
     let item = NeoutilsOntologyGetStorage(e, scriptHash, key, error)
-    return item ?? ""
+    return item
 }
 
 public func ontologyGetRawTransaction(endpoint: String = ontologyTestNodes.bestNode.rawValue, txID: String) -> String {
     let e = getEndpoint(def: endpoint)
     let error = NSErrorPointer(nilLiteral: ())
     let raw = NeoutilsOntologyGetRawTransaction(e, txID, error)
-    return raw ?? ""
+    return raw
 }
 
 public func ontologyGetBlockWithHash(endpoint: String = ontologyTestNodes.bestNode.rawValue, hash: String) -> String {
     let e = getEndpoint(def: endpoint)
     let error = NSErrorPointer(nilLiteral: ())
     let result = NeoutilsOntologyGetBlockWithHash(e, hash, error)
-    return result ?? ""
+    return result
 }
 
 public func ontologyGetBlockWithHeight(endpoint: String = ontologyTestNodes.bestNode.rawValue, height: Int) -> String {
     let e = getEndpoint(def: endpoint)
     let error = NSErrorPointer(nilLiteral: ())
     let result = NeoutilsOntologyGetBlockWithHeight(e, height, error)
-    return result ?? ""
+    return result
 }
 
 public enum OntAsset: String {
@@ -148,19 +148,19 @@ public func ontologyTransfer(endpoint: String = ontologyTestNodes.bestNode.rawVa
     let error = NSErrorPointer(nilLiteral: ())
     let e = getEndpoint(def: endpoint)
     let txID = NeoutilsOntologyTransfer(e, gasPrice, gasLimit, wif, asset.rawValue, toAddress, amount, error)
-    return txID ?? ""
+    return txID
 }
 
 public func claimONG(endpoint: String = ontologyTestNodes.bestNode.rawValue, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
     let error = NSErrorPointer(nilLiteral: ())
     let e = getEndpoint(def: endpoint)
     let txID = NeoutilsClaimONG(e, gasPrice, gasLimit, wif, error)
-    return txID ?? ""
+    return txID
 }
 
 public func getUnboundONG(endpoint: String = ontologyTestNodes.bestNode.rawValue, address: String) -> String {
     let error = NSErrorPointer(nilLiteral: ())
     let e = getEndpoint(def: endpoint)
     let res = NeoutilsOntologyGetUnboundONG(e, address, error)
-    return res ?? ""
+    return res
 }

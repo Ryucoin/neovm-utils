@@ -40,12 +40,7 @@ class Tests: XCTestCase {
         let gasPrice = 500
         let gasLimit = 20000
 
-        guard let tx = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWallet.wif, payer: exampleWallet.address) else {
-            print("Failed to build the transaction")
-            return
-        }
-
-        print(tx)
+        let tx = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWallet.wif, payer: exampleWallet.address)
         XCTAssertNotEqual(tx, "")
     }
 
@@ -77,13 +72,13 @@ class Tests: XCTestCase {
         let gasLimit = 20000
 
         let res = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWallet.wif, payer: exampleWallet.address)
-        XCTAssertNotNil(res)
+        XCTAssertNotEqual("", res)
         
         let res2 = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWallet.wif, payer: exampleWallet.address)
-        XCTAssertNotNil(res2)
+        XCTAssertNotEqual("", res2)
 
         let res3 = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: "123")
-        XCTAssertNil(res3)
+        XCTAssertEqual("", res3)
     }
 
     func testBuildOntologyInvocationHelperFail() {
@@ -99,7 +94,7 @@ class Tests: XCTestCase {
         let gasLimit = 20000
 
         let res = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWallet.wif, payer: exampleWallet.address)
-        XCTAssertNil(res)
+        XCTAssertEqual("", res)
     }
 
     func testClaimONG() {
@@ -245,9 +240,9 @@ class Tests: XCTestCase {
             XCTFail()
             return
         }
-        XCTAssertEqual(10852500, result.gasConsumed())
-        XCTAssertEqual(1, result.state())
-        XCTAssertEqual(txHash, result.txHash())
+        XCTAssertEqual(10852500, result.gasConsumed)
+        XCTAssertEqual(1, result.state)
+        XCTAssertEqual(txHash, result.txHash)
     }
 
     func testGetStorage() {
@@ -413,7 +408,7 @@ class Tests: XCTestCase {
             let res = NeoutilsOntologyInvoke(endpoint, contractHash, method, args, gasPrice, gasLimit, wif, exampleWallet.address, err)
             XCTAssertNil(err)
             XCTAssertNotNil(res)
-            print("Response: \(res ?? "ERROR")")
+            print("Response: \(res)")
         } catch let error {
             XCTFail("Failed to cast JSON: \(error)")
         }
@@ -427,13 +422,13 @@ class Tests: XCTestCase {
         let gasLimit = 20000
 
         let res = ontologyInvoke(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWallet.wif, payer: exampleWallet.address)
-        XCTAssertNotNil(res)
+        XCTAssertNotEqual("", res)
 
         let res2 = ontologyInvoke(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWallet.wif)
-        XCTAssertNotNil(res2)
+        XCTAssertNotEqual("", res2)
 
         let res3 = ontologyInvoke(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: "123")
-        XCTAssertNil(res3)
+        XCTAssertEqual("", res3)
     }
 
     func testOntologyInvocationHelperFail() {
@@ -449,7 +444,7 @@ class Tests: XCTestCase {
         let gasLimit = 20000
 
         let res = ontologyInvoke(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWallet.wif, payer: exampleWallet.address)
-        XCTAssertNil(res)
+        XCTAssertEqual("", res)
     }
 
     func testOntologyInvocationRead() {
@@ -571,13 +566,10 @@ class Tests: XCTestCase {
         let gasPrice = 500
         let gasLimit = 20000
 
-        guard let res = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWallet.wif, payer: exampleWallet.address) else {
-            XCTFail()
-            return
-        }
-
+        let res = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWallet.wif, payer: exampleWallet.address)
         let txId = ontologySendRawTransaction(raw: res)
-        print(txId)
+        XCTAssertNotEqual("", res)
+        XCTAssertNotEqual("", txId)
     }
 
     func testSharedSecret() {

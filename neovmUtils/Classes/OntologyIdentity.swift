@@ -57,9 +57,7 @@ public func sendRegister(endpoint: String = ontologyTestNodes.bestNode.rawValue,
     }
 
     let err = NSErrorPointer(nilLiteral: ())
-    guard let raw = NeoutilsOntologyMakeRegister(gasPrice, gasLimit, wif, payerAcct.wif, err) else {
-        return ""
-    }
+    let raw = NeoutilsOntologyMakeRegister(gasPrice, gasLimit, wif, payerAcct.wif, err)
     let e = getEndpoint(def: endpoint)
     let response = ontologySendRawTransaction(endpoint: e, raw: raw)
     return response
@@ -229,7 +227,7 @@ private func parseDDO(ontid: String, hex: String) -> OntidDescriptionObject {
 
 public func sendGetDDO(endpoint: String = ontologyTestNodes.bestNode.rawValue, ontid: String) -> OntidDescriptionObject? {
     let err = NSErrorPointer(nilLiteral: ())
-    let raw = NeoutilsOntologyBuildGetDDO(ontid, err) ?? ""
+    let raw = NeoutilsOntologyBuildGetDDO(ontid, err)
     let response = ontologySendPreExecRawTransaction(endpoint: endpoint, raw: raw)
     if response == "" {
         return nil
@@ -239,7 +237,7 @@ public func sendGetDDO(endpoint: String = ontologyTestNodes.bestNode.rawValue, o
 
 public func sendGetDDO(endpoint: String = ontologyTestNodes.bestNode.rawValue, ident: Identity) -> OntidDescriptionObject? {
     let err = NSErrorPointer(nilLiteral: ())
-    let raw = NeoutilsOntologyBuildGetDDO(ident.ontid, err) ?? ""
+    let raw = NeoutilsOntologyBuildGetDDO(ident.ontid, err)
     let response = ontologySendPreExecRawTransaction(endpoint: endpoint, raw: raw)
     if response == "" {
         return nil
