@@ -11,10 +11,7 @@
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		690E103E6A4FE287E583687B /* Pods_neovmUtilsExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1B185E068026CC4121840E7 /* Pods_neovmUtilsExample.framework */; };
 		7F2887A4223C6F810049FA4F /* OEP4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2887A3223C6F810049FA4F /* OEP4.swift */; };
-		7F2887A5223C6F810049FA4F /* OEP4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2887A3223C6F810049FA4F /* OEP4.swift */; };
-		7F2887A6223C6F840049FA4F /* OEP4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2887A3223C6F810049FA4F /* OEP4.swift */; };
 		7F2887A8223C73120049FA4F /* OEP8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2887A7223C73120049FA4F /* OEP8.swift */; };
-		7F2887A9223C73120049FA4F /* OEP8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2887A7223C73120049FA4F /* OEP8.swift */; };
 		7F6EF749221AFF8C00B20AA7 /* QRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EF748221AFF8C00B20AA7 /* QRView.swift */; };
 		7F6EF753221C0CCA00B20AA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EF752221C0CCA00B20AA7 /* AppDelegate.swift */; };
 		7F6EF755221C0CCA00B20AA7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EF754221C0CCA00B20AA7 /* ViewController.swift */; };
@@ -22,31 +19,13 @@
 		7F6EF75A221C0CCD00B20AA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F6EF759221C0CCD00B20AA7 /* Assets.xcassets */; };
 		7F6EF75D221C0CCD00B20AA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F6EF75B221C0CCD00B20AA7 /* LaunchScreen.storyboard */; };
 		7F6EF768221C0CCD00B20AA7 /* neovmUtilsExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EF767221C0CCD00B20AA7 /* neovmUtilsExampleUITests.swift */; };
-		7F6EF770221C0D9D00B20AA7 /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC232216F96B00F52C0F /* Crypto.swift */; };
-		7F6EF771221C0D9D00B20AA7 /* OntologyInvocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC2B2216FB3300F52C0F /* OntologyInvocation.swift */; };
-		7F6EF772221C0D9D00B20AA7 /* OntologyRPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC292216FAC500F52C0F /* OntologyRPC.swift */; };
-		7F6EF773221C0D9D00B20AA7 /* QRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EF748221AFF8C00B20AA7 /* QRView.swift */; };
-		7F6EF774221C0D9D00B20AA7 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC272216FA8000F52C0F /* Utils.swift */; };
-		7F6EF775221C0D9D00B20AA7 /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC252216F99400F52C0F /* Wallet.swift */; };
-		7F6EF776221C0D9D00B20AA7 /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC232216F96B00F52C0F /* Crypto.swift */; };
-		7F6EF777221C0D9D00B20AA7 /* OntologyInvocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC2B2216FB3300F52C0F /* OntologyInvocation.swift */; };
-		7F6EF778221C0D9D00B20AA7 /* OntologyRPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC292216FAC500F52C0F /* OntologyRPC.swift */; };
-		7F6EF779221C0D9D00B20AA7 /* QRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EF748221AFF8C00B20AA7 /* QRView.swift */; };
-		7F6EF77A221C0D9D00B20AA7 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC272216FA8000F52C0F /* Utils.swift */; };
-		7F6EF77B221C0D9D00B20AA7 /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC252216F99400F52C0F /* Wallet.swift */; };
 		7F6EF79F221EE62A00B20AA7 /* OntologyIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EF79E221EE62A00B20AA7 /* OntologyIdentity.swift */; };
-		7F6EF7A0221EE63000B20AA7 /* OntologyIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EF79E221EE62A00B20AA7 /* OntologyIdentity.swift */; };
-		7F6EF7A1221EE63100B20AA7 /* OntologyIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EF79E221EE62A00B20AA7 /* OntologyIdentity.swift */; };
-		7F6EF7AF2220555700B20AA7 /* neoutils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6EF7AE2220555600B20AA7 /* neoutils.framework */; };
-		7F6EF7B02220555700B20AA7 /* neoutils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6EF7AE2220555600B20AA7 /* neoutils.framework */; };
-		7F6EF7B12220555700B20AA7 /* neoutils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6EF7AE2220555600B20AA7 /* neoutils.framework */; };
 		7F725CE821FF04CA00850C2D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F725CE721FF04CA00850C2D /* Foundation.framework */; };
 		7FD0FC242216F96B00F52C0F /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC232216F96B00F52C0F /* Crypto.swift */; };
 		7FD0FC262216F99400F52C0F /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC252216F99400F52C0F /* Wallet.swift */; };
 		7FD0FC282216FA8000F52C0F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC272216FA8000F52C0F /* Utils.swift */; };
 		7FD0FC2A2216FAC500F52C0F /* OntologyRPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC292216FAC500F52C0F /* OntologyRPC.swift */; };
 		7FD0FC2C2216FB3300F52C0F /* OntologyInvocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC2B2216FB3300F52C0F /* OntologyInvocation.swift */; };
-		E767D1BAF7D9A2C815AB40C9 /* Pods_neovmUtilsExampleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D193F19DF3696D3C2F47FA33 /* Pods_neovmUtilsExampleUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,10 +40,8 @@
 
 /* Begin PBXFileReference section */
 		11D54E3E6F1A2BDC166CA1C7 /* neovmUtils.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = neovmUtils.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		13C3DF155AF6CCB371587AF7 /* Pods-neovmUtilsExampleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-neovmUtilsExampleUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-neovmUtilsExampleUITests/Pods-neovmUtilsExampleUITests.release.xcconfig"; sourceTree = "<group>"; };
 		2528B724E89C96563820CE12 /* Pods-neovmUtilsExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-neovmUtilsExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-neovmUtilsExample/Pods-neovmUtilsExample.release.xcconfig"; sourceTree = "<group>"; };
 		2F41F78181412FF1BDE4530E /* Pods-neovmUtilsExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-neovmUtilsExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-neovmUtilsExample/Pods-neovmUtilsExample.debug.xcconfig"; sourceTree = "<group>"; };
-		3FB817A62A3DEE8991D7485F /* Pods-neovmUtilsExampleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-neovmUtilsExampleUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-neovmUtilsExampleUITests/Pods-neovmUtilsExampleUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* neovmUtils_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = neovmUtils_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
@@ -82,13 +59,13 @@
 		7F6EF767221C0CCD00B20AA7 /* neovmUtilsExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = neovmUtilsExampleUITests.swift; sourceTree = "<group>"; };
 		7F6EF769221C0CCD00B20AA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7F6EF79E221EE62A00B20AA7 /* OntologyIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OntologyIdentity.swift; sourceTree = "<group>"; };
-		7F6EF7AE2220555600B20AA7 /* neoutils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = neoutils.framework; sourceTree = "<group>"; };
 		7F725CE721FF04CA00850C2D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7FD0FC232216F96B00F52C0F /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
 		7FD0FC252216F99400F52C0F /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
 		7FD0FC272216FA8000F52C0F /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		7FD0FC292216FAC500F52C0F /* OntologyRPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OntologyRPC.swift; sourceTree = "<group>"; };
 		7FD0FC2B2216FB3300F52C0F /* OntologyInvocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OntologyInvocation.swift; sourceTree = "<group>"; };
+		7FDB22D222445C5A0057875D /* neoutils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = neoutils.framework; sourceTree = "<group>"; };
 		BBBB5BA3FC5B0631497C3D8E /* Pods-neovmUtils_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-neovmUtils_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-neovmUtils_Tests/Pods-neovmUtils_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		BC6F233EC5E38887EC244709 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		CEE1B85670C5A8A3A335B23E /* Pods-neovmUtils_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-neovmUtils_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-neovmUtils_Tests/Pods-neovmUtils_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -105,7 +82,6 @@
 			files = (
 				7F725CE821FF04CA00850C2D /* Foundation.framework in Frameworks */,
 				23A5A664E1604A98B30A541C /* Pods_neovmUtils_Tests.framework in Frameworks */,
-				7F6EF7AF2220555700B20AA7 /* neoutils.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,7 +90,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				690E103E6A4FE287E583687B /* Pods_neovmUtilsExample.framework in Frameworks */,
-				7F6EF7B02220555700B20AA7 /* neoutils.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,8 +97,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E767D1BAF7D9A2C815AB40C9 /* Pods_neovmUtilsExampleUITests.framework in Frameworks */,
-				7F6EF7B12220555700B20AA7 /* neoutils.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,8 +110,6 @@
 				BBBB5BA3FC5B0631497C3D8E /* Pods-neovmUtils_Tests.release.xcconfig */,
 				2F41F78181412FF1BDE4530E /* Pods-neovmUtilsExample.debug.xcconfig */,
 				2528B724E89C96563820CE12 /* Pods-neovmUtilsExample.release.xcconfig */,
-				3FB817A62A3DEE8991D7485F /* Pods-neovmUtilsExampleUITests.debug.xcconfig */,
-				13C3DF155AF6CCB371587AF7 /* Pods-neovmUtilsExampleUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -236,7 +207,7 @@
 		BB75E40C24537D4E61108C25 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7F6EF7AE2220555600B20AA7 /* neoutils.framework */,
+				7FDB22D222445C5A0057875D /* neoutils.framework */,
 				7F725CE721FF04CA00850C2D /* Foundation.framework */,
 				F456429103DFD18E76CEF465 /* Pods_neovmUtils_Tests.framework */,
 				F1B185E068026CC4121840E7 /* Pods_neovmUtilsExample.framework */,
@@ -289,11 +260,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7F6EF76D221C0CCD00B20AA7 /* Build configuration list for PBXNativeTarget "neovmUtilsExampleUITests" */;
 			buildPhases = (
-				B63462B4C8E022D39673F529 /* [CP] Check Pods Manifest.lock */,
 				7F6EF75F221C0CCD00B20AA7 /* Sources */,
 				7F6EF760221C0CCD00B20AA7 /* Frameworks */,
 				7F6EF761221C0CCD00B20AA7 /* Resources */,
-				B20D61D46BFADA9E9A1B364D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -406,12 +375,14 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-neovmUtilsExample/Pods-neovmUtilsExample-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/RyuCrypto/RyuCrypto.framework",
+				"${BUILT_PRODUCTS_DIR}/neovmUtils/neovmUtils.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RyuCrypto.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/neovmUtils.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -434,50 +405,6 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-neovmUtilsExample-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B20D61D46BFADA9E9A1B364D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-neovmUtilsExampleUITests/Pods-neovmUtilsExampleUITests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/RyuCrypto/RyuCrypto.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RyuCrypto.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-neovmUtilsExampleUITests/Pods-neovmUtilsExampleUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B63462B4C8E022D39673F529 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-neovmUtilsExampleUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -530,17 +457,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F2887A9223C73120049FA4F /* OEP8.swift in Sources */,
-				7F6EF775221C0D9D00B20AA7 /* Wallet.swift in Sources */,
-				7F6EF7A0221EE63000B20AA7 /* OntologyIdentity.swift in Sources */,
-				7F6EF771221C0D9D00B20AA7 /* OntologyInvocation.swift in Sources */,
-				7F6EF773221C0D9D00B20AA7 /* QRView.swift in Sources */,
-				7F6EF770221C0D9D00B20AA7 /* Crypto.swift in Sources */,
-				7F6EF774221C0D9D00B20AA7 /* Utils.swift in Sources */,
 				7F6EF755221C0CCA00B20AA7 /* ViewController.swift in Sources */,
-				7F6EF772221C0D9D00B20AA7 /* OntologyRPC.swift in Sources */,
 				7F6EF753221C0CCA00B20AA7 /* AppDelegate.swift in Sources */,
-				7F2887A5223C6F810049FA4F /* OEP4.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -548,15 +466,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F6EF778221C0D9D00B20AA7 /* OntologyRPC.swift in Sources */,
-				7F6EF77B221C0D9D00B20AA7 /* Wallet.swift in Sources */,
-				7F6EF776221C0D9D00B20AA7 /* Crypto.swift in Sources */,
 				7F6EF768221C0CCD00B20AA7 /* neovmUtilsExampleUITests.swift in Sources */,
-				7F6EF779221C0D9D00B20AA7 /* QRView.swift in Sources */,
-				7F6EF777221C0D9D00B20AA7 /* OntologyInvocation.swift in Sources */,
-				7F6EF7A1221EE63100B20AA7 /* OntologyIdentity.swift in Sources */,
-				7F6EF77A221C0D9D00B20AA7 /* Utils.swift in Sources */,
-				7F2887A6223C6F840049FA4F /* OEP4.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,7 +530,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -680,7 +589,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -707,11 +615,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CEE1B85670C5A8A3A335B23E /* Pods-neovmUtils_Tests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = 6RN58493KK;
-				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(PROJECT_DIR)",
@@ -745,11 +651,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BBBB5BA3FC5B0631497C3D8E /* Pods-neovmUtils_Tests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = 6RN58493KK;
-				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(PROJECT_DIR)",
@@ -839,9 +743,7 @@
 		};
 		7F6EF76E221C0CCD00B20AA7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3FB817A62A3DEE8991D7485F /* Pods-neovmUtilsExampleUITests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -873,9 +775,7 @@
 		};
 		7F6EF76F221C0CCD00B20AA7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 13C3DF155AF6CCB371587AF7 /* Pods-neovmUtilsExampleUITests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

@@ -5,9 +5,5 @@ target 'neovmUtils_Tests' do
 end
 
 target 'neovmUtilsExample' do
-    pod 'RyuCrypto'
-end
-
-target 'neovmUtilsExampleUITests' do
-    pod 'RyuCrypto'
+    pod 'neovmUtils', :path => './'
 end

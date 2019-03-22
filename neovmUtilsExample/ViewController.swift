@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import neovmUtils
 
 class ViewController: UIViewController {
     @IBOutlet weak var qrView: QRView!
