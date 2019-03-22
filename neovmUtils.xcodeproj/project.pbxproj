@@ -614,7 +614,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -674,7 +673,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -701,11 +699,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CEE1B85670C5A8A3A335B23E /* Pods-neovmUtils_Tests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = 6RN58493KK;
-				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(PROJECT_DIR)",
@@ -739,11 +735,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BBBB5BA3FC5B0631497C3D8E /* Pods-neovmUtils_Tests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = 6RN58493KK;
-				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(PROJECT_DIR)",
@@ -835,7 +829,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3FB817A62A3DEE8991D7485F /* Pods-neovmUtilsExampleUITests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -869,7 +862,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 13C3DF155AF6CCB371587AF7 /* Pods-neovmUtilsExampleUITests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
