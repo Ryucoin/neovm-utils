@@ -18,11 +18,10 @@ public enum ontologyTestNodes: String {
 }
 
 public enum ontologyMainNodes: String {
-    case seed1 = "seed1.ont.io:20338"
-    case seed2 = "seed2.ont.io:20338"
-    case seed3 = "seed3.ont.io:20338"
-    case seed4 = "seed4.ont.io:20338"
-    case seed5 = "seed5.ont.io:20338"
+    case seed1 = "http://dappnode1.ont.io:20336"
+    case seed2 = "http://dappnode2.ont.io:20336"
+    case seed3 = "http://dappnode3.ont.io:20336"
+    case seed4 = "http://dappnode4.ont.io:20336"
     case bestNode = "mainNetBestNode"
 }
 
@@ -47,7 +46,7 @@ public func getBestNode(net:network) -> String {
         }
         return bestNode
     case .mainNet:
-        let nodes: [ontologyMainNodes] = [.seed1, .seed2, .seed3, .seed4, .seed5]
+        let nodes: [ontologyMainNodes] = [.seed1, .seed2, .seed3, .seed4]
         for node in nodes {
             let count = ontologyGetBlockCount(endpoint: node.rawValue)
             bestNode = node.rawValue

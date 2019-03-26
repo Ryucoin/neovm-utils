@@ -192,15 +192,12 @@ class Tests: XCTestCase {
     }
 
     func testGetBalances() {
-        let (ont, ong) = ontologyGetBalances(address: "AcNZnTKFx1cA53H7DHcU9T6ErdVMzTrwSq")
-        print("Ont: \(ont), Ong: \(ong)")
-        let none = ont == 0 && ong == 0
-        XCTAssertFalse(none)
+        let address = "AFmseVrdL9f9oyCzZefL9tG6UbviEH9ugK"
+        let (ont, ong) = ontologyGetBalances(address: address)
+        XCTAssertTrue(ont > 0 && ong > 0)
 
-        let (ontMain, ongMain) = ontologyGetBalances(endpoint: ontologyMainNodes.bestNode.rawValue, address: "AcNZnTKFx1cA53H7DHcU9T6ErdVMzTrwSq")
-        print("Ont: \(ont), Ong: \(ong)")
-        let noneMain = ontMain == 0 && ongMain == 0
-        XCTAssertTrue(noneMain)
+        let (ontMain, ongMain) = ontologyGetBalances(endpoint: ontologyMainNodes.bestNode.rawValue, address: address)
+        XCTAssertTrue(ontMain > 0 && ongMain > 0)
     }
 
     func testGetBlock() {
@@ -228,7 +225,7 @@ class Tests: XCTestCase {
     }
 
     func testGetRawTransaction() {
-        let txID = "f4250dab094c38d8265acc15c366dc508d2e14bf5699e12d9df26577ed74d657"
+        let txID = "ea82d1e85303e1d955231b7c863308ce9b580602d386f8aa9bd80bccc0b51b6e"
         let raw = ontologyGetRawTransaction(endpoint: ontologyMainNodes.bestNode.rawValue, txID: txID)
         let unknown = "unknown transaction"
         XCTAssertNotEqual(raw, unknown)
@@ -448,16 +445,14 @@ class Tests: XCTestCase {
     }
 
     func testOntologyInvocationRead() {
-        let contractHash = "23e18245a3028a14dfdd25e4a6d8d05eea871e23"
-        let method = "hasJoined"
+        let contractHash = "a29564a30043d50620e4c6be61eda834d0acc48b"
 
-        let gid = OntologyParameter(type: .String, value: "G31n2c4a21345678ffa1cc2b452f118aa")
-        let mid = OntologyParameter(type: .String, value: "M1551904081075")
-        let addr = OntologyParameter(type: .Address, value: "AXJzwkVNmzAadANqsgW5iJvPGFPWUJEhK9")
-
-        let args: [OntologyParameter] = [gid, mid, addr]
-        let res = ontologyInvokeRead(contractHash: contractHash, method: method, args: args)
-        XCTAssertNotEqual(res, "")
+        let methods: [String] = ["getTotal", "getCirculation", "getLocked"]
+        for method in methods {
+            let res = ontologyInvokeRead(contractHash: contractHash, method: method, args: [])
+            XCTAssertNotEqual(res, "")
+            print(res)
+        }
     }
 
     func testPublicKeyFrom() {
