@@ -1,5 +1,5 @@
 PODS:
-  - neovmUtils (0.3.0):
+  - neovmUtils (0.4.0):
     - RyuCrypto (~> 0.0.1)
   - RyuCrypto (0.0.1)
 
@@ -16,7 +16,7 @@ EXTERNAL SOURCES:
     :path: "./"
 
 SPEC CHECKSUMS:
-  neovmUtils: 54f50126e29eec20c851339d79006bae1a1d8fed
+  neovmUtils: 58c188961e56fafb1facfe451513866a7b057136
   RyuCrypto: 4395cd6eba1e291c5ad6b819feb73bc35cdd9402
 
 PODFILE CHECKSUM: 3a76598d4222d635488357ea0df900168259ce82
