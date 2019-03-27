@@ -48,10 +48,7 @@ public func createIdentity(label: String = "", password: String = "") -> Identit
 public func sendRegister(endpoint: String = ontologyTestNodes.bestNode.rawValue, ident: Identity, password: String = "", payerAcct: Wallet, gasLimit: Int = 20000, gasPrice: Int = 500) -> String {
     var wif = ""
     if ident.hasPassword {
-        guard let w = wifFromEncryptedKey(encrypted: ident.enc, password: password) else {
-            return ""
-        }
-        wif = w
+        wif = wifFromEncryptedKey(encrypted: ident.enc, password: password)
     } else {
         wif = ident.wif
     }
