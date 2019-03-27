@@ -10,8 +10,8 @@ install:
   - pod install
 
 script:
-- pod lib lint
 - xcodebuild clean build test -workspace neovmUtils.xcworkspace -scheme neovmUtils-Example -destination 'platform=iOS Simulator,name=iPhone 8,OS=12.1' -sdk iphonesimulator12.1 CODE_SIGNING_REQUIRED=NO -configuration Debug ONLY_ACTIVE_ARCH=YES ENABLE_TESTABILITY=YES -enableCodeCoverage YES | xcpretty -c
 - bash <(curl -s https://codecov.io/bash) -cF unit -J neovmUtils
 - xcodebuild clean build test -workspace neovmUtils.xcworkspace -scheme neovmUtilsExample -destination 'platform=iOS Simulator,name=iPhone 8,OS=12.1' -sdk iphonesimulator12.1 CODE_SIGNING_REQUIRED=NO -configuration Debug ONLY_ACTIVE_ARCH=YES ENABLE_TESTABILITY=YES -enableCodeCoverage YES | xcpretty -c
 - bash <(curl -s https://codecov.io/bash) -cF ui -J neovmUtils
+- pod lib lint
