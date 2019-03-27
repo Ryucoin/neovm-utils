@@ -9,6 +9,8 @@
 @import Foundation;
 #include "ref.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol Universeerror;
 @class Universeerror;
 
@@ -25,5 +27,7 @@
 - (instancetype)initWithRef:(id)ref;
 - (NSString* _Nonnull)error;
 @end
+
+NS_ASSUME_NONNULL_END
 
 #endif

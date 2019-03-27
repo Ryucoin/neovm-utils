@@ -10,6 +10,7 @@
 #include "ref.h"
 #include "Universe.objc.h"
 
+NS_ASSUME_NONNULL_BEGIN
 
 @class NeoutilsBlockCountResponse;
 @class NeoutilsFetchSeedRequest;
@@ -518,5 +519,7 @@ FOUNDATION_EXPORT BOOL NeoutilsVerify(NSData* _Nullable publicKey, NSData* _Null
 // skipped method SmartContractInterface.GenerateInvokeFunctionRawTransactionWithAmountToSend with unsupported parameter or return types
 
 @end
+
+NS_ASSUME_NONNULL_END
 
 #endif
