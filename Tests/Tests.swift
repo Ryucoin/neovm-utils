@@ -341,7 +341,7 @@ class Tests: XCTestCase {
         XCTAssertEqual(oep8.getSymbol(tokenId: 1), "REP")
         XCTAssertEqual(oep8.getTotalSupply(tokenId: 1), "400d03")
         XCTAssertEqual(oep8.getBalance(address: address, tokenId: 1), "400d03")
-}
+    }
 
     func testOID() {
         let identity = createIdentity()
