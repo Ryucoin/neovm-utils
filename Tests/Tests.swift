@@ -338,41 +338,9 @@ class Tests: XCTestCase {
         let address = "AHDP1jtfMA1vMpy3Gy41vMfyVWQym4eTwu"
 
         XCTAssertEqual(oep8.getName(tokenId: 1), "redpumpkin")
-        XCTAssertEqual(oep8.getName(tokenId: 2), "orangepumpkin")
-        XCTAssertEqual(oep8.getName(tokenId: 3), "yellowpumpkin")
-        XCTAssertEqual(oep8.getName(tokenId: 4), "greenpumpkin")
-        XCTAssertEqual(oep8.getName(tokenId: 5), "indigopumpkin")
-        XCTAssertEqual(oep8.getName(tokenId: 6), "bluepumpkin")
-        XCTAssertEqual(oep8.getName(tokenId: 7), "purplepumpkin")
-        XCTAssertEqual(oep8.getName(tokenId: 8), "glodpumpkin")
-
         XCTAssertEqual(oep8.getSymbol(tokenId: 1), "REP")
-        XCTAssertEqual(oep8.getSymbol(tokenId: 2), "ORP")
-        XCTAssertEqual(oep8.getSymbol(tokenId: 3), "YEP")
-        XCTAssertEqual(oep8.getSymbol(tokenId: 4), "GRP")
-        XCTAssertEqual(oep8.getSymbol(tokenId: 5), "INP")
-        XCTAssertEqual(oep8.getSymbol(tokenId: 6), "BLP")
-        XCTAssertEqual(oep8.getSymbol(tokenId: 7), "PUP")
-        XCTAssertEqual(oep8.getSymbol(tokenId: 8), "GLP")
-
         XCTAssertEqual(oep8.getTotalSupply(tokenId: 1), "400d03")
-        XCTAssertEqual(oep8.getTotalSupply(tokenId: 2), "50c300")
-        XCTAssertEqual(oep8.getTotalSupply(tokenId: 3), "400d03")
-        XCTAssertEqual(oep8.getTotalSupply(tokenId: 4), "400d03")
-        XCTAssertEqual(oep8.getTotalSupply(tokenId: 5), "400d03")
-        XCTAssertEqual(oep8.getTotalSupply(tokenId: 6), "400d03")
-        XCTAssertEqual(oep8.getTotalSupply(tokenId: 7), "400d03")
-        XCTAssertEqual(oep8.getTotalSupply(tokenId: 8), "")
-
         XCTAssertEqual(oep8.getBalance(address: address, tokenId: 1), "400d03")
-        XCTAssertEqual(oep8.getBalance(address: address, tokenId: 2), "50c300")
-        XCTAssertEqual(oep8.getBalance(address: address, tokenId: 3), "400d03")
-        XCTAssertEqual(oep8.getBalance(address: address, tokenId: 4), "400d03")
-        XCTAssertEqual(oep8.getBalance(address: address, tokenId: 5), "400d03")
-        XCTAssertEqual(oep8.getBalance(address: address, tokenId: 6), "400d03")
-        XCTAssertEqual(oep8.getBalance(address: address, tokenId: 7), "400d03")
-        XCTAssertEqual(oep8.getBalance(address: address, tokenId: 8), "")
-    }
 
     func testOID() {
         let identity = createIdentity()
