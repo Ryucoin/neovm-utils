@@ -1,15 +1,7 @@
-#
-# Be sure to run `pod lib lint neovmUtils.podspec' to ensure this is a
-# valid spec before submitting.
-#
-# Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see https://guides.cocoapods.org/syntax/podspec.html
-#
-
 Pod::Spec.new do |s|
   s.name             = 'neovmUtils'
-  s.version          = '0.3.2'
-  s.summary          = 'Useful functions for the NEO and Ontology blockchains for iOS.'
+  s.version          = '0.4.0'
+  s.summary          = 'Swift SDK for the NEO and Ontology blockchains'
 
   s.homepage         = 'https://github.com/Ryucoin/neovm-utils'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
