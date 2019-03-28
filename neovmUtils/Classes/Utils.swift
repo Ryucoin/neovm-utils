@@ -10,17 +10,17 @@ import Foundation
 import Neoutils
 
 public extension Data {
-    public var bytesToHex: String? {
+    var bytesToHex: String? {
         return NeoutilsBytesToHex(self)
     }
 }
 
 public extension String {
-    public var hexToBytes: Data? {
+    var hexToBytes: Data? {
         return NeoutilsHexTobytes(self)
     }
 
-    public var isValidAddress: Bool {
+    var isValidAddress: Bool {
         return NeoutilsValidateNEOAddress(self)
     }
 

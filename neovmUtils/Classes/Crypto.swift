@@ -27,32 +27,28 @@ public class Mnemonic {
 public func createMnemonic() -> Mnemonic {
     let raw = mnemonic_generate(128)!
     let mnemonic = String(cString: raw)
-    var seed = Data(repeating: 0, count: 64)
-    seed.withUnsafeMutableBytes { seedPtr in
-        mnemonic_to_seed(mnemonic, "", seedPtr, nil)
-    }
 
-    let m = Mnemonic(value: mnemonic, seed: seed)
+    var seed = [UInt8](repeating: 0, count: 64)
+    mnemonic_to_seed(mnemonic, "", &seed, nil)
+
+    let m = Mnemonic(value: mnemonic, seed: Data(seed))
     return m
 }
 
 public func mnemonicFromPhrase(phrase: String) -> Mnemonic {
-    var seed = Data(repeating: 0, count: 512 / 8)
-    seed.withUnsafeMutableBytes { seedPtr in
-        mnemonic_to_seed(phrase, "", seedPtr, nil)
-    }
+    var seed = [UInt8](repeating: 0, count: 64)
+    mnemonic_to_seed(phrase, "", &seed, nil)
 
-    let m = Mnemonic(value: phrase, seed: seed)
+    let m = Mnemonic(value: phrase, seed: Data(seed))
     return m
 }
 
 public func privateKeyFromMnemonic(mnemonic:Mnemonic) -> Data {
     var node = HDNode()
-    _ = mnemonic.seed.withUnsafeBytes { dataPtr in
-        hdnode_from_seed(dataPtr, Int32(mnemonic.seed.count), "secp256k1", &node)
-    }
+    var data = [UInt8](repeating: 0, count: mnemonic.seed.count)
+    hdnode_from_seed(&data, Int32(mnemonic.seed.count), "secp256k1", &node)
 
-    return Data(bytes: withUnsafeBytes(of: &node.private_key) { ptr in
+    return Data(withUnsafeBytes(of: &node.private_key) { ptr in
         return ptr.map({ $0 })
     })
 }

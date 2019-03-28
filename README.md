@@ -97,6 +97,8 @@ We welcome contributors to `neovmUtils`. Before beginning, please take a look at
 
 It follows the [ontio-community sdk specifications doc](https://github.com/ontio-community/specifications/blob/master/sdk_dev_standard/en/ontology-sdk-dev.md) for its Ontology integration.
 
+The compiled headers created by gomobile should be wrapped in NS_ASSUME_NONNULL macros until this is resolved by gomobile (https://stackoverflow.com/a/36164132/3830876).
+
 #### Primary Authors
 
 `neovmUtils` - [Wyatt Mufson](mailto:wyatt@ryucoin.com) from Ryu Coin
