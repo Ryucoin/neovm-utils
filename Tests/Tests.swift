@@ -315,10 +315,8 @@ class Tests: XCTestCase {
             XCTFail()
             return
         }
-        guard let w = wifFromEncryptedKey(encrypted: e, password: password) else {
-            XCTFail()
-            return
-        }
+
+        let w = wifFromEncryptedKey(encrypted: e, password: password)
         XCTAssertTrue(w == exampleWallet.wif)
     }
 
