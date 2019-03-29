@@ -149,7 +149,7 @@ public func newEncryptedKey(wif: String, password: String) -> String? {
     return nep2?.encryptedKey
 }
 
-public func wifFromEncryptedKey(encrypted: String, password: String) -> String {
+public func wifFromEncryptedKey(encrypted: String, password: String) -> String? {
     let error = NSErrorPointer(nilLiteral: ())
     let wif = NeoutilsNEP2Decrypt(encrypted, password, error)
     return wif

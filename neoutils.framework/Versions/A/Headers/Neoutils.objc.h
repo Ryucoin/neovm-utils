@@ -368,7 +368,7 @@ FOUNDATION_EXPORT NeoutilsRawTransaction* _Nullable NeoutilsMintTokensRawTransac
 
 FOUNDATION_EXPORT NSString* _Nonnull NeoutilsNEOAddresstoScriptHashBigEndian(NSString* _Nullable neoAddress);
 
-FOUNDATION_EXPORT NSString* _Nonnull NeoutilsNEP2Decrypt(NSString* _Nullable key, NSString* _Nullable passphrase, NSError* _Nullable* error);
+FOUNDATION_EXPORT NSString* _Nullable NeoutilsNEP2Decrypt(NSString* _Nullable key, NSString* _Nullable passphrase, NSError* _Nullable* error);
 
 FOUNDATION_EXPORT NeoutilsNEP2* _Nullable NeoutilsNEP2Encrypt(NSString* _Nullable wif, NSString* _Nullable passphrase, NSError* _Nullable* error);
 
