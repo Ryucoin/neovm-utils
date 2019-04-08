@@ -71,11 +71,8 @@ public func getEndpoint(def:String) -> String {
 public func ontologyGetBlockCount(endpoint: String = ontologyTestNodes.bestNode.rawValue) -> Int {
     let e = getEndpoint(def: endpoint)
     let error = NSErrorPointer(nilLiteral: ())
-    var count: Int = 0
+    var count: Int = -1
     NeoutilsOntologyGetBlockCount(e, &count, error)
-    if error != nil {
-        return -1
-    }
     return count
 }
 

@@ -10,7 +10,7 @@ import Foundation
 import Neoutils
 
 public extension Data {
-    var bytesToHex: String? {
+    var bytesToHex: String {
         return NeoutilsBytesToHex(self)
     }
 }

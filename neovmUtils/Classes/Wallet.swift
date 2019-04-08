@@ -28,8 +28,8 @@ public class Wallet {
         self.wif = wif
         self.privateKey = privateKey
         self.publicKey = publicKey
-        self.privateKeyString = privateKey.bytesToHex ?? ""
-        self.publicKeyString = publicKey.bytesToHex ?? ""
+        self.privateKeyString = privateKey.bytesToHex
+        self.publicKeyString = publicKey.bytesToHex
         self.neoWallet = neoWallet
     }
     
@@ -79,7 +79,7 @@ public class Wallet {
         case .PrivateKey:
             code = privateKeyString
         case .NEOPrivateKey:
-            code = neoPrivateKey.bytesToHex!
+            code = neoPrivateKey.bytesToHex
         case .NEP2:
             code = newEncryptedKey(wif: wif, password: passphrase)!
         case .WIF:
@@ -213,9 +213,7 @@ private func walletFromOntAccount(ontAccount: NeoutilsONTAccount) -> Wallet {
 }
 
 private func walletFromNEOPrivateKey(privateKey: Data) -> Wallet? {
-    guard let p = privateKey.bytesToHex else {
-        return nil
-    }
+    let p = privateKey.bytesToHex
     return walletFromNEOPrivateKey(privateKey: p)
 }
 

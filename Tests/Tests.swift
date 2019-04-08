@@ -20,6 +20,29 @@ class Tests: XCTestCase {
         XCTAssertEqual("", addressFromPublicKey(publicKey: ""))
     }
 
+    func testBadOntKey() {
+        let privateKeyStr = exampleWallet.privateKeyString
+        let modified = privateKeyStr.dropFirst()
+        let newPKS = "B\(modified)"
+        guard let newPK = newPKS.hexToBytes else {
+            XCTFail()
+            return
+        }
+
+        print(privateKeyStr)
+        print(newPKS)
+        let nWallet = walletFromPrivateKey(privateKey: newPK)
+        XCTAssertNil(nWallet)
+    }
+
+    func testBadWif() {
+        let wif = exampleWallet.wif
+        let modified = wif.dropFirst()
+        let newWif = "B\(modified)"
+        let nWallet = walletFromWIF(wif: newWif)
+        XCTAssertNil(nWallet)
+    }
+
     func testBuildJoinTransaction() {
         let contractHash = "6b21a978e40e681c8439e2fb9cb39424920bf3e1"
         let gid = "G1"
@@ -138,11 +161,7 @@ class Tests: XCTestCase {
             return
         }
 
-        guard let n = neo.bytesToHex else {
-            XCTFail()
-            return
-        }
-
+        let n = neo.bytesToHex
         guard let e = walletFromPrivateKey(privateKey: n) else {
             XCTFail()
             return
@@ -198,6 +217,9 @@ class Tests: XCTestCase {
 
         let (ontMain, ongMain) = ontologyGetBalances(endpoint: ontologyMainNodes.bestNode.rawValue, address: address)
         XCTAssertTrue(ontMain > 0 && ongMain > 0)
+
+        let (ontBad, ongBad) = ontologyGetBalances(address: "bad address")
+        XCTAssertTrue(ontBad == 0 && ongBad == 0)
     }
 
     func testGetBlock() {
@@ -449,7 +471,7 @@ class Tests: XCTestCase {
         let q5 = exampleWallet.exportQR(key: .Address)
         let q6 = exampleWallet.exportQR(key: .PublicKey)
         XCTAssertEqual(q1.code, exampleWallet.privateKeyString)
-        XCTAssertEqual(q2.code, exampleWallet.neoPrivateKey.bytesToHex!)
+        XCTAssertEqual(q2.code, exampleWallet.neoPrivateKey.bytesToHex)
         XCTAssertEqual(q3.code, newEncryptedKey(wif: exampleWallet.wif, password: passphrase) ?? "")
         XCTAssertEqual(q4.code, exampleWallet.wif)
         XCTAssertEqual(q5.code, exampleWallet.address)
