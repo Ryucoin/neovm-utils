@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name             = 'neovmUtils'
-  s.version          = '0.4.2'
-  s.summary          = 'Swift SDK for the NEO and Ontology blockchains'
+  s.version          = '0.4.3'
+  s.summary          = 'Swift SDK for the Ontology and NEO blockchains'
 
   s.homepage         = 'https://github.com/Ryucoin/neovm-utils'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
