@@ -358,6 +358,7 @@ class Tests: XCTestCase {
         let wallet = newWallet()
         let address = wallet.address
         let tokenId = ""
+        let state = State(address: address, tokenId: tokenId)
 
         XCTAssertEqual(oep5.getName(), "HyperDragons")
         XCTAssertEqual(oep5.getSymbol(), "HD")
@@ -365,13 +366,12 @@ class Tests: XCTestCase {
         XCTAssertEqual(oep5.getBalance(address: address), "")
         XCTAssertEqual(oep5.getOwner(tokenId: tokenId), "")
         XCTAssertEqual(oep5.getTokenName(tokenId: tokenId), "00")
-        XCTAssertNotEqual(oep5.transfer(address: address, tokenId: tokenId, wallet: wallet), "")
 
-        let state = State(address: address, tokenId: tokenId)
+        XCTAssertNotEqual(oep5.transfer(address: address, tokenId: tokenId, wallet: wallet), "")
         XCTAssertNotEqual(oep5.transferMulti(args: [state], wallet: wallet), "")
         XCTAssertNotEqual(oep5.transferMulti(args: [[address, tokenId]], wallet: wallet), "")
-        XCTAssertNotEqual(oep5.transferMulti(args: [[address, tokenId, "invalid"]], wallet: wallet), "")
-        XCTAssertNotEqual(oep5.mint(tokenName: "Name", address: address, wallet: wallet), "")
+        XCTAssertTrue(oep5.transferMulti(args: [[address, tokenId, "invalid"]], wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
+        XCTAssertTrue(oep5.mint(tokenName: "Name", address: address, wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
     }
 
     func testOEP8() {

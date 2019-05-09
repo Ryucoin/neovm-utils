@@ -48,35 +48,35 @@ public class OEP5Interface: NSObject {
         return ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "nameOf", args: [token])
     }
 
-    public func transfer(address: String, tokenId: String, wallet: Wallet) -> String {
-        return transfer(address: address, tokenId: tokenId, wif: wallet.wif)
+    public func transfer(address: String, tokenId: String, gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet) -> String {
+        return transfer(address: address, tokenId: tokenId, gasPrice: gasPrice, gasLimit: gasLimit, wif: wallet.wif)
     }
 
-    public func transfer(address: String, tokenId: String, wif: String) -> String {
+    public func transfer(address: String, tokenId: String, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
         let receiver = OntologyParameter(type: .Address, value: address)
         let token = OntologyParameter(type: .String, value: tokenId)
-        return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "transfer", args: [receiver, token], wif: wif)
+        return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "transfer", args: [receiver, token], gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
     }
 
-    public func transferMulti(args: [State], wallet: Wallet) -> String {
-        return transferMulti(args: args, wif: wallet.wif)
+    public func transferMulti(args: [State], gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet) -> String {
+        return transferMulti(args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: wallet.wif)
     }
 
-    public func transferMulti(args: [State], wif: String) -> String {
+    public func transferMulti(args: [State], gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
         var params: [[String]] = []
         for arg in args {
             let array = arg.getParam()
             params.append(array)
         }
 
-        return transferMulti(args: params, wif: wif)
+        return transferMulti(args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
     }
 
-    public func transferMulti(args: [[String]], wallet: Wallet) -> String {
-        return transferMulti(args: args, wif: wallet.wif)
+    public func transferMulti(args: [[String]], gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet) -> String {
+        return transferMulti(args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: wallet.wif)
     }
 
-    public func transferMulti(args: [[String]], wif: String) -> String {
+    public func transferMulti(args: [[String]], gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
         var params: [OntologyParameter] = []
         for arg in args {
             guard arg.count == 2 else {
@@ -89,16 +89,16 @@ public class OEP5Interface: NSObject {
             params.append(array)
         }
 
-        return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "transferMulti", args: params, wif: wif)
+        return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "transferMulti", args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
     }
 
-    public func mint(tokenName: String, address: String, wallet: Wallet) -> String {
-        return mint(tokenName: tokenName, address: address, wif: wallet.wif)
+    public func mint(tokenName: String, address: String, gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet) -> String {
+        return mint(tokenName: tokenName, address: address, gasPrice: gasPrice, gasLimit: gasLimit, wif: wallet.wif)
     }
 
-    public func mint(tokenName: String, address: String, wif: String) -> String {
+    public func mint(tokenName: String, address: String, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
         let name = OntologyParameter(type: .String, value: tokenName)
         let receiver = OntologyParameter(type: .Address, value: address)
-        return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "mint", args: [name, receiver], wif: wif)
+        return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "mint", args: [name, receiver], gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
     }
 }
