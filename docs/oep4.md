@@ -41,7 +41,7 @@ func getName() -> String?
 Gets the symbol for the given `OEP4` token.
 
 ``` swift
-func getSymbol() -> String?
+func getSymbol() -> String
 ```
 
 #### Get Decimals
@@ -49,7 +49,7 @@ func getSymbol() -> String?
 Gets the amount of decimals for the given `OEP4` token. Returns the hex representation.
 
 ``` swift
-func getDecimals() -> String?
+func getDecimals() -> String
 ```
 
 #### Get Total Supply
@@ -57,7 +57,7 @@ func getDecimals() -> String?
 Gets the total supply for the given `OEP4` token. Returns the hex representation.
 
 ``` swift
-func getTotalSupply() -> String?
+func getTotalSupply() -> String
 ```
 
 #### Get Balance
@@ -65,5 +65,5 @@ func getTotalSupply() -> String?
 Gets the balance for the given `address` of the given `OEP4` token. Returns the hex representation.
 
 ``` swift
-func getBalance(address: String) -> String?
+func getBalance(address: String) -> String
 ```

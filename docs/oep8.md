@@ -32,7 +32,7 @@ var endpoint: String = ""
 Gets the name of the given `OEP8` token with a `tokenId`.
 
 ``` swift
-func getName(tokenId: Int) -> String?
+func getName(tokenId: Int) -> String
 ```
 
 #### Get Symbol
@@ -40,7 +40,7 @@ func getName(tokenId: Int) -> String?
 Gets the symbol for the given `OEP8` token with a `tokenId`.
 
 ``` swift
-func getSymbol(tokenId: Int) -> String?
+func getSymbol(tokenId: Int) -> String
 ```
 
 #### Get Total Supply
@@ -48,7 +48,7 @@ func getSymbol(tokenId: Int) -> String?
 Gets the total supply for the given `OEP8` token with a `tokenId`. Returns the hex representation.
 
 ``` swift
-func getTotalSupply(tokenId: Int) -> String?
+func getTotalSupply(tokenId: Int) -> String
 ```
 
 #### Get Balance
@@ -56,5 +56,5 @@ func getTotalSupply(tokenId: Int) -> String?
 Gets the balance for the given `address` of the given `OEP8` token with a `tokenId`. Returns the hex representation.
 
 ``` swift
-func getBalance(address: String, tokenId: Int) -> String?
+func getBalance(address: String, tokenId: Int) -> String
 ```
