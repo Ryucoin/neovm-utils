@@ -29,13 +29,15 @@ public class OEP5Interface: NSObject {
         return hex.hexToAscii()
     }
 
-    public func getTotalSupply() -> String {
-        return ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "totalSupply", args: [])
+    public func getTotalSupply() -> Int {
+        let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "totalSupply", args: [])
+        return hex.hexToDecimal()
     }
 
-    public func getBalance(address: String) -> String {
+    public func getBalance(address: String) -> Int {
         let address = OntologyParameter(type: .Address, value: address)
-        return ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "balanceOf", args: [address])
+        let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "balanceOf", args: [address])
+        return hex.hexToDecimal()
     }
 
     public func getOwner(tokenId: String) -> String {

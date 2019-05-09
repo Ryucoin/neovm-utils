@@ -343,14 +343,16 @@ class Tests: XCTestCase {
     }
 
     func testOEP4() {
-        let oep4 = OEP4Interface(contractHash: "25277b421a58cfc2ef5836767e54eb7abdd31afd", endpoint: ontologyTestNodes.bestNode.rawValue)
+        let oep4 = OEP4Interface(contractHash: "78b98deed62aa708eaf6de85843734ecdfb14c1b", endpoint: ontologyMainNodes.bestNode.rawValue)
         let address = "ATrApQ3w4xLnc2yDkEDXw1zAk9Ue544Csz"
 
-        XCTAssertEqual(oep4.getName(), "LUCKY")
-        XCTAssertEqual(oep4.getSymbol(), "LCY")
-        XCTAssertEqual(oep4.getDecimals(), "09")
-        XCTAssertEqual(oep4.getTotalSupply(), "0000e8890423c78a00")
-        XCTAssertEqual(oep4.getBalance(address: address), "")
+        XCTAssertEqual(oep4.getName(), "SEED")
+        XCTAssertEqual(oep4.getSymbol(), "SEED")
+        XCTAssertEqual(oep4.getDecimals(), 6)
+        let rawSupply = oep4.getTotalSupply()
+        let actual = Int(Double(rawSupply) / pow(10, 6))
+        XCTAssertEqual(actual, 100000000000)
+        XCTAssertEqual(oep4.getBalance(address: address), 0)
     }
 
     func testOEP5() {
@@ -362,8 +364,8 @@ class Tests: XCTestCase {
 
         XCTAssertEqual(oep5.getName(), "HyperDragons")
         XCTAssertEqual(oep5.getSymbol(), "HD")
-        XCTAssertNotEqual(oep5.getTotalSupply(), "c30a")
-        XCTAssertEqual(oep5.getBalance(address: address), "")
+        XCTAssertTrue(oep5.getTotalSupply() > 2755)
+        XCTAssertEqual(oep5.getBalance(address: address), 0)
         XCTAssertEqual(oep5.getOwner(tokenId: tokenId), "")
         XCTAssertEqual(oep5.getTokenName(tokenId: tokenId), "00")
 
@@ -380,8 +382,8 @@ class Tests: XCTestCase {
 
         XCTAssertEqual(oep8.getName(tokenId: 1), "redpumpkin")
         XCTAssertEqual(oep8.getSymbol(tokenId: 1), "REP")
-        XCTAssertEqual(oep8.getTotalSupply(tokenId: 1), "400d03")
-        XCTAssertEqual(oep8.getBalance(address: address, tokenId: 1), "400d03")
+        XCTAssertEqual(oep8.getTotalSupply(tokenId: 1), 200000)
+        XCTAssertEqual(oep8.getBalance(address: address, tokenId: 1), 200000)
     }
 
     func testOID() {

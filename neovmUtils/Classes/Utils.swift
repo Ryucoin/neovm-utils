@@ -43,4 +43,22 @@ public extension String {
         }
         return String(characters)
     }
+
+    func hexToDecimal() -> Int {
+        var formatted = self
+        let length = self.count
+        if length <= 16 {
+            let difference = 16 - length
+            for _ in 0..<difference {
+                formatted.append("0")
+            }
+        } else {
+            return 0
+        }
+
+        let value = UInt64(formatted, radix: 16) ?? 0
+        let z = value.byteSwapped
+        let final = UInt64(bitPattern: Int64(z))
+        return Int(final)
+    }
 }

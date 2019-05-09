@@ -31,14 +31,16 @@ public class OEP8Interface: NSObject {
         return hex.hexToAscii()
     }
 
-    public func getTotalSupply(tokenId: Int) -> String {
+    public func getTotalSupply(tokenId: Int) -> Int {
         let tokenId = OntologyParameter(type: .Integer, value: tokenId)
-        return ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "totalSupply", args: [tokenId])
+        let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "totalSupply", args: [tokenId])
+        return hex.hexToDecimal()
     }
 
-    public func getBalance(address: String, tokenId: Int) -> String {
+    public func getBalance(address: String, tokenId: Int) -> Int {
         let address = OntologyParameter(type: .Address, value: address)
         let tokenId = OntologyParameter(type: .Integer, value: tokenId)
-        return ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "balanceOf", args: [address, tokenId])
+        let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "balanceOf", args: [address, tokenId])
+        return hex.hexToDecimal()
     }
 }
