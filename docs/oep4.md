@@ -33,7 +33,7 @@ var endpoint: String = ""
 Gets the name of the given `OEP4` token.
 
 ``` swift
-func getName() -> String?
+func getName() -> String
 ```
 
 #### Get Symbol
