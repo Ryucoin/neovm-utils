@@ -98,11 +98,21 @@ func transfer(address: String, tokenId: String, wif: String) -> String
 Transfers the multiple tokens at once. Takes an array of type `[address, tokenId]` that transfers the token with token id `tokenId` to `address`. Requires either a `wallet` or `wif` to sign the transaction. Returns the transaction hash.
 
 ``` swift
-func transferMulti(args: [String], wallet: Wallet) -> String {
+func transferMulti(args: [[String]], wallet: Wallet) -> String {
 ```
 or
 ``` swift
-func transferMulti(args: [String], wif: String) -> String {
+func transferMulti(args: [[String]], wif: String) -> String {
+```
+
+Can also call with an array of `State` objects, which contain an `address` and `tokenId`.
+
+``` swift
+func transferMulti(args: [State], wif: String) -> String {
+```
+or
+``` swift
+func transferMulti(args: [State], wif: String) -> String {
 ```
 
 #### Mint

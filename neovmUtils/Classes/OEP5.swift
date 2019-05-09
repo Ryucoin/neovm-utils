@@ -58,11 +58,25 @@ public class OEP5Interface: NSObject {
         return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "transfer", args: [receiver, token], wif: wif)
     }
 
-    public func transferMulti(args: [String], wallet: Wallet) -> String {
+    public func transferMulti(args: [State], wallet: Wallet) -> String {
         return transferMulti(args: args, wif: wallet.wif)
     }
 
-    public func transferMulti(args: [String], wif: String) -> String {
+    public func transferMulti(args: [State], wif: String) -> String {
+        var params: [[String]] = []
+        for arg in args {
+            let array = arg.getParam()
+            params.append(array)
+        }
+
+        return transferMulti(args: params, wif: wif)
+    }
+
+    public func transferMulti(args: [[String]], wallet: Wallet) -> String {
+        return transferMulti(args: args, wif: wallet.wif)
+    }
+
+    public func transferMulti(args: [[String]], wif: String) -> String {
         var params: [OntologyParameter] = []
         for arg in args {
             guard arg.count == 2 else {

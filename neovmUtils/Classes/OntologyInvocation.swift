@@ -30,6 +30,22 @@ public class OntologyParameter {
     }
 }
 
+public class State {
+    private var address: String = ""
+    private var tokenId: String = ""
+
+    public convenience init(address: String, tokenId: String) {
+        self.init()
+        self.address = address
+        self.tokenId = tokenId
+    }
+
+    public func getParam() -> [String] {
+        let array = [address, tokenId]
+        return array
+    }
+}
+
 private func convertParamArray(params: [OntologyParameter]) -> [String: [[String:Any]]] {
     var args: [[String:Any]] = []
     for i in 0..<params.count {
