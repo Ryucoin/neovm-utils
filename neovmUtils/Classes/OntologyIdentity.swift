@@ -106,19 +106,19 @@ private func parseDDOAttribute(hex: String) -> [DDOAttribute] {
         let keyVal = Int(UInt8(keyLength, radix: 16)! * 2)
         let keyUpper = index + 2 + keyVal
         let keyData = String(hex[index + 2..<keyUpper])
-        let key = hexToAscii(text: keyData)
+        let key = keyData.hexToAscii()
 
         let typeLength = hex[keyUpper..<keyUpper + 2]
         let typeVal = Int(UInt8(typeLength, radix: 16)! * 2)
         let typeUpper = keyUpper + 2 + typeVal
         let typeData = String(hex[keyUpper + 2..<typeUpper])
-        let type = hexToAscii(text: typeData)
+        let type = typeData.hexToAscii()
 
         let valueLength = hex[typeUpper..<typeUpper + 2]
         let valueVal = Int(UInt8(valueLength, radix: 16)! * 2)
         let valueUpper = typeUpper + 2 + valueVal
         let valueData = String(hex[typeUpper + 2..<valueUpper])
-        let value = hexToAscii(text: valueData)
+        let value = valueData.hexToAscii()
 
         let attr = DDOAttribute(key: key, type: type, value: value)
         attributes.append(attr)

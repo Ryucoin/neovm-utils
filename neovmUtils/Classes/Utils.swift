@@ -33,14 +33,14 @@ public extension String {
     func index(at offset: Int) -> String.Index {
         return index(startIndex, offsetBy: offset)
     }
-}
 
-func hexToAscii(text: String) -> String {
-    let regex = try! NSRegularExpression(pattern: "(0x)?([0-9A-Fa-f]{2})", options: .caseInsensitive)
-    let textNS = text as NSString
-    let matchesArray = regex.matches(in: textNS as String, options: [], range: NSMakeRange(0, textNS.length))
-    let characters = matchesArray.map {
-        Character(UnicodeScalar(UInt32(textNS.substring(with: $0.range(at: 2)), radix: 16)!)!)
+    func hexToAscii() -> String {
+        let regex = try! NSRegularExpression(pattern: "(0x)?([0-9A-Fa-f]{2})", options: .caseInsensitive)
+        let textNS = self as NSString
+        let matchesArray = regex.matches(in: textNS as String, options: [], range: NSMakeRange(0, textNS.length))
+        let characters = matchesArray.map {
+            Character(UnicodeScalar(UInt32(textNS.substring(with: $0.range(at: 2)), radix: 16)!)!)
+        }
+        return String(characters)
     }
-    return String(characters)
 }

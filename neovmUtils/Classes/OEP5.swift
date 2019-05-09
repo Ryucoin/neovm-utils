@@ -21,12 +21,12 @@ public class OEP5Interface: NSObject {
 
     public func getName() -> String {
         let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "name", args: [])
-        return hexToAscii(text: hex)
+        return hex.hexToAscii()
     }
 
     public func getSymbol() -> String {
         let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "symbol", args: [])
-        return hexToAscii(text: hex)
+        return hex.hexToAscii()
     }
 
     public func getTotalSupply() -> String {

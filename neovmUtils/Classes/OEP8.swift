@@ -22,13 +22,13 @@ public class OEP8Interface: NSObject {
     public func getName(tokenId: Int) -> String {
         let tokenId = OntologyParameter(type: .Integer, value: tokenId)
         let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "name", args: [tokenId])
-        return hexToAscii(text: hex)
+        return hex.hexToAscii()
     }
 
     public func getSymbol(tokenId: Int) -> String {
         let tokenId = OntologyParameter(type: .Integer, value: tokenId)
         let hex =  ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "symbol", args: [tokenId])
-        return hexToAscii(text: hex)
+        return hex.hexToAscii()
     }
 
     public func getTotalSupply(tokenId: Int) -> String {
