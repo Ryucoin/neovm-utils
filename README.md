@@ -56,6 +56,7 @@ end
 - [QR View](docs/qr-view.md)
 - [Mnemonic Creation](docs/mnemonic.md)
 - [OEP4 Interface](docs/oep4.md)
+- [OEP5 Interface](docs/oep5.md)
 - [OEP8 Interface](docs/oep8.md)
 - [Compiled neo-utils golang](#golang)
 
