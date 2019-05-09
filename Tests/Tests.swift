@@ -353,6 +353,27 @@ class Tests: XCTestCase {
         XCTAssertEqual(oep4.getBalance(address: address), "")
     }
 
+    func testOEP5() {
+        let oep5 = OEP5Interface(contractHash: "cae215265a5e348bfd603b8db22893aa74b42417", endpoint: ontologyMainNodes.bestNode.rawValue)
+        let wallet = newWallet()
+        let address = wallet.address
+        let tokenId = ""
+
+        XCTAssertEqual(oep5.getName(), "HyperDragons")
+        XCTAssertEqual(oep5.getSymbol(), "HD")
+        XCTAssertNotEqual(oep5.getTotalSupply(), "c30a")
+        XCTAssertEqual(oep5.getBalance(address: address), "")
+        XCTAssertEqual(oep5.getOwner(tokenId: tokenId), "")
+        XCTAssertEqual(oep5.getTokenName(tokenId: tokenId), "00")
+        XCTAssertNotEqual(oep5.transfer(address: address, tokenId: tokenId, wallet: wallet), "")
+
+        let state = State(address: address, tokenId: tokenId)
+        XCTAssertNotEqual(oep5.transferMulti(args: [state], wallet: wallet), "")
+        XCTAssertNotEqual(oep5.transferMulti(args: [[address, tokenId]], wallet: wallet), "")
+        XCTAssertNotEqual(oep5.transferMulti(args: [[address, tokenId, "invalid"]], wallet: wallet), "")
+        XCTAssertNotEqual(oep5.mint(tokenName: "Name", address: address, wallet: wallet), "")
+    }
+
     func testOEP8() {
         let oep8 = OEP8Interface(contractHash: "edf64937ca304ea8180fa92e2de36dc0a33cc712")
         let address = "AHDP1jtfMA1vMpy3Gy41vMfyVWQym4eTwu"

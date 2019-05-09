@@ -83,8 +83,8 @@ public class OEP5Interface: NSObject {
                 continue
             }
 
-            let receiver = OntologyParameter(type: .Address, value: args[0])
-            let token = OntologyParameter(type: .String, value: args[1])
+            let receiver = OntologyParameter(type: .Address, value: arg[0])
+            let token = OntologyParameter(type: .String, value: arg[1])
             let array = OntologyParameter(type: .Array, value: [receiver, token])
             params.append(array)
         }

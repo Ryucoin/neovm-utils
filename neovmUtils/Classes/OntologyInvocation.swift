@@ -46,19 +46,34 @@ public class State {
     }
 }
 
-private func convertParamArray(params: [OntologyParameter]) -> [String: [[String:Any]]] {
-    var args: [[String:Any]] = []
+private func convertParamArray(params: [OntologyParameter]) -> [String: [[String: Any]]] {
+    var args: [[String: Any]] = []
     for i in 0..<params.count {
         let item = params[i]
-        let type = item.type.rawValue
-        let value = item.value
-        let arg: [String:Any] = ["type": type, "value": value]
-        args.append(arg)
+        if item.type == .Array {
+            guard let arr = item.value as? [OntologyParameter] else {
+                continue
+            }
+
+            let dict = convertParamArray(params: arr)
+            var str: String = ""
+            if let data = try? JSONSerialization.data(withJSONObject: dict) {
+                str = String(data: data, encoding: .utf8) ?? ""
+            }
+
+            let arg: [String: Any] = ["type": item.type.rawValue, "value": str]
+            args.append(arg)
+        } else {
+            let type = item.type.rawValue
+            let value = item.value
+            let arg: [String: Any] = ["type": type, "value": value]
+            args.append(arg)
+        }
     }
     return ["array": args]
 }
 
-private func buildOntologyInvocationTransactionHelper(contractHash: String, method: String, args: [String: [[String:Any]]], gasPrice: Int, gasLimit: Int, wif: String, payer: String) -> String {
+private func buildOntologyInvocationTransactionHelper(contractHash: String, method: String, args: [String: [[String: Any]]], gasPrice: Int, gasLimit: Int, wif: String, payer: String) -> String {
     do {
         let data = try JSONSerialization.data(withJSONObject: args)
         let params = String(data: data, encoding: .utf8)
@@ -70,7 +85,7 @@ private func buildOntologyInvocationTransactionHelper(contractHash: String, meth
     }
 }
 
-private func ontologyInvokeHelper(endpoint: String, contractHash: String, method: String, args: [String: [[String:Any]]], gasPrice: Int, gasLimit: Int, wif: String, payer: String) -> String {
+private func ontologyInvokeHelper(endpoint: String, contractHash: String, method: String, args: [String: [[String: Any]]], gasPrice: Int, gasLimit: Int, wif: String, payer: String) -> String {
     do {
         let data = try JSONSerialization.data(withJSONObject: args)
         let args = String(data: data, encoding: .utf8)
