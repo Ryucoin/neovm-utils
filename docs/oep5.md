@@ -51,7 +51,7 @@ func getSymbol() -> String
 
 #### Get Total Supply
 
-Gets the total amount of tokens minted. Returns the hex representation.
+Gets the total amount of tokens minted. Returns the decimal representation.
 
 ``` swift
 func getTotalSupply() -> String
@@ -59,7 +59,7 @@ func getTotalSupply() -> String
 
 #### Get Balance
 
-Gets the total balance of tokens for the given `address`. Returns the hex representation.
+Gets the total balance of tokens for the given `address`. Returns the decimal representation.
 
 ``` swift
 func getBalance(address: String) -> String
@@ -67,7 +67,7 @@ func getBalance(address: String) -> String
 
 #### Get Owner
 
-Gets the owner of the token with the token id `tokenId`. Returns the hex representation.
+Gets the owner of the token with the token id `tokenId`.
 
 ``` swift
 func getOwner(tokenId: String) -> String

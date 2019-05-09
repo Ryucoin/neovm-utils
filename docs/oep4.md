@@ -46,7 +46,7 @@ func getSymbol() -> String
 
 #### Get Decimals
 
-Gets the amount of decimals for the given `OEP4` token. Returns the hex representation.
+Gets the amount of decimals for the given `OEP4` token. Returns the decimal representation.
 
 ``` swift
 func getDecimals() -> String
@@ -54,7 +54,7 @@ func getDecimals() -> String
 
 #### Get Total Supply
 
-Gets the total supply for the given `OEP4` token. Returns the hex representation.
+Gets the total supply for the given `OEP4` token. Returns the decimal representation.
 
 ``` swift
 func getTotalSupply() -> String
@@ -62,7 +62,7 @@ func getTotalSupply() -> String
 
 #### Get Balance
 
-Gets the balance for the given `address` of the given `OEP4` token. Returns the hex representation.
+Gets the balance for the given `address` of the given `OEP4` token. Returns the decimal representation.
 
 ``` swift
 func getBalance(address: String) -> String

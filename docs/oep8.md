@@ -45,7 +45,7 @@ func getSymbol(tokenId: Int) -> String
 
 #### Get Total Supply
 
-Gets the total supply for the given `OEP8` token with a `tokenId`. Returns the hex representation.
+Gets the total supply for the given `OEP8` token with a `tokenId`. Returns the decimal representation.
 
 ``` swift
 func getTotalSupply(tokenId: Int) -> String
@@ -53,7 +53,7 @@ func getTotalSupply(tokenId: Int) -> String
 
 #### Get Balance
 
-Gets the balance for the given `address` of the given `OEP8` token with a `tokenId`. Returns the hex representation.
+Gets the balance for the given `address` of the given `OEP8` token with a `tokenId`. Returns the decimal representation.
 
 ``` swift
 func getBalance(address: String, tokenId: Int) -> String
