@@ -19,19 +19,19 @@ public class OEP8Interface: NSObject {
         self.endpoint = endpoint
     }
 
-    public func getName(tokenId: Int) -> String? {
+    public func getName(tokenId: Int) -> String {
         let tokenId = OntologyParameter(type: .Integer, value: tokenId)
         let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "name", args: [tokenId])
         return hexToAscii(text: hex)
     }
 
-    public func getSymbol(tokenId: Int) -> String? {
+    public func getSymbol(tokenId: Int) -> String {
         let tokenId = OntologyParameter(type: .Integer, value: tokenId)
         let hex =  ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "symbol", args: [tokenId])
         return hexToAscii(text: hex)
     }
 
-    public func getTotalSupply(tokenId: Int) -> String? {
+    public func getTotalSupply(tokenId: Int) -> String {
         let tokenId = OntologyParameter(type: .Integer, value: tokenId)
         return ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "totalSupply", args: [tokenId])
     }
