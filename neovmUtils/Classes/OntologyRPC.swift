@@ -25,6 +25,8 @@ public enum ontologyMainNodes: String {
     case bestNode = "mainNetBestNode"
 }
 
+public let solochainNode = "http://127.0.0.1:20336"
+
 public enum network {
     case mainNet
     case testNet
