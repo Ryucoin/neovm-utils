@@ -94,6 +94,11 @@ public class Wallet: Codable {
         return true
     }
 
+    public func toData() -> Data? {
+        let data = try? JSONEncoder().encode(self)
+        return data
+    }
+
     public func signMessage(message: String) -> String? {
         let error = NSErrorPointer(nilLiteral: ())
         let data = Data(message.utf8)
