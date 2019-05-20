@@ -103,46 +103,46 @@ public class Wallet: Codable {
         }
         return nil
     }
-    
+
     public func verifySignature(pubKey: Data, signature: String, message: String) -> Bool {
         let data = Data(message.utf8)
         let hash = sha256(data)
         return NeoutilsVerify(pubKey, signature.hexToBytes, hash)
     }
-    
+
     public func computeSharedSecret(publicKey: Data) -> Data? {
         if let neoWallet = neoWallet {
             return neoWallet.computeSharedSecret(publicKey)
         }
         return nil
     }
-    
+
     public func computeSharedSecret(publicKey: String) -> Data? {
         if let neoWallet = neoWallet {
             return neoWallet.computeSharedSecret(publicKey.hexToBytes)
         }
         return nil
     }
-    
+
     public func privateEncrypt(message: String) -> String? {
         if let neoWallet = neoWallet {
             return NeoutilsEncrypt(neoWallet.privateKey, message)
         }
         return nil
     }
-    
+
     public func privateDecrypt(encrypted: String) -> String? {
         if let neoWallet = neoWallet {
             return NeoutilsDecrypt(neoWallet.privateKey, encrypted)
         }
         return nil
     }
-    
+
     public func sharedEncrypt(message: String, publicKey: Data) -> String {
         let secretKey = computeSharedSecret(publicKey: publicKey)
         return NeoutilsEncrypt(secretKey, message)
     }
-    
+
     public func sharedDecrypt(encrypted: String, publicKey: Data) -> String {
         let secretKey = computeSharedSecret(publicKey: publicKey)
         return NeoutilsDecrypt(secretKey, encrypted)
