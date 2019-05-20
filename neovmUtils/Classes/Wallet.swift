@@ -21,7 +21,7 @@ public class Wallet: Codable {
     public var neoPrivateKey: Data? {
         return neoWallet?.privateKey
     }
-    private var locked: Bool = false
+    public var locked: Bool = false
     private var lockKey: String = ""
 
     public convenience init(address: String, wif: String, privateKey: Data, publicKey: Data, neoWallet: NeoutilsWallet) {
@@ -39,11 +39,19 @@ public class Wallet: Codable {
 
     private enum CodingKeys: String, CodingKey {
         case lockKey = "lockKey"
+        case address = "address"
+        case publicKey = "publicKey"
+        case publicKeyString = "publicKeyString"
+        case locked = "locked"
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(lockKey, forKey: .lockKey)
+        try container.encode(address, forKey: .address)
+        try container.encode(publicKey, forKey: .publicKey)
+        try container.encode(publicKeyString, forKey: .publicKeyString)
+        try container.encode(locked, forKey: .locked)
     }
 
     public func lock(password: String) -> Bool {
@@ -61,6 +69,28 @@ public class Wallet: Codable {
         self.privateKeyString = ""
         self.privateKey = Data()
         self.neoWallet = nil
+        return true
+    }
+
+    public func unlock(password: String) -> Bool {
+        if !locked {
+            return false
+        }
+
+        guard let wifTry = wifFromEncryptedKey(encrypted: self.lockKey, password: password) else {
+            return false
+        }
+
+        guard let wal = walletFromWIF(wif: wifTry) else {
+            return false
+        }
+
+        self.lockKey = ""
+        self.locked = false
+        self.wif = wal.wif
+        self.privateKeyString = wal.privateKeyString
+        self.privateKey = wal.privateKey
+        self.neoWallet = wal.neoWallet
         return true
     }
 

@@ -313,6 +313,40 @@ class Tests: XCTestCase {
         XCTAssertTrue(exampleWallet.address.isValidAddress)
     }
 
+    func testLocking() {
+        let wallet = newWallet()
+        let wif = wallet.wif
+        let password = "password"
+
+        XCTAssertEqual(wif, wallet.wif)
+        XCTAssertFalse(wallet.locked)
+        let locked = wallet.lock(password: password)
+        XCTAssertTrue(locked)
+        XCTAssertNotEqual(wif, wallet.wif)
+        XCTAssertEqual("", wallet.wif)
+        XCTAssertTrue(wallet.locked)
+
+        guard let data = try? JSONEncoder().encode(wallet) else {
+            XCTFail()
+            return
+        }
+
+        guard let w = try? JSONDecoder().decode(Wallet.self, from: data) else {
+            XCTFail()
+            return
+        }
+
+        XCTAssertNotEqual(wif, w.wif)
+        XCTAssertEqual("", w.wif)
+        XCTAssertTrue(w.locked)
+        
+        let unlocked = w.unlock(password: password)
+        XCTAssertTrue(unlocked)
+        XCTAssertEqual(wif, w.wif)
+        XCTAssertNotEqual("", w.wif)
+        XCTAssertFalse(w.locked)
+    }
+
     func testMnemonic() {
         let m = createMnemonic()
         guard let w = walletFromMnemonicPhrase(mnemonic: m.value!) else {
