@@ -129,7 +129,11 @@ class Tests: XCTestCase {
         for _ in 0..<5 {
             let wallet = newWallet()
             let ont = wallet.privateKey.count
-            let neo = wallet.neoPrivateKey.count
+            guard let neo = wallet.neoPrivateKey?.count else {
+                XCTFail()
+                return
+            }
+
             if (neo > ont) {
                 XCTFail()
                 return
@@ -144,7 +148,10 @@ class Tests: XCTestCase {
         }
 
         let ont = exampleWallet.privateKey
-        let neo = exampleWallet.neoPrivateKey
+        guard let neo = exampleWallet.neoPrivateKey else {
+            XCTFail()
+            return
+        }
 
         guard let b = walletFromPrivateKey(privateKey: ont) else {
             XCTFail()
@@ -201,9 +208,17 @@ class Tests: XCTestCase {
             return
         }
 
-        let encrypted = wallet.privateEncrypt(message: original)
+        guard let encrypted = wallet.privateEncrypt(message: original) else {
+            XCTFail()
+            return
+        }
+
         let decrypted = wallet.privateDecrypt(encrypted: encrypted)
-        let encryptedString = wallet.privateEncrypt(message: original)
+        guard let encryptedString = wallet.privateEncrypt(message: original) else {
+            XCTFail()
+            return
+        }
+
         let decryptedString = wallet.privateDecrypt(encrypted: encryptedString)
 
         XCTAssert(original == decrypted)
@@ -525,7 +540,7 @@ class Tests: XCTestCase {
         let q5 = exampleWallet.exportQR(key: .Address)
         let q6 = exampleWallet.exportQR(key: .PublicKey)
         XCTAssertEqual(q1.code, exampleWallet.privateKeyString)
-        XCTAssertEqual(q2.code, exampleWallet.neoPrivateKey.bytesToHex)
+        XCTAssertEqual(q2.code, exampleWallet.neoPrivateKey?.bytesToHex)
         XCTAssertEqual(q3.code, newEncryptedKey(wif: exampleWallet.wif, password: passphrase) ?? "")
         XCTAssertEqual(q4.code, exampleWallet.wif)
         XCTAssertEqual(q5.code, exampleWallet.address)

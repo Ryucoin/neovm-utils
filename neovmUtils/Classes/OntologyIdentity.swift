@@ -9,7 +9,7 @@
 import Foundation
 import Neoutils
 
-public class Identity {
+public class Identity: Codable {
     public var label: String = ""
     public var ontid: String = ""
     public var publicKey: String = ""

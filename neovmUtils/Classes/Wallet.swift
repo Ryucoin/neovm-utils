@@ -10,19 +10,21 @@ import UIKit
 import Neoutils
 import CommonCrypto
 
-public class Wallet {
+public class Wallet: Codable {
     public var address: String = ""
     public var wif: String = ""
     public var privateKey: Data = Data()
     public var publicKey: Data = Data()
     public var privateKeyString: String = ""
     public var publicKeyString: String = ""
-    private var neoWallet: NeoutilsWallet!
-    public var neoPrivateKey: Data {
-        return neoWallet.privateKey!
+    private var neoWallet: NeoutilsWallet?
+    public var neoPrivateKey: Data? {
+        return neoWallet?.privateKey
     }
-    
-    convenience init(address: String, wif: String, privateKey: Data, publicKey: Data, neoWallet: NeoutilsWallet) {
+    private var locked: Bool = false
+    private var lockKey: String = ""
+
+    public convenience init(address: String, wif: String, privateKey: Data, publicKey: Data, neoWallet: NeoutilsWallet) {
         self.init()
         self.address = address
         self.wif = wif
@@ -31,13 +33,45 @@ public class Wallet {
         self.privateKeyString = privateKey.bytesToHex
         self.publicKeyString = publicKey.bytesToHex
         self.neoWallet = neoWallet
+        self.locked = false
+        self.lockKey = wif
     }
-    
+
+    private enum CodingKeys: String, CodingKey {
+        case lockKey = "lockKey"
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(lockKey, forKey: .lockKey)
+    }
+
+    public func lock(password: String) -> Bool {
+        if locked {
+            return false
+        }
+
+        guard let enc = newEncryptedKey(wif: self.wif, password: password) else {
+            return false
+        }
+
+        self.lockKey = enc
+        self.locked = true
+        self.wif = ""
+        self.privateKeyString = ""
+        self.privateKey = Data()
+        self.neoWallet = nil
+        return true
+    }
+
     public func signMessage(message: String) -> String? {
         let error = NSErrorPointer(nilLiteral: ())
         let data = Data(message.utf8)
-        let sig = NeoutilsSign(data, neoWallet.privateKey!.bytesToHex, error)?.bytesToHex
-        return sig
+        if let neoWallet = neoWallet {
+            let sig = NeoutilsSign(data, neoWallet.privateKey!.bytesToHex, error)?.bytesToHex
+            return sig
+        }
+        return nil
     }
     
     public func verifySignature(pubKey: Data, signature: String, message: String) -> Bool {
@@ -47,19 +81,31 @@ public class Wallet {
     }
     
     public func computeSharedSecret(publicKey: Data) -> Data? {
-        return neoWallet.computeSharedSecret(publicKey)
+        if let neoWallet = neoWallet {
+            return neoWallet.computeSharedSecret(publicKey)
+        }
+        return nil
     }
     
     public func computeSharedSecret(publicKey: String) -> Data? {
-        return neoWallet.computeSharedSecret(publicKey.hexToBytes)
+        if let neoWallet = neoWallet {
+            return neoWallet.computeSharedSecret(publicKey.hexToBytes)
+        }
+        return nil
     }
     
-    public func privateEncrypt(message: String) -> String {
-        return NeoutilsEncrypt(neoWallet.privateKey, message)
+    public func privateEncrypt(message: String) -> String? {
+        if let neoWallet = neoWallet {
+            return NeoutilsEncrypt(neoWallet.privateKey, message)
+        }
+        return nil
     }
     
-    public func privateDecrypt(encrypted: String) -> String {
-        return NeoutilsDecrypt(neoWallet.privateKey, encrypted)
+    public func privateDecrypt(encrypted: String) -> String? {
+        if let neoWallet = neoWallet {
+            return NeoutilsDecrypt(neoWallet.privateKey, encrypted)
+        }
+        return nil
     }
     
     public func sharedEncrypt(message: String, publicKey: Data) -> String {
@@ -79,7 +125,7 @@ public class Wallet {
         case .PrivateKey:
             code = privateKeyString
         case .NEOPrivateKey:
-            code = neoPrivateKey.bytesToHex
+            code = neoPrivateKey?.bytesToHex ?? ""
         case .NEP2:
             code = newEncryptedKey(wif: wif, password: passphrase)!
         case .WIF:

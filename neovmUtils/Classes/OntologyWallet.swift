@@ -10,7 +10,7 @@ import UIKit
 
 typealias Account = Wallet
 
-public final class OntologyWallet: NSObject {
+public final class OntologyWallet: Codable {
     var name: String = ""
     let version: String = "1.0"
     var scrypt: [String: Int] = [:]
@@ -19,7 +19,6 @@ public final class OntologyWallet: NSObject {
     var createTime: String = ""
     var identities: [Identity] = []
     var accounts: [Account] = []
-    var extra: Any? = nil
 
     init(name: String) {
         self.name = name
