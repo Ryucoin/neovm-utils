@@ -61,11 +61,11 @@ public class OEP4Interface: NSObject {
         return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "transfer", args: [fromAcct, toAcct, spend], gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
     }
 
-    public func transferMulti(args: [[String]], decimals: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet) -> String {
+    public func transferMulti(args: [[Any]], decimals: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet) -> String {
         return transferMulti(args: args, decimals: decimals, gasPrice: gasPrice, gasLimit: gasLimit, wif: wallet.wif)
     }
 
-    public func transferMulti(args: [[String]], decimals: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
+    public func transferMulti(args: [[Any]], decimals: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
         var params: [OntologyParameter] = []
         for arg in args {
             guard arg.count == 3 else {

@@ -463,6 +463,22 @@ class Tests: XCTestCase {
         let actual = Int(Double(rawSupply) / pow(10, 6))
         XCTAssertEqual(actual, 100000000000)
         XCTAssertEqual(oep4.getBalance(address: address), 0)
+
+        let fault = "[NeoVmService] vm execute state fault!"
+        let wallet = newWallet()
+        let res = oep4.transfer(from: address, to: wallet.address, amount: 1, decimals: 8, wallet: wallet)
+        XCTAssertEqual(res, fault)
+        let resx = oep4.transfer(from: address, to: wallet.address, amount: 1, decimals: 9, wallet: wallet)
+        XCTAssertEqual(resx, fault)
+        let args: [Any] = [address, wallet.address, 1]
+        let res2 = oep4.transferMulti(args: [args], decimals: 8, wallet: wallet)
+        XCTAssertEqual(res2, fault)
+        let args2: [Any] = [address, wallet.address, 1]
+        let res3 = oep4.transferMulti(args: [args2], decimals: 9, wallet: wallet)
+        XCTAssertEqual(res3, fault)
+        let args3: [Any] = [address, wallet.address, 1, 5]
+        let res4 = oep4.transferMulti(args: [args3], decimals: 9, wallet: wallet)
+        XCTAssertNotEqual(res4, "")
     }
 
     func testOEP5Mainnet() {
