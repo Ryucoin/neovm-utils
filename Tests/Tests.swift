@@ -216,6 +216,12 @@ class Tests: XCTestCase {
         }
 
         XCTAssertEqual(d_a, d_b)
+        do {
+            let w = try JSONDecoder().decode(Wallet.self, from: d_a)
+            XCTAssertTrue(same(a: a, b: w))
+        } catch {
+            XCTFail()
+        }
     }
 
     func testEncryptDecrypt() {
@@ -375,6 +381,7 @@ class Tests: XCTestCase {
 
     func testLockedWallet() {
         let a = newWallet()
+        let originalData = a.toData()
         let locked = a.lock(password: "123")
         XCTAssertTrue(locked)
         let second = a.lock(password: "456")
@@ -382,12 +389,23 @@ class Tests: XCTestCase {
         let sig = a.signMessage(message: "Hello, world!")
         XCTAssertNil(sig)
         let publicKey = newWallet().publicKey
+        let publicKeyString = newWallet().publicKeyString
         let shared = a.computeSharedSecret(publicKey: publicKey)
         XCTAssertNil(shared)
+        let sharedString = a.computeSharedSecret(publicKey: publicKeyString)
+        XCTAssertNil(sharedString)
         let enc = a.privateEncrypt(message: "XXX")
         XCTAssertNil(enc)
         let dec = a.privateDecrypt(encrypted: "XXX")
         XCTAssertNil(dec)
+        let lockedData = a.toData()
+        XCTAssertNotEqual(originalData, lockedData)
+        let unlocked1 = a.unlock(password: "1234")
+        XCTAssertFalse(unlocked1)
+        let unlocked2 = a.unlock(password: "123")
+        XCTAssertTrue(unlocked2)
+        let unlocked3 = a.unlock(password: "123")
+        XCTAssertFalse(unlocked3)
     }
 
     func testMnemonic() {
