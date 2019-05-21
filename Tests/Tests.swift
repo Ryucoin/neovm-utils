@@ -201,6 +201,23 @@ class Tests: XCTestCase {
         XCTAssertTrue(mnemonic.isValid())
     }
 
+    func testData() {
+        let a = newWallet()
+        let b = a
+
+        guard let d_a = a.toData() else {
+            XCTFail()
+            return
+        }
+
+        guard let d_b = b.toData() else {
+            XCTFail()
+            return
+        }
+
+        XCTAssertEqual(d_a, d_b)
+    }
+
     func testEncryptDecrypt() {
         let original = "Hello, world"
         guard let wallet = walletFromPrivateKey(privateKey: exampleWallet.privateKey) else {
@@ -354,6 +371,23 @@ class Tests: XCTestCase {
         } catch {
             XCTFail("\(error)")
         }
+    }
+
+    func testLockedWallet() {
+        let a = newWallet()
+        let locked = a.lock(password: "123")
+        XCTAssertTrue(locked)
+        let second = a.lock(password: "456")
+        XCTAssertFalse(second)
+        let sig = a.signMessage(message: "Hello, world!")
+        XCTAssertNil(sig)
+        let publicKey = newWallet().publicKey
+        let shared = a.computeSharedSecret(publicKey: publicKey)
+        XCTAssertNil(shared)
+        let enc = a.privateEncrypt(message: "XXX")
+        XCTAssertNil(enc)
+        let dec = a.privateDecrypt(encrypted: "XXX")
+        XCTAssertNil(dec)
     }
 
     func testMnemonic() {
