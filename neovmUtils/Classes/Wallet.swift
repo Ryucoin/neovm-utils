@@ -10,7 +10,7 @@ import UIKit
 import Neoutils
 import CommonCrypto
 
-public class Wallet: Codable {
+final public class Wallet: NSObject, Codable {
     public var address: String = ""
     public var wif: String = ""
     public var privateKey: Data = Data()
@@ -24,8 +24,7 @@ public class Wallet: Codable {
     public var locked: Bool = false
     private var lockKey: String = ""
 
-    public convenience init(address: String, wif: String, privateKey: Data, publicKey: Data, neoWallet: NeoutilsWallet) {
-        self.init()
+    public init(address: String, wif: String, privateKey: Data, publicKey: Data, neoWallet: NeoutilsWallet) {
         self.address = address
         self.wif = wif
         self.privateKey = privateKey
@@ -43,6 +42,9 @@ public class Wallet: Codable {
         case publicKey = "publicKey"
         case publicKeyString = "publicKeyString"
         case locked = "locked"
+        case wif = "wif"
+        case privateKey = "privateKey"
+        case privateKeyString = "privateKeyString"
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -52,6 +54,24 @@ public class Wallet: Codable {
         try container.encode(publicKey, forKey: .publicKey)
         try container.encode(publicKeyString, forKey: .publicKeyString)
         try container.encode(locked, forKey: .locked)
+        try container.encode(wif, forKey: .wif)
+        try container.encode(privateKey, forKey: .privateKey)
+        try container.encode(privateKeyString, forKey: .privateKeyString)
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.lockKey = try container.decode(String.self, forKey: .lockKey)
+        self.address = try container.decode(String.self, forKey: .address)
+        self.publicKey = try container.decode(Data.self, forKey: .publicKey)
+        self.publicKeyString = try container.decode(String.self, forKey: .publicKeyString)
+        self.locked = try container.decode(Bool.self, forKey: .locked)
+        self.wif = try container.decode(String.self, forKey: .wif)
+        self.privateKey = try container.decode(Data.self, forKey: .privateKey)
+        self.privateKeyString = try container.decode(String.self, forKey: .privateKeyString)
+        if self.wif != "" {
+            self.neoWallet = NeoutilsGenerateFromWIF(self.wif, NSErrorPointer(nilLiteral: ()))
+        }
     }
 
     public func lock(password: String) -> Bool {
@@ -273,6 +293,35 @@ public func addressFromPublicKey(publicKey: String) -> String {
         return ""
     }
     return addressFromPublicKey(publicKey: p)
+}
+
+public func same(a: Wallet, b: Wallet) -> Bool {
+    guard a.address == b.address else {
+        print("Different address")
+        return false
+    }
+
+    guard a.publicKeyString == b.publicKeyString else {
+        print("Different publicKeyString")
+        return false
+    }
+
+    guard a.wif == b.wif else {
+        print("Different wif")
+        return false
+    }
+
+    guard a.privateKeyString == b.privateKeyString else {
+        print("Different privateKeyString")
+        return false
+    }
+
+    guard a.neoPrivateKey?.bytesToHex == b.neoPrivateKey?.bytesToHex else {
+        print("Different neoPrivateKey")
+        return false
+    }
+
+    return true
 }
 
 // MARK: - PRIVATE FUNCTIONS

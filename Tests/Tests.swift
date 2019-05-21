@@ -331,20 +331,29 @@ class Tests: XCTestCase {
             return
         }
 
-        guard let w = try? JSONDecoder().decode(Wallet.self, from: data) else {
-            XCTFail()
-            return
-        }
+        do {
+            let w = try JSONDecoder().decode(Wallet.self, from: data)
+            XCTAssertNotEqual(wif, w.wif)
+            XCTAssertEqual("", w.wif)
+            XCTAssertTrue(w.locked)
+            XCTAssertTrue(same(a: wallet, b: w))
 
-        XCTAssertNotEqual(wif, w.wif)
-        XCTAssertEqual("", w.wif)
-        XCTAssertTrue(w.locked)
-        
-        let unlocked = w.unlock(password: password)
-        XCTAssertTrue(unlocked)
-        XCTAssertEqual(wif, w.wif)
-        XCTAssertNotEqual("", w.wif)
-        XCTAssertFalse(w.locked)
+            let unlocked = w.unlock(password: password)
+            XCTAssertTrue(unlocked)
+            XCTAssertEqual(wif, w.wif)
+            XCTAssertNotEqual("", w.wif)
+            XCTAssertFalse(w.locked)
+            XCTAssertFalse(same(a: wallet, b: w))
+
+            let unlocked2 = wallet.unlock(password: password)
+            XCTAssertTrue(unlocked2)
+            XCTAssertEqual(wif, wallet.wif)
+            XCTAssertNotEqual("", wallet.wif)
+            XCTAssertFalse(wallet.locked)
+            XCTAssertTrue(same(a: wallet, b: w))
+        } catch {
+            XCTFail("\(error)")
+        }
     }
 
     func testMnemonic() {
