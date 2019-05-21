@@ -296,32 +296,7 @@ public func addressFromPublicKey(publicKey: String) -> String {
 }
 
 public func same(a: Wallet, b: Wallet) -> Bool {
-    guard a.address == b.address else {
-        print("Different address")
-        return false
-    }
-
-    guard a.publicKeyString == b.publicKeyString else {
-        print("Different publicKeyString")
-        return false
-    }
-
-    guard a.wif == b.wif else {
-        print("Different wif")
-        return false
-    }
-
-    guard a.privateKeyString == b.privateKeyString else {
-        print("Different privateKeyString")
-        return false
-    }
-
-    guard a.neoPrivateKey?.bytesToHex == b.neoPrivateKey?.bytesToHex else {
-        print("Different neoPrivateKey")
-        return false
-    }
-
-    return true
+    return a.address == b.address && a.publicKeyString == b.publicKeyString && a.wif == b.wif && a.privateKeyString == b.privateKeyString && a.neoPrivateKey?.bytesToHex == b.neoPrivateKey?.bytesToHex
 }
 
 // MARK: - PRIVATE FUNCTIONS
