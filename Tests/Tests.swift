@@ -492,6 +492,15 @@ class Tests: XCTestCase {
 
         let allowance = oep4.allowance(owner: wallet.address, spender: address)
         XCTAssertEqual(allowance, 0)
+
+        let from = OntologyParameter(type: .Address, value: address)
+        let to = OntologyParameter(type: .Address, value: wallet.address)
+        let amount = OntologyParameter(type: .Fixed8, value: 1.0)
+        let res7 = oep4.customInvoke(operation: "transfer", args: [from, to, amount], wallet: wallet)
+        XCTAssertNotEqual(res7, "")
+
+        let decimals = oep4.customRead(operation: "decimals", args: []).hexToDecimal()
+        XCTAssertEqual(decimals, 6)
     }
 
     func testOEP5Mainnet() {
