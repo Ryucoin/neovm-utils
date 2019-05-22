@@ -10,7 +10,7 @@ import UIKit
 import Neoutils
 import CommonCrypto
 
-final public class Wallet: NSObject, Codable {
+public final class Wallet: NSObject, Codable {
     public var address: String = ""
     public var wif: String = ""
     public var privateKey: Data = Data()

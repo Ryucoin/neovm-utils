@@ -50,6 +50,8 @@ end
 
 `neovmUtils` offers:
 - [NEO/ONT Wallet](docs/wallet.md)
+- [Ontology Wallet](docs/ont-wallet.md)
+- [OntMonitor](docs/monitor.md)
 - [ONT Identity](docs/ontid.md)
 - [ONT RPC Methods](docs/ont-rpc.md)
 - [ONT Transactions](docs/ont-trans.md)
@@ -58,6 +60,7 @@ end
 - [OEP4 Interface](docs/oep4.md)
 - [OEP5 Interface](docs/oep5.md)
 - [OEP8 Interface](docs/oep8.md)
+- [Utils](docs/utils.md)
 - [Compiled neo-utils golang](#golang)
 
 ### golang

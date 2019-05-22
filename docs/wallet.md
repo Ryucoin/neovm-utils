@@ -5,6 +5,9 @@ Implemented in [Wallet.swift](https://github.com/Ryucoin/neovm-utils/blob/master
 - [Wallet Class](#wallet-class)
 - [Properties](#properties)
 - [Methods](#methods)
+  - [lock](#lock)
+  - [unlock](#unlock)
+  - [toData](#to-data)
   - [signMessage](#sign-message)
   - [verifySignature](#sign-message)
   - [computeSharedSecret](#compute-shared-secret)
@@ -31,7 +34,7 @@ Implemented in [Wallet.swift](https://github.com/Ryucoin/neovm-utils/blob/master
 The `Wallet` class is used to manage funds on the NEO and Ontology blockchains.
 
 ``` swift
-public class Wallet
+public final class Wallet
 ```
 
 ### Properties:
@@ -44,9 +47,34 @@ var publicKey: Data!
 var privateKeyString: String!
 var publicKeyString: String!
 var neoPrivateKey: Data
+var locked: Bool
 ```
 
 ### Methods:
+
+#### Lock
+
+Locks the wallet with a password. Returns a `Bool` for whether it locked successfully.
+
+``` swift
+lock(password: String) -> Bool
+```
+
+#### Unlock
+
+Unlocks the wallet with a password. Returns a `Bool` for whether it unlocked successfully.
+
+``` swift
+unlock(password: String) -> Bool
+```
+
+#### To Data
+
+Converts the `Wallet` to `Data`
+
+``` swift
+toData() -> Data?
+```
 
 #### Sign Message
 
@@ -179,7 +207,7 @@ newEncryptedKey(wif: String, password: String) -> String?
 Creates a wif from a given `NEP2` encrypted key
 
 ``` swift
-wifFromEncryptedKey(encrypted: String, password: String) -> String?
+wifFromEncryptedKey(encrypted: String, password: String) -> String
 ```
 
 #### Address From WIF
