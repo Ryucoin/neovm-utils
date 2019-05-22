@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias Account = Wallet
+public typealias Account = Wallet
 
 public final class OntologyWallet: Codable {
     var name: String = ""
@@ -68,4 +68,9 @@ fileprivate func getTimestamp() -> String {
     dateFormatter.locale = Locale(identifier: "en_US_POSIX")
     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssXXXXX"
     return dateFormatter.string(from: date)
+}
+
+func newAccount() -> Account {
+    let account: Account = newWallet()
+    return account
 }

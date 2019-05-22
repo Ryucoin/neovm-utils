@@ -624,6 +624,33 @@ class Tests: XCTestCase {
         }
     }
 
+    func testOntologyWallet() {
+        let wallet = OntologyWallet(name: "My Wallet")
+        let account = newAccount()
+        let account2 = newAccount()
+        XCTAssertNotEqual(account.address, account2.address)
+
+        XCTAssertEqual(wallet.accounts.count, 0)
+        wallet.addAccount(acc: account)
+        XCTAssertEqual(wallet.accounts.count, 1)
+        wallet.setDefaultAccountAddress(acc: account)
+        XCTAssertEqual(wallet.accounts.count, 1)
+        wallet.setDefaultAccountAddress(acc: account2)
+        XCTAssertEqual(wallet.accounts.count, 2)
+
+        let ident = createIdentity()
+        let ident2 = createIdentity()
+        XCTAssertNotEqual(ident.ontid, ident2.ontid)
+
+        XCTAssertEqual(wallet.identities.count, 0)
+        wallet.addIdentity(ident: ident)
+        XCTAssertEqual(wallet.identities.count, 1)
+        wallet.setDefaultOntId(ident: ident)
+        XCTAssertEqual(wallet.identities.count, 1)
+        wallet.setDefaultOntId(ident: ident2)
+        XCTAssertEqual(wallet.identities.count, 2)
+    }
+
     func testPublicKeyFrom() {
         guard let p1 = publicKeyFromWif(wif: exampleWallet.wif) else {
             XCTFail()

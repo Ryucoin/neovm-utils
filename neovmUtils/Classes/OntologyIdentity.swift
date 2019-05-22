@@ -31,7 +31,7 @@ public class Identity: Codable {
 }
 
 public func createIdentity(label: String = "", password: String = "") -> Identity {
-    let account = newWallet()
+    let account = newAccount()
     let ontid = "did:ont:\(account.address)"
     let publicKey = account.publicKeyString
     var privateKey = account.privateKeyString
@@ -45,7 +45,7 @@ public func createIdentity(label: String = "", password: String = "") -> Identit
     return Identity(label: label, ontid: ontid, publicKey: publicKey, privateKey: privateKey, wif: wif, enc: enc)
 }
 
-public func sendRegister(endpoint: String = ontologyTestNodes.bestNode.rawValue, ident: Identity, password: String = "", payerAcct: Wallet, gasLimit: Int = 20000, gasPrice: Int = 500) -> String {
+public func sendRegister(endpoint: String = ontologyTestNodes.bestNode.rawValue, ident: Identity, password: String = "", payerAcct: Account, gasLimit: Int = 20000, gasPrice: Int = 500) -> String {
     var wif = ""
     if ident.hasPassword {
         guard let w = wifFromEncryptedKey(encrypted: ident.enc, password: password) else {
