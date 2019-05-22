@@ -370,6 +370,8 @@ FOUNDATION_EXPORT NSString* _Nonnull NeoutilsNEOAddresstoScriptHashBigEndian(NSS
 
 FOUNDATION_EXPORT NSString* _Nonnull NeoutilsNEP2Decrypt(NSString* _Nullable key, NSString* _Nullable passphrase, NSError* _Nullable* error);
 
+FOUNDATION_EXPORT NeoutilsWallet* _Nullable NeoutilsNEP2DecryptToWallet(NSString* _Nullable key, NSString* _Nullable passphrase, NSError* _Nullable* error);
+
 FOUNDATION_EXPORT NeoutilsNEP2* _Nullable NeoutilsNEP2Encrypt(NSString* _Nullable wif, NSString* _Nullable passphrase, NSError* _Nullable* error);
 
 // skipped function NeonJSTXSerializer with unsupported parameter or return types
