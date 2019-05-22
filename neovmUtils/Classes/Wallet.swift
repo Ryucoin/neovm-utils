@@ -79,10 +79,7 @@ final public class Wallet: NSObject, Codable {
             return false
         }
 
-        guard let enc = newEncryptedKey(wif: self.wif, password: password) else {
-            return false
-        }
-
+        let enc = newEncryptedKey(wif: self.wif, password: password)!
         self.lockKey = enc
         self.locked = true
         self.wif = ""

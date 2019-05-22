@@ -316,6 +316,11 @@ class Tests: XCTestCase {
         XCTAssertEqual(res2, "")
     }
 
+    func testHexFail() {
+        let string = "ABCDEFGHIJKLMNOPQRSTUV"
+        XCTAssertEqual(string.hexToDecimal(), 0)
+    }
+
     func testInvalidKeys() {
         let p = "NOT A VALID PRIVATE KEY"
         let w = "NOT A VALID WIF"
@@ -619,9 +624,19 @@ class Tests: XCTestCase {
         let methods: [String] = ["getTotal", "getCirculation", "getLocked"]
         for method in methods {
             let res = ontologyInvokeRead(contractHash: contractHash, method: method, args: [])
-            XCTAssertNotEqual(res, "")
-            print(res)
+            let num = res.hexToDecimal()
+            XCTAssertGreaterThan(num, 0)
+            print(num)
         }
+    }
+
+    func testOntologyParameterArrayFail() {
+        let param = OntologyParameter(type: .Array, value: 5)
+        let args: [OntologyParameter] = [param]
+        let res = ontologyInvokeRead(contractHash: "a29564a30043d50620e4c6be61eda834d0acc48b", method: "getTotal", args: args)
+        let num = res.hexToDecimal()
+        XCTAssertGreaterThan(num, 0)
+        print(num)
     }
 
     func testOntologyWallet() {
