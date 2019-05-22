@@ -97,10 +97,7 @@ final public class Wallet: NSObject, Codable {
             return false
         }
 
-        guard let wifTry = wifFromEncryptedKey(encrypted: self.lockKey, password: password) else {
-            return false
-        }
-
+        let wifTry = wifFromEncryptedKey(encrypted: self.lockKey, password: password)
         guard let wal = walletFromWIF(wif: wifTry) else {
             return false
         }
@@ -250,7 +247,7 @@ public func newEncryptedKey(wif: String, password: String) -> String? {
     return nep2?.encryptedKey
 }
 
-public func wifFromEncryptedKey(encrypted: String, password: String) -> String? {
+public func wifFromEncryptedKey(encrypted: String, password: String) -> String {
     let error = NSErrorPointer(nilLiteral: ())
     let wif = NeoutilsNEP2Decrypt(encrypted, password, error)
     return wif

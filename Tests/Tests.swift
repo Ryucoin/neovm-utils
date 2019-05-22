@@ -827,4 +827,20 @@ class Tests: XCTestCase {
     func testWalletFromWIF() {
         let _ = walletFromWIF(wif: exampleWallet.wif)
     }
+
+    func testWif() {
+        let str = "ABCDEFGHIJKLMNOPQRTSTUVWXYZ"
+        let w1 = wifFromEncryptedKey(encrypted: str, password: "123")
+        let wif = newWallet().wif
+        guard let encrypted = newEncryptedKey(wif: wif, password: "123") else {
+            XCTFail()
+            return
+        }
+        let w2 = wifFromEncryptedKey(encrypted: encrypted, password: "456")
+        let none = ""
+        XCTAssertEqual(none, w1)
+        XCTAssertEqual(none, w2)
+        let enc2 = newEncryptedKey(wif: "", password: "")
+        XCTAssertNil(enc2)
+    }
 }
