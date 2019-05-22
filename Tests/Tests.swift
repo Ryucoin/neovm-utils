@@ -585,6 +585,58 @@ class Tests: XCTestCase {
         XCTAssertEqual(res4, "")
     }
 
+    func testOntMonitor() {
+        let exp = expectation(description: "Ont monitor")
+        let monitor = OntMonitor.shared
+        let blockHeight = monitor.blockHeight
+        XCTAssertEqual(blockHeight, 0)
+
+        func finish(_ monitor: OntMonitor, _ num: Int, _ exp: XCTestExpectation) {
+            print("Found new height #\(num): \(monitor.blockHeight)")
+            print("TPS: \(monitor.tps)")
+            print("Block time: \(monitor.blockTime)")
+            exp.fulfill()
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            let blockHeight2 = monitor.blockHeight
+            if blockHeight == blockHeight2 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    let blockHeight3 = monitor.blockHeight
+                    if blockHeight == blockHeight3 {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                            let blockHeight4 = monitor.blockHeight
+                            if blockHeight == blockHeight4 {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                                    let blockHeight5 = monitor.blockHeight
+                                    if blockHeight == blockHeight5 {
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                                            let blockHeight6 = monitor.blockHeight
+                                            if blockHeight == blockHeight6 {
+                                                XCTFail("No block in 30 seconds")
+                                            } else {
+                                                finish(monitor, 6, exp)
+                                            }
+                                        }
+                                    } else {
+                                        finish(monitor, 5, exp)
+                                    }
+                                }
+                            } else {
+                                finish(monitor, 4, exp)
+                            }
+                        }
+                    } else {
+                        finish(monitor, 3, exp)
+                    }
+                }
+            } else {
+                finish(monitor, 2, exp)
+            }
+        }
+        wait(for: [exp], timeout: 35)
+    }
+
     func testOntologyInvocation() {
         let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
         let method = "put"

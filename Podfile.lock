@@ -1,24 +1,33 @@
 PODS:
   - neovmUtils (0.4.3):
     - RyuCrypto (~> 0.0.1)
+    - Socket.IO-Client-Swift (~> 14.0.0)
   - RyuCrypto (0.0.1)
+  - Socket.IO-Client-Swift (14.0.0):
+    - Starscream (~> 3.0.6)
+  - Starscream (3.0.6)
 
 DEPENDENCIES:
   - neovmUtils (from `./`)
   - RyuCrypto
+  - Socket.IO-Client-Swift (= 14.0.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - RyuCrypto
+    - Socket.IO-Client-Swift
+    - Starscream
 
 EXTERNAL SOURCES:
   neovmUtils:
     :path: "./"
 
 SPEC CHECKSUMS:
-  neovmUtils: 30d66cd52d5eea9414bdc0bf248849d05bc9160d
+  neovmUtils: 946f19c37d6e34d965b1e0c4a1adeab4333c2d27
   RyuCrypto: 4395cd6eba1e291c5ad6b819feb73bc35cdd9402
+  Socket.IO-Client-Swift: 21e6a8a23a7d367d5ddfab6cbbd3c679cf3c25d6
+  Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
 
-PODFILE CHECKSUM: 3a76598d4222d635488357ea0df900168259ce82
+PODFILE CHECKSUM: 162cdf363b76b1f19a00206e8dba91c305c9ff58
 
 COCOAPODS: 1.6.1
