@@ -484,6 +484,14 @@ class Tests: XCTestCase {
         let args3: [Any] = [address, wallet.address, 1, 5]
         let res4 = oep4.transferMulti(args: [args3], decimals: 9, wallet: wallet)
         XCTAssertNotEqual(res4, "")
+
+        let res5 = oep4.approve(owner: wallet.address, spender: address, amount: 1, decimals: 8, wallet: wallet)
+        XCTAssertEqual(res5, fault)
+        let res6 = oep4.approve(owner: wallet.address, spender: address, amount: 1, decimals: 9, wallet: wallet)
+        XCTAssertEqual(res6, fault)
+
+        let allowance = oep4.allowance(owner: wallet.address, spender: address)
+        XCTAssertEqual(allowance, 0)
     }
 
     func testOEP5Mainnet() {
