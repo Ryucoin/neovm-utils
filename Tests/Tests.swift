@@ -384,6 +384,13 @@ class Tests: XCTestCase {
         }
     }
 
+    func testLockingIncorrectly() {
+        let a = newAccount()
+        a.wif = ""
+        let locked = a.lock(password: "123")
+        XCTAssertFalse(locked)
+    }
+
     func testLockedWallet() {
         let a = newWallet()
         let originalData = a.toData()
