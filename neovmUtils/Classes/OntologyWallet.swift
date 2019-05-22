@@ -39,6 +39,20 @@ public final class OntologyWallet: Codable {
         }
     }
 
+    func removeIdenitity(ident: Identity) {
+        self.identities = self.identities.filter { $0.ontid != ident.ontid }
+        if self.defaultOntid == ident.ontid {
+            self.defaultOntid = ""
+        }
+    }
+
+    func removeAccount(acc: Account) {
+        self.accounts = self.accounts.filter { $0.address != acc.address }
+        if self.defaultAccountAddress == acc.address {
+            self.defaultAccountAddress = ""
+        }
+    }
+
     func setDefaultOntId(ident: Identity) {
         for identity in self.identities {
             if ident.ontid == identity.ontid {

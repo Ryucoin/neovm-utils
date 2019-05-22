@@ -738,6 +738,14 @@ class Tests: XCTestCase {
         XCTAssertEqual(wallet.identities.count, 1)
         wallet.setDefaultOntId(ident: ident2)
         XCTAssertEqual(wallet.identities.count, 2)
+
+        wallet.removeIdenitity(ident: ident2)
+        XCTAssertEqual(wallet.identities.count, 1)
+        XCTAssertEqual(wallet.defaultOntid, "")
+
+        wallet.removeAccount(acc: account2)
+        XCTAssertEqual(wallet.accounts.count, 1)
+        XCTAssertEqual(wallet.defaultAccountAddress, "")
     }
 
     func testPublicKeyFrom() {

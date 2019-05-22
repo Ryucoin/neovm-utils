@@ -10,6 +10,8 @@ Follows the specifications outlined in the [Ontology Developer Documentation](ht
 - [Methods](#methods)
   - [Add Identity](#add-identity)
   - [Add Account](#add-account)
+  - [Remove Identity](#remove-identity)
+  - [Remove Account](#remove-account)
   - [Set Default OntId](#set-default-ontid)
   - [Set Default Address](#set-default-address)
 - [Helpers](#helpers)
@@ -50,12 +52,28 @@ Adds an `Identity` to the array `identities`.
 addIdentity(ident: Identity)
 ```
 
-#### Add Identity
+#### Add Account
 
 Adds an `Account` to the array `accounts`.
 
 ``` swift
 addAccount(acc: Account)
+```
+
+#### Remove Identity
+
+Removes an `Identity` from the array `identities`.
+
+``` swift
+removeIdentity(ident: Identity)
+```
+
+#### Remove Account
+
+Removes an `Account` from the array `accounts`.
+
+``` swift
+removeAccount(acc: Account)
 ```
 
 #### Set Default OntId
