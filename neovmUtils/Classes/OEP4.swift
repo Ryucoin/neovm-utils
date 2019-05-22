@@ -30,7 +30,8 @@ public class OEP4Interface: NSObject {
     }
 
     public func getDecimals() -> Int {
-        return ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "decimals", args: []).hexToDecimal()
+        let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "decimals", args: [])
+        return hex.hexToDecimal()
     }
 
     public func getTotalSupply() -> Int {
