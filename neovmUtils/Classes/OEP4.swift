@@ -62,6 +62,24 @@ public class OEP4Interface: NSObject {
         return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "transfer", args: [fromAcct, toAcct, spend], gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
     }
 
+    public func transferFrom(spender: String, from: String, to: String, amount: Double, decimals: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet) -> String {
+        return transferFrom(spender: spender, from: from, to: to, amount: amount, decimals: decimals, gasPrice: gasPrice, gasLimit: gasLimit, wif: wallet.wif)
+    }
+
+    public func transferFrom(spender: String, from: String, to: String, amount: Double, decimals: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
+        let spenderAcct = OntologyParameter(type: .Address, value: spender)
+        let fromAcct = OntologyParameter(type: .Address, value: from)
+        let toAcct = OntologyParameter(type: .String, value: to)
+        var type = OntologyParameterType.Integer
+        if decimals == 8 {
+            type = .Fixed8
+        } else if decimals == 9 {
+            type = .Fixed9
+        }
+        let spend = OntologyParameter(type: type, value: amount)
+        return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "transferFrom", args: [spenderAcct, fromAcct, toAcct, spend], gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
+    }
+
     public func transferMulti(args: [[Any]], decimals: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet) -> String {
         return transferMulti(args: args, decimals: decimals, gasPrice: gasPrice, gasLimit: gasLimit, wif: wallet.wif)
     }

@@ -501,6 +501,11 @@ class Tests: XCTestCase {
 
         let decimals = oep4.customRead(operation: "decimals", args: []).hexToDecimal()
         XCTAssertEqual(decimals, 6)
+
+        let res8 = oep4.transferFrom(spender: address, from: wallet.address, to: address, amount: 1, decimals: 8, wallet: wallet)
+        let res9 = oep4.transferFrom(spender: address, from: wallet.address, to: address, amount: 1, decimals: 9, wallet: wallet)
+        XCTAssertEqual(res8, fault)
+        XCTAssertEqual(res9, fault)
     }
 
     func testOEP5Mainnet() {
