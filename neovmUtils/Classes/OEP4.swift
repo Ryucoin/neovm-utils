@@ -45,11 +45,11 @@ public class OEP4Interface: NSObject {
         return hex.hexToDecimal()
     }
 
-    public func transfer(from: String, to: String, amount: Double, decimals: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet) -> String {
-        return transfer(from: from, to: to, amount: amount, decimals: decimals, gasPrice: gasPrice, gasLimit: gasLimit, wif: wallet.wif)
+    public func transfer(from: String, to: String, amount: Double, decimals: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet, payer: String = "") -> String {
+        return transfer(from: from, to: to, amount: amount, decimals: decimals, gasPrice: gasPrice, gasLimit: gasLimit, wif: wallet.wif, payer: payer)
     }
 
-    public func transfer(from: String, to: String, amount: Double, decimals: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
+    public func transfer(from: String, to: String, amount: Double, decimals: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String, payer: String = "") -> String {
         let fromAcct = OntologyParameter(type: .Address, value: from)
         let toAcct = OntologyParameter(type: .String, value: to)
         var type = OntologyParameterType.Integer
@@ -59,14 +59,14 @@ public class OEP4Interface: NSObject {
             type = .Fixed9
         }
         let spend = OntologyParameter(type: type, value: amount)
-        return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "transfer", args: [fromAcct, toAcct, spend], gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
+        return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "transfer", args: [fromAcct, toAcct, spend], gasPrice: gasPrice, gasLimit: gasLimit, wif: wif, payer: payer)
     }
 
-    public func transferFrom(spender: String, from: String, to: String, amount: Double, decimals: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet) -> String {
-        return transferFrom(spender: spender, from: from, to: to, amount: amount, decimals: decimals, gasPrice: gasPrice, gasLimit: gasLimit, wif: wallet.wif)
+    public func transferFrom(spender: String, from: String, to: String, amount: Double, decimals: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet, payer: String = "") -> String {
+        return transferFrom(spender: spender, from: from, to: to, amount: amount, decimals: decimals, gasPrice: gasPrice, gasLimit: gasLimit, wif: wallet.wif, payer: payer)
     }
 
-    public func transferFrom(spender: String, from: String, to: String, amount: Double, decimals: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
+    public func transferFrom(spender: String, from: String, to: String, amount: Double, decimals: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String, payer: String = "") -> String {
         let spenderAcct = OntologyParameter(type: .Address, value: spender)
         let fromAcct = OntologyParameter(type: .Address, value: from)
         let toAcct = OntologyParameter(type: .String, value: to)
@@ -77,14 +77,14 @@ public class OEP4Interface: NSObject {
             type = .Fixed9
         }
         let spend = OntologyParameter(type: type, value: amount)
-        return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "transferFrom", args: [spenderAcct, fromAcct, toAcct, spend], gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
+        return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "transferFrom", args: [spenderAcct, fromAcct, toAcct, spend], gasPrice: gasPrice, gasLimit: gasLimit, wif: wif, payer: payer)
     }
 
-    public func transferMulti(args: [[Any]], decimals: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet) -> String {
-        return transferMulti(args: args, decimals: decimals, gasPrice: gasPrice, gasLimit: gasLimit, wif: wallet.wif)
+    public func transferMulti(args: [[Any]], decimals: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet, payer: String = "") -> String {
+        return transferMulti(args: args, decimals: decimals, gasPrice: gasPrice, gasLimit: gasLimit, wif: wallet.wif, payer: payer)
     }
 
-    public func transferMulti(args: [[Any]], decimals: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
+    public func transferMulti(args: [[Any]], decimals: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String, payer: String = "") -> String {
         var params: [OntologyParameter] = []
         for arg in args {
             guard arg.count == 3 else {
@@ -104,14 +104,14 @@ public class OEP4Interface: NSObject {
             params.append(array)
         }
 
-        return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "transferMulti", args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
+        return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "transferMulti", args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif, payer: payer)
     }
 
-    public func approve(owner: String, spender: String, amount: Double, decimals: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet) -> String {
-        return approve(owner: owner, spender: spender, amount: amount, decimals: decimals, gasPrice: gasPrice, gasLimit: gasLimit, wif: wallet.wif)
+    public func approve(owner: String, spender: String, amount: Double, decimals: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet, payer: String = "") -> String {
+        return approve(owner: owner, spender: spender, amount: amount, decimals: decimals, gasPrice: gasPrice, gasLimit: gasLimit, wif: wallet.wif, payer: payer)
     }
 
-    public func approve(owner: String, spender: String, amount: Double, decimals: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
+    public func approve(owner: String, spender: String, amount: Double, decimals: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String, payer: String = "") -> String {
         let ownerAcct = OntologyParameter(type: .Address, value: owner)
         let spenderAcct = OntologyParameter(type: .String, value: spender)
         var type = OntologyParameterType.Integer
@@ -121,7 +121,7 @@ public class OEP4Interface: NSObject {
             type = .Fixed9
         }
         let spend = OntologyParameter(type: type, value: amount)
-        return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "approve", args: [ownerAcct, spenderAcct, spend], gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
+        return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "approve", args: [ownerAcct, spenderAcct, spend], gasPrice: gasPrice, gasLimit: gasLimit, wif: wif, payer: payer)
     }
 
     public func allowance(owner: String, spender: String) -> Int {
