@@ -464,6 +464,17 @@ class Tests: XCTestCase {
         XCTAssertTrue(w == exampleWallet.wif)
     }
 
+    func testNewWallet() {
+        let label = "Hello there!"
+        let password = "12345"
+        let wallet = newWallet(label: label, password: password)
+        XCTAssertTrue(wallet.locked)
+        XCTAssertEqual(wallet.wif, "")
+        XCTAssertEqual(wallet.label, label)
+        let unlocked = wallet.unlock(password: password)
+        XCTAssertTrue(unlocked)
+    }
+
     func testOEP4() {
         let oep4 = OEP4Interface(contractHash: "78b98deed62aa708eaf6de85843734ecdfb14c1b", endpoint: ontologyMainNodes.bestNode.rawValue)
         let address = "ATrApQ3w4xLnc2yDkEDXw1zAk9Ue544Csz"

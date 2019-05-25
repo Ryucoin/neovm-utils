@@ -23,6 +23,12 @@ public final class OntologyWallet: Codable {
     init(name: String) {
         self.name = name
         self.createTime = getTimestamp()
+        self.scrypt = [
+            "n": 16384,
+            "r": 8,
+            "p": 8,
+            "dkLen": 64
+        ]
     }
 
     func addIdentity(ident: Identity) {
@@ -84,7 +90,7 @@ fileprivate func getTimestamp() -> String {
     return dateFormatter.string(from: date)
 }
 
-func newAccount() -> Account {
-    let account: Account = newWallet()
+func newAccount(label: String = "", password: String? = nil) -> Account {
+    let account: Account = newWallet(label: label, password: password)
     return account
 }

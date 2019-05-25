@@ -23,8 +23,16 @@ public final class Wallet: NSObject, Codable {
     }
     public var locked: Bool = false
     private var lockKey: String = ""
+    public let algorithm: String = "ECDSA"
+    public let parameters: [String: String] = ["curve": "P-256"]
+    public var label: String = ""
+    public let signatureScheme: String = "SHA256withECDSA"
+    public let encAlg: String = "aes-256-gcm"
+    public var isDefault: Bool = false
 
-    public init(address: String, wif: String, privateKey: Data, publicKey: Data, neoWallet: NeoutilsWallet) {
+    public init(label: String = "", password: String? = nil, address: String, wif: String, privateKey: Data, publicKey: Data, neoWallet: NeoutilsWallet) {
+        super.init()
+        self.label = label
         self.address = address
         self.wif = wif
         self.privateKey = privateKey
@@ -34,6 +42,9 @@ public final class Wallet: NSObject, Codable {
         self.neoWallet = neoWallet
         self.locked = false
         self.lockKey = wif
+        if let password = password {
+            _ = self.lock(password: password)
+        }
     }
 
     private enum CodingKeys: String, CodingKey {
@@ -204,8 +215,10 @@ public enum KeyType {
 
 // MARK: - PUBLIC FUNCTIONS
 
-public func newWallet() -> Wallet {
-    let wallet = walletFromOntAccount(ontAccount: NeoutilsONTCreateAccount()!)
+public func newWallet(label: String = "", password: String? = nil) -> Wallet {
+    let wallet = walletFromOntAccount(label: label,
+                                      password: password,
+                                      ontAccount: NeoutilsONTCreateAccount()!)
     return wallet
 }
 
@@ -304,9 +317,11 @@ private func sha256(_ data: Data) -> Data {
     return res as Data
 }
 
-private func walletFromOntAccount(ontAccount: NeoutilsONTAccount) -> Wallet {
+private func walletFromOntAccount(label: String = "", password: String? = nil, ontAccount: NeoutilsONTAccount) -> Wallet {
     let err = NSErrorPointer(nilLiteral: ())
-    let w = Wallet(address: ontAccount.address,
+    let w = Wallet(label: label,
+                   password: password,
+                   address: ontAccount.address,
                    wif: ontAccount.wif,
                    privateKey: ontAccount.privateKey!,
                    publicKey: ontAccount.publicKey!,
