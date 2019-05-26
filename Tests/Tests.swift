@@ -531,7 +531,7 @@ class Tests: XCTestCase {
         let wallet = newWallet()
         let address = wallet.address
         let tokenId = ""
-        let state = State(address: address, tokenId: tokenId)
+        let state = OEP5State(address: address, tokenId: tokenId)
 
         XCTAssertEqual(oep5.getName(), "HyperDragons")
         XCTAssertEqual(oep5.getSymbol(), "HD")
@@ -558,7 +558,7 @@ class Tests: XCTestCase {
             let address = "ATrApQ3w4xLnc2yDkEDXw1zAk9Ue544Csz"
 
             let tokenId = ""
-            let state = State(address: address, tokenId: tokenId)
+            let state = OEP5State(address: address, tokenId: tokenId)
             XCTAssertEqual(oep5.getName(), "Ryu NFT Collectibles")
             XCTAssertEqual(oep5.getSymbol(), "RNC")
             XCTAssertTrue(oep5.getTotalSupply() > 1)

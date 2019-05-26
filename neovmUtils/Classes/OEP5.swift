@@ -45,11 +45,6 @@ public class OEP5Interface: NSObject {
         return ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "ownerOf", args: [token])
     }
 
-    public func getTokenName(tokenId: String) -> String {
-        let token = OntologyParameter(type: .String, value: tokenId)
-        return ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "nameOf", args: [token])
-    }
-
     public func transfer(address: String, tokenId: String, gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet) -> String {
         return transfer(address: address, tokenId: tokenId, gasPrice: gasPrice, gasLimit: gasLimit, wif: wallet.wif)
     }
@@ -60,11 +55,11 @@ public class OEP5Interface: NSObject {
         return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "transfer", args: [receiver, token], gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
     }
 
-    public func transferMulti(args: [State], gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet) -> String {
+    public func transferMulti(args: [OEP5State], gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet) -> String {
         return transferMulti(args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: wallet.wif)
     }
 
-    public func transferMulti(args: [State], gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
+    public func transferMulti(args: [OEP5State], gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
         var params: [[String]] = []
         for arg in args {
             let array = arg.getParam()
@@ -92,6 +87,34 @@ public class OEP5Interface: NSObject {
         }
 
         return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "transferMulti", args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
+    }
+
+    public func approve(address: String, tokenId: String, gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet) -> String {
+        return approve(address: address, tokenId: tokenId, gasPrice: gasPrice, gasLimit: gasLimit, wif: wallet.wif)
+    }
+
+    public func approve(address: String, tokenId: String, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
+        let toAcct = OntologyParameter(type: .Address, value: address)
+        let token = OntologyParameter(type: .String, value: tokenId)
+        let params = [toAcct, token]
+        return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "approve", args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
+    }
+
+    // OEP 5.1
+
+    public func clearApproved(tokenId: String, gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet) -> String {
+        return clearApproved(tokenId: tokenId, gasPrice: gasPrice, gasLimit: gasLimit, wif: wallet.wif)
+    }
+
+    public func clearApproved(tokenId: String, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
+        let token = OntologyParameter(type: .String, value: tokenId)
+        let params = [token]
+        return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "clearApproved", args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
+    }
+
+    public func getTokenName(tokenId: String) -> String {
+        let token = OntologyParameter(type: .String, value: tokenId)
+        return ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "nameOf", args: [token])
     }
 
     public func mint(tokenName: String, address: String, gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet) -> String {

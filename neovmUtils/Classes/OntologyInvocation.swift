@@ -30,7 +30,7 @@ public class OntologyParameter {
     }
 }
 
-public class State {
+public class OEP5State {
     private var address: String = ""
     private var tokenId: String = ""
 
