@@ -16,7 +16,10 @@ public class Identity: Codable {
     public var privateKey: String = ""
     public var wif: String = ""
     public var locked: Bool = false
-    private var key: String = ""
+    public var key: String = ""
+    public var isDefault: Bool = false
+    public let algorithm = "ECDSA"
+    public let parameters: [String: String] = ["curve": "P-256"]
 
     fileprivate convenience init(label: String = "", password: String? = nil, ontid: String, publicKey: String, privateKey: String, wif: String) {
         self.init()
