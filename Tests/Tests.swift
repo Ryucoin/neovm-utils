@@ -601,6 +601,14 @@ class Tests: XCTestCase {
         identity3.wif = ""
         let res4 = sendRegister(ident: identity3, payerAcct: exampleWallet)
         XCTAssertEqual(res4, "")
+        let res5 = sendRegister(ident: identity2, payerAcct: exampleWallet)
+        XCTAssertEqual(res5, "")
+        let unlocked = identity.unlock(password: "1234")
+        XCTAssertFalse(unlocked)
+        let identity4 = createIdentity()
+        identity4.wif = ""
+        let locked = identity4.lock(password: "1234")
+        XCTAssertFalse(locked)
     }
 
     func testOntMonitor() {

@@ -13,44 +13,77 @@ public class Identity: Codable {
     public var label: String = ""
     public var ontid: String = ""
     public var publicKey: String = ""
-    public var privatKey: String = ""
+    public var privateKey: String = ""
     public var wif: String = ""
-    public var enc: String = ""
-    public var hasPassword: Bool = false
+    public var locked: Bool = false
+    private var lockKey: String = ""
 
-    fileprivate convenience init(label: String = "", ontid: String, publicKey: String, privateKey: String, wif: String, enc: String) {
+    fileprivate convenience init(label: String = "", password: String? = nil, ontid: String, publicKey: String, privateKey: String, wif: String) {
         self.init()
         self.label = label
         self.ontid = ontid
         self.publicKey = publicKey
-        self.privatKey = privateKey
+        self.privateKey = privateKey
         self.wif = wif
-        self.enc = enc
-        self.hasPassword = enc != ""
+        self.locked = false
+        if let password = password {
+            _ = lock(password: password)
+        }
+    }
+
+    public func lock(password: String) -> Bool {
+        if locked {
+            return false
+        }
+
+        guard let enc = newEncryptedKey(wif: self.wif, password: password) else {
+            return false
+        }
+
+        self.lockKey = enc
+        self.locked = true
+        self.wif = ""
+        self.privateKey = ""
+        return true
+    }
+
+    public func unlock(password: String) -> Bool {
+        if !locked {
+            return false
+        }
+
+        let wifTry = wifFromEncryptedKey(encrypted: self.lockKey, password: password)
+        guard let wal = walletFromWIF(wif: wifTry) else {
+            return false
+        }
+
+        self.lockKey = ""
+        self.locked = false
+        self.wif = wal.wif
+        self.privateKey = wal.privateKeyString
+        return true
     }
 }
 
-public func createIdentity(label: String = "", password: String = "") -> Identity {
+public func createIdentity(label: String = "", password: String? = nil) -> Identity {
     let account = newAccount()
     let ontid = "did:ont:\(account.address)"
     let publicKey = account.publicKeyString
-    var privateKey = account.privateKeyString
-    var wif = account.wif
-    var enc = ""
-    if password != "" {
-        enc = newEncryptedKey(wif: wif, password: password)!
-        privateKey = ""
-        wif = ""
-    }
-    return Identity(label: label, ontid: ontid, publicKey: publicKey, privateKey: privateKey, wif: wif, enc: enc)
+    let privateKey = account.privateKeyString
+    let wif = account.wif
+    return Identity(label: label, password: password, ontid: ontid, publicKey: publicKey, privateKey: privateKey, wif: wif)
 }
 
-public func sendRegister(endpoint: String = ontologyTestNodes.bestNode.rawValue, ident: Identity, password: String = "", payerAcct: Account, gasLimit: Int = 20000, gasPrice: Int = 500) -> String {
-    var wif = ""
-    if ident.hasPassword {
-        wif = wifFromEncryptedKey(encrypted: ident.enc, password: password)
-    } else {
-        wif = ident.wif
+public func sendRegister(endpoint: String = ontologyTestNodes.bestNode.rawValue, ident: Identity, password: String? = nil, payerAcct: Account, gasLimit: Int = 20000, gasPrice: Int = 500) -> String {
+    var wif = ident.wif
+    if ident.locked {
+        if let password = password {
+            _ = ident.unlock(password: password)
+            wif = ident.wif
+            _ = ident.lock(password: password)
+        } else {
+            return ""
+        }
     }
 
     let err = NSErrorPointer(nilLiteral: ())
