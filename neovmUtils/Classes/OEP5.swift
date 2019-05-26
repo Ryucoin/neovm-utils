@@ -8,16 +8,7 @@
 
 import Foundation
 
-public class OEP5Interface: NSObject {
-
-    private var contractHash: String = ""
-    private var endpoint: String = ""
-
-    public convenience init(contractHash: String, endpoint: String = ontologyTestNodes.bestNode.rawValue) {
-        self.init()
-        self.contractHash = contractHash
-        self.endpoint = endpoint
-    }
+public class OEP5Interface: OEP10Interface {
 
     public func getName() -> String {
         let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "name", args: [])

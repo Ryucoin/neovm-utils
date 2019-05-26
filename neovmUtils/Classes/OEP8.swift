@@ -8,16 +8,7 @@
 
 import Foundation
 
-public class OEP8Interface: NSObject {
-
-    private var contractHash: String = ""
-    private var endpoint: String = ""
-
-    public convenience init(contractHash: String, endpoint: String = ontologyTestNodes.bestNode.rawValue) {
-        self.init()
-        self.contractHash = contractHash
-        self.endpoint = endpoint
-    }
+public class OEP8Interface: OEP10Interface {
 
     public func getName(tokenId: Int) -> String {
         let tokenId = OntologyParameter(type: .Integer, value: tokenId)
