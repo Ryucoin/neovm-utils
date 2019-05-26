@@ -22,7 +22,7 @@ public final class Wallet: NSObject, Codable {
         return neoWallet?.privateKey
     }
     public var locked: Bool = false
-    private var lockKey: String = ""
+    public var key: String = ""
     public let algorithm: String = "ECDSA"
     public let parameters: [String: String] = ["curve": "P-256"]
     public var label: String = ""
@@ -41,7 +41,7 @@ public final class Wallet: NSObject, Codable {
         self.publicKeyString = publicKey.bytesToHex
         self.neoWallet = neoWallet
         self.locked = false
-        self.lockKey = wif
+        self.key = ""
         if let password = password {
             _ = self.lock(password: password)
         }
@@ -60,7 +60,7 @@ public final class Wallet: NSObject, Codable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(lockKey, forKey: .lockKey)
+        try container.encode(key, forKey: .lockKey)
         try container.encode(address, forKey: .address)
         try container.encode(publicKey, forKey: .publicKey)
         try container.encode(publicKeyString, forKey: .publicKeyString)
@@ -72,7 +72,7 @@ public final class Wallet: NSObject, Codable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.lockKey = try container.decode(String.self, forKey: .lockKey)
+        self.key = try container.decode(String.self, forKey: .lockKey)
         self.address = try container.decode(String.self, forKey: .address)
         self.publicKey = try container.decode(Data.self, forKey: .publicKey)
         self.publicKeyString = try container.decode(String.self, forKey: .publicKeyString)
@@ -94,7 +94,7 @@ public final class Wallet: NSObject, Codable {
             return false
         }
 
-        self.lockKey = enc
+        self.key = enc
         self.locked = true
         self.wif = ""
         self.privateKeyString = ""
@@ -108,12 +108,12 @@ public final class Wallet: NSObject, Codable {
             return false
         }
 
-        let wifTry = wifFromEncryptedKey(encrypted: self.lockKey, password: password)
+        let wifTry = wifFromEncryptedKey(encrypted: self.key, password: password)
         guard let wal = walletFromWIF(wif: wifTry) else {
             return false
         }
 
-        self.lockKey = ""
+        self.key = ""
         self.locked = false
         self.wif = wal.wif
         self.privateKeyString = wal.privateKeyString

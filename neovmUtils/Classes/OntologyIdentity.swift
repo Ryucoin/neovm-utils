@@ -16,7 +16,7 @@ public class Identity: Codable {
     public var privateKey: String = ""
     public var wif: String = ""
     public var locked: Bool = false
-    private var lockKey: String = ""
+    private var key: String = ""
 
     fileprivate convenience init(label: String = "", password: String? = nil, ontid: String, publicKey: String, privateKey: String, wif: String) {
         self.init()
@@ -40,7 +40,7 @@ public class Identity: Codable {
             return false
         }
 
-        self.lockKey = enc
+        self.key = enc
         self.locked = true
         self.wif = ""
         self.privateKey = ""
@@ -52,12 +52,12 @@ public class Identity: Codable {
             return false
         }
 
-        let wifTry = wifFromEncryptedKey(encrypted: self.lockKey, password: password)
+        let wifTry = wifFromEncryptedKey(encrypted: self.key, password: password)
         guard let wal = walletFromWIF(wif: wifTry) else {
             return false
         }
 
-        self.lockKey = ""
+        self.key = ""
         self.locked = false
         self.wif = wal.wif
         self.privateKey = wal.privateKeyString
