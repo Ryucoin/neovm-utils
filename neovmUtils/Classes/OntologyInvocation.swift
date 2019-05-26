@@ -32,15 +32,15 @@ public class OntologyParameter {
 
 public class OEP5State {
     private var address: String = ""
-    private var tokenId: String = ""
+    private var tokenId: Any = ""
 
-    public convenience init(address: String, tokenId: String) {
+    public convenience init(address: String, tokenId: Any) {
         self.init()
         self.address = address
         self.tokenId = tokenId
     }
 
-    public func getParam() -> [String] {
+    public func getParam() -> [Any] {
         let array = [address, tokenId]
         return array
     }

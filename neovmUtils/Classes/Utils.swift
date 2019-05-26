@@ -61,4 +61,19 @@ public extension String {
         let final = UInt64(bitPattern: Int64(z))
         return Int(final)
     }
+
+    func scriptHashToAddress() -> String {
+        let length = self.count
+        var newStr = ""
+        let startIndex = self.startIndex
+        for i in 0..<length / 2 {
+            let index = length - 2 * (i + 1)
+            let start = self.index(startIndex, offsetBy: index)
+            let end = self.index(startIndex, offsetBy: index + 2)
+            let range = start..<end
+            let piece = self[range]
+            newStr += piece
+        }
+        return NeoutilsScriptHashToNEOAddress(newStr)
+    }
 }

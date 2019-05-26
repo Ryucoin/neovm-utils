@@ -29,4 +29,14 @@ public class OEPAssetInterface: NSObject {
     public func customRead(operation: String, args: [OntologyParameter]) -> String {
         return ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: operation, args: args)
     }
+
+    public func strOrIntToParam(arg: Any) -> OntologyParameter {
+        if let string = arg as? String {
+            return OntologyParameter(type: .String, value: string)
+        } else if let int = arg as? Int {
+            return OntologyParameter(type: .Integer, value: int)
+        } else {
+            return OntologyParameter(type: .String, value: "")
+        }
+    }
 }
