@@ -103,14 +103,14 @@ public func buildOntologyInvocationTransaction(contractHash: String, method: Str
     return buildOntologyInvocationTransactionHelper(contractHash: contractHash, method: method, args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif, payer: p)
 }
 
-public func ontologyInvoke(endpoint: String = ontologyTestNodes.bestNode.rawValue, contractHash: String, method: String, args: [OntologyParameter], gasPrice: Int = 0, gasLimit: Int = 0, wif: String, payer: String = "") -> String {
+public func ontologyInvoke(endpoint: String = testNet, contractHash: String, method: String, args: [OntologyParameter], gasPrice: Int = 0, gasLimit: Int = 0, wif: String, payer: String = "") -> String {
     let e = getEndpoint(def: endpoint)
     let params = convertParamArray(params: args)
     let p = payer == "" ? addressFromWif(wif: wif) ?? "" : payer
     return ontologyInvokeHelper(endpoint: e, contractHash: contractHash, method: method, args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif, payer: p)
 }
 
-public func ontologyInvokeRead(endpoint: String = ontologyTestNodes.bestNode.rawValue, contractHash: String, method: String, args: [OntologyParameter]) -> String {
+public func ontologyInvokeRead(endpoint: String = testNet, contractHash: String, method: String, args: [OntologyParameter]) -> String {
     let wallet = newWallet()
     let raw = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: 500, gasLimit: 20000, wif: wallet.wif, payer: wallet.address)
     let res = ontologySendPreExecRawTransaction(endpoint: endpoint, raw: raw)

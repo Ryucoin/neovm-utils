@@ -254,7 +254,7 @@ class Tests: XCTestCase {
         let (ont, ong) = ontologyGetBalances(address: address)
         XCTAssertTrue(ont > 0 && ong > 0)
 
-        let (ontMain, ongMain) = ontologyGetBalances(endpoint: ontologyMainNodes.bestNode.rawValue, address: address)
+        let (ontMain, ongMain) = ontologyGetBalances(endpoint: mainNet, address: address)
         XCTAssertTrue(ontMain > 0 && ongMain > 0)
 
         let (ontBad, ongBad) = ontologyGetBalances(address: "bad address")
@@ -287,7 +287,7 @@ class Tests: XCTestCase {
 
     func testGetRawTransaction() {
         let txID = "ea82d1e85303e1d955231b7c863308ce9b580602d386f8aa9bd80bccc0b51b6e"
-        let raw = ontologyGetRawTransaction(endpoint: ontologyMainNodes.bestNode.rawValue, txID: txID)
+        let raw = ontologyGetRawTransaction(endpoint: mainNet, txID: txID)
         let unknown = "unknown transaction"
         XCTAssertNotEqual(raw, unknown)
     }
@@ -477,14 +477,15 @@ class Tests: XCTestCase {
     }
 
     func testOEP4() {
-        let oep4 = OEP4Interface(contractHash: "78b98deed62aa708eaf6de85843734ecdfb14c1b", endpoint: ontologyMainNodes.bestNode.rawValue)
+        let oep4 = OEP4Interface(contractHash: "78b98deed62aa708eaf6de85843734ecdfb14c1b", endpoint: mainNet)
         let address = "ATrApQ3w4xLnc2yDkEDXw1zAk9Ue544Csz"
 
         XCTAssertEqual(oep4.getName(), "SEED")
         XCTAssertEqual(oep4.getSymbol(), "SEED")
-        XCTAssertEqual(oep4.getDecimals(), 6)
+        let decimals = Double(oep4.getDecimals())
+        XCTAssertEqual(decimals, 6)
         let rawSupply = oep4.getTotalSupply()
-        let actual = Int(Double(rawSupply) / pow(10, 6))
+        let actual = Int(Double(rawSupply) / pow(10, decimals))
         XCTAssertEqual(actual, 100000000000)
         XCTAssertEqual(oep4.getBalance(address: address), 0)
 
@@ -517,8 +518,8 @@ class Tests: XCTestCase {
         let res7 = oep4.customInvoke(operation: "transfer", args: [from, to, amount], wallet: wallet)
         XCTAssertNotEqual(res7, "")
 
-        let decimals = oep4.customRead(operation: "decimals", args: []).hexToDecimal()
-        XCTAssertEqual(decimals, 6)
+        let decimals2 = oep4.customRead(operation: "decimals", args: []).hexToDecimal()
+        XCTAssertEqual(decimals2, 6)
 
         let res8 = oep4.transferFrom(spender: address, from: wallet.address, to: address, amount: 1, decimals: 8, wallet: wallet)
         let res9 = oep4.transferFrom(spender: address, from: wallet.address, to: address, amount: 1, decimals: 9, wallet: wallet)
@@ -527,7 +528,7 @@ class Tests: XCTestCase {
     }
 
     func testOEP5Mainnet() {
-        let oep5 = OEP5Interface(contractHash: "cae215265a5e348bfd603b8db22893aa74b42417", endpoint: ontologyMainNodes.bestNode.rawValue)
+        let oep5 = OEP5Interface(contractHash: "cae215265a5e348bfd603b8db22893aa74b42417", endpoint: mainNet)
         let wallet = newWallet()
         let address = wallet.address
         let tokenId = 87

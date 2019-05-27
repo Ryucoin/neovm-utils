@@ -77,7 +77,7 @@ public func createIdentity(label: String = "", password: String? = nil) -> Ident
     return Identity(label: label, password: password, ontid: ontid, publicKey: publicKey, privateKey: privateKey, wif: wif)
 }
 
-public func sendRegister(endpoint: String = ontologyTestNodes.bestNode.rawValue, ident: Identity, password: String? = nil, payerAcct: Account, gasLimit: Int = 20000, gasPrice: Int = 500) -> String {
+public func sendRegister(endpoint: String = testNet, ident: Identity, password: String? = nil, payerAcct: Account, gasLimit: Int = 20000, gasPrice: Int = 500) -> String {
     var wif = ident.wif
     if ident.locked {
         if let password = password {
@@ -258,7 +258,7 @@ private func parseDDO(ontid: String, hex: String) -> OntidDescriptionObject {
     return OntidDescriptionObject(ontid: ontid, publicKeys: publicKeys, attributes: attributes, recovery: recovery)
 }
 
-public func sendGetDDO(endpoint: String = ontologyTestNodes.bestNode.rawValue, ontid: String) -> OntidDescriptionObject? {
+public func sendGetDDO(endpoint: String = testNet, ontid: String) -> OntidDescriptionObject? {
     let err = NSErrorPointer(nilLiteral: ())
     let raw = NeoutilsOntologyBuildGetDDO(ontid, err)
     let response = ontologySendPreExecRawTransaction(endpoint: endpoint, raw: raw)
@@ -268,7 +268,7 @@ public func sendGetDDO(endpoint: String = ontologyTestNodes.bestNode.rawValue, o
     return parseDDO(ontid: ontid, hex: response)
 }
 
-public func sendGetDDO(endpoint: String = ontologyTestNodes.bestNode.rawValue, ident: Identity) -> OntidDescriptionObject? {
+public func sendGetDDO(endpoint: String = testNet, ident: Identity) -> OntidDescriptionObject? {
     let err = NSErrorPointer(nilLiteral: ())
     let raw = NeoutilsOntologyBuildGetDDO(ident.ontid, err)
     let response = ontologySendPreExecRawTransaction(endpoint: endpoint, raw: raw)

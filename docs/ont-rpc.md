@@ -27,7 +27,7 @@ Implemented in [OntologyRPC.swift](https://github.com/Ryucoin/neovm-utils/blob/m
 Gets the current block count
 
 ``` swift
-ontologyGetBlockCount(endpoint: String = ontologyTestNodes.bestNode.rawValue) -> Int
+ontologyGetBlockCount(endpoint: String = testNet) -> Int
 ```
 
 #### Get Balances
@@ -35,7 +35,7 @@ ontologyGetBlockCount(endpoint: String = ontologyTestNodes.bestNode.rawValue) ->
 Gets the ONT and ONG balances for an address.
 
 ``` swift
-ontologyGetBalances(endpoint: String = ontologyTestNodes.bestNode.rawValue, address: String) -> (Int, Double)
+ontologyGetBalances(endpoint: String = testNet, address: String) -> (Int, Double)
 ```
 
 #### Get Smart Code Event
@@ -43,7 +43,7 @@ ontologyGetBalances(endpoint: String = ontologyTestNodes.bestNode.rawValue, addr
 Gets the smart code event for a given transaction hash
 
 ``` swift
-ontologyGetSmartCodeEvent(endpoint: String = ontologyTestNodes.bestNode.rawValue, txHash: String) -> NeoutilsSmartCodeEvent?
+ontologyGetSmartCodeEvent(endpoint: String = testNet, txHash: String) -> NeoutilsSmartCodeEvent?
 ```
 
 #### Send Raw Transaction
@@ -51,7 +51,7 @@ ontologyGetSmartCodeEvent(endpoint: String = ontologyTestNodes.bestNode.rawValue
 Sends a raw transaction
 
 ``` swift
-ontologySendRawTransaction(endpoint: String = ontologyTestNodes.bestNode.rawValue, raw: String) -> String
+ontologySendRawTransaction(endpoint: String = testNet, raw: String) -> String
 ```
 
 #### Get Storage
@@ -59,7 +59,7 @@ ontologySendRawTransaction(endpoint: String = ontologyTestNodes.bestNode.rawValu
 Gets a value out of storage for a key for a given smart contract
 
 ``` swift
-ontologyGetStorage(endpoint: String = ontologyTestNodes.bestNode.rawValue, scriptHash: String, key: String) -> String
+ontologyGetStorage(endpoint: String = testNet, scriptHash: String, key: String) -> String
 ```
 
 #### Get Raw Transaction
@@ -67,7 +67,7 @@ ontologyGetStorage(endpoint: String = ontologyTestNodes.bestNode.rawValue, scrip
 Gets the raw transaction for a transaction id
 
 ``` swift
-ontologyGetRawTransaction(endpoint: String = ontologyTestNodes.bestNode.rawValue, txID: String) -> String
+ontologyGetRawTransaction(endpoint: String = testNet, txID: String) -> String
 ```
 
 #### Get Block With Hash
@@ -75,7 +75,7 @@ ontologyGetRawTransaction(endpoint: String = ontologyTestNodes.bestNode.rawValue
 Gets the block for a given hash
 
 ``` swift
-ontologyGetBlockWithHash(endpoint: String = ontologyTestNodes.bestNode.rawValue, hash: String) -> String
+ontologyGetBlockWithHash(endpoint: String = testNet, hash: String) -> String
 ```
 
 #### Get Block With Height
@@ -83,7 +83,7 @@ ontologyGetBlockWithHash(endpoint: String = ontologyTestNodes.bestNode.rawValue,
 Gets the block for a given height
 
 ``` swift
-ontologyGetBlockWithHeight(endpoint: String = ontologyTestNodes.bestNode.rawValue, height: Int) -> String
+ontologyGetBlockWithHeight(endpoint: String = testNet, height: Int) -> String
 ```
 
 #### Transfer
@@ -91,7 +91,7 @@ ontologyGetBlockWithHeight(endpoint: String = ontologyTestNodes.bestNode.rawValu
 Transfers an `OntAsset` to an address
 
 ``` swift
-ontologyTransfer(endpoint: String = ontologyTestNodes.bestNode.rawValue, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String, asset: OntAsset, toAddress: String, amount: Double) -> String
+ontologyTransfer(endpoint: String = testNet, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String, asset: OntAsset, toAddress: String, amount: Double) -> String
 ```
 
 
@@ -100,7 +100,7 @@ ontologyTransfer(endpoint: String = ontologyTestNodes.bestNode.rawValue, gasPric
 Claims ONG for an address
 
 ``` swift
-claimONG(endpoint: String = ontologyTestNodes.bestNode.rawValue, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String
+claimONG(endpoint: String = testNet, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String
 ```
 
 
@@ -109,7 +109,7 @@ claimONG(endpoint: String = ontologyTestNodes.bestNode.rawValue, gasPrice: Int =
 Gets the unbound ONG for an address
 
 ``` swift
-getUnboundONG(endpoint: String = ontologyTestNodes.bestNode.rawValue, address: String) -> String
+getUnboundONG(endpoint: String = testNet, address: String) -> String
 ```
 
 ### Helpers

@@ -52,7 +52,7 @@ buildOntologyInvocationTransaction(contractHash: String, method: String, args: [
 Invokes a transaction
 
 ``` swift
-ontologyInvoke(endpoint: String = ontologyTestNodes.bestNode.rawValue, contractHash: String, method: String, args: [OntologyParameter], gasPrice: Int = 0, gasLimit: Int = 0, wif: String, payer: String = "") -> String?
+ontologyInvoke(endpoint: String = testNet, contractHash: String, method: String, args: [OntologyParameter], gasPrice: Int = 0, gasLimit: Int = 0, wif: String, payer: String = "") -> String?
 ```
 
 #### Read
@@ -60,5 +60,5 @@ ontologyInvoke(endpoint: String = ontologyTestNodes.bestNode.rawValue, contractH
 Pre-executes a transaction
 
 ``` swift
-ontologyInvokeRead(endpoint: String = ontologyTestNodes.bestNode.rawValue, contractHash: String, method: String, args: [OntologyParameter]) -> String?
+ontologyInvokeRead(endpoint: String = testNet, contractHash: String, method: String, args: [OntologyParameter]) -> String?
 ```

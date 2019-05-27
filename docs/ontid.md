@@ -105,7 +105,7 @@ createIdentity(label: String = "", password: String = "") -> Identity
 Registers an `Identity`
 
 ``` swift
-sendRegister(endpoint: String = ontologyTestNodes.bestNode.rawValue, ident: Identity, password: String = "", payerAcct: Wallet, gasLimit: Int = 20000, gasPrice: Int = 500) -> String
+sendRegister(endpoint: String = testNet, ident: Identity, password: String = "", payerAcct: Wallet, gasLimit: Int = 20000, gasPrice: Int = 500) -> String
 ```
 
 #### Send Get DDO
@@ -113,9 +113,9 @@ sendRegister(endpoint: String = ontologyTestNodes.bestNode.rawValue, ident: Iden
 Gets a `OntidDescriptionObject?` for a given ontid or `Identity`
 
 ``` swift
-sendGetDDO(endpoint: String = ontologyTestNodes.bestNode.rawValue, ontid: String) -> OntidDescriptionObject?
+sendGetDDO(endpoint: String = testNet, ontid: String) -> OntidDescriptionObject?
 ```
 and
 ``` swift
-sendGetDDO(endpoint: String = ontologyTestNodes.bestNode.rawValue, ident: Identity) -> OntidDescriptionObject?
+sendGetDDO(endpoint: String = testNet, ident: Identity) -> OntidDescriptionObject?
 ```
