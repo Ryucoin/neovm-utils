@@ -103,6 +103,8 @@ public class OEP5Interface: OEP10Interface {
         return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "clearApproved", args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
     }
 
+    // OEP 5.R
+
     public func getTokenName(tokenId: Any) -> String {
         let token = strOrIntToParam(arg: tokenId)
         return ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "nameOf", args: [token])
