@@ -75,7 +75,7 @@ public class OEP8Interface: OEP10Interface {
             let fromAcct = OntologyParameter(type: .Address, value: arg[0] as! String)
             let toAcct = OntologyParameter(type: .Address, value: arg[1] as! String)
             let token = strOrIntToParam(arg: arg[2])
-            let spending = OntologyParameter(type: .Address, value: arg[3] as! Int)
+            let spending = OntologyParameter(type: .Integer, value: arg[3] as! Int)
             let array = OntologyParameter(type: .Array, value: [fromAcct, toAcct, token, spending])
             params.append(array)
         }
@@ -109,12 +109,12 @@ public class OEP8Interface: OEP10Interface {
         return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "transferFrom", args: [spenderAcct, fromAcct, toAcct, token, sending], gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
     }
 
-    public func getAllowance(owner: String, spender: String, tokenId: Any) -> String {
+    public func getAllowance(owner: String, spender: String, tokenId: Any) -> Int {
         let ownerAcct = OntologyParameter(type: .Address, value: owner)
         let spenderAcct = OntologyParameter(type: .Address, value: spender)
         let token = strOrIntToParam(arg: tokenId)
         let hex =  ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "allowance", args: [ownerAcct, spenderAcct, token])
-        return hex.hexToAscii()
+        return hex.hexToDecimal()
     }
 
     public func approveMulti(args: [OEP8State], gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet) -> String {
@@ -145,7 +145,7 @@ public class OEP8Interface: OEP10Interface {
             let fromAcct = OntologyParameter(type: .Address, value: arg[0] as! String)
             let toAcct = OntologyParameter(type: .Address, value: arg[1] as! String)
             let token = strOrIntToParam(arg: arg[2])
-            let spending = OntologyParameter(type: .Address, value: arg[3] as! Int)
+            let spending = OntologyParameter(type: .Integer, value: arg[3] as! Int)
             let array = OntologyParameter(type: .Array, value: [fromAcct, toAcct, token, spending])
             params.append(array)
         }
