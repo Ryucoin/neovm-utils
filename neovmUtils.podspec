@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
 
   s.homepage         = 'https://github.com/Ryucoin/neovm-utils'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'WyattMufson' => 'wyatt@ryucoin.com' }
+  s.author           = { 'WyattMufson' => 'wyatt@towerbuilders.org' }
   s.source           = { :git => 'https://github.com/Ryucoin/neovm-utils.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '12.0'
