@@ -107,7 +107,7 @@ The compiled headers created by gomobile should be wrapped in NS_ASSUME_NONNULL 
 
 #### Primary Authors
 
-`neovmUtils` - [Wyatt Mufson](mailto:wyatt@towerbuilders.org) from Ryu Games
+`neovmUtils` - [Wyatt Mufson](mailto:wyatt@towerbuilders.org) from Ryu Games and TowerBuilders
 
 `neo-utils` - [Apisit Toompakdee](mailto:apisit@o3.network) from O3 Labs
 
