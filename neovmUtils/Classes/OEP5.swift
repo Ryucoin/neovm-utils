@@ -71,7 +71,7 @@ public class OEP5Interface: OEP10Interface {
                 continue
             }
 
-            let receiver = OntologyParameter(type: .Address, value: arg[0] as! String)
+            let receiver = OntologyParameter(type: .Address, value: arg[0] as? String ?? "")
             let token = strOrIntToParam(arg: arg[1])
             let array = OntologyParameter(type: .Array, value: [receiver, token])
             params.append(array)

@@ -72,10 +72,10 @@ public class OEP8Interface: OEP10Interface {
                 continue
             }
 
-            let fromAcct = OntologyParameter(type: .Address, value: arg[0] as! String)
-            let toAcct = OntologyParameter(type: .Address, value: arg[1] as! String)
+            let fromAcct = OntologyParameter(type: .Address, value: arg[0] as? String ?? "")
+            let toAcct = OntologyParameter(type: .Address, value: arg[1] as? String ?? "")
             let token = strOrIntToParam(arg: arg[2])
-            let spending = OntologyParameter(type: .Integer, value: arg[3] as! Int)
+            let spending = OntologyParameter(type: .Integer, value: arg[3] as? Int ?? 0)
             let array = OntologyParameter(type: .Array, value: [fromAcct, toAcct, token, spending])
             params.append(array)
         }
@@ -142,10 +142,10 @@ public class OEP8Interface: OEP10Interface {
                 continue
             }
 
-            let fromAcct = OntologyParameter(type: .Address, value: arg[0] as! String)
-            let toAcct = OntologyParameter(type: .Address, value: arg[1] as! String)
+            let fromAcct = OntologyParameter(type: .Address, value: arg[0] as? String ?? "")
+            let toAcct = OntologyParameter(type: .Address, value: arg[1] as? String ?? "")
             let token = strOrIntToParam(arg: arg[2])
-            let spending = OntologyParameter(type: .Integer, value: arg[3] as! Int)
+            let spending = OntologyParameter(type: .Integer, value: arg[3] as? Int ?? 0)
             let array = OntologyParameter(type: .Array, value: [fromAcct, toAcct, token, spending])
             params.append(array)
         }
@@ -164,11 +164,11 @@ public class OEP8Interface: OEP10Interface {
                 continue
             }
 
-            let spenderAcct = OntologyParameter(type: .Address, value: arg[0] as! String)
-            let fromAcct = OntologyParameter(type: .Address, value: arg[1] as! String)
-            let toAcct = OntologyParameter(type: .Address, value: arg[2] as! String)
+            let spenderAcct = OntologyParameter(type: .Address, value: arg[0] as? String ?? "")
+            let fromAcct = OntologyParameter(type: .Address, value: arg[1] as? String ?? "")
+            let toAcct = OntologyParameter(type: .Address, value: arg[2] as? String ?? "")
             let token = strOrIntToParam(arg: arg[3])
-            let spending = OntologyParameter(type: .Integer, value: arg[4] as! Int)
+            let spending = OntologyParameter(type: .Integer, value: arg[4] as? Int ?? 0)
             let array = OntologyParameter(type: .Array, value: [spenderAcct, fromAcct, toAcct, token, spending])
             params.append(array)
         }
