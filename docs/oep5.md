@@ -114,15 +114,3 @@ or
 ``` swift
 func transferMulti(args: [State], wif: String) -> String {
 ```
-
-#### Mint
-
-Mints a token with name `tokenName` and sends it to `address`. Requires either a `wallet` or `wif` to sign the transaction. Returns the transaction hash.
-
-``` swift
-func mint(tokenName: String, address: String, wallet: Wallet) -> String
-```
-or
-``` swift
-func mint(tokenName: String, address: String, wif: String) -> String
-```

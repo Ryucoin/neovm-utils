@@ -18,6 +18,8 @@
 
 `neovmUtils` also implements BIP39 mnemonic phrases to generate wallets using an iOS wrapper of the [Trezor Crypto library](https://github.com/Ryucoin/trezor-crypto-ios).
 
+It allows users to interact with numerous classes of digital assets on Ontology, such as native ONT/ONG and OEP4/5/8/10 assets.
+
 ## Installation
 
 `neovmUtils` is available through [CocoaPods](https://cocoapods.org). To install
