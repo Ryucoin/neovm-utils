@@ -14,7 +14,7 @@
 
 ## Overview
 
-`neovmUtils` is a native iOS framework for interacting with the NEO and Ontology blockchains. It includes a compiled version of the [neo-utils](https://github.com/O3Labs/neo-utils) project by O3 Labs written in Go.
+`neovmUtils` is a native iOS framework for interacting with the Ontology and NEO blockchains. It includes a compiled version of the [neo-utils](https://github.com/O3Labs/neo-utils) project by O3 Labs written in Go.
 
 `neovmUtils` also implements BIP39 mnemonic phrases to generate wallets using an iOS wrapper of the [Trezor Crypto library](https://github.com/Ryucoin/trezor-crypto-ios).
 
