@@ -477,6 +477,17 @@ class Tests: XCTestCase {
         XCTAssertTrue(unlocked)
     }
 
+    func testOEP10() {
+        let oep5 = OEP5Interface(contractHash: "cae215265a5e348bfd603b8db22893aa74b42417", endpoint: mainNet)
+        let wallet = newWallet()
+        let hash = "edf64937ca304ea8180fa92e2de36dc0a33cc712"
+        XCTAssertTrue(oep5.approveContract(hash: hash, wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
+        XCTAssertTrue(oep5.unapproveContract(hash: hash, wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
+        XCTAssertEqual(oep5.isApproved(hash: hash, wallet: wallet), "00")
+        XCTAssertEqual(oep5.getTokenName(tokenId: "A"), "00")
+        XCTAssertEqual(oep5.getTokenName(tokenId: 5.0), "00")
+    }
+
     func testOEP4() {
         let oep4 = OEP4Interface(contractHash: "78b98deed62aa708eaf6de85843734ecdfb14c1b", endpoint: mainNet)
         let address = "ATrApQ3w4xLnc2yDkEDXw1zAk9Ue544Csz"
@@ -613,17 +624,6 @@ class Tests: XCTestCase {
 
         XCTAssertEqual(oep8.transferFromMulti(args: [[address, address, wallet.address, tokenId, 1]], wallet: wallet), tfault)
         XCTAssertTrue(oep8.transferFromMulti(args: [[address, address, wallet.address, tokenId]], wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
-    }
-
-    func testOEP10() {
-        let oep5 = OEP5Interface(contractHash: "cae215265a5e348bfd603b8db22893aa74b42417", endpoint: mainNet)
-        let wallet = newWallet()
-        let hash = "edf64937ca304ea8180fa92e2de36dc0a33cc712"
-        XCTAssertTrue(oep5.approveContract(hash: hash, wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
-        XCTAssertTrue(oep5.unapproveContract(hash: hash, wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
-        XCTAssertEqual(oep5.isApproved(hash: hash, wallet: wallet), "00")
-        XCTAssertEqual(oep5.getTokenName(tokenId: "A"), "00")
-        XCTAssertEqual(oep5.getTokenName(tokenId: 5.0), "00")
     }
 
     func testOID() {

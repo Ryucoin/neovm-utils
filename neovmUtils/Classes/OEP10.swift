@@ -11,23 +11,20 @@ import Foundation
 public class OEP10Interface: OEPAssetInterface {
 
     public func approveContract(hash: String, wallet: Wallet, gasPrice: Int = 500, gasLimit: Int = 20000) -> String {
-        let addr = OntologyParameter(type: .Address, value: wallet.address)
         let cHash = OntologyParameter(type: .String, value: hash)
-        let params = [addr, cHash]
+        let params = [cHash]
         return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "approveContract", args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wallet.wif)
     }
 
     public func unapproveContract(hash: String, wallet: Wallet, gasPrice: Int = 500, gasLimit: Int = 20000) -> String {
-        let addr = OntologyParameter(type: .Address, value: wallet.address)
         let cHash = OntologyParameter(type: .String, value: hash)
-        let params = [addr, cHash]
+        let params = [cHash]
         return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "unapproveContract", args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wallet.wif)
     }
 
     public func isApproved(hash: String, wallet: Wallet) -> String {
-        let addr = OntologyParameter(type: .Address, value: wallet.address)
         let cHash = OntologyParameter(type: .String, value: hash)
-        let params = [addr, cHash]
+        let params = [cHash]
         let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "isApproved", args: params)
         return hex
     }
