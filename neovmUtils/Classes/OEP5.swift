@@ -132,21 +132,4 @@ public class OEP5Interface: OEP10Interface {
         let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "tokenMetadata", args: [token])
         return hex
     }
-
-    // OEP 5.R
-
-    public func getTokenName(tokenId: Any) -> String {
-        let token = strOrIntToParam(arg: tokenId)
-        return ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "nameOf", args: [token])
-    }
-
-    public func mint(tokenName: String, address: String, gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet) -> String {
-        return mint(tokenName: tokenName, address: address, gasPrice: gasPrice, gasLimit: gasLimit, wif: wallet.wif)
-    }
-
-    public func mint(tokenName: String, address: String, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
-        let name = OntologyParameter(type: .String, value: tokenName)
-        let receiver = OntologyParameter(type: .Address, value: address)
-        return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "mint", args: [name, receiver], gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
-    }
 }

@@ -121,6 +121,26 @@ class Tests: XCTestCase {
         XCTAssertEqual("", res)
     }
 
+    func testCES1() {
+        let ces1 = CES1Interface(contractHash: "1aefd53f8c8a0614ad8f21013d010cdd2268fa7e")
+        let wallet = newWallet()
+        let address = "ASxs5XV5oEVafpoibiWxYXRqqXsmRz6GZR"
+
+        let tokenId = ""
+        XCTAssertEqual(ces1.getName(), "Ryu NFT Collectibles")
+        XCTAssertEqual(ces1.getSymbol(), "RNC")
+        XCTAssertTrue(ces1.getTotalSupply() > 1)
+        XCTAssertTrue(ces1.getBalance(address: address) > 1)
+        XCTAssertEqual(ces1.getOwner(tokenId: tokenId), "")
+
+        XCTAssertEqual(ces1.nameOf(tokenId: "A"), "")
+        XCTAssertEqual(ces1.nameOf(tokenId: 5.0), "")
+        XCTAssertEqual(ces1.mint(tokenName: "Name", address: address, wallet: wallet), fault)
+
+        let hex = ces1.tokensOf(address: address)
+        print(hex)
+    }
+
     func testClaimONG() {
         let tx = claimONG(wif: exampleWallet.wif)
         print(tx)
@@ -483,8 +503,6 @@ class Tests: XCTestCase {
         XCTAssertTrue(oep5.approveContract(hash: hash, wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
         XCTAssertTrue(oep5.unapproveContract(hash: hash, wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
         XCTAssertEqual(oep5.isApproved(hash: hash, wallet: wallet), "00")
-        XCTAssertEqual(oep5.getTokenName(tokenId: "A"), "00")
-        XCTAssertEqual(oep5.getTokenName(tokenId: 5.0), "00")
     }
 
     func testOEP4() {
@@ -555,13 +573,11 @@ class Tests: XCTestCase {
         XCTAssertEqual(oep5.getBalance(address: address), 0)
         XCTAssertEqual(owner, "654c9d8057fefb71a41954ec9b96d3af997119f9")
         XCTAssertEqual(ownerAddress, "AR1VgCAkzwqJKEA3K36g33HrBa3Yzd4Ssd")
-        XCTAssertEqual(oep5.getTokenName(tokenId: tokenId), "00")
 
         XCTAssertEqual(oep5.transfer(address: address, tokenId: tokenId, wallet: wallet), fault)
         XCTAssertEqual(oep5.transferMulti(args: [state], wallet: wallet), fault)
         XCTAssertEqual(oep5.transferMulti(args: [[address, tokenId]], wallet: wallet), fault)
         XCTAssertTrue(oep5.transferMulti(args: [[address, tokenId, "invalid"]], wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
-        XCTAssertTrue(oep5.mint(tokenName: "Name", address: address, wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
 
         XCTAssertEqual(oep5.approve(address: address, tokenId: tokenId, wallet: wallet), fault)
         XCTAssertTrue(oep5.clearApproved(tokenId: tokenId, wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
@@ -570,35 +586,6 @@ class Tests: XCTestCase {
         XCTAssertEqual(oep5.tokensOf(address: address), "00")
         XCTAssertTrue(oep5.approvalForAll(owner: address, to: ownerAddress, approval: true, wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
         XCTAssertTrue(oep5.approvalForAll(owner: address, to: ownerAddress, approval: false, wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
-    }
-
-    func testOEP5Solochain() {
-        let blockHeight = ontologyGetBlockCount(endpoint: solochainNode)
-        if blockHeight > 0 {
-            print("Solochain has blockheight of \(blockHeight)")
-
-            let oep5 = OEP5Interface(contractHash: "f073603eb71d65885ffa2b3cbf584588edfe4757", endpoint: solochainNode)
-
-            let wallet = newWallet()
-            let address = "ATrApQ3w4xLnc2yDkEDXw1zAk9Ue544Csz"
-
-            let tokenId = ""
-            let state = OEP5State(address: address, tokenId: tokenId)
-            XCTAssertEqual(oep5.getName(), "Ryu NFT Collectibles")
-            XCTAssertEqual(oep5.getSymbol(), "RNC")
-            XCTAssertTrue(oep5.getTotalSupply() > 1)
-            XCTAssertTrue(oep5.getBalance(address: address) > 1)
-            XCTAssertEqual(oep5.getOwner(tokenId: tokenId), "")
-            XCTAssertEqual(oep5.getTokenName(tokenId: tokenId), "")
-
-            XCTAssertEqual(oep5.transfer(address: address, tokenId: tokenId, gasPrice: 0, wallet: wallet), fault)
-            XCTAssertEqual(oep5.transferMulti(args: [state], gasPrice: 0,wallet: wallet), fault)
-            XCTAssertEqual(oep5.transferMulti(args: [[address, tokenId]], gasPrice: 0, wallet: wallet), fault)
-            XCTAssertEqual(oep5.transferMulti(args: [[address, tokenId, "invalid"]], gasPrice: 0, wallet: wallet), fault)
-            XCTAssertNotEqual(oep5.mint(tokenName: "Name", address: address, gasPrice: 0, gasLimit: 28000, wallet: wallet), fault)
-        } else {
-            print("Solochain isn't running, so skipping testOEP5Solochain")
-        }
     }
 
     func testOEP8() {
