@@ -3,8 +3,7 @@ import Neoutils
 
 class Tests: XCTestCase {
     var exampleWallet : Wallet = newWallet()
-    let fault = "[NeoVmService] vm execute state fault!"
-    let tfault = "[NeoVmService] vm execution encountered a state fault!"
+    let fault = "[NeoVmService] vm execution encountered a state fault!"
 
     override func setUp() {
         super.setUp()
@@ -566,6 +565,9 @@ class Tests: XCTestCase {
 
         XCTAssertEqual(oep5.approve(address: address, tokenId: tokenId, wallet: wallet), fault)
         XCTAssertTrue(oep5.clearApproved(tokenId: tokenId, wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
+
+        XCTAssertEqual(oep5.allowance(tokenId: tokenId), "00")
+        XCTAssertEqual(oep5.tokensOf(address: address), "00")
     }
 
     func testOEP5Solochain() {
@@ -609,20 +611,20 @@ class Tests: XCTestCase {
         XCTAssertEqual(oep8.getTotalSupply(tokenId: tokenId), 200000)
         XCTAssertEqual(oep8.getBalance(address: address, tokenId: tokenId), 200000)
 
-        XCTAssertEqual(oep8.transfer(from: address, to: wallet.address, tokenId: tokenId, amount: 1, wallet: wallet), tfault)
-        XCTAssertEqual(oep8.transferMulti(args: [state], wallet: wallet), tfault)
-        XCTAssertEqual(oep8.transferMulti(args: [[address, wallet.address, tokenId, 1]], wallet: wallet), tfault)
+        XCTAssertEqual(oep8.transfer(from: address, to: wallet.address, tokenId: tokenId, amount: 1, wallet: wallet), fault)
+        XCTAssertEqual(oep8.transferMulti(args: [state], wallet: wallet), fault)
+        XCTAssertEqual(oep8.transferMulti(args: [[address, wallet.address, tokenId, 1]], wallet: wallet), fault)
         XCTAssertTrue(oep8.transferMulti(args: [[address, tokenId, "invalid"]], wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
 
-        XCTAssertEqual(oep8.approve(from: address, to: wallet.address, tokenId: tokenId, amount: 1, wallet: wallet), tfault)
-        XCTAssertEqual(oep8.transferFrom(spender: address, from: address, to: wallet.address, tokenId: tokenId, amount: 1, wallet: wallet), tfault)
+        XCTAssertEqual(oep8.approve(from: address, to: wallet.address, tokenId: tokenId, amount: 1, wallet: wallet), fault)
+        XCTAssertEqual(oep8.transferFrom(spender: address, from: address, to: wallet.address, tokenId: tokenId, amount: 1, wallet: wallet), fault)
         XCTAssertEqual(oep8.getAllowance(owner: address, spender: wallet.address, tokenId: tokenId), 0)
 
-        XCTAssertEqual(oep8.approveMulti(args: [state], wallet: wallet), tfault)
-        XCTAssertEqual(oep8.approveMulti(args: [[address, wallet.address, tokenId, 1]], wallet: wallet), tfault)
+        XCTAssertEqual(oep8.approveMulti(args: [state], wallet: wallet), fault)
+        XCTAssertEqual(oep8.approveMulti(args: [[address, wallet.address, tokenId, 1]], wallet: wallet), fault)
         XCTAssertTrue(oep8.approveMulti(args: [[address, tokenId, "invalid"]], wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
 
-        XCTAssertEqual(oep8.transferFromMulti(args: [[address, address, wallet.address, tokenId, 1]], wallet: wallet), tfault)
+        XCTAssertEqual(oep8.transferFromMulti(args: [[address, address, wallet.address, tokenId, 1]], wallet: wallet), fault)
         XCTAssertTrue(oep8.transferFromMulti(args: [[address, address, wallet.address, tokenId]], wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
     }
 

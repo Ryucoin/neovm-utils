@@ -91,6 +91,12 @@ public class OEP5Interface: OEP10Interface {
         return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "approve", args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
     }
 
+    public func allowance(tokenId: Any) -> String {
+        let token = strOrIntToParam(arg: tokenId)
+        let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "allowance", args: [token])
+        return hex
+    }
+
     // OEP 5.1
 
     public func clearApproved(tokenId: Any, gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet) -> String {
@@ -101,6 +107,12 @@ public class OEP5Interface: OEP10Interface {
         let token = strOrIntToParam(arg: tokenId)
         let params = [token]
         return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "clearApproved", args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
+    }
+
+    public func tokensOf(address: String) -> String {
+        let owner = OntologyParameter(type: .Address, value: address)
+        let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "tokensOf", args: [owner])
+        return hex
     }
 
     // OEP 5.R
