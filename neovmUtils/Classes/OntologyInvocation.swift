@@ -16,17 +16,24 @@ public enum OntologyParameterType: String {
     case Fixed9
     case Integer
     case Array
+    case Bool
     case Unknown
 }
 
 public class OntologyParameter {
     public var type: OntologyParameterType = .Unknown
     public var value: Any = ""
-    
+
     public convenience init(type: OntologyParameterType, value: Any) {
         self.init()
-        self.type = type
-        self.value = value
+        if type == .Bool {
+            self.type = .Integer
+            let value = value as? Bool ?? false
+            self.value = value ? 1 : 0
+        } else {
+            self.type = type
+            self.value = value
+        }
     }
 }
 

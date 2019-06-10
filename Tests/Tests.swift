@@ -568,6 +568,8 @@ class Tests: XCTestCase {
 
         XCTAssertEqual(oep5.allowance(tokenId: tokenId), "00")
         XCTAssertEqual(oep5.tokensOf(address: address), "00")
+        XCTAssertTrue(oep5.approvalForAll(owner: address, to: ownerAddress, approval: true, wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
+        XCTAssertTrue(oep5.approvalForAll(owner: address, to: ownerAddress, approval: false, wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
     }
 
     func testOEP5Solochain() {

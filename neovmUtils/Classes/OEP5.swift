@@ -109,9 +109,27 @@ public class OEP5Interface: OEP10Interface {
         return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "clearApproved", args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
     }
 
+    public func approvalForAll(owner: String, to: String, approval: Bool, gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet) -> String {
+        return approvalForAll(owner: owner, to: to, approval: approval, gasPrice: gasPrice, gasLimit: gasLimit, wif: wallet.wif)
+    }
+
+    public func approvalForAll(owner: String, to: String, approval: Bool, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
+        let fromAcct = OntologyParameter(type: .Address, value: owner)
+        let toAcct = OntologyParameter(type: .Address, value: to)
+        let token = OntologyParameter(type: .Bool, value: approval)
+        let params = [fromAcct, toAcct, token]
+        return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "approvalForAll", args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
+    }
+
     public func tokensOf(address: String) -> String {
         let owner = OntologyParameter(type: .Address, value: address)
         let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "tokensOf", args: [owner])
+        return hex
+    }
+
+    public func tokenMetadata(tokenId: Any) -> String {
+        let token = strOrIntToParam(arg: tokenId)
+        let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "tokenMetadata", args: [token])
         return hex
     }
 
