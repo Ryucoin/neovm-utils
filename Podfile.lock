@@ -1,5 +1,5 @@
 PODS:
-  - neovmUtils (0.4.3):
+  - neovmUtils (1.0.1):
     - RyuCrypto (~> 0.0.1)
     - Socket.IO-Client-Swift (~> 14.0.0)
   - RyuCrypto (0.0.1)
@@ -23,7 +23,7 @@ EXTERNAL SOURCES:
     :path: "./"
 
 SPEC CHECKSUMS:
-  neovmUtils: 946f19c37d6e34d965b1e0c4a1adeab4333c2d27
+  neovmUtils: b94043a93e0837f94aa9da6bb397eab562d19d71
   RyuCrypto: 4395cd6eba1e291c5ad6b819feb73bc35cdd9402
   Socket.IO-Client-Swift: 21e6a8a23a7d367d5ddfab6cbbd3c679cf3c25d6
   Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5

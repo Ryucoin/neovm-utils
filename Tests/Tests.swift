@@ -519,8 +519,17 @@ class Tests: XCTestCase {
         XCTAssertEqual(bool, true)
         parser.resetParser()
 
-        let hex2 = "8100"
-        guard let arr = parser.deserialize(hex: hex2) as? [Any] else {
+        let hex2 = "0100"
+        guard let bool2 = parser.deserialize(hex: hex2) as? Bool else {
+            XCTFail()
+            return
+        }
+
+        XCTAssertEqual(bool2, false)
+        parser.resetParser()
+
+        let hex3 = "8100"
+        guard let arr = parser.deserialize(hex: hex3) as? [Any] else {
             XCTFail()
             return
         }
