@@ -1,6 +1,6 @@
 //
 //  QRView.swift
-//  neovmUtils_Tests
+//  neovmUtils
 //
 //  Created by Ross Krasner on 10/28/18.
 //  Copyright © 2019 Ryu Blockchain Technologies. All rights reserved.
