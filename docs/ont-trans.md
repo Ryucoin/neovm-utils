@@ -1,6 +1,6 @@
 # Ontology Transactions
 
-Implemented in [OntologyInvocation.swift](https://github.com/Ryucoin/neovm-utils/blob/master/neovmUtils/Classes/OntologyInvocation.swift)
+Implemented in [OntologyInvocation.swift](https://github.com/Ryucoin/neovm-utils/blob/master/neovmUtils/Classes/Ontology/OntologyInvocation.swift)
 
 - [Parameters](#parameters)
 - [Functions](#functions)

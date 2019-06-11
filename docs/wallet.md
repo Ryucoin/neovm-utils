@@ -1,6 +1,6 @@
 # Wallet
 
-Implemented in [Wallet.swift](https://github.com/Ryucoin/neovm-utils/blob/master/neovmUtils/Classes/Wallet.swift)
+Implemented in [Wallet.swift](https://github.com/Ryucoin/neovm-utils/blob/master/neovmUtils/Classes/Wallets/Wallet.swift)
 
 - [Wallet Class](#wallet-class)
 - [Properties](#properties)

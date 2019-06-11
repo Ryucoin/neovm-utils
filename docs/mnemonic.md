@@ -1,6 +1,6 @@
 # Mnemonic
 
-Implemented in [Crypto.swift](https://github.com/Ryucoin/neovm-utils/blob/master/neovmUtils/Classes/Crypto.swift)
+Implemented in [Mnemonic.swift](https://github.com/Ryucoin/neovm-utils/blob/master/neovmUtils/Classes/Wallets/Mnemonic.swift)
 
 - [Mnemonic Class](#mnemonic-class)
 - [Properties](#properties)

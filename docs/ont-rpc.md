@@ -1,6 +1,6 @@
 # Ontology RPC
 
-Implemented in [OntologyRPC.swift](https://github.com/Ryucoin/neovm-utils/blob/master/neovmUtils/Classes/OntologyRPC.swift)
+Implemented in [OntologyRPC.swift](https://github.com/Ryucoin/neovm-utils/blob/master/neovmUtils/Classes/Ontology/OntologyRPC.swift)
 
 - [Functions](#functions)
   - [ontologyGetBlockCount](#get-block-count)

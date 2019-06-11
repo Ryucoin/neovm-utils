@@ -1,6 +1,6 @@
 # QR View
 
-Implemented in [QRView.swift](https://github.com/Ryucoin/neovm-utils/blob/master/neovmUtils/Classes/QRView.swift)
+Implemented in [QRView.swift](https://github.com/Ryucoin/neovm-utils/blob/master/neovmUtils/Classes/UI/QRView.swift)
 
 - [QRView Class](#qrview-class)
 - [Properties](#properties)

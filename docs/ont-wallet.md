@@ -1,6 +1,6 @@
 # Ontology Wallet
 
-Implemented in [OntologyWallet.swift](https://github.com/Ryucoin/neovm-utils/blob/master/neovmUtils/Classes/OntologyWallet.swift)
+Implemented in [OntologyWallet.swift](https://github.com/Ryucoin/neovm-utils/blob/master/neovmUtils/Classes/Ontology/OntologyWallet.swift)
 
 Follows the specifications outlined in the [Ontology Developer Documentation](https://dev-docs.ont.io/#/docs-en/SDKs/01-wallet-file-specification).
 
