@@ -508,6 +508,34 @@ class Tests: XCTestCase {
         XCTAssertTrue(unlocked)
     }
 
+    func testNEOVMParser() {
+        let parser = NEOVMParser()
+        let hex1 = "0101"
+        guard let bool = parser.deserialize(hex: hex1) as? Bool else {
+            XCTFail()
+            return
+        }
+
+        XCTAssertEqual(bool, true)
+        parser.resetParser()
+
+        let hex2 = "8100"
+        guard let arr = parser.deserialize(hex: hex2) as? [Any] else {
+            XCTFail()
+            return
+        }
+
+        XCTAssertEqual(arr.count, 1)
+        parser.resetParser()
+
+        guard let empty = parser.deserialize(hex: "03") as? String else {
+            XCTFail()
+            return
+        }
+
+        XCTAssertEqual(empty, "")
+    }
+
     func testOEP10() {
         let oep5 = OEP5Interface(contractHash: "cae215265a5e348bfd603b8db22893aa74b42417", endpoint: mainNet)
         let wallet = newWallet()
