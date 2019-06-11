@@ -1,6 +1,6 @@
 # OEP5 Interface
 
-Implemented in [OEP5.swift](https://github.com/Ryucoin/neovm-utils/blob/master/neovmUtils/Classes/OEP5.swift)
+Implemented in [OEP5.swift](https://github.com/Ryucoin/neovm-utils/blob/master/neovmUtils/Classes/Asset%20Interfaces/OEP5.swift)
 
 - [OEP5 Class](#oep5-class)
 - [Properties](#properties)

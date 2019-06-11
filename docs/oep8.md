@@ -1,6 +1,6 @@
 # OEP8 Interface
 
-Implemented in [OEP8.swift](https://github.com/Ryucoin/neovm-utils/blob/master/neovmUtils/Classes/OEP8.swift)
+Implemented in [OEP8.swift](https://github.com/Ryucoin/neovm-utils/blob/master/neovmUtils/Classes/Asset%20Interfaces/OEP8.swift)
 
 - [OEP8 Class](#oep8-class)
 - [Properties](#properties)

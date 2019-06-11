@@ -1,6 +1,6 @@
 # OEP4 Interface
 
-Implemented in [OEP4.swift](https://github.com/Ryucoin/neovm-utils/blob/master/neovmUtils/Classes/OEP4.swift)
+Implemented in [OEP4.swift](https://github.com/Ryucoin/neovm-utils/blob/master/neovmUtils/Classes/Asset%20Interfaces/OEP4.swift)
 
 - [OEP4 Class](#oep4-class)
 - [Properties](#properties)
