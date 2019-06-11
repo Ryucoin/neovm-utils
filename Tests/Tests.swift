@@ -374,6 +374,35 @@ class Tests: XCTestCase {
         XCTAssertTrue(exampleWallet.address.isValidAddress)
     }
 
+    func testLockedWallet() {
+        let a = newWallet()
+        let originalData = a.toData()
+        let locked = a.lock(password: "123")
+        XCTAssertTrue(locked)
+        let second = a.lock(password: "456")
+        XCTAssertFalse(second)
+        let sig = a.signMessage(message: "Hello, world!")
+        XCTAssertNil(sig)
+        let publicKey = newWallet().publicKey
+        let publicKeyString = newWallet().publicKeyString
+        let shared = a.computeSharedSecret(publicKey: publicKey)
+        XCTAssertNil(shared)
+        let sharedString = a.computeSharedSecret(publicKey: publicKeyString)
+        XCTAssertNil(sharedString)
+        let enc = a.privateEncrypt(message: "XXX")
+        XCTAssertNil(enc)
+        let dec = a.privateDecrypt(encrypted: "XXX")
+        XCTAssertNil(dec)
+        let lockedData = a.toData()
+        XCTAssertNotEqual(originalData, lockedData)
+        let unlocked1 = a.unlock(password: "1234")
+        XCTAssertFalse(unlocked1)
+        let unlocked2 = a.unlock(password: "123")
+        XCTAssertTrue(unlocked2)
+        let unlocked3 = a.unlock(password: "123")
+        XCTAssertFalse(unlocked3)
+    }
+
     func testLocking() {
         let wallet = newWallet()
         let wif = wallet.wif
@@ -422,35 +451,6 @@ class Tests: XCTestCase {
         a.wif = ""
         let locked = a.lock(password: "123")
         XCTAssertFalse(locked)
-    }
-
-    func testLockedWallet() {
-        let a = newWallet()
-        let originalData = a.toData()
-        let locked = a.lock(password: "123")
-        XCTAssertTrue(locked)
-        let second = a.lock(password: "456")
-        XCTAssertFalse(second)
-        let sig = a.signMessage(message: "Hello, world!")
-        XCTAssertNil(sig)
-        let publicKey = newWallet().publicKey
-        let publicKeyString = newWallet().publicKeyString
-        let shared = a.computeSharedSecret(publicKey: publicKey)
-        XCTAssertNil(shared)
-        let sharedString = a.computeSharedSecret(publicKey: publicKeyString)
-        XCTAssertNil(sharedString)
-        let enc = a.privateEncrypt(message: "XXX")
-        XCTAssertNil(enc)
-        let dec = a.privateDecrypt(encrypted: "XXX")
-        XCTAssertNil(dec)
-        let lockedData = a.toData()
-        XCTAssertNotEqual(originalData, lockedData)
-        let unlocked1 = a.unlock(password: "1234")
-        XCTAssertFalse(unlocked1)
-        let unlocked2 = a.unlock(password: "123")
-        XCTAssertTrue(unlocked2)
-        let unlocked3 = a.unlock(password: "123")
-        XCTAssertFalse(unlocked3)
     }
 
     func testMnemonic() {
