@@ -28,7 +28,7 @@
 		7F6EF79F221EE62A00B20AA7 /* OntologyIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EF79E221EE62A00B20AA7 /* OntologyIdentity.swift */; };
 		7F725CE821FF04CA00850C2D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F725CE721FF04CA00850C2D /* Foundation.framework */; };
 		7FCC1AD42292AB59001EF591 /* OntologyWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCC1AD32292AB59001EF591 /* OntologyWallet.swift */; };
-		7FD0FC242216F96B00F52C0F /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC232216F96B00F52C0F /* Crypto.swift */; };
+		7FD0FC242216F96B00F52C0F /* Mnemonic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC232216F96B00F52C0F /* Mnemonic.swift */; };
 		7FD0FC262216F99400F52C0F /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC252216F99400F52C0F /* Wallet.swift */; };
 		7FD0FC282216FA8000F52C0F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC272216FA8000F52C0F /* Utils.swift */; };
 		7FD0FC2A2216FAC500F52C0F /* OntologyRPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC292216FAC500F52C0F /* OntologyRPC.swift */; };
@@ -77,7 +77,7 @@
 		7F6EF79E221EE62A00B20AA7 /* OntologyIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OntologyIdentity.swift; sourceTree = "<group>"; };
 		7F725CE721FF04CA00850C2D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7FCC1AD32292AB59001EF591 /* OntologyWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OntologyWallet.swift; sourceTree = "<group>"; };
-		7FD0FC232216F96B00F52C0F /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
+		7FD0FC232216F96B00F52C0F /* Mnemonic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mnemonic.swift; sourceTree = "<group>"; };
 		7FD0FC252216F99400F52C0F /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
 		7FD0FC272216FA8000F52C0F /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		7FD0FC292216FAC500F52C0F /* OntologyRPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OntologyRPC.swift; sourceTree = "<group>"; };
@@ -189,18 +189,12 @@
 			isa = PBXGroup;
 			children = (
 				7F66581822AF4A5300472335 /* Asset Interfaces */,
-				7FD0FC232216F96B00F52C0F /* Crypto.swift */,
-				7F66580A22AEEB1F00472335 /* DynamicList.swift */,
-				7F66580C22AEECF400472335 /* NEOVMParser.swift */,
 				7FD3E49C2295AB3A004A136B /* OntMonitor.swift */,
-				7F6EF79E221EE62A00B20AA7 /* OntologyIdentity.swift */,
-				7FD0FC2B2216FB3300F52C0F /* OntologyInvocation.swift */,
-				7FD0FC292216FAC500F52C0F /* OntologyRPC.swift */,
-				7FCC1AD32292AB59001EF591 /* OntologyWallet.swift */,
-				7F66580E22AEF6AE00472335 /* PackedList.swift */,
-				7F6EF748221AFF8C00B20AA7 /* QRView.swift */,
+				7F66581B22AF4BA800472335 /* Ontology */,
+				7F66581C22AF4BB900472335 /* UI */,
+				7F66581922AF4B6700472335 /* Smart Contracts */,
 				7FD0FC272216FA8000F52C0F /* Utils.swift */,
-				7FD0FC252216F99400F52C0F /* Wallet.swift */,
+				7F66581A22AF4B9400472335 /* Wallets */,
 			);
 			name = Classes;
 			path = neovmUtils/Classes;
@@ -217,6 +211,44 @@
 				7FD3E49E229ACF3A004A136B /* OEPAssetInterface.swift */,
 			);
 			path = "Asset Interfaces";
+			sourceTree = "<group>";
+		};
+		7F66581922AF4B6700472335 /* Smart Contracts */ = {
+			isa = PBXGroup;
+			children = (
+				7F66580A22AEEB1F00472335 /* DynamicList.swift */,
+				7F66580C22AEECF400472335 /* NEOVMParser.swift */,
+				7F66580E22AEF6AE00472335 /* PackedList.swift */,
+			);
+			path = "Smart Contracts";
+			sourceTree = "<group>";
+		};
+		7F66581A22AF4B9400472335 /* Wallets */ = {
+			isa = PBXGroup;
+			children = (
+				7FD0FC232216F96B00F52C0F /* Mnemonic.swift */,
+				7FD0FC252216F99400F52C0F /* Wallet.swift */,
+			);
+			path = Wallets;
+			sourceTree = "<group>";
+		};
+		7F66581B22AF4BA800472335 /* Ontology */ = {
+			isa = PBXGroup;
+			children = (
+				7F6EF79E221EE62A00B20AA7 /* OntologyIdentity.swift */,
+				7FD0FC2B2216FB3300F52C0F /* OntologyInvocation.swift */,
+				7FD0FC292216FAC500F52C0F /* OntologyRPC.swift */,
+				7FCC1AD32292AB59001EF591 /* OntologyWallet.swift */,
+			);
+			path = Ontology;
+			sourceTree = "<group>";
+		};
+		7F66581C22AF4BB900472335 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				7F6EF748221AFF8C00B20AA7 /* QRView.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		7F6EF751221C0CCA00B20AA7 /* neovmUtilsExample */ = {
@@ -491,7 +523,7 @@
 				7FD0FC2A2216FAC500F52C0F /* OntologyRPC.swift in Sources */,
 				7F66580D22AEECF400472335 /* NEOVMParser.swift in Sources */,
 				7F66580F22AEF6AF00472335 /* PackedList.swift in Sources */,
-				7FD0FC242216F96B00F52C0F /* Crypto.swift in Sources */,
+				7FD0FC242216F96B00F52C0F /* Mnemonic.swift in Sources */,
 				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
 				7FD0FC282216FA8000F52C0F /* Utils.swift in Sources */,
 				7FD3E49F229ACF3A004A136B /* OEPAssetInterface.swift in Sources */,

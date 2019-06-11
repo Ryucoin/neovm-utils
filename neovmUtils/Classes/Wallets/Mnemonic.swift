@@ -1,5 +1,5 @@
 //
-//  Crypto.swift
+//  Mnemonic.swift
 //  neovmUtils_Tests
 //
 //  Created by Wyatt Mufson on 2/15/19.
