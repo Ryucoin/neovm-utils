@@ -601,6 +601,30 @@ class Tests: XCTestCase {
         XCTAssertEqual(oep5.tokensOf(address: address), "00")
         XCTAssertTrue(oep5.approvalForAll(owner: address, to: ownerAddress, approval: true, wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
         XCTAssertTrue(oep5.approvalForAll(owner: address, to: ownerAddress, approval: false, wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
+
+        let hex = oep5.tokenMetadata(tokenId: tokenId)
+        let parser = NEOVMParser()
+        let raw = parser.deserialize(hex: hex)
+        guard let metadata = raw as? [String: Any] else {
+            XCTFail("Failed to cast metadata to dict")
+            return
+        }
+
+        guard let image = metadata["image"] as? String else {
+            XCTFail("Failed to cast image")
+            return
+        }
+
+        guard let name = metadata["name"] as? String else {
+            XCTFail("Failed to cast name")
+            return
+        }
+
+        let imageURL = "https://hyd-go-res.alfakingdom.com/normal/W.svg"
+        XCTAssertEqual(imageURL, image.hexToAscii())
+
+        let tokenName = "dragon#W"
+        XCTAssertEqual(tokenName, name.hexToAscii())
     }
 
     func testOEP8() {
