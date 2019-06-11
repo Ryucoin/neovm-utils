@@ -151,6 +151,24 @@ class Tests: XCTestCase {
 
         let dna = ces1.getDNA(tokenId: tokenId)
         XCTAssertTrue(dna.count == 120)
+
+        let colorStruct1 = ces1.getColor(tokenId: "A")
+        let color1 = colorStruct1.color
+        let alpha1 = colorStruct1.alpha
+        XCTAssertEqual(color1, "")
+        XCTAssertEqual(alpha1, "")
+
+        let colorStruct2 = ces1.getColor(tokenId: tokenId)
+        let color2 = colorStruct2.color
+        let alpha2 = colorStruct2.alpha
+        XCTAssertEqual(color2, "ffffff")
+        XCTAssertEqual(alpha2, "ff")
+
+        let approvalForAllError = "CES1 Assets do not support approvalForAll"
+        XCTAssertEqual(ces1.approvalForAll(owner: address, to: address, approval: true, wif: wallet.wif), approvalForAllError)
+        XCTAssertEqual(ces1.approvalForAll(owner: address, to: address, approval: true, wallet: wallet), approvalForAllError)
+        let tokenMetadataError = "CES1 Assets do not support tokenMetadata"
+        XCTAssertEqual(ces1.tokenMetadata(tokenId: tokenId), tokenMetadataError)
     }
 
     func testClaimONG() {

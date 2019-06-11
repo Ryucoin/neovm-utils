@@ -28,6 +28,16 @@ public final class CES1Interface: OEP5Interface {
         return hex
     }
 
+    public func getColor(tokenId: Any) -> TokenColor {
+        let dna = getDNA(tokenId: tokenId)
+        if dna.count < 8 {
+            return TokenColor(color: "", alpha: "")
+        }
+        let color = String(dna[0..<6])
+        let alpha = String(dna[6..<8])
+        return TokenColor(color: color, alpha: alpha)
+    }
+
     public func getRaritySupply(rarity: String) -> Int {
         let param = OntologyParameter(type: .String, value: rarity)
         let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "getRaritySupply", args: [param])
@@ -57,18 +67,20 @@ public final class CES1Interface: OEP5Interface {
         return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "mint", args: [name, receiver], gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
     }
 
-    @available(*, unavailable, message:"CES1 Assets do not support approvalForAll")
     override public func approvalForAll(owner: String, to: String, approval: Bool, gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet) -> String {
-        return ""
+        return "CES1 Assets do not support approvalForAll"
     }
 
-    @available(*, unavailable, message: "CES1 Assets do not support approvalForAll")
     override public func approvalForAll(owner: String, to: String, approval: Bool, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
-        return ""
+        return "CES1 Assets do not support approvalForAll"
     }
 
-    @available(*, unavailable, message: "CES1 Assets do not support tokenMetadata")
     override public func tokenMetadata(tokenId: Any) -> String {
-        return ""
+        return "CES1 Assets do not support tokenMetadata"
     }
+}
+
+public struct TokenColor {
+    let color: String
+    let alpha: String
 }
