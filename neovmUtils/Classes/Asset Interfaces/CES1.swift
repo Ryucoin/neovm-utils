@@ -25,24 +25,25 @@ public final class CES1Interface: OEP5Interface {
     public func getDNA(tokenId: Any) -> String {
         let token = strOrIntToParam(arg: tokenId)
         let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "getDNA", args: [token])
-        return hex.hexToAscii()
+        return hex
     }
 
-    public func getRaritySupply(tokenId: Any) -> Int {
-        let token = strOrIntToParam(arg: tokenId)
-        let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "getRaritySupply", args: [token])
+    public func getRaritySupply(rarity: String) -> Int {
+        let param = OntologyParameter(type: .String, value: rarity)
+        let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "getRaritySupply", args: [param])
         return hex.hexToDecimal()
     }
 
-    public func getNameSupply(tokenId: Any) -> Int {
-        let token = strOrIntToParam(arg: tokenId)
-        let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "getNameSupply", args: [token])
+    public func getNameSupply(name: String) -> Int {
+        let param = OntologyParameter(type: .String, value: name)
+        let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "getNameSupply", args: [param])
         return hex.hexToDecimal()
     }
 
-    public func getRarityAndNameSupply(tokenId: Any) -> Int {
-        let token = strOrIntToParam(arg: tokenId)
-        let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "getRarityAndNameSupply", args: [token])
+    public func getRarityAndNameSupply(rarity: String, name: String) -> Int {
+        let rparam = OntologyParameter(type: .String, value: rarity)
+        let nparam = OntologyParameter(type: .String, value: name)
+        let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "getRarityAndNameSupply", args: [nparam, rparam])
         return hex.hexToDecimal()
     }
 

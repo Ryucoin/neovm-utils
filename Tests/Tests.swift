@@ -126,13 +126,16 @@ class Tests: XCTestCase {
         let wallet = newWallet()
         let address = "ARCeBHE161cR8Z4YUaxtDGEJbAmt53M24W"
         let tokenId = 1
+        let rarity = "Common"
+        let name = "Slimey"
 
         XCTAssertEqual(ces1.getName(), "Ryu NFT Collectibles")
         XCTAssertEqual(ces1.getSymbol(), "RNC")
         XCTAssertTrue(ces1.getTotalSupply() > 1)
         XCTAssertTrue(ces1.getBalance(address: address) > 1)
 
-        XCTAssertEqual(ces1.nameOf(tokenId: tokenId), "Slimey")
+        XCTAssertEqual(ces1.nameOf(tokenId: tokenId), name)
+        XCTAssertEqual(ces1.getRarity(tokenId: tokenId), rarity)
         XCTAssertEqual(ces1.mint(tokenName: "Name", address: address, wallet: wallet), fault)
 
         let hex = ces1.tokensOf(address: address)
@@ -141,6 +144,13 @@ class Tests: XCTestCase {
         for token in tokens {
             XCTAssertEqual(ces1.getOwner(tokenId: token).scriptHashToAddress(), address)
         }
+
+        XCTAssertTrue(ces1.getNameSupply(name: name) >= 1)
+        XCTAssertTrue(ces1.getRaritySupply(rarity: rarity) >= 1)
+        XCTAssertTrue(ces1.getRarityAndNameSupply(rarity: rarity, name: name) >= 1)
+
+        let dna = ces1.getDNA(tokenId: tokenId)
+        XCTAssertTrue(dna.count == 120)
     }
 
     func testClaimONG() {
@@ -558,7 +568,7 @@ class Tests: XCTestCase {
         XCTAssertEqual(res9, fault)
     }
 
-    func testOEP5Mainnet() {
+    func testOEP5() {
         let oep5 = OEP5Interface(contractHash: "cae215265a5e348bfd603b8db22893aa74b42417", endpoint: mainNet)
         let wallet = newWallet()
         let address = wallet.address
@@ -583,6 +593,9 @@ class Tests: XCTestCase {
 
         XCTAssertEqual(oep5.approve(address: address, tokenId: tokenId, wallet: wallet), fault)
         XCTAssertTrue(oep5.clearApproved(tokenId: tokenId, wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
+
+        XCTAssertEqual(oep5.allowance(tokenId: "A"), "00")
+        XCTAssertEqual(oep5.allowance(tokenId: 1.5), "00")
 
         XCTAssertEqual(oep5.allowance(tokenId: tokenId), "00")
         XCTAssertEqual(oep5.tokensOf(address: address), "00")
