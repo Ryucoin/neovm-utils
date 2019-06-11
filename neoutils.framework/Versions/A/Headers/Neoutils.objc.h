@@ -294,7 +294,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Create a new wallet.
  */
-- (nonnull instancetype)init;
+- (instancetype)init;
 @property (nonatomic) NSData* _Nullable publicKey;
 @property (nonatomic) NSData* _Nullable privateKey;
 @property (nonatomic) NSString* _Nonnull address;

@@ -122,23 +122,25 @@ class Tests: XCTestCase {
     }
 
     func testCES1() {
-        let ces1 = CES1Interface(contractHash: "1aefd53f8c8a0614ad8f21013d010cdd2268fa7e")
+        let ces1 = CES1Interface(contractHash: "a47222204212ef759df954f1e1b156528098153d")
         let wallet = newWallet()
-        let address = "ASxs5XV5oEVafpoibiWxYXRqqXsmRz6GZR"
+        let address = "ARCeBHE161cR8Z4YUaxtDGEJbAmt53M24W"
+        let tokenId = 1
 
-        let tokenId = ""
         XCTAssertEqual(ces1.getName(), "Ryu NFT Collectibles")
         XCTAssertEqual(ces1.getSymbol(), "RNC")
         XCTAssertTrue(ces1.getTotalSupply() > 1)
         XCTAssertTrue(ces1.getBalance(address: address) > 1)
-        XCTAssertEqual(ces1.getOwner(tokenId: tokenId), "")
 
-        XCTAssertEqual(ces1.nameOf(tokenId: "A"), "")
-        XCTAssertEqual(ces1.nameOf(tokenId: 5.0), "")
+        XCTAssertEqual(ces1.nameOf(tokenId: tokenId), "Slimey")
         XCTAssertEqual(ces1.mint(tokenName: "Name", address: address, wallet: wallet), fault)
 
         let hex = ces1.tokensOf(address: address)
-        print(hex)
+        let dynamic = DynamicList(hex: hex)
+        let tokens = dynamic.flatten()
+        for token in tokens {
+            XCTAssertEqual(ces1.getOwner(tokenId: token).scriptHashToAddress(), address)
+        }
     }
 
     func testClaimONG() {

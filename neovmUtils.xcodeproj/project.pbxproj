@@ -14,6 +14,10 @@
 		7F2887A8223C73120049FA4F /* OEP8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2887A7223C73120049FA4F /* OEP8.swift */; };
 		7F5BDD88228391CC00FDB729 /* OEP5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5BDD87228391CC00FDB729 /* OEP5.swift */; };
 		7F6657FB22AED67600472335 /* CES1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6657FA22AED67600472335 /* CES1.swift */; };
+		7F66580B22AEEB1F00472335 /* DynamicList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F66580A22AEEB1F00472335 /* DynamicList.swift */; };
+		7F66580D22AEECF400472335 /* NEOVMParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F66580C22AEECF400472335 /* NEOVMParser.swift */; };
+		7F66580F22AEF6AF00472335 /* PackedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F66580E22AEF6AE00472335 /* PackedList.swift */; };
+		7F66581722AF489B00472335 /* neoutils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F66581622AF489B00472335 /* neoutils.framework */; };
 		7F6EF749221AFF8C00B20AA7 /* QRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EF748221AFF8C00B20AA7 /* QRView.swift */; };
 		7F6EF753221C0CCA00B20AA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EF752221C0CCA00B20AA7 /* AppDelegate.swift */; };
 		7F6EF755221C0CCA00B20AA7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EF754221C0CCA00B20AA7 /* ViewController.swift */; };
@@ -29,7 +33,6 @@
 		7FD0FC282216FA8000F52C0F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC272216FA8000F52C0F /* Utils.swift */; };
 		7FD0FC2A2216FAC500F52C0F /* OntologyRPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC292216FAC500F52C0F /* OntologyRPC.swift */; };
 		7FD0FC2C2216FB3300F52C0F /* OntologyInvocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC2B2216FB3300F52C0F /* OntologyInvocation.swift */; };
-		7FD3E49B229599CF004A136B /* neoutils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FD3E49A229599CF004A136B /* neoutils.framework */; };
 		7FD3E49D2295AB3A004A136B /* OntMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD3E49C2295AB3A004A136B /* OntMonitor.swift */; };
 		7FD3E49F229ACF3A004A136B /* OEPAssetInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD3E49E229ACF3A004A136B /* OEPAssetInterface.swift */; };
 		7FD3E4A1229AD043004A136B /* OEP10.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD3E4A0229AD043004A136B /* OEP10.swift */; };
@@ -56,6 +59,10 @@
 		7F2887A7223C73120049FA4F /* OEP8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OEP8.swift; sourceTree = "<group>"; };
 		7F5BDD87228391CC00FDB729 /* OEP5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OEP5.swift; sourceTree = "<group>"; };
 		7F6657FA22AED67600472335 /* CES1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CES1.swift; sourceTree = "<group>"; };
+		7F66580A22AEEB1F00472335 /* DynamicList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicList.swift; sourceTree = "<group>"; };
+		7F66580C22AEECF400472335 /* NEOVMParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEOVMParser.swift; sourceTree = "<group>"; };
+		7F66580E22AEF6AE00472335 /* PackedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackedList.swift; sourceTree = "<group>"; };
+		7F66581622AF489B00472335 /* neoutils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = neoutils.framework; sourceTree = "<group>"; };
 		7F6EF748221AFF8C00B20AA7 /* QRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRView.swift; sourceTree = "<group>"; };
 		7F6EF750221C0CCA00B20AA7 /* neovmUtilsExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = neovmUtilsExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F6EF752221C0CCA00B20AA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -75,7 +82,6 @@
 		7FD0FC272216FA8000F52C0F /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		7FD0FC292216FAC500F52C0F /* OntologyRPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OntologyRPC.swift; sourceTree = "<group>"; };
 		7FD0FC2B2216FB3300F52C0F /* OntologyInvocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OntologyInvocation.swift; sourceTree = "<group>"; };
-		7FD3E49A229599CF004A136B /* neoutils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = neoutils.framework; sourceTree = "<group>"; };
 		7FD3E49C2295AB3A004A136B /* OntMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OntMonitor.swift; sourceTree = "<group>"; };
 		7FD3E49E229ACF3A004A136B /* OEPAssetInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OEPAssetInterface.swift; sourceTree = "<group>"; };
 		7FD3E4A0229AD043004A136B /* OEP10.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OEP10.swift; sourceTree = "<group>"; };
@@ -95,7 +101,7 @@
 			files = (
 				7F725CE821FF04CA00850C2D /* Foundation.framework in Frameworks */,
 				23A5A664E1604A98B30A541C /* Pods_neovmUtils_Tests.framework in Frameworks */,
-				7FD3E49B229599CF004A136B /* neoutils.framework in Frameworks */,
+				7F66581722AF489B00472335 /* neoutils.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,24 +188,35 @@
 		7F3AD42E2200627700B45C16 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				7F6657FA22AED67600472335 /* CES1.swift */,
+				7F66581822AF4A5300472335 /* Asset Interfaces */,
 				7FD0FC232216F96B00F52C0F /* Crypto.swift */,
-				7F2887A3223C6F810049FA4F /* OEP4.swift */,
-				7F5BDD87228391CC00FDB729 /* OEP5.swift */,
-				7F2887A7223C73120049FA4F /* OEP8.swift */,
-				7FD3E4A0229AD043004A136B /* OEP10.swift */,
-				7FD3E49E229ACF3A004A136B /* OEPAssetInterface.swift */,
+				7F66580A22AEEB1F00472335 /* DynamicList.swift */,
+				7F66580C22AEECF400472335 /* NEOVMParser.swift */,
 				7FD3E49C2295AB3A004A136B /* OntMonitor.swift */,
 				7F6EF79E221EE62A00B20AA7 /* OntologyIdentity.swift */,
 				7FD0FC2B2216FB3300F52C0F /* OntologyInvocation.swift */,
 				7FD0FC292216FAC500F52C0F /* OntologyRPC.swift */,
 				7FCC1AD32292AB59001EF591 /* OntologyWallet.swift */,
+				7F66580E22AEF6AE00472335 /* PackedList.swift */,
 				7F6EF748221AFF8C00B20AA7 /* QRView.swift */,
 				7FD0FC272216FA8000F52C0F /* Utils.swift */,
 				7FD0FC252216F99400F52C0F /* Wallet.swift */,
 			);
 			name = Classes;
 			path = neovmUtils/Classes;
+			sourceTree = "<group>";
+		};
+		7F66581822AF4A5300472335 /* Asset Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				7F6657FA22AED67600472335 /* CES1.swift */,
+				7F2887A3223C6F810049FA4F /* OEP4.swift */,
+				7F5BDD87228391CC00FDB729 /* OEP5.swift */,
+				7F2887A7223C73120049FA4F /* OEP8.swift */,
+				7FD3E4A0229AD043004A136B /* OEP10.swift */,
+				7FD3E49E229ACF3A004A136B /* OEPAssetInterface.swift */,
+			);
+			path = "Asset Interfaces";
 			sourceTree = "<group>";
 		};
 		7F6EF751221C0CCA00B20AA7 /* neovmUtilsExample */ = {
@@ -227,7 +244,7 @@
 		BB75E40C24537D4E61108C25 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7FD3E49A229599CF004A136B /* neoutils.framework */,
+				7F66581622AF489B00472335 /* neoutils.framework */,
 				7F725CE721FF04CA00850C2D /* Foundation.framework */,
 				F456429103DFD18E76CEF465 /* Pods_neovmUtils_Tests.framework */,
 				F1B185E068026CC4121840E7 /* Pods_neovmUtilsExample.framework */,
@@ -472,6 +489,8 @@
 				7FD3E49D2295AB3A004A136B /* OntMonitor.swift in Sources */,
 				7FD0FC2C2216FB3300F52C0F /* OntologyInvocation.swift in Sources */,
 				7FD0FC2A2216FAC500F52C0F /* OntologyRPC.swift in Sources */,
+				7F66580D22AEECF400472335 /* NEOVMParser.swift in Sources */,
+				7F66580F22AEF6AF00472335 /* PackedList.swift in Sources */,
 				7FD0FC242216F96B00F52C0F /* Crypto.swift in Sources */,
 				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
 				7FD0FC282216FA8000F52C0F /* Utils.swift in Sources */,
@@ -483,6 +502,7 @@
 				7F2887A4223C6F810049FA4F /* OEP4.swift in Sources */,
 				7F2887A8223C73120049FA4F /* OEP8.swift in Sources */,
 				7FD3E4A1229AD043004A136B /* OEP10.swift in Sources */,
+				7F66580B22AEEB1F00472335 /* DynamicList.swift in Sources */,
 				7FCC1AD42292AB59001EF591 /* OntologyWallet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
