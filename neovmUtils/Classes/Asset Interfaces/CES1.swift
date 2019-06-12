@@ -81,6 +81,11 @@ public final class CES1Interface: OEP5Interface {
 }
 
 public struct TokenColor {
-    let color: String
-    let alpha: String
+    public let color: String
+    public let alpha: String
+
+    public init(color: String, alpha: String) {
+        self.color = color
+        self.alpha = alpha
+    }
 }
