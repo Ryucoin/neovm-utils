@@ -10,26 +10,26 @@ import Foundation
 
 public class OEPAssetInterface: AssetInterface {
 
-    public func customInvoke(operation: String, args: [OntologyParameter], gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet, payer: String = "") -> String {
+    public func customInvoke(operation: String, args: [NVMParameter], gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet, payer: String = "") -> String {
         return customInvoke(operation: operation, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: wallet.wif, payer: payer)
     }
 
-    public func customInvoke(operation: String, args: [OntologyParameter], gasPrice: Int = 500, gasLimit: Int = 20000, wif: String, payer: String = "") -> String {
+    public func customInvoke(operation: String, args: [NVMParameter], gasPrice: Int = 500, gasLimit: Int = 20000, wif: String, payer: String = "") -> String {
         let other: [String: Any] = ["gasPrice": gasPrice, "gasLimit": gasLimit, "payer": payer]
         return interface.invoke(contractHash: contractHash, operation: operation, args: args, wif: wif, other: other)
     }
 
-    public func customRead(operation: String, args: [OntologyParameter]) -> String {
+    public func customRead(operation: String, args: [NVMParameter]) -> String {
         return interface.read(contractHash: contractHash, operation: operation, args: args)
     }
 
-    public func strOrIntToParam(arg: Any) -> OntologyParameter {
+    public func strOrIntToParam(arg: Any) -> NVMParameter {
         if let string = arg as? String {
-            return OntologyParameter(type: .String, value: string)
+            return NVMParameter(type: .String, value: string)
         } else if let int = arg as? Int {
-            return OntologyParameter(type: .Integer, value: int)
+            return NVMParameter(type: .Integer, value: int)
         } else {
-            return OntologyParameter(type: .String, value: "")
+            return NVMParameter(type: .String, value: "")
         }
     }
 }

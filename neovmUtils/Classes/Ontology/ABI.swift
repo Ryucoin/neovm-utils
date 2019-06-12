@@ -8,34 +8,6 @@
 
 import Foundation
 
-public enum OntologyParameterType: String {
-    case Address
-    case String
-    case Fixed8
-    case Fixed9
-    case Integer
-    case Array
-    case Bool
-    case Unknown
-}
-
-public class OntologyParameter {
-    public var type: OntologyParameterType = .Unknown
-    public var value: Any = ""
-
-    public convenience init(type: OntologyParameterType, value: Any) {
-        self.init()
-        if type == .Bool {
-            self.type = .Integer
-            let value = value as? Bool ?? false
-            self.value = value ? 1 : 0
-        } else {
-            self.type = type
-            self.value = value
-        }
-    }
-}
-
 public class OEP5State {
     private var address: String = ""
     private var tokenId: Any = ""

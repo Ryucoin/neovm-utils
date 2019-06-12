@@ -11,11 +11,11 @@ Implemented in [OntologyInvocation.swift](https://github.com/Ryucoin/neovm-utils
 ### Parameters
 
 ``` swift
-public class OntologyParameter {
-  public var type: OntologyParameterType = .Unknown
+public class NVMParameter {
+  public var type: NVMParameterType = .Unknown
   public var value: Any = ""
 
-  public convenience init(type: OntologyParameterType, value: Any) {
+  public convenience init(type: NVMParameterType, value: Any) {
     self.init()
     self.type = type
     self.value = value
@@ -26,7 +26,7 @@ public class OntologyParameter {
 #### Types
 
 ``` swift
-public enum OntologyParameterType: String {
+public enum NVMParameterType: String {
   case Address
   case String
   case Fixed8
@@ -44,7 +44,7 @@ public enum OntologyParameterType: String {
 Builds a raw transaction
 
 ``` swift
-buildOntologyInvocationTransaction(contractHash: String, method: String, args: [OntologyParameter], gasPrice: Int = 0, gasLimit: Int = 0, wif: String, payer: String = "") -> String?
+buildOntologyInvocationTransaction(contractHash: String, method: String, args: [NVMParameter], gasPrice: Int = 0, gasLimit: Int = 0, wif: String, payer: String = "") -> String?
 ```
 
 #### Invoke
@@ -52,7 +52,7 @@ buildOntologyInvocationTransaction(contractHash: String, method: String, args: [
 Invokes a transaction
 
 ``` swift
-ontologyInvoke(endpoint: String = testNet, contractHash: String, method: String, args: [OntologyParameter], gasPrice: Int = 0, gasLimit: Int = 0, wif: String, payer: String = "") -> String?
+ontologyInvoke(endpoint: String = testNet, contractHash: String, method: String, args: [NVMParameter], gasPrice: Int = 0, gasLimit: Int = 0, wif: String, payer: String = "") -> String?
 ```
 
 #### Read
@@ -60,5 +60,5 @@ ontologyInvoke(endpoint: String = testNet, contractHash: String, method: String,
 Pre-executes a transaction
 
 ``` swift
-ontologyInvokeRead(endpoint: String = testNet, contractHash: String, method: String, args: [OntologyParameter]) -> String?
+ontologyInvokeRead(endpoint: String = testNet, contractHash: String, method: String, args: [NVMParameter]) -> String?
 ```

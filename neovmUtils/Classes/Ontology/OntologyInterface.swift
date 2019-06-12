@@ -13,7 +13,7 @@ public final class OntologyInterface: NSObject, BlockchainInterfaceProtocol {
     public var testnetExecution: Bool = true
 
     public func invoke(contractHash: String, operation: String, args: [Any], wif: String, other: [String : Any]) -> String {
-        guard let params = args as? [OntologyParameter] else {
+        guard let params = args as? [NVMParameter] else {
             return ""
         }
 
@@ -25,7 +25,7 @@ public final class OntologyInterface: NSObject, BlockchainInterfaceProtocol {
     }
 
     public func read(contractHash: String, operation: String, args: [Any]) -> String {
-        guard let params = args as? [OntologyParameter] else {
+        guard let params = args as? [NVMParameter] else {
             return ""
         }
 

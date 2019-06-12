@@ -9,12 +9,12 @@
 import Foundation
 import Neoutils
 
-private func convertParamArray(params: [OntologyParameter]) -> [String: [[String: Any]]] {
+private func convertParamArray(params: [NVMParameter]) -> [String: [[String: Any]]] {
     var args: [[String: Any]] = []
     for i in 0..<params.count {
         let item = params[i]
         if item.type == .Array {
-            guard let arr = item.value as? [OntologyParameter] else {
+            guard let arr = item.value as? [NVMParameter] else {
                 continue
             }
 
@@ -60,20 +60,20 @@ private func ontologyInvokeHelper(endpoint: String, contractHash: String, method
     }
 }
 
-public func buildOntologyInvocationTransaction(contractHash: String, method: String, args: [OntologyParameter], gasPrice: Int = 0, gasLimit: Int = 0, wif: String, payer: String = "") -> String {
+public func buildOntologyInvocationTransaction(contractHash: String, method: String, args: [NVMParameter], gasPrice: Int = 0, gasLimit: Int = 0, wif: String, payer: String = "") -> String {
     let params = convertParamArray(params: args)
     let p = payer == "" ? addressFromWif(wif: wif) ?? "" : payer
     return buildOntologyInvocationTransactionHelper(contractHash: contractHash, method: method, args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif, payer: p)
 }
 
-public func ontologyInvoke(endpoint: String = ontologyTestNet, contractHash: String, method: String, args: [OntologyParameter], gasPrice: Int = 0, gasLimit: Int = 0, wif: String, payer: String = "") -> String {
+public func ontologyInvoke(endpoint: String = ontologyTestNet, contractHash: String, method: String, args: [NVMParameter], gasPrice: Int = 0, gasLimit: Int = 0, wif: String, payer: String = "") -> String {
     let e = formatEndpoint(endpt: endpoint)
     let params = convertParamArray(params: args)
     let p = payer == "" ? addressFromWif(wif: wif) ?? "" : payer
     return ontologyInvokeHelper(endpoint: e, contractHash: contractHash, method: method, args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif, payer: p)
 }
 
-public func ontologyInvokeRead(endpoint: String = ontologyTestNet, contractHash: String, method: String, args: [OntologyParameter]) -> String {
+public func ontologyInvokeRead(endpoint: String = ontologyTestNet, contractHash: String, method: String, args: [NVMParameter]) -> String {
     let wallet = newWallet()
     let raw = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: 500, gasLimit: 20000, wif: wallet.wif, payer: wallet.address)
     let res = ontologySendPreExecRawTransaction(endpoint: endpoint, raw: raw)

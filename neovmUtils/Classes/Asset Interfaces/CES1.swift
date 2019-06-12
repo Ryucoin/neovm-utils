@@ -39,20 +39,20 @@ public final class CES1Interface: OEP5Interface {
     }
 
     public func getRaritySupply(rarity: String) -> Int {
-        let param = OntologyParameter(type: .String, value: rarity)
+        let param = NVMParameter(type: .String, value: rarity)
         let hex = interface.read(contractHash: contractHash, operation: "getRaritySupply", args: [param])
         return hex.hexToDecimal()
     }
 
     public func getNameSupply(name: String) -> Int {
-        let param = OntologyParameter(type: .String, value: name)
+        let param = NVMParameter(type: .String, value: name)
         let hex = interface.read(contractHash: contractHash, operation: "getNameSupply", args: [param])
         return hex.hexToDecimal()
     }
 
     public func getRarityAndNameSupply(rarity: String, name: String) -> Int {
-        let rparam = OntologyParameter(type: .String, value: rarity)
-        let nparam = OntologyParameter(type: .String, value: name)
+        let rparam = NVMParameter(type: .String, value: rarity)
+        let nparam = NVMParameter(type: .String, value: name)
         let hex = interface.read(contractHash: contractHash, operation: "getRarityAndNameSupply", args: [nparam, rparam])
         return hex.hexToDecimal()
     }
@@ -62,8 +62,8 @@ public final class CES1Interface: OEP5Interface {
     }
 
     public func mint(tokenName: String, address: String, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
-        let name = OntologyParameter(type: .String, value: tokenName)
-        let receiver = OntologyParameter(type: .Address, value: address)
+        let name = NVMParameter(type: .String, value: tokenName)
+        let receiver = NVMParameter(type: .Address, value: address)
         let other: [String: Any] = ["gasPrice": gasPrice, "gasLimit": gasLimit]
         return interface.invoke(contractHash: contractHash, operation: "mint", args: [name, receiver], wif: wif, other: other)
     }

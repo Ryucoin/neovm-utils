@@ -18,9 +18,10 @@
 		7F601E1D22B0A2CD00901046 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F601E1C22B0A2CD00901046 /* Network.swift */; };
 		7F601E2122B0A46F00901046 /* ABI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F601E2022B0A46F00901046 /* ABI.swift */; };
 		7F601E2322B0A76D00901046 /* AssetInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F601E2222B0A76D00901046 /* AssetInterface.swift */; };
+		7F601E2522B0C0B700901046 /* NVMParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F601E2422B0C0B700901046 /* NVMParameter.swift */; };
 		7F6657FB22AED67600472335 /* CES1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6657FA22AED67600472335 /* CES1.swift */; };
 		7F66580B22AEEB1F00472335 /* DynamicList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F66580A22AEEB1F00472335 /* DynamicList.swift */; };
-		7F66580D22AEECF400472335 /* NEOVMParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F66580C22AEECF400472335 /* NEOVMParser.swift */; };
+		7F66580D22AEECF400472335 /* NVMParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F66580C22AEECF400472335 /* NVMParser.swift */; };
 		7F66580F22AEF6AF00472335 /* PackedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F66580E22AEF6AE00472335 /* PackedList.swift */; };
 		7F66581722AF489B00472335 /* neoutils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F66581622AF489B00472335 /* neoutils.framework */; };
 		7F6EF749221AFF8C00B20AA7 /* QRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EF748221AFF8C00B20AA7 /* QRView.swift */; };
@@ -68,9 +69,10 @@
 		7F601E1C22B0A2CD00901046 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		7F601E2022B0A46F00901046 /* ABI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABI.swift; sourceTree = "<group>"; };
 		7F601E2222B0A76D00901046 /* AssetInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetInterface.swift; sourceTree = "<group>"; };
+		7F601E2422B0C0B700901046 /* NVMParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NVMParameter.swift; sourceTree = "<group>"; };
 		7F6657FA22AED67600472335 /* CES1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CES1.swift; sourceTree = "<group>"; };
 		7F66580A22AEEB1F00472335 /* DynamicList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicList.swift; sourceTree = "<group>"; };
-		7F66580C22AEECF400472335 /* NEOVMParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEOVMParser.swift; sourceTree = "<group>"; };
+		7F66580C22AEECF400472335 /* NVMParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NVMParser.swift; sourceTree = "<group>"; };
 		7F66580E22AEF6AE00472335 /* PackedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackedList.swift; sourceTree = "<group>"; };
 		7F66581622AF489B00472335 /* neoutils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = neoutils.framework; sourceTree = "<group>"; };
 		7F6EF748221AFF8C00B20AA7 /* QRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRView.swift; sourceTree = "<group>"; };
@@ -228,7 +230,8 @@
 			isa = PBXGroup;
 			children = (
 				7F66580A22AEEB1F00472335 /* DynamicList.swift */,
-				7F66580C22AEECF400472335 /* NEOVMParser.swift */,
+				7F66580C22AEECF400472335 /* NVMParser.swift */,
+				7F601E2422B0C0B700901046 /* NVMParameter.swift */,
 				7F66580E22AEF6AE00472335 /* PackedList.swift */,
 			);
 			path = "Smart Contracts";
@@ -537,7 +540,7 @@
 				7FD3E49D2295AB3A004A136B /* OntMonitor.swift in Sources */,
 				7FD0FC2C2216FB3300F52C0F /* Invocation.swift in Sources */,
 				7FD0FC2A2216FAC500F52C0F /* RPC.swift in Sources */,
-				7F66580D22AEECF400472335 /* NEOVMParser.swift in Sources */,
+				7F66580D22AEECF400472335 /* NVMParser.swift in Sources */,
 				7F66580F22AEF6AF00472335 /* PackedList.swift in Sources */,
 				7FD0FC242216F96B00F52C0F /* Mnemonic.swift in Sources */,
 				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
@@ -548,6 +551,7 @@
 				7F6EF749221AFF8C00B20AA7 /* QRView.swift in Sources */,
 				7F601E1B22B09BA100901046 /* BlockchainInterfaceProtocol.swift in Sources */,
 				7F5BDD88228391CC00FDB729 /* OEP5.swift in Sources */,
+				7F601E2522B0C0B700901046 /* NVMParameter.swift in Sources */,
 				7F6657FB22AED67600472335 /* CES1.swift in Sources */,
 				7F601E1D22B0A2CD00901046 /* Network.swift in Sources */,
 				7F2887A4223C6F810049FA4F /* OEP4.swift in Sources */,

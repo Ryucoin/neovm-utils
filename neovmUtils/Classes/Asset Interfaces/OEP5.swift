@@ -26,7 +26,7 @@ public class OEP5Interface: OEP10Interface {
     }
 
     public func getBalance(address: String) -> Int {
-        let address = OntologyParameter(type: .Address, value: address)
+        let address = NVMParameter(type: .Address, value: address)
         let hex = interface.read(contractHash: contractHash, operation: "balanceOf", args: [address])
         return hex.hexToDecimal()
     }
@@ -42,7 +42,7 @@ public class OEP5Interface: OEP10Interface {
     }
 
     public func transfer(address: String, tokenId: Any, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
-        let receiver = OntologyParameter(type: .Address, value: address)
+        let receiver = NVMParameter(type: .Address, value: address)
         let token = strOrIntToParam(arg: tokenId)
         let other: [String: Any] = ["gasPrice": gasPrice, "gasLimit": gasLimit]
         return interface.invoke(contractHash: contractHash, operation: "transfer", args: [receiver, token], wif: wif, other: other)
@@ -67,15 +67,15 @@ public class OEP5Interface: OEP10Interface {
     }
 
     public func transferMulti(args: [[Any]], gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
-        var params: [OntologyParameter] = []
+        var params: [NVMParameter] = []
         for arg in args {
             guard arg.count == 2 else {
                 continue
             }
 
-            let receiver = OntologyParameter(type: .Address, value: arg[0] as? String ?? "")
+            let receiver = NVMParameter(type: .Address, value: arg[0] as? String ?? "")
             let token = strOrIntToParam(arg: arg[1])
-            let array = OntologyParameter(type: .Array, value: [receiver, token])
+            let array = NVMParameter(type: .Array, value: [receiver, token])
             params.append(array)
         }
         let other: [String: Any] = ["gasPrice": gasPrice, "gasLimit": gasLimit]
@@ -87,7 +87,7 @@ public class OEP5Interface: OEP10Interface {
     }
 
     public func approve(address: String, tokenId: Any, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
-        let toAcct = OntologyParameter(type: .Address, value: address)
+        let toAcct = NVMParameter(type: .Address, value: address)
         let token = strOrIntToParam(arg: tokenId)
         let params = [toAcct, token]
         let other: [String: Any] = ["gasPrice": gasPrice, "gasLimit": gasLimit]
@@ -118,16 +118,16 @@ public class OEP5Interface: OEP10Interface {
     }
 
     public func approvalForAll(owner: String, to: String, approval: Bool, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
-        let fromAcct = OntologyParameter(type: .Address, value: owner)
-        let toAcct = OntologyParameter(type: .Address, value: to)
-        let token = OntologyParameter(type: .Bool, value: approval)
+        let fromAcct = NVMParameter(type: .Address, value: owner)
+        let toAcct = NVMParameter(type: .Address, value: to)
+        let token = NVMParameter(type: .Bool, value: approval)
         let params = [fromAcct, toAcct, token]
         let other: [String: Any] = ["gasPrice": gasPrice, "gasLimit": gasLimit]
         return interface.invoke(contractHash: contractHash, operation: "approvalForAll", args: params, wif: wif, other: other)
     }
 
     public func tokensOf(address: String) -> String {
-        let owner = OntologyParameter(type: .Address, value: address)
+        let owner = NVMParameter(type: .Address, value: address)
         let hex = interface.read(contractHash: contractHash, operation: "tokensOf", args: [owner])
         return hex
     }

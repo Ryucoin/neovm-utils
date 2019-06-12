@@ -51,11 +51,11 @@ class Tests: XCTestCase {
         let entry = 10.0
         let max : Int = 1
 
-        let target = OntologyParameter(type: .Address, value: exampleWallet.address)
-        let gameId = OntologyParameter(type: .String, value: gid)
-        let matchId = OntologyParameter(type: .String, value: mid)
-        let fee = OntologyParameter(type: .Fixed8, value: entry)
-        let mx = OntologyParameter(type: .Integer, value: max)
+        let target = NVMParameter(type: .Address, value: exampleWallet.address)
+        let gameId = NVMParameter(type: .String, value: gid)
+        let matchId = NVMParameter(type: .String, value: mid)
+        let fee = NVMParameter(type: .Fixed8, value: entry)
+        let mx = NVMParameter(type: .Integer, value: max)
 
         let args = [target, gameId, matchId, fee, mx]
 
@@ -91,7 +91,7 @@ class Tests: XCTestCase {
     func testBuildOntologyInvocationHelper() {
         let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
         let method = "put"
-        let args: [OntologyParameter] = [OntologyParameter(type: .Address, value: exampleWallet.address), OntologyParameter(type: .String, value: "Hello!")]
+        let args: [NVMParameter] = [NVMParameter(type: .Address, value: exampleWallet.address), NVMParameter(type: .String, value: "Hello!")]
         let gasPrice = 500
         let gasLimit = 20000
 
@@ -113,7 +113,7 @@ class Tests: XCTestCase {
             bytes: [0xD8, 0x00] as [UInt8],
             encoding: String.Encoding.utf16BigEndian)!
 
-        let args: [OntologyParameter] = [OntologyParameter(type: .Address, value: exampleWallet.address), OntologyParameter(type: .String, value: badStr)]
+        let args: [NVMParameter] = [NVMParameter(type: .Address, value: exampleWallet.address), NVMParameter(type: .String, value: badStr)]
         let gasPrice = 500
         let gasLimit = 20000
 
@@ -526,8 +526,8 @@ class Tests: XCTestCase {
         XCTAssertTrue(unlocked)
     }
 
-    func testNEOVMParser() {
-        let parser = NEOVMParser()
+    func testNVMParser() {
+        let parser = NVMParser()
         let hex1 = "0101"
         guard let bool = parser.deserialize(hex: hex1) as? Bool else {
             XCTFail()
@@ -608,9 +608,9 @@ class Tests: XCTestCase {
         let allowance = oep4.allowance(owner: wallet.address, spender: address)
         XCTAssertEqual(allowance, 0)
 
-        let from = OntologyParameter(type: .Address, value: address)
-        let to = OntologyParameter(type: .Address, value: wallet.address)
-        let amount = OntologyParameter(type: .Fixed8, value: 1.0)
+        let from = NVMParameter(type: .Address, value: address)
+        let to = NVMParameter(type: .Address, value: wallet.address)
+        let amount = NVMParameter(type: .Fixed8, value: 1.0)
         let res7 = oep4.customInvoke(operation: "transfer", args: [from, to, amount], wallet: wallet)
         XCTAssertNotEqual(res7, "")
 
@@ -658,7 +658,7 @@ class Tests: XCTestCase {
         XCTAssertTrue(oep5.approvalForAll(owner: address, to: ownerAddress, approval: false, wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
 
         let hex = oep5.tokenMetadata(tokenId: tokenId)
-        let parser = NEOVMParser()
+        let parser = NVMParser()
         let raw = parser.deserialize(hex: hex)
         guard let metadata = raw as? [String: Any] else {
             XCTFail("Failed to cast metadata to dict")
@@ -811,7 +811,7 @@ class Tests: XCTestCase {
     func testOntologyInvocationHelper() {
         let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
         let method = "put"
-        let args: [OntologyParameter] = [OntologyParameter(type: .Address, value: exampleWallet.address), OntologyParameter(type: .String, value: "Hello!")]
+        let args: [NVMParameter] = [NVMParameter(type: .Address, value: exampleWallet.address), NVMParameter(type: .String, value: "Hello!")]
         let gasPrice = 500
         let gasLimit = 20000
 
@@ -833,7 +833,7 @@ class Tests: XCTestCase {
             bytes: [0xD8, 0x00] as [UInt8],
             encoding: String.Encoding.utf16BigEndian)!
 
-        let args: [OntologyParameter] = [OntologyParameter(type: .Address, value: exampleWallet.address), OntologyParameter(type: .String, value: badStr)]
+        let args: [NVMParameter] = [NVMParameter(type: .Address, value: exampleWallet.address), NVMParameter(type: .String, value: badStr)]
         let gasPrice = 500
         let gasLimit = 20000
 
@@ -853,9 +853,9 @@ class Tests: XCTestCase {
         }
     }
 
-    func testOntologyParameterArrayFail() {
-        let param = OntologyParameter(type: .Array, value: 5)
-        let args: [OntologyParameter] = [param]
+    func testNVMParameterArrayFail() {
+        let param = NVMParameter(type: .Array, value: 5)
+        let args: [NVMParameter] = [param]
         let res = ontologyInvokeRead(contractHash: "a29564a30043d50620e4c6be61eda834d0acc48b", method: "getTotal", args: args)
         let num = res.hexToDecimal()
         XCTAssertGreaterThan(num, 0)
@@ -999,7 +999,7 @@ class Tests: XCTestCase {
     func testSendRawTransaction() {
         let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
         let method = "put"
-        let args: [OntologyParameter] = [OntologyParameter(type: .Address, value: exampleWallet.address), OntologyParameter(type: .String, value: "Hello!")]
+        let args: [NVMParameter] = [NVMParameter(type: .Address, value: exampleWallet.address), NVMParameter(type: .String, value: "Hello!")]
         let gasPrice = 500
         let gasLimit = 20000
 
