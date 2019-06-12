@@ -1,5 +1,5 @@
 //
-//  OntologyInvocation.swift
+//  Invocation.swift
 //  neovmUtils
 //
 //  Created by Wyatt Mufson on 2/15/19.
@@ -8,70 +8,6 @@
 
 import Foundation
 import Neoutils
-
-public enum OntologyParameterType: String {
-    case Address
-    case String
-    case Fixed8
-    case Fixed9
-    case Integer
-    case Array
-    case Bool
-    case Unknown
-}
-
-public class OntologyParameter {
-    public var type: OntologyParameterType = .Unknown
-    public var value: Any = ""
-
-    public convenience init(type: OntologyParameterType, value: Any) {
-        self.init()
-        if type == .Bool {
-            self.type = .Integer
-            let value = value as? Bool ?? false
-            self.value = value ? 1 : 0
-        } else {
-            self.type = type
-            self.value = value
-        }
-    }
-}
-
-public class OEP5State {
-    private var address: String = ""
-    private var tokenId: Any = ""
-
-    public convenience init(address: String, tokenId: Any) {
-        self.init()
-        self.address = address
-        self.tokenId = tokenId
-    }
-
-    public func getParam() -> [Any] {
-        let array = [address, tokenId]
-        return array
-    }
-}
-
-public class OEP8State {
-    private var from: String = ""
-    private var to: String = ""
-    private var tokenId: Any = ""
-    private var amount: Int = 0
-
-    public convenience init(from: String, to: String, tokenId: Any, amount: Int) {
-        self.init()
-        self.from = from
-        self.to = to
-        self.tokenId = tokenId
-        self.amount = amount
-    }
-
-    public func getParam() -> [Any] {
-        let array = [from, to, tokenId, amount]
-        return array
-    }
-}
 
 private func convertParamArray(params: [OntologyParameter]) -> [String: [[String: Any]]] {
     var args: [[String: Any]] = []
@@ -131,7 +67,7 @@ public func buildOntologyInvocationTransaction(contractHash: String, method: Str
 }
 
 public func ontologyInvoke(endpoint: String = ontologyTestNet, contractHash: String, method: String, args: [OntologyParameter], gasPrice: Int = 0, gasLimit: Int = 0, wif: String, payer: String = "") -> String {
-    let e = getEndpoint(def: endpoint)
+    let e = formatEndpoint(endpt: endpoint)
     let params = convertParamArray(params: args)
     let p = payer == "" ? addressFromWif(wif: wif) ?? "" : payer
     return ontologyInvokeHelper(endpoint: e, contractHash: contractHash, method: method, args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif, payer: p)

@@ -119,7 +119,7 @@ getUnboundONG(endpoint: String = testNet, address: String) -> String
 Gets the endpoint for a given url
 
 ``` swift
-getEndpoint(def:String) -> String
+formatEndpoint(endpt:String) -> String
 ```
 
 #### Get Best Node

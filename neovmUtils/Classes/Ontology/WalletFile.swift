@@ -1,5 +1,5 @@
 //
-//  OntologyWallet.swift
+//  WalletFile.swift
 //  neovmUtils
 //
 //  Created by Wyatt Mufson on 5/20/19.

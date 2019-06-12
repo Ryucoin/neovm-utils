@@ -1,5 +1,5 @@
 //
-//  OntologyIdentity.swift
+//  Identity.swift
 //  neovmUtils
 //
 //  Created by Wyatt Mufson on 2/21/19.
@@ -91,7 +91,7 @@ public func sendRegister(endpoint: String = ontologyTestNet, ident: Identity, pa
 
     let err = NSErrorPointer(nilLiteral: ())
     let raw = NeoutilsOntologyMakeRegister(gasPrice, gasLimit, wif, payerAcct.wif, err)
-    let e = getEndpoint(def: endpoint)
+    let e = formatEndpoint(endpt: endpoint)
     let response = ontologySendRawTransaction(endpoint: e, raw: raw)
     return response
 }

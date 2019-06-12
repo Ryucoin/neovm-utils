@@ -1,5 +1,5 @@
 //
-//  OntologyRPC.swift
+//  RPC.swift
 //  neovmUtils
 //
 //  Created by Wyatt Mufson on 2/15/19.
@@ -8,31 +8,6 @@
 
 import Foundation
 import Neoutils
-
-public enum ontologyTestNodes: String {
-    case polaris1 = "http://polaris1.ont.io:20336"
-    case polaris2 = "http://polaris2.ont.io:20336"
-    case polaris3 = "http://polaris3.ont.io:20336"
-    case polaris4 = "http://polaris4.ont.io:20336"
-    case bestNode = "testNetBestNode"
-}
-
-public enum ontologyMainNodes: String {
-    case seed1 = "http://dappnode1.ont.io:20336"
-    case seed2 = "http://dappnode2.ont.io:20336"
-    case seed3 = "http://dappnode3.ont.io:20336"
-    case seed4 = "http://dappnode4.ont.io:20336"
-    case bestNode = "mainNetBestNode"
-}
-
-public let ontologyTestNet = ontologyTestNodes.bestNode.rawValue
-public let ontologyMainNet = ontologyMainNodes.bestNode.rawValue
-public let solochainNode = "http://127.0.0.1:20336"
-
-public enum network {
-    case mainNet
-    case testNet
-}
 
 public func getBestNode(net: network) -> String {
     var bestNode = ""
@@ -63,17 +38,17 @@ public func getBestNode(net: network) -> String {
     }
 }
 
-public func getEndpoint(def: String) -> String {
-    if def == ontologyTestNodes.bestNode.rawValue {
+public func formatEndpoint(endpt: String) -> String {
+    if endpt == ontologyTestNodes.bestNode.rawValue {
         return getBestNode(net: .testNet)
-    } else if def == ontologyMainNodes.bestNode.rawValue {
+    } else if endpt == ontologyMainNodes.bestNode.rawValue {
         return getBestNode(net: .mainNet)
     }
-    return def
+    return endpt
 }
 
 public func ontologyGetBlockCount(endpoint: String = ontologyTestNet) -> Int {
-    let e = getEndpoint(def: endpoint)
+    let e = formatEndpoint(endpt: endpoint)
     let error = NSErrorPointer(nilLiteral: ())
     var count: Int = -1
     NeoutilsOntologyGetBlockCount(e, &count, error)
@@ -81,7 +56,7 @@ public func ontologyGetBlockCount(endpoint: String = ontologyTestNet) -> Int {
 }
 
 public func ontologyGetBalances(endpoint: String = ontologyTestNet, address: String) -> (Int, Double) {
-    let e = getEndpoint(def: endpoint)
+    let e = formatEndpoint(endpt: endpoint)
     let error = NSErrorPointer(nilLiteral: ())
     let balances = NeoutilsOntologyGetBalance(e, address, error)
     let ont = Int(balances?.ont ?? "0") ?? 0
@@ -91,49 +66,49 @@ public func ontologyGetBalances(endpoint: String = ontologyTestNet, address: Str
 }
 
 public func ontologyGetSmartCodeEvent(endpoint: String = ontologyTestNet, txHash: String) -> NeoutilsSmartCodeEvent? {
-    let e = getEndpoint(def: endpoint)
+    let e = formatEndpoint(endpt: endpoint)
     let error = NSErrorPointer(nilLiteral: ())
     let res = NeoutilsOntologyGetSmartCodeEvent(e, txHash, error)
     return res
 }
 
 public func ontologySendRawTransaction(endpoint: String = ontologyTestNet, raw: String) -> String {
-    let e = getEndpoint(def: endpoint)
+    let e = formatEndpoint(endpt: endpoint)
     let error = NSErrorPointer(nilLiteral: ())
     let txId = NeoutilsOntologySendRawTransaction(e, raw, error)
     return txId
 }
 
 public func ontologySendPreExecRawTransaction(endpoint: String = ontologyTestNet, raw: String) -> String {
-    let e = getEndpoint(def: endpoint)
+    let e = formatEndpoint(endpt: endpoint)
     let error = NSErrorPointer(nilLiteral: ())
     let response = NeoutilsOntologySendPreExecRawTransaction(e, raw, error)
     return response
 }
 
 public func ontologyGetStorage(endpoint: String = ontologyTestNet, scriptHash: String, key: String) -> String {
-    let e = getEndpoint(def: endpoint)
+    let e = formatEndpoint(endpt: endpoint)
     let error = NSErrorPointer(nilLiteral: ())
     let item = NeoutilsOntologyGetStorage(e, scriptHash, key, error)
     return item
 }
 
 public func ontologyGetRawTransaction(endpoint: String = ontologyTestNet, txID: String) -> String {
-    let e = getEndpoint(def: endpoint)
+    let e = formatEndpoint(endpt: endpoint)
     let error = NSErrorPointer(nilLiteral: ())
     let raw = NeoutilsOntologyGetRawTransaction(e, txID, error)
     return raw
 }
 
 public func ontologyGetBlockWithHash(endpoint: String = ontologyTestNet, hash: String) -> String {
-    let e = getEndpoint(def: endpoint)
+    let e = formatEndpoint(endpt: endpoint)
     let error = NSErrorPointer(nilLiteral: ())
     let result = NeoutilsOntologyGetBlockWithHash(e, hash, error)
     return result
 }
 
 public func ontologyGetBlockWithHeight(endpoint: String = ontologyTestNet, height: Int) -> String {
-    let e = getEndpoint(def: endpoint)
+    let e = formatEndpoint(endpt: endpoint)
     let error = NSErrorPointer(nilLiteral: ())
     let result = NeoutilsOntologyGetBlockWithHeight(e, height, error)
     return result
@@ -146,21 +121,21 @@ public enum OntAsset: String {
 
 public func ontologyTransfer(endpoint: String = ontologyTestNet, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String, asset: OntAsset, toAddress: String, amount: Double) -> String {
     let error = NSErrorPointer(nilLiteral: ())
-    let e = getEndpoint(def: endpoint)
+    let e = formatEndpoint(endpt: endpoint)
     let txID = NeoutilsOntologyTransfer(e, gasPrice, gasLimit, wif, asset.rawValue, toAddress, amount, error)
     return txID
 }
 
 public func claimONG(endpoint: String = ontologyTestNet, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
     let error = NSErrorPointer(nilLiteral: ())
-    let e = getEndpoint(def: endpoint)
+    let e = formatEndpoint(endpt: endpoint)
     let txID = NeoutilsClaimONG(e, gasPrice, gasLimit, wif, error)
     return txID
 }
 
 public func getUnboundONG(endpoint: String = ontologyTestNet, address: String) -> String {
     let error = NSErrorPointer(nilLiteral: ())
-    let e = getEndpoint(def: endpoint)
+    let e = formatEndpoint(endpt: endpoint)
     let res = NeoutilsOntologyGetUnboundONG(e, address, error)
     return res
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-public final class OntologyInterface: NSObject, BlockchainInterfaceProtocl {
+public final class OntologyInterface: NSObject, BlockchainInterfaceProtocol {
     static let shared = OntologyInterface()
     public var testnetExecution: Bool = true
 
@@ -32,5 +32,3 @@ public final class OntologyInterface: NSObject, BlockchainInterfaceProtocl {
         return ontologyInvokeRead(endpoint: testnetExecution ? ontologyTestNet : ontologyMainNet, contractHash: contractHash, method: operation, args: params)
     }
 }
-
-
