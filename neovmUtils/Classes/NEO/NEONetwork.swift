@@ -7,22 +7,67 @@
 //
 
 import Foundation
+import Promises
+import NetworkUtils
 
-public enum neoTestNodes: String {
-    case polaris1 = "http://polaris1.ont.io:20336"
-    case polaris2 = "http://polaris2.ont.io:20336"
-    case polaris3 = "http://polaris3.ont.io:20336"
-    case polaris4 = "http://polaris4.ont.io:20336"
-    case bestNode = "testNetBestNode"
+public var neoTestNet = "testNetBestNode"
+public var neoMainNet = "mainNetBestNode"
+
+public func getBestNEONode(net: network) -> Promise<String?> {
+    return Promise<String?> { fulfill, _ in
+        var o3api = "https://platform.o3.network/api/v1/nodes"
+        if net == .testNet {
+            o3api += "?network=test"
+        }
+
+        networkUtils.get(o3api).then({ data in
+            do {
+                guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+                    print("Invalid data from o3api")
+                    fulfill(nil)
+                    return
+                }
+
+                guard let result = json["result"] as? [String: [String: Any]] else {
+                    print("Failed to get result from o3api")
+                    fulfill(nil)
+                    return
+                }
+
+                guard let neo = result["neo"] else {
+                    print("Failed to get neo nodes from o3api")
+                    fulfill(nil)
+                    return
+                }
+
+                guard let best = neo["best"] as? String else {
+                    print("Failed to get best node from o3api")
+                    fulfill(nil)
+                    return
+                }
+
+                fulfill(best)
+            } catch {
+                print("Error in do-try block for getBestNEONode")
+                fulfill(nil)
+            }
+        }).catch({ (error) in
+            if let error = error as? NetworkError {
+                print("Network error with o3api: \(error.localizedDescription)")
+            }
+            fulfill(nil)
+        })
+    }
 }
 
-public enum neoMainNodes: String {
-    case seed1 = "http://dappnode1.ont.io:20336"
-    case seed2 = "http://dappnode2.ont.io:20336"
-    case seed3 = "http://dappnode3.ont.io:20336"
-    case seed4 = "http://dappnode4.ont.io:20336"
-    case bestNode = "mainNetBestNode"
+public func formatNEOEndpoint(endpt: String) -> String? {
+    var node: String? = endpt
+    DispatchQueue.global().sync {
+        if endpt == neoTestNet {
+            node = try? await(getBestNEONode(net: .testNet))
+        } else if endpt == neoMainNet {
+            node = try? await(getBestNEONode(net: .mainNet))
+        }
+    }
+    return node
 }
-
-public var neoTestNet = neoTestNodes.bestNode.rawValue
-public var neoMainNet = neoMainNodes.bestNode.rawValue

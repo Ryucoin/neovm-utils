@@ -32,3 +32,41 @@ public enum network {
     case mainNet
     case testNet
 }
+
+public func getBestOntologyNode(net: network) -> String {
+    var bestNode = ""
+    var bestCount = -1
+    switch net {
+    case .testNet:
+        let nodes: [ontologyTestNodes] = [.polaris1, .polaris2, .polaris3, .polaris4]
+        for node in nodes {
+            let count = ontologyGetBlockCount(endpoint: node.rawValue)
+            bestNode = node.rawValue
+            if count > bestCount {
+                bestNode = node.rawValue
+                bestCount = count
+            }
+        }
+        return bestNode
+    case .mainNet:
+        let nodes: [ontologyMainNodes] = [.seed1, .seed2, .seed3, .seed4]
+        for node in nodes {
+            let count = ontologyGetBlockCount(endpoint: node.rawValue)
+            bestNode = node.rawValue
+            if count > bestCount {
+                bestNode = node.rawValue
+                bestCount = count
+            }
+        }
+        return bestNode
+    }
+}
+
+public func formatONTEndpoint(endpt: String) -> String {
+    if endpt == ontologyTestNodes.bestNode.rawValue {
+        return getBestOntologyNode(net: .testNet)
+    } else if endpt == ontologyMainNodes.bestNode.rawValue {
+        return getBestOntologyNode(net: .mainNet)
+    }
+    return endpt
+}
