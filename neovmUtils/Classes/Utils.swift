@@ -13,6 +13,10 @@ public extension Data {
     var bytesToHex: String {
         return NeoutilsBytesToHex(self)
     }
+
+    var bytes: [UInt8] {
+        return [UInt8](self)
+    }
 }
 
 public extension String {
@@ -76,4 +80,49 @@ public extension String {
         }
         return NeoutilsScriptHashToNEOAddress(newStr)
     }
+
+    func dataWithHexString() -> Data {
+        var hex = self
+        var data = Data()
+        while hex.count > 0 {
+            let c: String = String(hex[0..<2])
+            hex = String(hex[2..<hex.count])
+            var ch: UInt32 = 0
+            Scanner(string: c).scanHexInt32(&ch)
+            var char = UInt8(ch)
+            data.append(&char, count: 1)
+        }
+        return data
+    }
+}
+
+public extension Array where Element == UInt8 {
+    var hexString: String {
+        return self.map { return String(format: "%x", $0) }.joined()
+    }
+
+    var fullHexString: String {
+        return self.map { return String(format: "%02x", $0) }.joined()
+    }
+
+    mutating func removeTrailingZeros() {
+        for i in (0..<self.endIndex).reversed() {
+            guard self[i] == 0 else {
+                break
+            }
+            self.remove(at: i)
+        }
+    }
+}
+
+public func toByteArray<T>(_ value: T) -> [UInt8] {
+    var value = value
+    return withUnsafeBytes(of: &value) { Array($0) }
+}
+
+public func toByteArrayWithoutTrailingZeros<T>(_ value: T) -> [UInt8] {
+    var value = value
+    var arr = withUnsafeBytes(of: &value) { Array($0) }
+    arr.removeTrailingZeros()
+    return arr
 }

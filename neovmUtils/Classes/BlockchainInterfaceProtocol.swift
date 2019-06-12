@@ -15,3 +15,4 @@ public protocol BlockchainInterfaceProtocol {
 }
 
 public let Ontology = OntologyInterface.shared
+public let NEO = NEOInterface.shared
