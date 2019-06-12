@@ -1,5 +1,5 @@
 //
-//  RPC.swift
+//  ONTRPC.swift
 //  neovmUtils
 //
 //  Created by Wyatt Mufson on 2/15/19.

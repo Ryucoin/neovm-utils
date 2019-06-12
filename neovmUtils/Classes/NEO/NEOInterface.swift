@@ -16,13 +16,15 @@ public final class NEOInterface: NSObject, BlockchainInterfaceProtocol {
         guard let params = args as? [NVMParameter] else {
             return ""
         }
-        return ""
+
+        return neoInvoke(contractHash: contractHash, method: operation, args: params)
     }
     
     public func read(contractHash: String, operation: String, args: [Any]) -> String {
         guard let params = args as? [NVMParameter] else {
             return ""
         }
-        return ""
+
+        return neoInvokeRead(contractHash: contractHash, method: operation, args: params)
     }
 }

@@ -15,8 +15,8 @@
 		7F5BDD88228391CC00FDB729 /* OEP5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5BDD87228391CC00FDB729 /* OEP5.swift */; };
 		7F601E1922B09B1B00901046 /* OntologyInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F601E1822B09B1B00901046 /* OntologyInterface.swift */; };
 		7F601E1B22B09BA100901046 /* BlockchainInterfaceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F601E1A22B09BA100901046 /* BlockchainInterfaceProtocol.swift */; };
-		7F601E1D22B0A2CD00901046 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F601E1C22B0A2CD00901046 /* Network.swift */; };
-		7F601E2122B0A46F00901046 /* ABI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F601E2022B0A46F00901046 /* ABI.swift */; };
+		7F601E1D22B0A2CD00901046 /* ONTNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F601E1C22B0A2CD00901046 /* ONTNetwork.swift */; };
+		7F601E2122B0A46F00901046 /* ONTState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F601E2022B0A46F00901046 /* ONTState.swift */; };
 		7F601E2322B0A76D00901046 /* AssetInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F601E2222B0A76D00901046 /* AssetInterface.swift */; };
 		7F601E2522B0C0B700901046 /* NVMParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F601E2422B0C0B700901046 /* NVMParameter.swift */; };
 		7F601E2822B0C1CC00901046 /* NEOInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F601E2722B0C1CC00901046 /* NEOInterface.swift */; };
@@ -24,6 +24,9 @@
 		7F601E2C22B0C70700901046 /* OpCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F601E2B22B0C70700901046 /* OpCodes.swift */; };
 		7F601E2E22B0D23100901046 /* Base58.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F601E2D22B0D23100901046 /* Base58.swift */; };
 		7F601E3022B0D37700901046 /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F601E2F22B0D37700901046 /* SHA256.swift */; };
+		7F601E3222B0D67800901046 /* NEOInvocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F601E3122B0D67800901046 /* NEOInvocation.swift */; };
+		7F601E3422B0D6D800901046 /* NEONetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F601E3322B0D6D800901046 /* NEONetwork.swift */; };
+		7F601E3622B0D71000901046 /* NEORPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F601E3522B0D71000901046 /* NEORPC.swift */; };
 		7F6657FB22AED67600472335 /* CES1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6657FA22AED67600472335 /* CES1.swift */; };
 		7F66580B22AEEB1F00472335 /* DynamicList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F66580A22AEEB1F00472335 /* DynamicList.swift */; };
 		7F66580D22AEECF400472335 /* NVMParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F66580C22AEECF400472335 /* NVMParser.swift */; };
@@ -36,14 +39,14 @@
 		7F6EF75A221C0CCD00B20AA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F6EF759221C0CCD00B20AA7 /* Assets.xcassets */; };
 		7F6EF75D221C0CCD00B20AA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F6EF75B221C0CCD00B20AA7 /* LaunchScreen.storyboard */; };
 		7F6EF768221C0CCD00B20AA7 /* neovmUtilsExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EF767221C0CCD00B20AA7 /* neovmUtilsExampleUITests.swift */; };
-		7F6EF79F221EE62A00B20AA7 /* Identity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EF79E221EE62A00B20AA7 /* Identity.swift */; };
+		7F6EF79F221EE62A00B20AA7 /* ONTIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EF79E221EE62A00B20AA7 /* ONTIdentity.swift */; };
 		7F725CE821FF04CA00850C2D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F725CE721FF04CA00850C2D /* Foundation.framework */; };
 		7FCC1AD42292AB59001EF591 /* WalletFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCC1AD32292AB59001EF591 /* WalletFile.swift */; };
 		7FD0FC242216F96B00F52C0F /* Mnemonic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC232216F96B00F52C0F /* Mnemonic.swift */; };
 		7FD0FC262216F99400F52C0F /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC252216F99400F52C0F /* Wallet.swift */; };
 		7FD0FC282216FA8000F52C0F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC272216FA8000F52C0F /* Utils.swift */; };
-		7FD0FC2A2216FAC500F52C0F /* RPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC292216FAC500F52C0F /* RPC.swift */; };
-		7FD0FC2C2216FB3300F52C0F /* Invocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC2B2216FB3300F52C0F /* Invocation.swift */; };
+		7FD0FC2A2216FAC500F52C0F /* ONTRPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC292216FAC500F52C0F /* ONTRPC.swift */; };
+		7FD0FC2C2216FB3300F52C0F /* ONTInvocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC2B2216FB3300F52C0F /* ONTInvocation.swift */; };
 		7FD3E49D2295AB3A004A136B /* OntMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD3E49C2295AB3A004A136B /* OntMonitor.swift */; };
 		7FD3E49F229ACF3A004A136B /* OEPAssetInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD3E49E229ACF3A004A136B /* OEPAssetInterface.swift */; };
 		7FD3E4A1229AD043004A136B /* OEP10.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD3E4A0229AD043004A136B /* OEP10.swift */; };
@@ -71,8 +74,8 @@
 		7F5BDD87228391CC00FDB729 /* OEP5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OEP5.swift; sourceTree = "<group>"; };
 		7F601E1822B09B1B00901046 /* OntologyInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OntologyInterface.swift; sourceTree = "<group>"; };
 		7F601E1A22B09BA100901046 /* BlockchainInterfaceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockchainInterfaceProtocol.swift; sourceTree = "<group>"; };
-		7F601E1C22B0A2CD00901046 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
-		7F601E2022B0A46F00901046 /* ABI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABI.swift; sourceTree = "<group>"; };
+		7F601E1C22B0A2CD00901046 /* ONTNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ONTNetwork.swift; sourceTree = "<group>"; };
+		7F601E2022B0A46F00901046 /* ONTState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ONTState.swift; sourceTree = "<group>"; };
 		7F601E2222B0A76D00901046 /* AssetInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetInterface.swift; sourceTree = "<group>"; };
 		7F601E2422B0C0B700901046 /* NVMParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NVMParameter.swift; sourceTree = "<group>"; };
 		7F601E2722B0C1CC00901046 /* NEOInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEOInterface.swift; sourceTree = "<group>"; };
@@ -80,6 +83,9 @@
 		7F601E2B22B0C70700901046 /* OpCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpCodes.swift; sourceTree = "<group>"; };
 		7F601E2D22B0D23100901046 /* Base58.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base58.swift; sourceTree = "<group>"; };
 		7F601E2F22B0D37700901046 /* SHA256.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA256.swift; sourceTree = "<group>"; };
+		7F601E3122B0D67800901046 /* NEOInvocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEOInvocation.swift; sourceTree = "<group>"; };
+		7F601E3322B0D6D800901046 /* NEONetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEONetwork.swift; sourceTree = "<group>"; };
+		7F601E3522B0D71000901046 /* NEORPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEORPC.swift; sourceTree = "<group>"; };
 		7F6657FA22AED67600472335 /* CES1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CES1.swift; sourceTree = "<group>"; };
 		7F66580A22AEEB1F00472335 /* DynamicList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicList.swift; sourceTree = "<group>"; };
 		7F66580C22AEECF400472335 /* NVMParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NVMParser.swift; sourceTree = "<group>"; };
@@ -96,14 +102,14 @@
 		7F6EF763221C0CCD00B20AA7 /* neovmUtilsExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = neovmUtilsExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F6EF767221C0CCD00B20AA7 /* neovmUtilsExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = neovmUtilsExampleUITests.swift; sourceTree = "<group>"; };
 		7F6EF769221C0CCD00B20AA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7F6EF79E221EE62A00B20AA7 /* Identity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identity.swift; sourceTree = "<group>"; };
+		7F6EF79E221EE62A00B20AA7 /* ONTIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ONTIdentity.swift; sourceTree = "<group>"; };
 		7F725CE721FF04CA00850C2D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7FCC1AD32292AB59001EF591 /* WalletFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletFile.swift; sourceTree = "<group>"; };
 		7FD0FC232216F96B00F52C0F /* Mnemonic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mnemonic.swift; sourceTree = "<group>"; };
 		7FD0FC252216F99400F52C0F /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
 		7FD0FC272216FA8000F52C0F /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		7FD0FC292216FAC500F52C0F /* RPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPC.swift; sourceTree = "<group>"; };
-		7FD0FC2B2216FB3300F52C0F /* Invocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invocation.swift; sourceTree = "<group>"; };
+		7FD0FC292216FAC500F52C0F /* ONTRPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ONTRPC.swift; sourceTree = "<group>"; };
+		7FD0FC2B2216FB3300F52C0F /* ONTInvocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ONTInvocation.swift; sourceTree = "<group>"; };
 		7FD3E49C2295AB3A004A136B /* OntMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OntMonitor.swift; sourceTree = "<group>"; };
 		7FD3E49E229ACF3A004A136B /* OEPAssetInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OEPAssetInterface.swift; sourceTree = "<group>"; };
 		7FD3E4A0229AD043004A136B /* OEP10.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OEP10.swift; sourceTree = "<group>"; };
@@ -227,8 +233,11 @@
 			isa = PBXGroup;
 			children = (
 				7F601E2D22B0D23100901046 /* Base58.swift */,
+				7F601E3122B0D67800901046 /* NEOInvocation.swift */,
 				7F601E2722B0C1CC00901046 /* NEOInterface.swift */,
+				7F601E3322B0D6D800901046 /* NEONetwork.swift */,
 				7F601E2B22B0C70700901046 /* OpCodes.swift */,
+				7F601E3522B0D71000901046 /* NEORPC.swift */,
 				7F601E2922B0C6EF00901046 /* ScriptBuilder.swift */,
 				7F601E2F22B0D37700901046 /* SHA256.swift */,
 			);
@@ -272,13 +281,13 @@
 		7F66581B22AF4BA800472335 /* Ontology */ = {
 			isa = PBXGroup;
 			children = (
-				7F601E2022B0A46F00901046 /* ABI.swift */,
-				7F6EF79E221EE62A00B20AA7 /* Identity.swift */,
-				7FD0FC2B2216FB3300F52C0F /* Invocation.swift */,
-				7F601E1C22B0A2CD00901046 /* Network.swift */,
+				7F6EF79E221EE62A00B20AA7 /* ONTIdentity.swift */,
+				7FD0FC2B2216FB3300F52C0F /* ONTInvocation.swift */,
+				7F601E1C22B0A2CD00901046 /* ONTNetwork.swift */,
 				7FD3E49C2295AB3A004A136B /* OntMonitor.swift */,
 				7F601E1822B09B1B00901046 /* OntologyInterface.swift */,
-				7FD0FC292216FAC500F52C0F /* RPC.swift */,
+				7FD0FC292216FAC500F52C0F /* ONTRPC.swift */,
+				7F601E2022B0A46F00901046 /* ONTState.swift */,
 				7FCC1AD32292AB59001EF591 /* WalletFile.swift */,
 			);
 			path = Ontology;
@@ -560,33 +569,36 @@
 			files = (
 				7F601E2322B0A76D00901046 /* AssetInterface.swift in Sources */,
 				7FD0FC262216F99400F52C0F /* Wallet.swift in Sources */,
+				7F601E3222B0D67800901046 /* NEOInvocation.swift in Sources */,
 				7FD3E49D2295AB3A004A136B /* OntMonitor.swift in Sources */,
-				7FD0FC2C2216FB3300F52C0F /* Invocation.swift in Sources */,
+				7FD0FC2C2216FB3300F52C0F /* ONTInvocation.swift in Sources */,
 				7F601E2A22B0C6EF00901046 /* ScriptBuilder.swift in Sources */,
 				7F601E2E22B0D23100901046 /* Base58.swift in Sources */,
-				7FD0FC2A2216FAC500F52C0F /* RPC.swift in Sources */,
+				7FD0FC2A2216FAC500F52C0F /* ONTRPC.swift in Sources */,
 				7F66580D22AEECF400472335 /* NVMParser.swift in Sources */,
 				7F66580F22AEF6AF00472335 /* PackedList.swift in Sources */,
 				7FD0FC242216F96B00F52C0F /* Mnemonic.swift in Sources */,
+				7F601E3622B0D71000901046 /* NEORPC.swift in Sources */,
 				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
 				7FD0FC282216FA8000F52C0F /* Utils.swift in Sources */,
 				7FD3E49F229ACF3A004A136B /* OEPAssetInterface.swift in Sources */,
 				7F601E1922B09B1B00901046 /* OntologyInterface.swift in Sources */,
-				7F6EF79F221EE62A00B20AA7 /* Identity.swift in Sources */,
+				7F6EF79F221EE62A00B20AA7 /* ONTIdentity.swift in Sources */,
 				7F6EF749221AFF8C00B20AA7 /* QRView.swift in Sources */,
 				7F601E1B22B09BA100901046 /* BlockchainInterfaceProtocol.swift in Sources */,
+				7F601E3422B0D6D800901046 /* NEONetwork.swift in Sources */,
 				7F5BDD88228391CC00FDB729 /* OEP5.swift in Sources */,
 				7F601E2C22B0C70700901046 /* OpCodes.swift in Sources */,
 				7F601E2522B0C0B700901046 /* NVMParameter.swift in Sources */,
 				7F6657FB22AED67600472335 /* CES1.swift in Sources */,
 				7F601E2822B0C1CC00901046 /* NEOInterface.swift in Sources */,
-				7F601E1D22B0A2CD00901046 /* Network.swift in Sources */,
+				7F601E1D22B0A2CD00901046 /* ONTNetwork.swift in Sources */,
 				7F2887A4223C6F810049FA4F /* OEP4.swift in Sources */,
 				7F2887A8223C73120049FA4F /* OEP8.swift in Sources */,
 				7FD3E4A1229AD043004A136B /* OEP10.swift in Sources */,
 				7F601E3022B0D37700901046 /* SHA256.swift in Sources */,
 				7F66580B22AEEB1F00472335 /* DynamicList.swift in Sources */,
-				7F601E2122B0A46F00901046 /* ABI.swift in Sources */,
+				7F601E2122B0A46F00901046 /* ONTState.swift in Sources */,
 				7FCC1AD42292AB59001EF591 /* WalletFile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
