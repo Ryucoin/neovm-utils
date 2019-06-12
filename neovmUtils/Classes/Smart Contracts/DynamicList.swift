@@ -19,8 +19,8 @@ public final class DynamicList: NSObject {
                 self.items = itm
             }
 
-            if let packedArrau = parsed["packed"] as? [[String: Any]] {
-                for dict in packedArrau {
+            if let packedArray = parsed["packed"] as? [[String: Any]] {
+                for dict in packedArray {
                     let packedList = PackedList(dict: dict)
                     packed.append(packedList)
                 }
