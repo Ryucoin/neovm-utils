@@ -9,7 +9,7 @@
 import Foundation
 import Neoutils
 
-public func getBestNode(net: network) -> String {
+public func getBestOntologyNode(net: network) -> String {
     var bestNode = ""
     var bestCount = -1
     switch net {
@@ -40,9 +40,9 @@ public func getBestNode(net: network) -> String {
 
 public func formatEndpoint(endpt: String) -> String {
     if endpt == ontologyTestNodes.bestNode.rawValue {
-        return getBestNode(net: .testNet)
+        return getBestOntologyNode(net: .testNet)
     } else if endpt == ontologyMainNodes.bestNode.rawValue {
-        return getBestNode(net: .mainNet)
+        return getBestOntologyNode(net: .mainNet)
     }
     return endpt
 }

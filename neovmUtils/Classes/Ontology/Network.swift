@@ -24,8 +24,8 @@ public enum ontologyMainNodes: String {
     case bestNode = "mainNetBestNode"
 }
 
-public let ontologyTestNet = ontologyTestNodes.bestNode.rawValue
-public let ontologyMainNet = ontologyMainNodes.bestNode.rawValue
+public var ontologyTestNet = ontologyTestNodes.bestNode.rawValue
+public var ontologyMainNet = ontologyMainNodes.bestNode.rawValue
 public let solochainNode = "http://127.0.0.1:20336"
 
 public enum network {

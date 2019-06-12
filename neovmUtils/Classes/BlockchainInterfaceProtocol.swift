@@ -8,8 +8,10 @@
 
 import Foundation
 
-protocol BlockchainInterfaceProtocol {
+public protocol BlockchainInterfaceProtocol {
     var testnetExecution: Bool { get set }
-    func invoke(contractHash: String, operation: String, args: [Any], wallet: Wallet, other: [String: Any]) -> String
+    func invoke(contractHash: String, operation: String, args: [Any], wif: String, other: [String: Any]) -> String
     func read(contractHash: String, operation: String, args: [Any]) -> String
 }
+
+public let Ontology = OntologyInterface.shared

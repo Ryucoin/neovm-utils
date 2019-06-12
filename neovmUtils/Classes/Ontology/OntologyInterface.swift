@@ -9,10 +9,10 @@
 import UIKit
 
 public final class OntologyInterface: NSObject, BlockchainInterfaceProtocol {
-    static let shared = OntologyInterface()
+    public static let shared = OntologyInterface()
     public var testnetExecution: Bool = true
 
-    func invoke(contractHash: String, operation: String, args: [Any], wallet: Wallet, other: [String : Any]) -> String {
+    public func invoke(contractHash: String, operation: String, args: [Any], wif: String, other: [String : Any]) -> String {
         guard let params = args as? [OntologyParameter] else {
             return ""
         }
@@ -21,10 +21,10 @@ public final class OntologyInterface: NSObject, BlockchainInterfaceProtocol {
         let gasLimit = other["gasLimit"] as? Int ?? 20000
         let payer = other["payer"] as? String ?? ""
 
-        return ontologyInvoke(endpoint: testnetExecution ? ontologyTestNet : ontologyMainNet, contractHash: contractHash, method: operation, args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wallet.wif, payer: payer)
+        return ontologyInvoke(endpoint: testnetExecution ? ontologyTestNet : ontologyMainNet, contractHash: contractHash, method: operation, args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif, payer: payer)
     }
 
-    func read(contractHash: String, operation: String, args: [Any]) -> String {
+    public func read(contractHash: String, operation: String, args: [Any]) -> String {
         guard let params = args as? [OntologyParameter] else {
             return ""
         }

@@ -564,7 +564,7 @@ class Tests: XCTestCase {
     }
 
     func testOEP10() {
-        let oep5 = OEP5Interface(contractHash: "cae215265a5e348bfd603b8db22893aa74b42417", endpoint: ontologyMainNet)
+        let oep5 = OEP5Interface(contractHash: "cae215265a5e348bfd603b8db22893aa74b42417", testnet: false)
         let wallet = newWallet()
         let hash = "edf64937ca304ea8180fa92e2de36dc0a33cc712"
         XCTAssertTrue(oep5.approveContract(hash: hash, wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
@@ -573,7 +573,7 @@ class Tests: XCTestCase {
     }
 
     func testOEP4() {
-        let oep4 = OEP4Interface(contractHash: "78b98deed62aa708eaf6de85843734ecdfb14c1b", endpoint: ontologyMainNet)
+        let oep4 = OEP4Interface(contractHash: "78b98deed62aa708eaf6de85843734ecdfb14c1b", testnet: false)
         let address = "ATrApQ3w4xLnc2yDkEDXw1zAk9Ue544Csz"
 
         XCTAssertEqual(oep4.getName(), "SEED")
@@ -624,7 +624,7 @@ class Tests: XCTestCase {
     }
 
     func testOEP5() {
-        let oep5 = OEP5Interface(contractHash: "cae215265a5e348bfd603b8db22893aa74b42417", endpoint: ontologyMainNet)
+        let oep5 = OEP5Interface(contractHash: "cae215265a5e348bfd603b8db22893aa74b42417", testnet: false)
         let wallet = newWallet()
         let address = wallet.address
         let tokenId = 87

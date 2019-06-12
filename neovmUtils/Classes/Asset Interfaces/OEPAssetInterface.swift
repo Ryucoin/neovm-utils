@@ -8,26 +8,19 @@
 
 import Foundation
 
-public class OEPAssetInterface: NSObject {
-    internal var contractHash: String = ""
-    internal var endpoint: String = ""
-
-    public convenience init(contractHash: String, endpoint: String = ontologyTestNet) {
-        self.init()
-        self.contractHash = contractHash
-        self.endpoint = endpoint
-    }
+public class OEPAssetInterface: AssetInterface {
 
     public func customInvoke(operation: String, args: [OntologyParameter], gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet, payer: String = "") -> String {
         return customInvoke(operation: operation, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: wallet.wif, payer: payer)
     }
 
     public func customInvoke(operation: String, args: [OntologyParameter], gasPrice: Int = 500, gasLimit: Int = 20000, wif: String, payer: String = "") -> String {
-        return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: operation, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif, payer: payer)
+        let other: [String: Any] = ["gasPrice": gasPrice, "gasLimit": gasLimit, "payer": payer]
+        return interface.invoke(contractHash: contractHash, operation: operation, args: args, wif: wif, other: other)
     }
 
     public func customRead(operation: String, args: [OntologyParameter]) -> String {
-        return ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: operation, args: args)
+        return interface.read(contractHash: contractHash, operation: operation, args: args)
     }
 
     public func strOrIntToParam(arg: Any) -> OntologyParameter {
