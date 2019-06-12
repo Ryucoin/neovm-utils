@@ -41,13 +41,24 @@ private func sendJSONRPC(node: String, rpcMethod: RPCMethod, data: Data) -> Prom
     }
 }
 
+private func getResult(dict: [String: Any]) -> String {
+    guard let result = dict["result"] as? [String: Any] else {
+        return ""
+    }
+
+    guard let state = result["state"] as? String else {
+        return ""
+    }
+
+    return state
+}
+
 public func neoSendRawTransaction(endpoint: String = neoTestNet, raw: Data) -> String {
     var result = ""
-    DispatchQueue.global().sync {
-        if let node = formatNEOEndpoint(endpt: endpoint) {
-            if let dict = try? await(sendJSONRPC(node: node, rpcMethod: .sendRawTransaction, data: raw)) {
-                print("Dict: \(dict)")
-            }
+    DispatchQueue.promises = .global()
+    if let node = try? await(formatNEOEndpoint(endpt: endpoint)) {
+        if let dict = try? await(sendJSONRPC(node: node, rpcMethod: .sendRawTransaction, data: raw)) {
+            result = getResult(dict: dict)
         }
     }
     return result
@@ -55,11 +66,10 @@ public func neoSendRawTransaction(endpoint: String = neoTestNet, raw: Data) -> S
 
 public func neoInvokeScript(endpoint: String = neoTestNet, raw: Data) -> String {
     var result = ""
-    DispatchQueue.global().sync {
-        if let node = formatNEOEndpoint(endpt: endpoint) {
-            if let dict = try? await(sendJSONRPC(node: node, rpcMethod: .sendRawTransaction, data: raw)) {
-                print("Dict: \(dict)")
-            }
+    DispatchQueue.promises = .global()
+    if let node = try? await(formatNEOEndpoint(endpt: endpoint)) {
+        if let dict = try? await(sendJSONRPC(node: node, rpcMethod: .invokeScript, data: raw)) {
+            result = getResult(dict: dict)
         }
     }
     return result

@@ -19,14 +19,53 @@ private func concatenatePayloadData(txData: Data, signatureData: Data, publicKey
     return Data(payload)
 }
 
+private func unsignedPayloadToTransactionId(_ unsignedPayload: Data) -> String {
+    let unsignedPayloadString = unsignedPayload.fullHexString
+    let firstHash = unsignedPayloadString.dataWithHexString().sha256.fullHexString
+    let reversed: [UInt8] = firstHash.dataWithHexString().sha256.bytes.reversed()
+    return reversed.fullHexString
+}
+
+private func getAttribute(signer: Wallet?) -> [UInt8] {
+    var customAttributes: [TransactionAttritbute] = []
+    let remark = String(format: "O3X%@", Date().timeIntervalSince1970.description)
+    if let signer = signer {
+        customAttributes.append(TransactionAttritbute(script: signer.address.hashFromAddress()))
+    }
+    customAttributes.append(TransactionAttritbute(remark: remark))
+
+    var numberOfAttributes: UInt8 = 0x00
+    var attributesPayload: [UInt8] = []
+    for attribute in customAttributes where attribute.data != nil {
+        attributesPayload += attribute.data!
+        numberOfAttributes += 1
+    }
+    return  [numberOfAttributes] + attributesPayload
+}
+
 private func buildScript(scriptHash: String, operation: String, args: [NVMParameter], signer: Wallet? = nil) -> Data {
     let scriptBuilder = ScriptBuilder()
     scriptBuilder.pushTypedContractInvoke(scriptHash: scriptHash, operation: operation, args: args)
     let script = scriptBuilder.rawBytes
     let scriptBytes = [UInt8(script.count)] + script
     let scriptHexstring = scriptBytes.fullHexString
-    let rawTransaction = [0xd1, 0x00] + scriptHexstring.dataWithHexString().bytes
+    let payloadPrefix = [0xd1, 0x00] + scriptHexstring.dataWithHexString().bytes
+    let attributesPayload: [UInt8] =  getAttribute(signer: signer)
+
+    var rawTransaction = payloadPrefix + attributesPayload
+
+    let totalInputCount: UInt8 = 0
+    let finalInputPayload = Data()
+    let finalOutputCount: UInt8 = 0
+    let finalOutputPayload = Data()
+
+    rawTransaction += [totalInputCount] + finalInputPayload.bytes + [finalOutputCount] + finalOutputPayload.bytes
+
+    print(rawTransaction.fullHexString)
     let rawTransactionData = Data(rawTransaction)
+    let txid = unsignedPayloadToTransactionId(rawTransactionData)
+    print("Txid: \(txid)")
+
     if let signer = signer {
         let signatureData = signer.signData(data: rawTransactionData)
         let finalPayload = concatenatePayloadData(txData: rawTransactionData, signatureData: signatureData!, publicKey: signer.publicKey)
@@ -42,7 +81,7 @@ public func neoInvoke(endpoint: String = neoTestNet, contractHash: String, opera
 }
 
 public func neoInvokeRead(endpoint: String = neoTestNet, contractHash: String, operation: String, args: [NVMParameter]) -> String {
-    var payload = buildScript(scriptHash: contractHash, operation: operation, args: args)
+    var payload = buildScript(scriptHash: contractHash, operation: operation, args: args, signer: nil)
     payload += contractHash.dataWithHexString().bytes
     return neoInvokeScript(raw: payload)
 }

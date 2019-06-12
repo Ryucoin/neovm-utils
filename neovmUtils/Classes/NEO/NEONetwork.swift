@@ -20,7 +20,7 @@ public func getBestNEONode(net: network) -> Promise<String?> {
             o3api += "?network=test"
         }
 
-        networkUtils.get(o3api).then({ data in
+        networkUtils.get(o3api).then { data in
             do {
                 guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
                     print("Invalid data from o3api")
@@ -34,7 +34,13 @@ public func getBestNEONode(net: network) -> Promise<String?> {
                     return
                 }
 
-                guard let neo = result["neo"] else {
+                guard let d = result["data"] else {
+                    print("Failed to get data from o3api")
+                    fulfill(nil)
+                    return
+                }
+
+                guard let neo = d["neo"] as? [String: Any] else {
                     print("Failed to get neo nodes from o3api")
                     fulfill(nil)
                     return
@@ -51,23 +57,28 @@ public func getBestNEONode(net: network) -> Promise<String?> {
                 print("Error in do-try block for getBestNEONode")
                 fulfill(nil)
             }
-        }).catch({ (error) in
+        }.catch { (error) in
+            print("There was an error!")
             if let error = error as? NetworkError {
                 print("Network error with o3api: \(error.localizedDescription)")
             }
             fulfill(nil)
-        })
+        }
     }
 }
 
-public func formatNEOEndpoint(endpt: String) -> String? {
-    var node: String? = endpt
-    DispatchQueue.global().sync {
+public func formatNEOEndpoint(endpt: String) -> Promise<String?> {
+    return Promise<String?> { fulfill, _ in
         if endpt == neoTestNet {
-            node = try? await(getBestNEONode(net: .testNet))
+            getBestNEONode(net: .testNet).then { node in
+                fulfill(node)
+            }
         } else if endpt == neoMainNet {
-            node = try? await(getBestNEONode(net: .mainNet))
+            getBestNEONode(net: .mainNet).then { node in
+                fulfill(node)
+            }
+        } else {
+            fulfill(endpt)
         }
     }
-    return node
 }

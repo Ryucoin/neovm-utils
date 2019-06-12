@@ -27,6 +27,7 @@
 		7F601E3222B0D67800901046 /* NEOInvocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F601E3122B0D67800901046 /* NEOInvocation.swift */; };
 		7F601E3422B0D6D800901046 /* NEONetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F601E3322B0D6D800901046 /* NEONetwork.swift */; };
 		7F601E3622B0D71000901046 /* NEORPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F601E3522B0D71000901046 /* NEORPC.swift */; };
+		7F601E3822B1C25E00901046 /* TransactionAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F601E3722B1C25E00901046 /* TransactionAttribute.swift */; };
 		7F6657FB22AED67600472335 /* CES1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6657FA22AED67600472335 /* CES1.swift */; };
 		7F66580B22AEEB1F00472335 /* DynamicList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F66580A22AEEB1F00472335 /* DynamicList.swift */; };
 		7F66580D22AEECF400472335 /* NVMParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F66580C22AEECF400472335 /* NVMParser.swift */; };
@@ -86,6 +87,7 @@
 		7F601E3122B0D67800901046 /* NEOInvocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEOInvocation.swift; sourceTree = "<group>"; };
 		7F601E3322B0D6D800901046 /* NEONetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEONetwork.swift; sourceTree = "<group>"; };
 		7F601E3522B0D71000901046 /* NEORPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEORPC.swift; sourceTree = "<group>"; };
+		7F601E3722B1C25E00901046 /* TransactionAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionAttribute.swift; sourceTree = "<group>"; };
 		7F6657FA22AED67600472335 /* CES1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CES1.swift; sourceTree = "<group>"; };
 		7F66580A22AEEB1F00472335 /* DynamicList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicList.swift; sourceTree = "<group>"; };
 		7F66580C22AEECF400472335 /* NVMParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NVMParser.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				7F601E3522B0D71000901046 /* NEORPC.swift */,
 				7F601E2922B0C6EF00901046 /* ScriptBuilder.swift */,
 				7F601E2F22B0D37700901046 /* SHA256.swift */,
+				7F601E3722B1C25E00901046 /* TransactionAttribute.swift */,
 			);
 			path = NEO;
 			sourceTree = "<group>";
@@ -600,6 +603,7 @@
 				7F601E1B22B09BA100901046 /* BlockchainInterfaceProtocol.swift in Sources */,
 				7F601E3422B0D6D800901046 /* NEONetwork.swift in Sources */,
 				7F5BDD88228391CC00FDB729 /* OEP5.swift in Sources */,
+				7F601E3822B1C25E00901046 /* TransactionAttribute.swift in Sources */,
 				7F601E2C22B0C70700901046 /* OpCodes.swift in Sources */,
 				7F601E2522B0C0B700901046 /* NVMParameter.swift in Sources */,
 				7F6657FB22AED67600472335 /* CES1.swift in Sources */,

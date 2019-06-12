@@ -504,6 +504,23 @@ class Tests: XCTestCase {
         XCTAssertEqual(wallet.address, w.address)
     }
 
+    func testNEOInvocations() {
+        let contractHash = "849d095d07950b9e56d0c895ec48ec5100cfdff1"
+
+        let asset = OEPAssetInterface(contractHash: contractHash, testnet: true, interface: NEO)
+        let result = asset.customRead(operation: "name", args: [])
+        print("Result: \(result)")
+
+        let address = "AUxBn8n37YpYwkVKVg5rSP6W2BwrJZjU5t"
+        let param = NVMParameter(type: .Address, value: address)
+        let result2 = asset.customRead(operation: "balanceOf", args: [param])
+        print("Result 2: \(result2)")
+
+//        let wallet = newWallet()
+//        let result3 = asset.customInvoke(operation: "name", args: [], wif: wallet.wif)
+//        print("Result 3: \(result3)")
+    }
+
     func testNEP2() {
         let password = "12345678"
         guard let e = newEncryptedKey(wif: exampleWallet.wif, password: password) else {
