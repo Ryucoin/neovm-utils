@@ -91,7 +91,7 @@ public func sendRegister(endpoint: String = ontologyTestNet, ident: Identity, pa
 
     let err = NSErrorPointer(nilLiteral: ())
     let raw = NeoutilsOntologyMakeRegister(gasPrice, gasLimit, wif, payerAcct.wif, err)
-    let e = formatEndpoint(endpt: endpoint)
+    let e = formatONTEndpoint(endpt: endpoint)
     let response = ontologySendRawTransaction(endpoint: e, raw: raw)
     return response
 }

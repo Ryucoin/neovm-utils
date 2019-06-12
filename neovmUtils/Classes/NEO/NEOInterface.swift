@@ -17,7 +17,11 @@ public final class NEOInterface: NSObject, BlockchainInterfaceProtocol {
             return ""
         }
 
-        return neoInvoke(contractHash: contractHash, method: operation, args: params)
+        guard let signer = walletFromWIF(wif: wif) else {
+            return ""
+        }
+
+        return neoInvoke(contractHash: contractHash, operation: operation, args: params, signer: signer)
     }
     
     public func read(contractHash: String, operation: String, args: [Any]) -> String {
@@ -25,6 +29,6 @@ public final class NEOInterface: NSObject, BlockchainInterfaceProtocol {
             return ""
         }
 
-        return neoInvokeRead(contractHash: contractHash, method: operation, args: params)
+        return neoInvokeRead(contractHash: contractHash, operation: operation, args: params)
     }
 }

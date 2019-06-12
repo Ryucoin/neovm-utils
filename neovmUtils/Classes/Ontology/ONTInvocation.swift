@@ -67,7 +67,7 @@ public func buildOntologyInvocationTransaction(contractHash: String, method: Str
 }
 
 public func ontologyInvoke(endpoint: String = ontologyTestNet, contractHash: String, method: String, args: [NVMParameter], gasPrice: Int = 0, gasLimit: Int = 0, wif: String, payer: String = "") -> String {
-    let e = formatEndpoint(endpt: endpoint)
+    let e = formatONTEndpoint(endpt: endpoint)
     let params = convertParamArray(params: args)
     let p = payer == "" ? addressFromWif(wif: wif) ?? "" : payer
     return ontologyInvokeHelper(endpoint: e, contractHash: contractHash, method: method, args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif, payer: p)

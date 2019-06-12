@@ -36,3 +36,22 @@ public func getBestNEONode(net: network) -> String {
         return bestNode
     }
 }
+
+public func formatNEOEndpoint(endpt: String) -> String {
+    if endpt == neoTestNodes.bestNode.rawValue {
+        return getBestNEONode(net: .testNet)
+    } else if endpt == neoMainNodes.bestNode.rawValue {
+        return getBestNEONode(net: .mainNet)
+    }
+    return endpt
+}
+
+public func neoSendRawTransaction(endpoint: String = neoTestNet, raw: Data) -> String {
+    let node = formatNEOEndpoint(endpt: endpoint)
+    return ""
+}
+
+public func neoInvokeScript(endpoint: String = neoTestNet, raw: Data) -> String {
+    let node = formatNEOEndpoint(endpt: endpoint)
+    return ""
+}
