@@ -304,7 +304,7 @@ class Tests: XCTestCase {
         let (ont, ong) = ontologyGetBalances(address: address)
         XCTAssertTrue(ont > 0 && ong > 0)
 
-        let (ontMain, ongMain) = ontologyGetBalances(endpoint: mainNet, address: address)
+        let (ontMain, ongMain) = ontologyGetBalances(endpoint: ontologyMainNet, address: address)
         XCTAssertTrue(ontMain > 0 && ongMain > 0)
 
         let (ontBad, ongBad) = ontologyGetBalances(address: "bad address")
@@ -337,7 +337,7 @@ class Tests: XCTestCase {
 
     func testGetRawTransaction() {
         let txID = "ea82d1e85303e1d955231b7c863308ce9b580602d386f8aa9bd80bccc0b51b6e"
-        let raw = ontologyGetRawTransaction(endpoint: mainNet, txID: txID)
+        let raw = ontologyGetRawTransaction(endpoint: ontologyMainNet, txID: txID)
         let unknown = "unknown transaction"
         XCTAssertNotEqual(raw, unknown)
     }
@@ -564,7 +564,7 @@ class Tests: XCTestCase {
     }
 
     func testOEP10() {
-        let oep5 = OEP5Interface(contractHash: "cae215265a5e348bfd603b8db22893aa74b42417", endpoint: mainNet)
+        let oep5 = OEP5Interface(contractHash: "cae215265a5e348bfd603b8db22893aa74b42417", endpoint: ontologyMainNet)
         let wallet = newWallet()
         let hash = "edf64937ca304ea8180fa92e2de36dc0a33cc712"
         XCTAssertTrue(oep5.approveContract(hash: hash, wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
@@ -573,7 +573,7 @@ class Tests: XCTestCase {
     }
 
     func testOEP4() {
-        let oep4 = OEP4Interface(contractHash: "78b98deed62aa708eaf6de85843734ecdfb14c1b", endpoint: mainNet)
+        let oep4 = OEP4Interface(contractHash: "78b98deed62aa708eaf6de85843734ecdfb14c1b", endpoint: ontologyMainNet)
         let address = "ATrApQ3w4xLnc2yDkEDXw1zAk9Ue544Csz"
 
         XCTAssertEqual(oep4.getName(), "SEED")
@@ -624,7 +624,7 @@ class Tests: XCTestCase {
     }
 
     func testOEP5() {
-        let oep5 = OEP5Interface(contractHash: "cae215265a5e348bfd603b8db22893aa74b42417", endpoint: mainNet)
+        let oep5 = OEP5Interface(contractHash: "cae215265a5e348bfd603b8db22893aa74b42417", endpoint: ontologyMainNet)
         let wallet = newWallet()
         let address = wallet.address
         let tokenId = 87

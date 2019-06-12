@@ -12,7 +12,7 @@ public class OEPAssetInterface: NSObject {
     internal var contractHash: String = ""
     internal var endpoint: String = ""
 
-    public convenience init(contractHash: String, endpoint: String = testNet) {
+    public convenience init(contractHash: String, endpoint: String = ontologyTestNet) {
         self.init()
         self.contractHash = contractHash
         self.endpoint = endpoint
