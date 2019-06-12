@@ -74,7 +74,7 @@ class Tests: XCTestCase {
         let argDict : [[String:Any]] = [["T":"Address", "V":exampleWallet.address], ["T":"String", "V":"Hello!"]]
 
         do {
-            let data =  try JSONSerialization.data(withJSONObject: argDict, options: .prettyPrinted)
+            let data = try JSONSerialization.data(withJSONObject: argDict, options: .prettyPrinted)
             let args = String(data: data, encoding: String.Encoding.utf8)
             let gasPrice = 500
             let gasLimit = 20000
@@ -792,7 +792,7 @@ class Tests: XCTestCase {
         let argDict : [[String:Any]] = [["T":"Address", "V":exampleWallet.address], ["T":"String", "V":"Hello!"]]
 
         do {
-            let data =  try JSONSerialization.data(withJSONObject: argDict, options: .prettyPrinted)
+            let data = try JSONSerialization.data(withJSONObject: argDict, options: .prettyPrinted)
             let args = String(data: data, encoding: String.Encoding.utf8)
             let gasPrice = 500
             let gasLimit = 20000

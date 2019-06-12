@@ -18,7 +18,7 @@ public class OEP8Interface: OEP10Interface {
 
     public func getSymbol(tokenId: Any) -> String {
         let token = strOrIntToParam(arg: tokenId)
-        let hex =  interface.read(contractHash: contractHash, operation: "symbol", args: [token])
+        let hex = interface.read(contractHash: contractHash, operation: "symbol", args: [token])
         return hex.hexToAscii()
     }
 
@@ -116,7 +116,7 @@ public class OEP8Interface: OEP10Interface {
         let ownerAcct = OntologyParameter(type: .Address, value: owner)
         let spenderAcct = OntologyParameter(type: .Address, value: spender)
         let token = strOrIntToParam(arg: tokenId)
-        let hex =  interface.read(contractHash: contractHash, operation: "allowance", args: [ownerAcct, spenderAcct, token])
+        let hex = interface.read(contractHash: contractHash, operation: "allowance", args: [ownerAcct, spenderAcct, token])
         return hex.hexToDecimal()
     }
 
