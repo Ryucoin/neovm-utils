@@ -69,6 +69,14 @@ public class ScriptBuilder {
         pushOPCode(.PACK)
     }
 
+    private func pushTypedArray(_ arrayValue: [NVMParameter]) {
+        for elem in arrayValue {
+            pushTypedData(elem)
+        }
+        pushInt(arrayValue.count)
+        pushOPCode(.PACK)
+    }
+
     public func resetScript() {
         rawBytes.removeAll()
     }
@@ -89,8 +97,34 @@ public class ScriptBuilder {
         }
     }
 
-    public func pushContractInvoke(scriptHash: String, operation: String? = nil, args: Any? = nil) {
-        pushData(args)
+    public func pushTypedData(_ data: NVMParameter?) {
+        guard let unwrappedData = data else {
+            pushBool(false)
+            return
+        }
+        let type = unwrappedData.type.rawValue.lowercased()
+        if type == "string" || type == "hash160" {
+            pushHexString((unwrappedData.value as? String ?? "").toHexString())
+        } else if type == "address" {
+            pushHexString((unwrappedData.value as? String ?? "").hashFromAddress())
+        } else if type == "boolean" {
+            pushBool(unwrappedData.value as? Bool ?? false)
+        }  else if type == "integer" {
+            pushInt(unwrappedData.value as? Int ?? 0)
+        } else if type == "bytearray" {
+            pushHexString(unwrappedData.value as? String ?? "")
+        } else if type == "array" {
+            let array = unwrappedData.value as? [NVMParameter] ?? []
+            pushTypedArray(array)
+        }
+    }
+
+    public func pushTypedContractInvoke(scriptHash: String, operation: String? = nil, args: [NVMParameter]) {
+        if (!args.isEmpty) {
+            pushTypedArray(args.reversed())
+        } else {
+            pushBool(false)
+        }
 
         if let operation = operation {
             let hex = operation.unicodeScalars.filter { $0.isASCII }.map { String(format: "%X", $0.value) }.joined()

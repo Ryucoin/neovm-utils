@@ -17,6 +17,10 @@ public extension Data {
     var bytes: [UInt8] {
         return [UInt8](self)
     }
+
+    var fullHexString: String {
+        return self.map { return String(format: "%02x", $0) }.joined()
+    }
 }
 
 public extension String {
@@ -36,6 +40,23 @@ public extension String {
 
     func index(at offset: Int) -> String.Index {
         return index(startIndex, offsetBy: offset)
+    }
+
+    func hashFromAddress() -> String {
+        let bytes = self.base58CheckDecodedBytes!
+        let shortened = bytes[0...20] //need exactly twenty one bytes
+        let substringData = Data(shortened)
+        let hashOne = substringData.sha256
+        let hashTwo = hashOne.sha256
+        _ = [UInt8](hashTwo)
+        let finalKeyData = Data(shortened[1...shortened.count - 1])
+        return finalKeyData.fullHexString
+    }
+
+    func toHexString() -> String {
+        let data = self.data(using: .utf8)!
+        let hexString = data.map { String(format: "%02x", $0) }.joined()
+        return hexString
     }
 
     func hexToAscii() -> String {
