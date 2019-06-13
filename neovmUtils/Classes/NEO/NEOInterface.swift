@@ -12,23 +12,15 @@ public final class NEOInterface: NSObject, BlockchainInterfaceProtocol {
     public static let shared = NEOInterface()
     public var testnetExecution: Bool = true
     
-    public func invoke(contractHash: String, operation: String, args: [Any], wif: String, other: [String : Any]) -> String {
-        guard let params = args as? [NVMParameter] else {
-            return ""
-        }
-
+    public func invoke(contractHash: String, operation: String, args: [NVMParameter], wif: String, other: [String: Any]) -> String {
         guard let signer = walletFromWIF(wif: wif) else {
             return ""
         }
 
-        return neoInvoke(contractHash: contractHash, operation: operation, args: params, signer: signer)
+        return neoInvoke(contractHash: contractHash, operation: operation, args: args, signer: signer)
     }
     
-    public func read(contractHash: String, operation: String, args: [Any]) -> String {
-        guard let params = args as? [NVMParameter] else {
-            return ""
-        }
-
-        return neoInvokeRead(contractHash: contractHash, operation: operation, args: params)
+    public func read(contractHash: String, operation: String, args: [NVMParameter]) -> String {
+        return neoInvokeRead(contractHash: contractHash, operation: operation, args: args)
     }
 }
