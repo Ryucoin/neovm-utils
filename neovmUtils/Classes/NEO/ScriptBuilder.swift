@@ -34,7 +34,7 @@ public class ScriptBuilder {
             rawBytes.append(rawValue)
         default:
             let intBytes = toByteArray(intValue)
-            pushData(intBytes.fullHexString)
+            pushHexString(intBytes.fullHexString)
         }
     }
 
@@ -58,36 +58,12 @@ public class ScriptBuilder {
         }
     }
 
-    private func pushArray(_ arrayValue: [Any?]) {
-        for elem in arrayValue {
-            pushData(elem)
-        }
-        pushInt(arrayValue.count)
-        pushOPCode(.PACK)
-    }
-
     private func pushTypedArray(_ arrayValue: [NVMParameter]) {
         for elem in arrayValue {
             pushTypedData(elem)
         }
         pushInt(arrayValue.count)
         pushOPCode(.PACK)
-    }
-
-    public func pushData(_ data: Any?) {
-        if let boolValue = data as? Bool {
-            pushBool(boolValue)
-        } else if let intValue = data as? Int {
-            pushInt(intValue)
-        } else if let stringValue = data as? String {
-            pushHexString(stringValue)
-        } else if let arrayValue = data as? [Any?] {
-            pushArray(arrayValue)
-        } else if data == nil {
-            pushBool(false)
-        } else {
-            print("Unsupported Data Type Pushed on stack")
-        }
     }
 
     public func pushTypedData(_ data: NVMParameter?) {
@@ -125,7 +101,7 @@ public class ScriptBuilder {
 
         if let operation = operation {
             let hex = operation.unicodeScalars.filter { $0.isASCII }.map { String(format: "%X", $0.value) }.joined()
-            pushData(hex)
+            pushHexString(hex)
         }
 
         if scriptHash.count != 40 {
