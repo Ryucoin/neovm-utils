@@ -12,14 +12,14 @@ import NetworkUtils
 
 private enum RPCMethod: String {
     case sendRawTransaction = "sendrawtransaction"
-    case invokeScript = "invokescript"
+    case invokeFunction = "invokefunction"
 }
 
-private func sendJSONRPC(node: String, rpcMethod: RPCMethod, data: Data) -> Promise<[String: Any]?> {
+private func sendRawTransaction(node: String, data: Data) -> Promise<[String: Any]?> {
     let params: [String: Any] = [
         "jsonrpc": "2.0",
         "id": 2,
-        "method": rpcMethod.rawValue,
+        "method": RPCMethod.sendRawTransaction.rawValue,
         "params": [data.fullHexString]
     ]
 
@@ -41,16 +41,53 @@ private func sendJSONRPC(node: String, rpcMethod: RPCMethod, data: Data) -> Prom
     }
 }
 
+private func invokeFunction(node: String, args: [Any]) -> Promise<[String: Any]?> {
+    let params: [String: Any] = [
+        "jsonrpc": "2.0",
+        "id": 2,
+        "method": RPCMethod.invokeFunction.rawValue,
+        "params": args
+    ]
+
+    return Promise<[String: Any]?> { fulfill, _ in
+        networkUtils.post(node, params, 3, "application/json-rpc").then ({ data in
+            guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+                print("Invalid data from sendJSONRPC")
+                fulfill(nil)
+                return
+            }
+
+            fulfill(json)
+        }).catch({ error in
+            if let error = error as? NetworkError {
+                print("Network error with sendJSONRPC: \(error.localizedDescription)")
+            }
+            fulfill(nil)
+        })
+    }
+}
+
+struct Stack: Codable {
+    let type: String
+    let value: String
+}
+
 private func getReadResult(dict: [String: Any]) -> String {
     guard let result = dict["result"] as? [String: Any] else {
         return ""
     }
 
-    guard let state = result["state"] as? String else {
+    guard let stackObj = result["stack"] as? [Any] else {
         return ""
     }
 
-    return state
+    guard let data = try? JSONSerialization.data(withJSONObject: stackObj, options: .prettyPrinted),
+        let stackArray = try? JSONDecoder().decode([Stack].self, from: data) else {
+            return ""
+    }
+
+    let first = stackArray[0].value
+    return first
 }
 
 private func getWriteResult(dict: [String: Any]) -> Bool {
@@ -65,18 +102,25 @@ public func neoSendRawTransaction(endpoint: String = neoTestNet, raw: Data) -> B
     var result = false
     DispatchQueue.promises = .global()
     if let node = try? await(formatNEOEndpoint(endpt: endpoint)) {
-        if let dict = try? await(sendJSONRPC(node: node, rpcMethod: .sendRawTransaction, data: raw)) {
+        if let dict = try? await(sendRawTransaction(node: node, data: raw)) {
             result = getWriteResult(dict: dict)
         }
     }
     return result
 }
 
-public func neoInvokeScript(endpoint: String = neoTestNet, raw: Data) -> String {
+public func neoInvokeScript(endpoint: String = neoTestNet, scriptHash: String, operation: String, args: [NVMParameter]) -> String {
     var result = ""
     DispatchQueue.promises = .global()
     if let node = try? await(formatNEOEndpoint(endpt: endpoint)) {
-        if let dict = try? await(sendJSONRPC(node: node, rpcMethod: .invokeScript, data: raw)) {
+        var params: [Any] = [scriptHash, operation]
+        var arguments: [Any] = []
+        for arg in args {
+            let param = arg.getIFArg()
+            arguments.append(param)
+        }
+        params.append(arguments)
+        if let dict = try? await(invokeFunction(node: node, args: params)) {
             result = getReadResult(dict: dict)
         }
     }

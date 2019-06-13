@@ -51,9 +51,7 @@ private func buildScript(scriptHash: String, operation: String, args: [NVMParame
     return scriptBytes.fullHexString
 }
 
-private func buildPayload(scriptHash: String, operation: String, args: [NVMParameter], signer: Wallet? = nil) -> (String, Data) {
-    let script = buildScript(scriptHash: scriptHash, operation: operation, args: args)
-
+private func buildPayload(script: String, scriptHash: String, operation: String, args: [NVMParameter], signer: Wallet? = nil) -> (String, Data) {
     let payloadPrefix = [0xd1, 0x00] + script.dataWithHexString().bytes
     let attributesPayload: [UInt8] =  getAttribute(signer: signer)
     var rawTransaction = payloadPrefix + attributesPayload
@@ -65,10 +63,8 @@ private func buildPayload(scriptHash: String, operation: String, args: [NVMParam
 
     rawTransaction += [totalInputCount] + finalInputPayload.bytes + [finalOutputCount] + finalOutputPayload.bytes
 
-    print(rawTransaction.fullHexString)
     let rawTransactionData = Data(rawTransaction)
     let txid = unsignedPayloadToTransactionId(rawTransactionData)
-    print("Txid: \(txid)")
 
     if let signer = signer {
         let signatureData = signer.signData(data: rawTransactionData)
@@ -79,16 +75,15 @@ private func buildPayload(scriptHash: String, operation: String, args: [NVMParam
 }
 
 public func neoInvoke(endpoint: String = neoTestNet, contractHash: String, operation: String, args: [NVMParameter], signer: Wallet) -> String {
-    var (txid, payload) = buildPayload(scriptHash: contractHash, operation: operation, args: args, signer: signer)
+    let script = buildScript(scriptHash: contractHash, operation: operation, args: args)
+    var (txid, payload) = buildPayload(script: script, scriptHash: contractHash, operation: operation, args: args, signer: signer)
     payload += contractHash.dataWithHexString().bytes
-    if neoSendRawTransaction(raw: payload) {
+    if neoSendRawTransaction(endpoint: endpoint, raw: payload) {
         return txid
     }
     return ""
 }
 
 public func neoInvokeRead(endpoint: String = neoTestNet, contractHash: String, operation: String, args: [NVMParameter]) -> String {
-    var (_, payload) = buildPayload(scriptHash: contractHash, operation: operation, args: args, signer: newWallet())
-    payload += contractHash.dataWithHexString().bytes
-    return neoInvokeScript(raw: payload)
+    return neoInvokeScript(endpoint: endpoint, scriptHash: contractHash, operation: operation, args: args)
 }

@@ -508,16 +508,19 @@ class Tests: XCTestCase {
         let contractHash = "849d095d07950b9e56d0c895ec48ec5100cfdff1"
 
         let asset = OEPAssetInterface(contractHash: contractHash, testnet: true, interface: NEO)
-        let result = asset.customRead(operation: "name", args: [])
-        print("Result: \(result)")
+        let result = asset.customRead(operation: "name", args: []).hexToAscii()
+        let name = "TrinityToken"
+        XCTAssertEqual(name, result)
 
         let address = "AUxBn8n37YpYwkVKVg5rSP6W2BwrJZjU5t"
         let param = NVMParameter(type: .Address, value: address)
-        let result2 = asset.customRead(operation: "balanceOf", args: [param])
-        print("Result 2: \(result2)")
+        let result2 = asset.customRead(operation: "balanceOf", args: [param]).hexToDecimal()
+        let balance = 2400000000
+        XCTAssertEqual(balance, result2)
 
         let wallet = newWallet()
         let txid = asset.customInvoke(operation: "name", args: [], wif: wallet.wif)
+        print("Invoking with txid: \(txid)")
         XCTAssertNotEqual(txid, "")
     }
 
