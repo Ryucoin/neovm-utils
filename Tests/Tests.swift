@@ -554,6 +554,17 @@ class Tests: XCTestCase {
         let arrayParam = NVMParameter(type: .Array, value: [to, amount])
         let cresult = ces1.customRead(operation: "transferMulti", args: [arrayParam])
         XCTAssertEqual(cresult, "")
+
+        let unknown = NVMParameter(type: .Unknown, value: "")
+        let unknownDict = unknown.getIFArg()
+        XCTAssertEqual(unknownDict.keys.count, 0)
+
+        let str = NVMParameter(type: .String, value: "Hello there, how are you doing today?")
+        let boolean = NVMParameter(type: .Boolean, value: true)
+        let bytearray = NVMParameter(type: .ByteArray, value: "262bec084432")
+        let array = NVMParameter(type: .Array, value: [])
+        let ctxid2 = ces1.customInvoke(operation: "operation", args: [array, str, boolean, arrayParam, bytearray], wif: wallet.wif)
+        XCTAssertNotEqual(ctxid2, "")
     }
 
     func testNEP2() {

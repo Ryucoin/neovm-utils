@@ -17,6 +17,7 @@ public enum NVMParameterType: String {
     case Array
     case Bool       // Casts to Int
     case Boolean
+    case ByteArray
     case Unknown
 }
 
