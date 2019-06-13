@@ -109,8 +109,12 @@ public class ScriptBuilder {
             pushHexString((unwrappedData.value as? String ?? "").hashFromAddress())
         } else if type == "boolean" {
             pushBool(unwrappedData.value as? Bool ?? false)
-        }  else if type == "integer" {
+        } else if type == "integer" {
             pushInt(unwrappedData.value as? Int ?? 0)
+        } else if type == "fixed8" {
+            pushInt(Int(unwrappedData.value as? Double ?? 0) * 100000000)
+        } else if type == "fixed9" {
+            pushInt(Int(unwrappedData.value as? Double ?? 0) * 1000000000)
         } else if type == "bytearray" {
             pushHexString(unwrappedData.value as? String ?? "")
         } else if type == "array" {

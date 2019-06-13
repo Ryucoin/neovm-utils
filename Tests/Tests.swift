@@ -401,6 +401,8 @@ class Tests: XCTestCase {
         XCTAssertFalse(second)
         let sig = a.signMessage(message: "Hello, world!")
         XCTAssertNil(sig)
+        let signed = a.signData(data: originalData ?? Data())
+        XCTAssertNil(signed)
         let publicKey = newWallet().publicKey
         let publicKeyString = newWallet().publicKeyString
         let shared = a.computeSharedSecret(publicKey: publicKey)
@@ -513,15 +515,28 @@ class Tests: XCTestCase {
         XCTAssertEqual(name, result)
 
         let address = "AUxBn8n37YpYwkVKVg5rSP6W2BwrJZjU5t"
-        let param = NVMParameter(type: .Address, value: address)
-        let result2 = asset.customRead(operation: "balanceOf", args: [param]).hexToDecimal()
+        let owner = NVMParameter(type: .Address, value: address)
+        let result2 = asset.customRead(operation: "balanceOf", args: [owner]).hexToDecimal()
         let balance = 2400000000
         XCTAssertEqual(balance, result2)
 
         let wallet = newWallet()
         let txid = asset.customInvoke(operation: "name", args: [], wif: wallet.wif)
-        print("Invoking with txid: \(txid)")
         XCTAssertNotEqual(txid, "")
+
+        let toAddress = wallet.address
+        let to = NVMParameter(type: .Address, value: toAddress)
+        let amount = NVMParameter(type: .Fixed8, value: 24)
+        let txid2 = asset.customInvoke(operation: "transfer", args: [owner, to, amount], wif: wallet.wif)
+        XCTAssertNotEqual(txid2, "")
+
+        let amount2 = NVMParameter(type: .Fixed9, value: 2.4)
+        let txid3 = asset.customInvoke(operation: "transfer", args: [owner, to, amount2], wif: wallet.wif)
+        XCTAssertNotEqual(txid3, "")
+
+        let amount3 = NVMParameter(type: .Integer, value: 2400000000)
+        let txid4 = asset.customInvoke(operation: "transfer", args: [owner, to, amount3], wif: wallet.wif)
+        XCTAssertNotEqual(txid4, "")
     }
 
     func testNEP2() {
