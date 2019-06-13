@@ -10,9 +10,6 @@ import Foundation
 
 public class ScriptBuilder {
     private(set) public var rawBytes = [UInt8]()
-    var rawHexString: String {
-        return rawBytes.fullHexString
-    }
 
     public init() {
         rawBytes = []

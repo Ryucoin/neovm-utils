@@ -32,9 +32,3 @@ public extension Array where Element == UInt8 {
         return sha256Data.bytes
     }
 }
-
-public extension String {
-    var sha256: Data? {
-        return self.data(using: String.Encoding.utf8)?.sha256
-    }
-}
