@@ -74,10 +74,6 @@ public class ScriptBuilder {
         pushOPCode(.PACK)
     }
 
-    public func resetScript() {
-        rawBytes.removeAll()
-    }
-
     public func pushData(_ data: Any?) {
         if let boolValue = data as? Bool {
             pushBool(boolValue)

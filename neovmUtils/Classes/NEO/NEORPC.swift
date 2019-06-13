@@ -86,6 +86,10 @@ private func getReadResult(dict: [String: Any]) -> String {
             return ""
     }
 
+    guard stackArray.count >= 1 else {
+        return ""
+    }
+
     let first = stackArray[0].value
     return first
 }

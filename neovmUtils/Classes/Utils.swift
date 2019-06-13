@@ -105,6 +105,10 @@ public extension String {
     func dataWithHexString() -> Data {
         var hex = self
         var data = Data()
+        guard self.count % 2 == 0 else {
+            return data
+        }
+
         while hex.count > 0 {
             let c: String = String(hex[0..<2])
             hex = String(hex[2..<hex.count])

@@ -537,6 +537,23 @@ class Tests: XCTestCase {
         let amount3 = NVMParameter(type: .Integer, value: 2400000000)
         let txid4 = asset.customInvoke(operation: "transfer", args: [owner, to, amount3], wif: wallet.wif)
         XCTAssertNotEqual(txid4, "")
+
+        let result3 = asset.customRead(operation: "transfer", args: [owner, to, amount])
+        let result4 = asset.customRead(operation: "transfer", args: [owner, to, amount2])
+        let result5 = asset.customRead(operation: "transfer", args: [owner, to, amount3])
+        XCTAssertEqual(result3, "")
+        XCTAssertEqual(result4, "")
+        XCTAssertEqual(result5, "")
+
+        let badHash = "\(contractHash)X"
+        let ces1 = CES1Interface(contractHash: badHash, testnet: true, interface: NEO)
+        let args: [Any] = [address, 1]
+        let ctxid = ces1.transferMulti(args: [args], wif: wallet.wif)
+        XCTAssertNotEqual(ctxid, "")
+
+        let arrayParam = NVMParameter(type: .Array, value: [to, amount])
+        let cresult = ces1.customRead(operation: "transferMulti", args: [arrayParam])
+        XCTAssertEqual(cresult, "")
     }
 
     func testNEP2() {
