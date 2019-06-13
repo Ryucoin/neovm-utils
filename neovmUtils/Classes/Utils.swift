@@ -118,10 +118,6 @@ public extension String {
 }
 
 public extension Array where Element == UInt8 {
-    var hexString: String {
-        return self.map { return String(format: "%x", $0) }.joined()
-    }
-
     var fullHexString: String {
         return self.map { return String(format: "%02x", $0) }.joined()
     }
