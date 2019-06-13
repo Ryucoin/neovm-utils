@@ -43,15 +43,19 @@ private func getAttribute(signer: Wallet?) -> [UInt8] {
     return  [numberOfAttributes] + attributesPayload
 }
 
-private func buildScript(scriptHash: String, operation: String, args: [NVMParameter], signer: Wallet? = nil) -> Data {
+private func buildScript(scriptHash: String, operation: String, args: [NVMParameter]) -> String {
     let scriptBuilder = ScriptBuilder()
     scriptBuilder.pushTypedContractInvoke(scriptHash: scriptHash, operation: operation, args: args)
     let script = scriptBuilder.rawBytes
     let scriptBytes = [UInt8(script.count)] + script
-    let scriptHexstring = scriptBytes.fullHexString
-    let payloadPrefix = [0xd1, 0x00] + scriptHexstring.dataWithHexString().bytes
-    let attributesPayload: [UInt8] =  getAttribute(signer: signer)
+    return scriptBytes.fullHexString
+}
 
+private func buildPayload(scriptHash: String, operation: String, args: [NVMParameter], signer: Wallet? = nil) -> (String, Data) {
+    let script = buildScript(scriptHash: scriptHash, operation: operation, args: args)
+
+    let payloadPrefix = [0xd1, 0x00] + script.dataWithHexString().bytes
+    let attributesPayload: [UInt8] =  getAttribute(signer: signer)
     var rawTransaction = payloadPrefix + attributesPayload
 
     let totalInputCount: UInt8 = 0
@@ -69,19 +73,22 @@ private func buildScript(scriptHash: String, operation: String, args: [NVMParame
     if let signer = signer {
         let signatureData = signer.signData(data: rawTransactionData)
         let finalPayload = concatenatePayloadData(txData: rawTransactionData, signatureData: signatureData!, publicKey: signer.publicKey)
-        return finalPayload
+        return (txid, finalPayload)
     }
-    return rawTransactionData
+    return (txid, rawTransactionData)
 }
 
 public func neoInvoke(endpoint: String = neoTestNet, contractHash: String, operation: String, args: [NVMParameter], signer: Wallet) -> String {
-    var payload = buildScript(scriptHash: contractHash, operation: operation, args: args, signer: signer)
+    var (txid, payload) = buildPayload(scriptHash: contractHash, operation: operation, args: args, signer: signer)
     payload += contractHash.dataWithHexString().bytes
-    return neoSendRawTransaction(raw: payload)
+    if neoSendRawTransaction(raw: payload) {
+        return txid
+    }
+    return ""
 }
 
 public func neoInvokeRead(endpoint: String = neoTestNet, contractHash: String, operation: String, args: [NVMParameter]) -> String {
-    var payload = buildScript(scriptHash: contractHash, operation: operation, args: args, signer: nil)
+    var (_, payload) = buildPayload(scriptHash: contractHash, operation: operation, args: args, signer: newWallet())
     payload += contractHash.dataWithHexString().bytes
     return neoInvokeScript(raw: payload)
 }

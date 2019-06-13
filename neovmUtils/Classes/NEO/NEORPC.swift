@@ -41,7 +41,7 @@ private func sendJSONRPC(node: String, rpcMethod: RPCMethod, data: Data) -> Prom
     }
 }
 
-private func getResult(dict: [String: Any]) -> String {
+private func getReadResult(dict: [String: Any]) -> String {
     guard let result = dict["result"] as? [String: Any] else {
         return ""
     }
@@ -53,12 +53,20 @@ private func getResult(dict: [String: Any]) -> String {
     return state
 }
 
-public func neoSendRawTransaction(endpoint: String = neoTestNet, raw: Data) -> String {
-    var result = ""
+private func getWriteResult(dict: [String: Any]) -> Bool {
+    guard let result = dict["result"] as? Int else {
+        return false
+    }
+
+    return result == 1
+}
+
+public func neoSendRawTransaction(endpoint: String = neoTestNet, raw: Data) -> Bool {
+    var result = false
     DispatchQueue.promises = .global()
     if let node = try? await(formatNEOEndpoint(endpt: endpoint)) {
         if let dict = try? await(sendJSONRPC(node: node, rpcMethod: .sendRawTransaction, data: raw)) {
-            result = getResult(dict: dict)
+            result = getWriteResult(dict: dict)
         }
     }
     return result
@@ -69,7 +77,7 @@ public func neoInvokeScript(endpoint: String = neoTestNet, raw: Data) -> String 
     DispatchQueue.promises = .global()
     if let node = try? await(formatNEOEndpoint(endpt: endpoint)) {
         if let dict = try? await(sendJSONRPC(node: node, rpcMethod: .invokeScript, data: raw)) {
-            result = getResult(dict: dict)
+            result = getReadResult(dict: dict)
         }
     }
     return result

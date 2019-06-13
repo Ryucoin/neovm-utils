@@ -516,9 +516,9 @@ class Tests: XCTestCase {
         let result2 = asset.customRead(operation: "balanceOf", args: [param])
         print("Result 2: \(result2)")
 
-//        let wallet = newWallet()
-//        let result3 = asset.customInvoke(operation: "name", args: [], wif: wallet.wif)
-//        print("Result 3: \(result3)")
+        let wallet = newWallet()
+        let txid = asset.customInvoke(operation: "name", args: [], wif: wallet.wif)
+        XCTAssertNotEqual(txid, "")
     }
 
     func testNEP2() {
