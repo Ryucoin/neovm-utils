@@ -56,21 +56,12 @@ struct Stack: Codable {
 }
 
 private func getReadResult(dict: [String: Any]) -> String {
-    guard let result = dict["result"] as? [String: Any] else {
-        return ""
-    }
-
-    guard let stackObj = result["stack"] as? [Any] else {
-        return ""
-    }
-
-    guard let data = try? JSONSerialization.data(withJSONObject: stackObj, options: .prettyPrinted),
-        let stackArray = try? JSONDecoder().decode([Stack].self, from: data) else {
+    guard let result = dict["result"] as? [String: Any],
+        let stackObj = result["stack"] as? [Any],
+        let data = try? JSONSerialization.data(withJSONObject: stackObj, options: .prettyPrinted),
+        let stackArray = try? JSONDecoder().decode([Stack].self, from: data),
+        stackArray.count >= 1 else {
             return ""
-    }
-
-    guard stackArray.count >= 1 else {
-        return ""
     }
 
     let first = stackArray[0].value
@@ -78,10 +69,7 @@ private func getReadResult(dict: [String: Any]) -> String {
 }
 
 private func getWriteResult(dict: [String: Any]) -> Bool {
-    guard let result = dict["result"] as? Int else {
-        return false
-    }
-
+    let result = dict["result"] as? Int ?? 0
     return result == 1
 }
 

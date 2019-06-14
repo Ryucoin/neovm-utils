@@ -1149,6 +1149,12 @@ class Tests: XCTestCase {
         print(tx)
     }
 
+    func testUtils() {
+        let str = "abc"
+        let d = str.dataWithHexString()
+        XCTAssertEqual(d.count, 0)
+    }
+
     func testWalletFromPK() {
         let wallet = walletFromPrivateKey(privateKey: exampleWallet.privateKey)
         XCTAssertNotNil(wallet)
