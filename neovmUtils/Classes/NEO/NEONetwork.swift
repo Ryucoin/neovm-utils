@@ -13,6 +13,26 @@ import NetworkUtils
 public var neoTestNet = "testNetBestNode"
 public var neoMainNet = "mainNetBestNode"
 
+public struct o3Response: Codable {
+    var result: o3Result
+    var code: Int
+}
+
+public struct o3Result: Codable {
+    var data: o3Data
+}
+
+public struct o3Data: Codable {
+    var neo: o3Chain
+    var ontology: o3Chain
+}
+
+public struct o3Chain: Codable {
+    var blockCount: Int
+    var best: String
+    var nodes: [String]
+}
+
 public func getBestNEONode(net: network) -> Promise<String?> {
     return Promise<String?> { fulfill, _ in
         var o3api = "https://platform.o3.network/api/v1/nodes"
@@ -21,42 +41,12 @@ public func getBestNEONode(net: network) -> Promise<String?> {
         }
 
         networkUtils.get(o3api).then { data in
-            do {
-                guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-                    print("Invalid data from o3api")
-                    fulfill(nil)
-                    return
-                }
-
-                guard let result = json["result"] as? [String: [String: Any]] else {
-                    print("Failed to get result from o3api")
-                    fulfill(nil)
-                    return
-                }
-
-                guard let d = result["data"] else {
-                    print("Failed to get data from o3api")
-                    fulfill(nil)
-                    return
-                }
-
-                guard let neo = d["neo"] as? [String: Any] else {
-                    print("Failed to get neo nodes from o3api")
-                    fulfill(nil)
-                    return
-                }
-
-                guard let best = neo["best"] as? String else {
-                    print("Failed to get best node from o3api")
-                    fulfill(nil)
-                    return
-                }
-
-                fulfill(best)
-            } catch {
-                print("Error in do-try block for getBestNEONode")
+            guard let json = try? JSONDecoder().decode(o3Response.self, from: data) else {
+                print("Invalid data from o3api")
                 fulfill(nil)
+                return
             }
+            fulfill(json.result.data.neo.best)
         }.catch { (error) in
             print("There was an error!")
             if let error = error as? NetworkError {

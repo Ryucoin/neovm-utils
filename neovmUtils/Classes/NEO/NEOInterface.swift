@@ -17,10 +17,10 @@ public final class NEOInterface: NSObject, BlockchainInterfaceProtocol {
             return ""
         }
 
-        return neoInvoke(contractHash: contractHash, operation: operation, args: args, signer: signer)
+        return neoInvoke(endpoint: testnetExecution ? neoTestNet : neoMainNet, contractHash: contractHash, operation: operation, args: args, signer: signer)
     }
     
     public func read(contractHash: String, operation: String, args: [NVMParameter]) -> String {
-        return neoInvokeRead(contractHash: contractHash, operation: operation, args: args)
+        return neoInvokeRead(endpoint: testnetExecution ? neoTestNet : neoMainNet, contractHash: contractHash, operation: operation, args: args)
     }
 }

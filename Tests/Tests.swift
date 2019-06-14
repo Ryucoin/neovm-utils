@@ -1,5 +1,6 @@
 import XCTest
 import Neoutils
+import Promises
 
 class Tests: XCTestCase {
     var exampleWallet : Wallet = newWallet()
@@ -509,6 +510,13 @@ class Tests: XCTestCase {
     func testNEOInvocations() {
         let contractHash = "849d095d07950b9e56d0c895ec48ec5100cfdff1"
 
+        DispatchQueue.promises = .global()
+        let bestNode = try? await(getBestNEONode(net: .testNet))
+        if bestNode == nil {
+            XCTFail()
+            return
+        }
+
         let asset = OEPAssetInterface(contractHash: contractHash, testnet: true, interface: NEO)
         let result = asset.customRead(operation: "name", args: []).hexToAscii()
         let name = "TrinityToken"
@@ -546,7 +554,7 @@ class Tests: XCTestCase {
         XCTAssertEqual(result5, "")
 
         let badHash = "\(contractHash)X"
-        let ces1 = CES1Interface(contractHash: badHash, testnet: true, interface: NEO)
+        let ces1 = CES1Interface(contractHash: badHash, testnet: false, interface: NEO)
         let args: [Any] = [address, 1]
         let ctxid = ces1.transferMulti(args: [args], wif: wallet.wif)
         XCTAssertNotEqual(ctxid, "")
