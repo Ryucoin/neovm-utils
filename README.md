@@ -35,7 +35,7 @@ And import it into your project with:
 import neovmUtils
 ```
 
-**Note:** `neovmUtils` requires iOS 12.0 or higher. Bitcode must also be disabled.
+**Note:** `neovmUtils` requires iOS 12.0 or higher.
 
 An example `Podfile` would look like this:
 
@@ -47,6 +47,16 @@ target :'My_App' do
   pod 'neovmUtils'
 end
 ```
+
+### Sub-dependencies
+
+`neovmUtils` requires:
+- `RyuCrypto` - the Ryu [fork of the Trezor Crypto library](https://github.com/Ryucoin/trezor-crypto-ios)
+- `Socket.IO-Client-Swift` - [Socket.io](https://github.com/socketio/socket.io-client-swift) WebSocket tool for iOS to interact with OntMonitor
+  - `Starscream` - [Starscream](https://github.com/daltoniam/Starscream) is a WebSocket client for Swift
+- `NetworkUtils` - Ryu's [NetworkUtils](https://github.com/Ryucoin/NetworkUtils) package is an [axios](https://github.com/axios/axios) style HTTP request package for Swift
+  - `PromisesSwift` - Google's [promise](https://github.com/google/promises) package for Swift
+    - `PromisesObjC` - Google's [promise](https://github.com/google/promises) package for Objective-C
 
 ## Usage
 
