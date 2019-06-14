@@ -9,8 +9,8 @@
 import Foundation
 import Neoutils
 
-private func concatenatePayloadData(txData: Data, signatureData: Data, publicKey: Data) -> Data {
-    var payload = txData.bytes + [0x01]               // signature number
+private func concatenatePayloadData(tx: [UInt8], signatureData: Data, publicKey: Data) -> Data {
+    var payload = tx + [0x01]                         // signature number
     payload += [0x41]                                 // signature struct length
     payload += [0x40]                                 // signature data length
     payload += signatureData.bytes                    // signature
@@ -20,9 +20,8 @@ private func concatenatePayloadData(txData: Data, signatureData: Data, publicKey
 }
 
 private func unsignedPayloadToTransactionId(_ unsignedPayload: Data) -> String {
-    let unsignedPayloadString = unsignedPayload.fullHexString
-    let firstHash = unsignedPayloadString.dataWithHexString().sha256.fullHexString
-    let reversed: [UInt8] = firstHash.dataWithHexString().sha256.bytes.reversed()
+    let firstHash = unsignedPayload.sha256
+    let reversed: [UInt8] = firstHash.sha256.bytes.reversed()
     return reversed.fullHexString
 }
 
@@ -83,7 +82,7 @@ private func buildPayload(script: [UInt8], scriptHash: String, operation: String
 
     if let signer = signer {
         let signatureData = signer.signData(data: rawTransactionData)
-        let finalPayload = concatenatePayloadData(txData: rawTransactionData, signatureData: signatureData!, publicKey: signer.publicKey)
+        let finalPayload = concatenatePayloadData(tx: rawTransaction, signatureData: signatureData!, publicKey: signer.publicKey)
         return (txid, finalPayload)
     }
     return (txid, rawTransactionData)
@@ -92,7 +91,8 @@ private func buildPayload(script: [UInt8], scriptHash: String, operation: String
 public func neoInvoke(endpoint: String = neoTestNet, contractHash: String, operation: String, args: [NVMParameter], signer: Wallet) -> String {
     let script = buildScript(scriptHash: contractHash, operation: operation, args: args)
     var (txid, payload) = buildPayload(script: script, scriptHash: contractHash, operation: operation, args: args, signer: signer)
-    payload += contractHash.dataWithHexString().bytes
+    payload += contractHash.dataWithHexString()
+
     if neoSendRawTransaction(endpoint: endpoint, raw: payload) {
         return txid
     }
