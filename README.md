@@ -69,9 +69,12 @@ end
 - Helpful UI Elements
   - [QR View](docs/qr-view.md)
 - Asset Interfaces
+  - [Asset Interface](docs/asset.md)
+  - [General OEP Interface](docs/oep.md)
   - [OEP4 Interface](docs/oep4.md)
   - [OEP5 Interface](docs/oep5.md)
   - [OEP8 Interface](docs/oep8.md)
+  - [OEP10 Interface](docs/oep10.md)
 - [Utils](docs/utils.md)
 - [Compiled neo-utils golang](#golang)
 

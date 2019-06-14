@@ -21,14 +21,13 @@ Implemented in [OEP5.swift](https://github.com/Ryucoin/neovm-utils/blob/master/n
 The `OEP5Interface` class is used to interact with [OEP5](https://github.com/ontio/OEPs/blob/master/OEPS/OEP-5.mediawiki) compliant smart contacts.
 
 ``` swift
-public class OEP5Interface: NSObject
+public class OEP5Interface: OEP10Interface
 ```
 
 ### Properties
 
 ``` swift
 var contractHash: String = ""
-var endpoint: String = ""
 ```
 
 ### Methods
