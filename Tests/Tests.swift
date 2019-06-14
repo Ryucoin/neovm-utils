@@ -571,6 +571,10 @@ class Tests: XCTestCase {
 
         let ctxid3 = ces1.customInvoke(operation: "operation", args: [str2], wif: wallet.wif)
         XCTAssertNotEqual(ctxid3, "")
+
+        let script = buildScript(scriptHash: badHash, operation: "operation", args: [str2])
+        let invokeresult = neoInvokeScript(raw: Data(script))
+        XCTAssertTrue(invokeresult.keys.count >= 1)
     }
 
     func testNEP2() {

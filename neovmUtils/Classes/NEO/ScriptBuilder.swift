@@ -52,7 +52,7 @@ public class ScriptBuilder {
             pushOPCode(.PUSHDATA2)
             rawBytes += toByteArrayWithoutTrailingZeros(stringBytes.count)
             rawBytes += stringBytes
-        } else if size < 0x100000000 {
+        } else {
             pushOPCode(.PUSHDATA4)
             rawBytes += toByteArrayWithoutTrailingZeros(stringBytes.count)
             rawBytes += stringBytes

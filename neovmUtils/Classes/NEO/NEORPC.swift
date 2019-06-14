@@ -13,13 +13,14 @@ import NetworkUtils
 private enum RPCMethod: String {
     case sendRawTransaction = "sendrawtransaction"
     case invokeFunction = "invokefunction"
+    case invokeScript = "invokescript"
 }
 
-private func sendRawTransaction(node: String, data: Data) -> Promise<[String: Any]?> {
+private func rpc(node: String, method: RPCMethod, data: Data) -> Promise<[String: Any]?> {
     let params: [String: Any] = [
         "jsonrpc": "2.0",
         "id": 2,
-        "method": RPCMethod.sendRawTransaction.rawValue,
+        "method": method.rawValue,
         "params": [data.fullHexString]
     ]
 
@@ -39,6 +40,14 @@ private func sendRawTransaction(node: String, data: Data) -> Promise<[String: An
             fulfill(nil)
         })
     }
+}
+
+private func sendRawTransaction(node: String, data: Data) -> Promise<[String: Any]?> {
+    return rpc(node: node, method: .sendRawTransaction, data: data)
+}
+
+private func invokeScript(node: String, data: Data) -> Promise<[String: Any]?> {
+    return rpc(node: node, method: .invokeScript, data: data)
 }
 
 private func invokeFunction(node: String, args: [Any]) -> Promise<[String: Any]?> {
@@ -108,6 +117,17 @@ public func neoSendRawTransaction(endpoint: String = neoTestNet, raw: Data) -> B
     if let node = try? await(formatNEOEndpoint(endpt: endpoint)) {
         if let dict = try? await(sendRawTransaction(node: node, data: raw)) {
             result = getWriteResult(dict: dict)
+        }
+    }
+    return result
+}
+
+public func neoInvokeScript(endpoint: String = neoTestNet, raw: Data) -> [String: Any] {
+    var result: [String: Any] = [:]
+    DispatchQueue.promises = .global()
+    if let node = try? await(formatNEOEndpoint(endpt: endpoint)) {
+        if let dict = try? await(invokeScript(node: node, data: raw)) {
+            result = dict
         }
     }
     return result

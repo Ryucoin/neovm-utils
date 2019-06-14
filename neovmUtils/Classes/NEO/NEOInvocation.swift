@@ -55,7 +55,7 @@ private func getLength(_ size: Int) -> [UInt8] {
     }
 }
 
-private func buildScript(scriptHash: String, operation: String, args: [NVMParameter]) -> [UInt8] {
+public func buildScript(scriptHash: String, operation: String, args: [NVMParameter]) -> [UInt8] {
     let scriptBuilder = ScriptBuilder()
     scriptBuilder.pushTypedContractInvoke(scriptHash: scriptHash, operation: operation, args: args)
 
