@@ -40,18 +40,19 @@ public class ScriptBuilder {
 
     private func pushHexString(_ stringValue: String) {
         let stringBytes = stringValue.dataWithHexString().bytes
-        if stringBytes.count < OpCode.PUSHBYTES75.rawValue {
+        let size = stringBytes.count
+        if size < OpCode.PUSHBYTES75.rawValue {
             rawBytes += toByteArrayWithoutTrailingZeros(stringBytes.count)
             rawBytes += stringBytes
-        } else if stringBytes.count < 0x100 {
+        } else if size < 0x100 {
             pushOPCode(.PUSHDATA1)
             rawBytes += toByteArrayWithoutTrailingZeros(stringBytes.count)
             rawBytes += stringBytes
-        } else if stringBytes.count < 0x10000 {
+        } else if size < 0x10000 {
             pushOPCode(.PUSHDATA2)
             rawBytes += toByteArrayWithoutTrailingZeros(stringBytes.count)
             rawBytes += stringBytes
-        } else {
+        } else if size < 0x100000000 {
             pushOPCode(.PUSHDATA4)
             rawBytes += toByteArrayWithoutTrailingZeros(stringBytes.count)
             rawBytes += stringBytes
@@ -66,28 +67,24 @@ public class ScriptBuilder {
         pushOPCode(.PACK)
     }
 
-    public func pushTypedData(_ data: NVMParameter?) {
-        guard let unwrappedData = data else {
-            pushBool(false)
-            return
-        }
-        let type = unwrappedData.type.rawValue.lowercased()
+    public func pushTypedData(_ data: NVMParameter) {
+        let type = data.type.rawValue.lowercased()
         if type == "string" || type == "hash160" {
-            pushHexString((unwrappedData.value as? String ?? "").toHexString())
+            pushHexString((data.value as? String ?? "").toHexString())
         } else if type == "address" {
-            pushHexString((unwrappedData.value as? String ?? "").hashFromAddress())
+            pushHexString((data.value as? String ?? "").hashFromAddress())
         } else if type == "boolean" {
-            pushBool(unwrappedData.value as? Bool ?? false)
+            pushBool(data.value as? Bool ?? false)
         } else if type == "integer" {
-            pushInt(unwrappedData.value as? Int ?? 0)
+            pushInt(data.value as? Int ?? 0)
         } else if type == "fixed8" {
-            pushInt(Int(unwrappedData.value as? Double ?? 0) * 100000000)
+            pushInt(Int(data.value as? Double ?? 0) * 100000000)
         } else if type == "fixed9" {
-            pushInt(Int(unwrappedData.value as? Double ?? 0) * 1000000000)
+            pushInt(Int(data.value as? Double ?? 0) * 1000000000)
         } else if type == "bytearray" {
-            pushHexString(unwrappedData.value as? String ?? "")
+            pushHexString(data.value as? String ?? "")
         } else if type == "array" {
-            let array = unwrappedData.value as? [NVMParameter] ?? []
+            let array = data.value as? [NVMParameter] ?? []
             pushTypedArray(array)
         }
     }

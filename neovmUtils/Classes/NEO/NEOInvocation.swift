@@ -43,16 +43,43 @@ private func getAttribute(signer: Wallet?) -> [UInt8] {
     return  [numberOfAttributes] + attributesPayload
 }
 
-private func buildScript(scriptHash: String, operation: String, args: [NVMParameter]) -> String {
+private func getLength(_ dataBytes: [UInt8]) -> [UInt8] {
+    let size = dataBytes.count
+    if size < OpCode.PUSHBYTES75.rawValue {
+        return toByteArrayWithoutTrailingZeros(size)
+    } else if size < 0x100 {
+        return [OpCode.PUSHDATA1.rawValue] + toByteArrayWithoutTrailingZeros(size)
+    } else if size < 0x10000 {
+        return [OpCode.PUSHDATA2.rawValue] + toByteArrayWithoutTrailingZeros(size)
+    } else {
+        return [OpCode.PUSHDATA4.rawValue] + toByteArrayWithoutTrailingZeros(size)
+    }
+}
+
+private func getLength(size: Int) -> [UInt8] {
+    if size < OpCode.PUSHBYTES75.rawValue {
+        return toByteArrayWithoutTrailingZeros(size)
+    } else if size < 0x100 {
+        return [OpCode.PUSHDATA1.rawValue] + toByteArrayWithoutTrailingZeros(size)
+    } else if size < 0x10000 {
+        return [OpCode.PUSHDATA2.rawValue] + toByteArrayWithoutTrailingZeros(size)
+    } else {
+        return [OpCode.PUSHDATA4.rawValue] + toByteArrayWithoutTrailingZeros(size)
+    }
+}
+
+private func buildScript(scriptHash: String, operation: String, args: [NVMParameter]) -> [UInt8] {
     let scriptBuilder = ScriptBuilder()
     scriptBuilder.pushTypedContractInvoke(scriptHash: scriptHash, operation: operation, args: args)
     let script = scriptBuilder.rawBytes
-    let scriptBytes = [UInt8(script.count)] + script
-    return scriptBytes.fullHexString
+    let lengthBytes = getLength(script)
+    let scriptBytes = lengthBytes + script
+
+    return scriptBytes
 }
 
-private func buildPayload(script: String, scriptHash: String, operation: String, args: [NVMParameter], signer: Wallet? = nil) -> (String, Data) {
-    let payloadPrefix = [0xd1, 0x00] + script.dataWithHexString().bytes
+private func buildPayload(script: [UInt8], scriptHash: String, operation: String, args: [NVMParameter], signer: Wallet? = nil) -> (String, Data) {
+    let payloadPrefix = [0xd1, 0x00] + script
     let attributesPayload: [UInt8] =  getAttribute(signer: signer)
     var rawTransaction = payloadPrefix + attributesPayload
 

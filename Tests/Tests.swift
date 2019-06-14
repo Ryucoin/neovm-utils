@@ -559,12 +559,18 @@ class Tests: XCTestCase {
         let unknownDict = unknown.getIFArg()
         XCTAssertEqual(unknownDict.keys.count, 0)
 
-        let str = NVMParameter(type: .String, value: "Hello there, how are you doing today?")
+        let str = NVMParameter(type: .String, value: "00000000000000000000000000000000000000000000000000000000000000000000000000000000")
         let boolean = NVMParameter(type: .Boolean, value: true)
         let bytearray = NVMParameter(type: .ByteArray, value: "262bec084432")
+        let negative = NVMParameter(type: .Integer, value: -1)
         let array = NVMParameter(type: .Array, value: [])
-        let ctxid2 = ces1.customInvoke(operation: "operation", args: [array, str, boolean, arrayParam, bytearray], wif: wallet.wif)
+        let ctxid2 = ces1.customInvoke(operation: "operation", args: [array, str, boolean, arrayParam, bytearray, negative], wif: wallet.wif)
         XCTAssertNotEqual(ctxid2, "")
+
+        let str2 = NVMParameter(type: .String, value: "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000")
+
+        let ctxid3 = ces1.customInvoke(operation: "operation", args: [str2], wif: wallet.wif)
+        XCTAssertNotEqual(ctxid3, "")
     }
 
     func testNEP2() {
