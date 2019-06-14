@@ -43,15 +43,17 @@ private func getAttribute(signer: Wallet?) -> [UInt8] {
 }
 
 private func getLength(_ size: Int) -> [UInt8] {
-    if size < OpCode.PUSHBYTES75.rawValue {
-        return toByteArrayWithoutTrailingZeros(size)
-    } else if size < 0x100 {
-        return [OpCode.PUSHDATA1.rawValue] + toByteArrayWithoutTrailingZeros(size)
-    } else if size < 0x10000 {
-        return [OpCode.PUSHDATA2.rawValue] + toByteArrayWithoutTrailingZeros(size)
-    } else {
-        return [OpCode.PUSHDATA4.rawValue] + toByteArrayWithoutTrailingZeros(size)
-    }
+    // TODO: Implement correctly
+//    if size < OpCode.PUSHBYTES75.rawValue {
+//        return toByteArrayWithoutTrailingZeros(size)
+//    } else if size < 0x100 {
+//        return [OpCode.PUSHDATA1.rawValue] + toByteArrayWithoutTrailingZeros(size)
+//    } else if size < 0x10000 {
+//        return [OpCode.PUSHDATA2.rawValue] + toByteArrayWithoutTrailingZeros(size)
+//    } else {
+//        return [OpCode.PUSHDATA4.rawValue] + toByteArrayWithoutTrailingZeros(size)
+//    }
+    return toByteArrayWithoutTrailingZeros(size)
 }
 
 public func buildScript(scriptHash: String, operation: String, args: [NVMParameter]) -> [UInt8] {
