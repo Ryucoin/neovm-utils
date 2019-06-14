@@ -57,7 +57,7 @@ end
   - [Mnemonic Creation](docs/mnemonic.md)
 - Ontology Blockchain Support
   - [Ontology Wallet File](docs/ont-wallet.md)
-  - [OntMonitor](docs/monitor.md)s
+  - [OntMonitor](docs/monitor.md)
   - [ONT Identity](docs/ontid.md)
   - [ONT Network Management](docs/ont-network.md)
   - [ONT RPC Methods](docs/ont-rpc.md)
