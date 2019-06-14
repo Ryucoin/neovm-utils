@@ -37,6 +37,19 @@ class Tests: XCTestCase {
         XCTAssertNil(nWallet)
     }
 
+    func testBadNEORPC() {
+        let bad = "http://badurlasdasd.com"
+        let result = neoInvokeScript(endpoint: bad, raw: Data())
+        XCTAssertTrue(result.keys.count == 0)
+
+        let expectation = XCTestExpectation(description: "Test bad node")
+        getBestNEONode(api: bad, net: .testNet).then { (result) in
+            XCTAssertNil(result)
+            expectation.fulfill()
+        }
+        self.wait(for: [expectation], timeout: 10)
+    }
+
     func testBadWif() {
         let wif = exampleWallet.wif
         let modified = wif.dropFirst()

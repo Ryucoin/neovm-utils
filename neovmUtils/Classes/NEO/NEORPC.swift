@@ -26,13 +26,10 @@ private func rpc(node: String, method: RPCMethod, params: Any) -> Promise<[Strin
 
     return Promise<[String: Any]?> { fulfill, _ in
         networkUtils.post(node, params, 3, "application/json-rpc").then { data in
-            guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-                fulfill(nil)
-                return
-            }
+            let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
             fulfill(json)
         }.catch { (error) in
-            print("Network error with sendJSONRPC: \((error as! NetworkError).localizedDescription)")
+            print("Network error with rpc: \((error as! NetworkError).localizedDescription)")
             fulfill(nil)
         }
     }
