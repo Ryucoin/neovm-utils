@@ -45,6 +45,27 @@ class Tests: XCTestCase {
         XCTAssertNil(nWallet)
     }
 
+    func testBase58() {
+        let address = newWallet().address
+        let bad = address + "a"
+        let hash = address.hashFromAddress()
+        let badHash = bad.hashFromAddress()
+        XCTAssertNotEqual("", hash)
+        XCTAssertEqual("", badHash)
+        XCTAssertEqual("", "BA".hashFromAddress())
+        XCTAssertEqual("", "BAX".hashFromAddress())
+        XCTAssertEqual("", "BADA".hashFromAddress())
+        XCTAssertEqual("", "BA0102".hashFromAddress())
+        XCTAssertEqual("", "BA234234234".hashFromAddress())
+        XCTAssertEqual("", "a12312B123123123A".hashFromAddress())
+        XCTAssertEqual("", "a12312B123123123Aa12312B123123123A".hashFromAddress())
+        XCTAssertEqual("", "123242345235".hashFromAddress())
+        XCTAssertEqual("", "DASDASDASDADA".hashFromAddress())
+        XCTAssertEqual("", "EASEAESASEASEASE".hashFromAddress())
+        XCTAssertEqual("", "D\(address)".hashFromAddress())
+        XCTAssertEqual("", "1\(address)".hashFromAddress())
+    }
+
     func testBuildJoinTransaction() {
         let contractHash = "6b21a978e40e681c8439e2fb9cb39424920bf3e1"
         let gid = "G1"

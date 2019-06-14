@@ -43,7 +43,7 @@ public extension String {
     }
 
     func hashFromAddress() -> String {
-        let bytes = self.base58CheckDecodedBytes!
+        guard let bytes = self.base58CheckDecodedBytes else { return "" }
         let shortened = bytes[0...20] //need exactly twenty one bytes
         let substringData = Data(shortened)
         let hashOne = substringData.sha256
