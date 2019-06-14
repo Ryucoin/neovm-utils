@@ -113,7 +113,7 @@ public func neoSendRawTransaction(endpoint: String = neoTestNet, raw: Data) -> B
     return result
 }
 
-public func neoInvokeScript(endpoint: String = neoTestNet, scriptHash: String, operation: String, args: [NVMParameter]) -> String {
+public func neoInvokeFunction(endpoint: String = neoTestNet, scriptHash: String, operation: String, args: [NVMParameter]) -> String {
     var result = ""
     DispatchQueue.promises = .global()
     if let node = try? await(formatNEOEndpoint(endpt: endpoint)) {

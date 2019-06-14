@@ -43,20 +43,7 @@ private func getAttribute(signer: Wallet?) -> [UInt8] {
     return  [numberOfAttributes] + attributesPayload
 }
 
-private func getLength(_ dataBytes: [UInt8]) -> [UInt8] {
-    let size = dataBytes.count
-    if size < OpCode.PUSHBYTES75.rawValue {
-        return toByteArrayWithoutTrailingZeros(size)
-    } else if size < 0x100 {
-        return [OpCode.PUSHDATA1.rawValue] + toByteArrayWithoutTrailingZeros(size)
-    } else if size < 0x10000 {
-        return [OpCode.PUSHDATA2.rawValue] + toByteArrayWithoutTrailingZeros(size)
-    } else {
-        return [OpCode.PUSHDATA4.rawValue] + toByteArrayWithoutTrailingZeros(size)
-    }
-}
-
-private func getLength(size: Int) -> [UInt8] {
+private func getLength(_ size: Int) -> [UInt8] {
     if size < OpCode.PUSHBYTES75.rawValue {
         return toByteArrayWithoutTrailingZeros(size)
     } else if size < 0x100 {
@@ -71,11 +58,12 @@ private func getLength(size: Int) -> [UInt8] {
 private func buildScript(scriptHash: String, operation: String, args: [NVMParameter]) -> [UInt8] {
     let scriptBuilder = ScriptBuilder()
     scriptBuilder.pushTypedContractInvoke(scriptHash: scriptHash, operation: operation, args: args)
-    let script = scriptBuilder.rawBytes
-    let lengthBytes = getLength(script)
-    let scriptBytes = lengthBytes + script
 
-    return scriptBytes
+    let scriptBytes = scriptBuilder.rawBytes
+    let lengthBytes =  getLength(scriptBytes.count)
+    let script = lengthBytes + scriptBytes
+
+    return script
 }
 
 private func buildPayload(script: [UInt8], scriptHash: String, operation: String, args: [NVMParameter], signer: Wallet? = nil) -> (String, Data) {
@@ -112,5 +100,5 @@ public func neoInvoke(endpoint: String = neoTestNet, contractHash: String, opera
 }
 
 public func neoInvokeRead(endpoint: String = neoTestNet, contractHash: String, operation: String, args: [NVMParameter]) -> String {
-    return neoInvokeScript(endpoint: endpoint, scriptHash: contractHash, operation: operation, args: args)
+    return neoInvokeFunction(endpoint: endpoint, scriptHash: contractHash, operation: operation, args: args)
 }
