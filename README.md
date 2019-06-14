@@ -66,8 +66,7 @@ end
   - [NEO Network Management](docs/neo-network.md)
   - [NEO RPC Methods](docs/neo-rpc.md)
   - [NEO TX Invocation](docs/neo-invo.md)
-- Helpful UI Elements
-  - [QR View](docs/qr-view.md)
+- [Blockchain Interface Protocol](docs/bip.md)
 - Asset Interfaces
   - [Asset Interface](docs/asset.md)
   - [General OEP Interface](docs/oep.md)
@@ -75,6 +74,8 @@ end
   - [OEP5 Interface](docs/oep5.md)
   - [OEP8 Interface](docs/oep8.md)
   - [OEP10 Interface](docs/oep10.md)
+- Helpful UI Elements
+  - [QR View](docs/qr-view.md)
 - [Utils](docs/utils.md)
 - [Compiled neo-utils golang](#golang)
 
