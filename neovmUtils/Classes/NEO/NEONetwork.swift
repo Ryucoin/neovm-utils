@@ -42,16 +42,12 @@ public func getBestNEONode(net: network) -> Promise<String?> {
 
         networkUtils.get(o3api).then { data in
             guard let json = try? JSONDecoder().decode(o3Response.self, from: data) else {
-                print("Invalid data from o3api")
                 fulfill(nil)
                 return
             }
             fulfill(json.result.data.neo.best)
         }.catch { (error) in
-            print("There was an error!")
-            if let error = error as? NetworkError {
-                print("Network error with o3api: \(error.localizedDescription)")
-            }
+            print("Network error with sendJSONRPC: \((error as! NetworkError).localizedDescription)")
             fulfill(nil)
         }
     }

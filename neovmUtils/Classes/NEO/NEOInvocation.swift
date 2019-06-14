@@ -92,10 +92,7 @@ public func neoInvoke(endpoint: String = neoTestNet, contractHash: String, opera
     var (txid, payload) = buildPayload(script: script, scriptHash: contractHash, operation: operation, args: args, signer: signer)
     payload += contractHash.dataWithHexString()
 
-    if neoSendRawTransaction(endpoint: endpoint, raw: payload) {
-        return txid
-    }
-    return ""
+    return neoSendRawTransaction(endpoint: endpoint, raw: payload) ? txid : ""
 }
 
 public func neoInvokeRead(endpoint: String = neoTestNet, contractHash: String, operation: String, args: [NVMParameter]) -> String {

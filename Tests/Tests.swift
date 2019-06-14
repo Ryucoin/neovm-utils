@@ -588,6 +588,10 @@ class Tests: XCTestCase {
         let script2 = buildScript(scriptHash: contractHash, operation: "name", args: [])
         let invokeresult2 = neoInvokeScript(raw: Data(script2))
         XCTAssertTrue(invokeresult2.keys.count >= 1)
+
+        let badWif = wallet.wif + "XXXX"
+        let res = ces1.customInvoke(operation: "operation", args: [], wif: badWif)
+        XCTAssertEqual(res, "")
     }
 
     func testNEP2() {

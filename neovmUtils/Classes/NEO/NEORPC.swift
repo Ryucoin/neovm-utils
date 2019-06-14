@@ -16,64 +16,38 @@ private enum RPCMethod: String {
     case invokeScript = "invokescript"
 }
 
-private func rpc(node: String, method: RPCMethod, data: Data) -> Promise<[String: Any]?> {
+private func rpc(node: String, method: RPCMethod, params: Any) -> Promise<[String: Any]?> {
     let params: [String: Any] = [
         "jsonrpc": "2.0",
         "id": 2,
         "method": method.rawValue,
-        "params": [data.fullHexString]
+        "params": params
     ]
 
     return Promise<[String: Any]?> { fulfill, _ in
         networkUtils.post(node, params, 3, "application/json-rpc").then ({ data in
-            guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-                print("Invalid data from sendJSONRPC")
+            guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
                 fulfill(nil)
                 return
             }
-
             fulfill(json)
         }).catch({ error in
-            if let error = error as? NetworkError {
-                print("Network error with sendJSONRPC: \(error.localizedDescription)")
-            }
+            print("Network error with sendJSONRPC: \((error as! NetworkError).localizedDescription)")
             fulfill(nil)
         })
     }
 }
 
 private func sendRawTransaction(node: String, data: Data) -> Promise<[String: Any]?> {
-    return rpc(node: node, method: .sendRawTransaction, data: data)
+    return rpc(node: node, method: .sendRawTransaction, params: [data.fullHexString])
 }
 
 private func invokeScript(node: String, data: Data) -> Promise<[String: Any]?> {
-    return rpc(node: node, method: .invokeScript, data: data)
+    return rpc(node: node, method: .invokeScript, params: [data.fullHexString])
 }
 
 private func invokeFunction(node: String, args: [Any]) -> Promise<[String: Any]?> {
-    let params: [String: Any] = [
-        "jsonrpc": "2.0",
-        "id": 2,
-        "method": RPCMethod.invokeFunction.rawValue,
-        "params": args
-    ]
-
-    return Promise<[String: Any]?> { fulfill, _ in
-        networkUtils.post(node, params, 3, "application/json-rpc").then ({ data in
-            guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-                print("Invalid data from sendJSONRPC")
-                fulfill(nil)
-                return
-            }
-
-            fulfill(json)
-        }).catch({ error in
-            if let error = error as? NetworkError {
-                print("Network error with sendJSONRPC: \(error.localizedDescription)")
-            }
-            fulfill(nil)
-        })
-    }
+    return rpc(node: node, method: .invokeFunction, params: args)
 }
 
 struct Stack: Codable {
