@@ -89,17 +89,15 @@ public class ScriptBuilder {
         }
     }
 
-    public func pushTypedContractInvoke(scriptHash: String, operation: String? = nil, args: [NVMParameter]) {
+    public func pushTypedContractInvoke(scriptHash: String, operation: String, args: [NVMParameter]) {
         if (!args.isEmpty) {
             pushTypedArray(args.reversed())
         } else {
             pushBool(false)
         }
 
-        if let operation = operation {
-            let hex = operation.unicodeScalars.filter { $0.isASCII }.map { String(format: "%X", $0.value) }.joined()
-            pushHexString(hex)
-        }
+        let hex = operation.unicodeScalars.filter { $0.isASCII }.map { String(format: "%X", $0.value) }.joined()
+        pushHexString(hex)
 
         if scriptHash.count != 40 {
             print("Attempting to invoke invalid contract")

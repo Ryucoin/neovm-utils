@@ -554,7 +554,7 @@ class Tests: XCTestCase {
         XCTAssertEqual(result5, "")
 
         let badHash = "\(contractHash)X"
-        let ces1 = CES1Interface(contractHash: badHash, testnet: false, interface: NEO)
+        let ces1 = CES1Interface(contractHash: contractHash, testnet: false, interface: NEO)
         let args: [Any] = [address, 1]
         let ctxid = ces1.transferMulti(args: [args], wif: wallet.wif)
         XCTAssertNotEqual(ctxid, "")
