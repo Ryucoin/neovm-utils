@@ -65,7 +65,7 @@ public func buildScript(scriptHash: String, operation: String, args: [NVMParamet
     return script
 }
 
-private func buildPayload(script: [UInt8], scriptHash: String, operation: String, args: [NVMParameter], signer: Wallet? = nil) -> (String, Data) {
+private func buildPayload(script: [UInt8], scriptHash: String, operation: String, args: [NVMParameter], signer: Wallet) -> (String, Data) {
     let payloadPrefix = [0xd1, 0x00] + script
     let attributesPayload: [UInt8] =  getAttribute(signer: signer)
     var rawTransaction = payloadPrefix + attributesPayload
@@ -80,12 +80,9 @@ private func buildPayload(script: [UInt8], scriptHash: String, operation: String
     let rawTransactionData = Data(rawTransaction)
     let txid = unsignedPayloadToTransactionId(rawTransactionData)
 
-    if let signer = signer {
-        let signatureData = signer.signData(data: rawTransactionData)
-        let finalPayload = concatenatePayloadData(tx: rawTransaction, signatureData: signatureData!, publicKey: signer.publicKey)
-        return (txid, finalPayload)
-    }
-    return (txid, rawTransactionData)
+    let signatureData = signer.signData(data: rawTransactionData)
+    let finalPayload = concatenatePayloadData(tx: rawTransaction, signatureData: signatureData!, publicKey: signer.publicKey)
+    return (txid, finalPayload)
 }
 
 public func neoInvoke(endpoint: String = neoTestNet, contractHash: String, operation: String, args: [NVMParameter], signer: Wallet) -> String {
