@@ -61,11 +61,11 @@ end
   - [ONT Identity](docs/ontid.md)
   - [ONT Network Management](docs/ont-network.md)
   - [ONT RPC Methods](docs/ont-rpc.md)
-  - [ONT TX Building](docs/ont-trans.md)
+  - [ONT TX Invocation](docs/ont-invo.md)
 - NEO Blockchain Support
   - [NEO Network Management](docs/neo-network.md)
   - [NEO RPC Methods](docs/neo-rpc.md)
-  - [NEO TX Building](docs/neo-trans.md)
+  - [NEO TX Invocation](docs/neo-invo.md)
 - Helpful UI Elements
   - [QR View](docs/qr-view.md)
 - Asset Interfaces
