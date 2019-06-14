@@ -105,12 +105,12 @@ or
 func transferMulti(args: [[String]], wif: String) -> String {
 ```
 
-Can also call with an array of `State` objects, which contain an `address` and `tokenId`.
+Can also call with an array of `OEP5State` objects, which contain an `address` and `tokenId`.
 
 ``` swift
-func transferMulti(args: [State], wif: String) -> String {
+func transferMulti(args: [OEP5State], wif: String) -> String {
 ```
 or
 ``` swift
-func transferMulti(args: [State], wif: String) -> String {
+func transferMulti(args: [OEP5State], wif: String) -> String {
 ```

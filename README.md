@@ -51,17 +51,27 @@ end
 ## Usage
 
 `neovmUtils` offers:
-- [NEO/ONT Wallet](docs/wallet.md)
-- [Ontology Wallet](docs/ont-wallet.md)
-- [OntMonitor](docs/monitor.md)
-- [ONT Identity](docs/ontid.md)
-- [ONT RPC Methods](docs/ont-rpc.md)
-- [ONT Transactions](docs/ont-trans.md)
-- [QR View](docs/qr-view.md)
-- [Mnemonic Creation](docs/mnemonic.md)
-- [OEP4 Interface](docs/oep4.md)
-- [OEP5 Interface](docs/oep5.md)
-- [OEP8 Interface](docs/oep8.md)
+- General NEOVM development tools
+  - [NEO/ONT Wallet](docs/wallet.md)
+  - [Parameter Building](docs/NVMParameter.md)
+  - [Mnemonic Creation](docs/mnemonic.md)
+- Ontology Blockchain Support
+  - [Ontology Wallet File](docs/ont-wallet.md)
+  - [OntMonitor](docs/monitor.md)s
+  - [ONT Identity](docs/ontid.md)
+  - [ONT Network Management](docs/ont-network.md)
+  - [ONT RPC Methods](docs/ont-rpc.md)
+  - [ONT TX Building](docs/ont-trans.md)
+- NEO Blockchain Support
+  - [NEO Network Management](docs/neo-network.md)
+  - [NEO RPC Methods](docs/neo-rpc.md)
+  - [NEO TX Building](docs/neo-trans.md)
+- Helpful UI Elements
+  - [QR View](docs/qr-view.md)
+- Asset Interfaces
+  - [OEP4 Interface](docs/oep4.md)
+  - [OEP5 Interface](docs/oep5.md)
+  - [OEP8 Interface](docs/oep8.md)
 - [Utils](docs/utils.md)
 - [Compiled neo-utils golang](#golang)
 

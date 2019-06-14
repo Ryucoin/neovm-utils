@@ -1,6 +1,6 @@
 # Ontology Identity
 
-Implemented in [OntologyIdentity.swift](https://github.com/Ryucoin/neovm-utils/blob/master/neovmUtils/Classes/Ontology/OntologyIdentity.swift)
+Implemented in [ONTIdentity.swift](https://github.com/Ryucoin/neovm-utils/blob/master/neovmUtils/Classes/Ontology/ONTIdentity.swift)
 
 The Ontology DID Protocol is further defined here in the [official documentation](https://github.com/ontio/ontology-DID). The Swift implementation is based off the [Java SDK's implementation](https://github.com/ontio/ontology-java-sdk/blob/master/docs/en/identity_claim.md) and the [TS SDK's implementation](https://github.com/ontio/ontology-ts-sdk/blob/master/docs/en/identity_claim.md).
 
