@@ -604,6 +604,15 @@ class Tests: XCTestCase {
         XCTAssertTrue(unlocked)
     }
 
+    func testNVMParameterArrayFail() {
+        let param = NVMParameter(type: .Array, value: 5)
+        let args: [NVMParameter] = [param]
+        let res = ontologyInvokeRead(contractHash: "a29564a30043d50620e4c6be61eda834d0acc48b", method: "getTotal", args: args)
+        let num = res.hexToDecimal()
+        XCTAssertGreaterThan(num, 0)
+        print(num)
+    }
+
     func testNVMParser() {
         let parser = NVMParser()
         let hex1 = "0101"
@@ -929,15 +938,6 @@ class Tests: XCTestCase {
             XCTAssertGreaterThan(num, 0)
             print(num)
         }
-    }
-
-    func testNVMParameterArrayFail() {
-        let param = NVMParameter(type: .Array, value: 5)
-        let args: [NVMParameter] = [param]
-        let res = ontologyInvokeRead(contractHash: "a29564a30043d50620e4c6be61eda834d0acc48b", method: "getTotal", args: args)
-        let num = res.hexToDecimal()
-        XCTAssertGreaterThan(num, 0)
-        print(num)
     }
 
     func testOntologyWallet() {
