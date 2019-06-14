@@ -1,5 +1,5 @@
 //
-//  NEOVMParser.swift
+//  NVMParser.swift
 //  neovmUtils
 //
 //  Created by Wyatt Mufson on 6/10/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class NEOVMParser: NSObject {
+public class NVMParser: NSObject {
     enum VMType: String {
         case ByteArray = "00"
         case Bool = "01"

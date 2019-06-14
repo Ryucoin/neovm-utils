@@ -13,6 +13,14 @@ public extension Data {
     var bytesToHex: String {
         return NeoutilsBytesToHex(self)
     }
+
+    var bytes: [UInt8] {
+        return [UInt8](self)
+    }
+
+    var fullHexString: String {
+        return self.map { return String(format: "%02x", $0) }.joined()
+    }
 }
 
 public extension String {
@@ -32,6 +40,23 @@ public extension String {
 
     func index(at offset: Int) -> String.Index {
         return index(startIndex, offsetBy: offset)
+    }
+
+    func hashFromAddress() -> String {
+        guard let bytes = self.base58CheckDecodedBytes else { return "" }
+        let shortened = bytes[0...20] //need exactly twenty one bytes
+        let substringData = Data(shortened)
+        let hashOne = substringData.sha256
+        let hashTwo = hashOne.sha256
+        _ = [UInt8](hashTwo)
+        let finalKeyData = Data(shortened[1...shortened.count - 1])
+        return finalKeyData.fullHexString
+    }
+
+    func toHexString() -> String {
+        let data = self.data(using: .utf8)!
+        let hexString = data.map { String(format: "%02x", $0) }.joined()
+        return hexString
     }
 
     func hexToAscii() -> String {
@@ -76,4 +101,49 @@ public extension String {
         }
         return NeoutilsScriptHashToNEOAddress(newStr)
     }
+
+    func dataWithHexString() -> Data {
+        var hex = self
+        var data = Data()
+        guard self.count % 2 == 0 else {
+            return data
+        }
+
+        while hex.count > 0 {
+            let c: String = String(hex[0..<2])
+            hex = String(hex[2..<hex.count])
+            var ch: UInt32 = 0
+            Scanner(string: c).scanHexInt32(&ch)
+            var char = UInt8(ch)
+            data.append(&char, count: 1)
+        }
+        return data
+    }
+}
+
+public extension Array where Element == UInt8 {
+    var fullHexString: String {
+        return self.map { return String(format: "%02x", $0) }.joined()
+    }
+
+    mutating func removeTrailingZeros() {
+        for i in (0..<self.endIndex).reversed() {
+            guard self[i] == 0 else {
+                break
+            }
+            self.remove(at: i)
+        }
+    }
+}
+
+public func toByteArray<T>(_ value: T) -> [UInt8] {
+    var value = value
+    return withUnsafeBytes(of: &value) { Array($0) }
+}
+
+public func toByteArrayWithoutTrailingZeros<T>(_ value: T) -> [UInt8] {
+    var value = value
+    var arr = withUnsafeBytes(of: &value) { Array($0) }
+    arr.removeTrailingZeros()
+    return arr
 }

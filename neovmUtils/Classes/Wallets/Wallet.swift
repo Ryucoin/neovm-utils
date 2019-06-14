@@ -137,6 +137,14 @@ public final class Wallet: NSObject, Codable {
         return nil
     }
 
+    public func signData(data: Data) -> Data? {
+        let error = NSErrorPointer(nilLiteral: ())
+        if let neoWallet = neoWallet {
+            return NeoutilsSign(data, neoWallet.privateKey!.bytesToHex, error)
+        }
+        return nil
+    }
+
     public func verifySignature(pubKey: Data, signature: String, message: String) -> Bool {
         let data = Data(message.utf8)
         let hash = sha256(data)

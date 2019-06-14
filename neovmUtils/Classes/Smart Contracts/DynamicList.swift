@@ -13,7 +13,7 @@ public final class DynamicList: NSObject {
     public var packed: [PackedList] = []
 
     public init(hex: String) {
-        let parser = NEOVMParser()
+        let parser = NVMParser()
         if let parsed = parser.deserialize(hex: hex) as? [String: Any] {
             if let itm = parsed["items"] as? Int {
                 self.items = itm

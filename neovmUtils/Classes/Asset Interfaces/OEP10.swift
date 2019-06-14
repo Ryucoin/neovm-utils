@@ -11,21 +11,23 @@ import Foundation
 public class OEP10Interface: OEPAssetInterface {
 
     public func approveContract(hash: String, wallet: Wallet, gasPrice: Int = 500, gasLimit: Int = 20000) -> String {
-        let cHash = OntologyParameter(type: .String, value: hash)
+        let cHash = NVMParameter(type: .String, value: hash)
         let params = [cHash]
-        return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "approveContract", args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wallet.wif)
+        let other: [String: Any] = ["gasPrice": gasPrice, "gasLimit": gasLimit]
+        return interface.invoke(contractHash: contractHash, operation: "approveContract", args: params, wif: wallet.wif, other: other)
     }
 
     public func unapproveContract(hash: String, wallet: Wallet, gasPrice: Int = 500, gasLimit: Int = 20000) -> String {
-        let cHash = OntologyParameter(type: .String, value: hash)
+        let cHash = NVMParameter(type: .String, value: hash)
         let params = [cHash]
-        return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "unapproveContract", args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wallet.wif)
+        let other: [String: Any] = ["gasPrice": gasPrice, "gasLimit": gasLimit]
+        return interface.invoke(contractHash: contractHash, operation: "unapproveContract", args: params, wif: wallet.wif, other: other)
     }
 
     public func isApproved(hash: String, wallet: Wallet) -> String {
-        let cHash = OntologyParameter(type: .String, value: hash)
+        let cHash = NVMParameter(type: .String, value: hash)
         let params = [cHash]
-        let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "isApproved", args: params)
+        let hex = interface.read(contractHash: contractHash, operation: "isApproved", args: params)
         return hex
     }
 }

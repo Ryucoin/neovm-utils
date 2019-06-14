@@ -15,14 +15,13 @@ Implemented in [OEP8.swift](https://github.com/Ryucoin/neovm-utils/blob/master/n
 The `OEP8Interface` class is used to interact with [OEP8](https://github.com/ontio/OEPs/blob/master/OEPS/OEP-8.mediawiki) compliant smart contacts.
 
 ``` swift
-public class OEP8Interface: NSObject
+public class OEP8Interface: OEP10Interface
 ```
 
 ### Properties
 
 ``` swift
 var contractHash: String = ""
-var endpoint: String = ""
 ```
 
 ### Methods

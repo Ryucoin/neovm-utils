@@ -1,5 +1,6 @@
 import XCTest
 import Neoutils
+import Promises
 
 class Tests: XCTestCase {
     var exampleWallet : Wallet = newWallet()
@@ -36,12 +37,46 @@ class Tests: XCTestCase {
         XCTAssertNil(nWallet)
     }
 
+    func testBadNEORPC() {
+        let bad = "http://badurlasdasd.com"
+        let result = neoInvokeScript(endpoint: bad, raw: Data())
+        XCTAssertTrue(result.keys.count == 0)
+
+        let expectation = XCTestExpectation(description: "Test bad node")
+        getBestNEONode(api: bad, net: .testNet).then { (result) in
+            XCTAssertNil(result)
+            expectation.fulfill()
+        }
+        self.wait(for: [expectation], timeout: 10)
+    }
+
     func testBadWif() {
         let wif = exampleWallet.wif
         let modified = wif.dropFirst()
         let newWif = "B\(modified)"
         let nWallet = walletFromWIF(wif: newWif)
         XCTAssertNil(nWallet)
+    }
+
+    func testBase58() {
+        let address = newWallet().address
+        let bad = address + "a"
+        let hash = address.hashFromAddress()
+        let badHash = bad.hashFromAddress()
+        XCTAssertNotEqual("", hash)
+        XCTAssertEqual("", badHash)
+        XCTAssertEqual("", "BA".hashFromAddress())
+        XCTAssertEqual("", "BAX".hashFromAddress())
+        XCTAssertEqual("", "BADA".hashFromAddress())
+        XCTAssertEqual("", "BA0102".hashFromAddress())
+        XCTAssertEqual("", "BA234234234".hashFromAddress())
+        XCTAssertEqual("", "a12312B123123123A".hashFromAddress())
+        XCTAssertEqual("", "a12312B123123123Aa12312B123123123A".hashFromAddress())
+        XCTAssertEqual("", "123242345235".hashFromAddress())
+        XCTAssertEqual("", "DASDASDASDADA".hashFromAddress())
+        XCTAssertEqual("", "EASEAESASEASEASE".hashFromAddress())
+        XCTAssertEqual("", "D\(address)".hashFromAddress())
+        XCTAssertEqual("", "1\(address)".hashFromAddress())
     }
 
     func testBuildJoinTransaction() {
@@ -51,11 +86,11 @@ class Tests: XCTestCase {
         let entry = 10.0
         let max : Int = 1
 
-        let target = OntologyParameter(type: .Address, value: exampleWallet.address)
-        let gameId = OntologyParameter(type: .String, value: gid)
-        let matchId = OntologyParameter(type: .String, value: mid)
-        let fee = OntologyParameter(type: .Fixed8, value: entry)
-        let mx = OntologyParameter(type: .Integer, value: max)
+        let target = NVMParameter(type: .Address, value: exampleWallet.address)
+        let gameId = NVMParameter(type: .String, value: gid)
+        let matchId = NVMParameter(type: .String, value: mid)
+        let fee = NVMParameter(type: .Fixed8, value: entry)
+        let mx = NVMParameter(type: .Integer, value: max)
 
         let args = [target, gameId, matchId, fee, mx]
 
@@ -74,7 +109,7 @@ class Tests: XCTestCase {
         let argDict : [[String:Any]] = [["T":"Address", "V":exampleWallet.address], ["T":"String", "V":"Hello!"]]
 
         do {
-            let data =  try JSONSerialization.data(withJSONObject: argDict, options: .prettyPrinted)
+            let data = try JSONSerialization.data(withJSONObject: argDict, options: .prettyPrinted)
             let args = String(data: data, encoding: String.Encoding.utf8)
             let gasPrice = 500
             let gasLimit = 20000
@@ -91,7 +126,7 @@ class Tests: XCTestCase {
     func testBuildOntologyInvocationHelper() {
         let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
         let method = "put"
-        let args: [OntologyParameter] = [OntologyParameter(type: .Address, value: exampleWallet.address), OntologyParameter(type: .String, value: "Hello!")]
+        let args: [NVMParameter] = [NVMParameter(type: .Address, value: exampleWallet.address), NVMParameter(type: .String, value: "Hello!")]
         let gasPrice = 500
         let gasLimit = 20000
 
@@ -113,7 +148,7 @@ class Tests: XCTestCase {
             bytes: [0xD8, 0x00] as [UInt8],
             encoding: String.Encoding.utf16BigEndian)!
 
-        let args: [OntologyParameter] = [OntologyParameter(type: .Address, value: exampleWallet.address), OntologyParameter(type: .String, value: badStr)]
+        let args: [NVMParameter] = [NVMParameter(type: .Address, value: exampleWallet.address), NVMParameter(type: .String, value: badStr)]
         let gasPrice = 500
         let gasLimit = 20000
 
@@ -304,7 +339,7 @@ class Tests: XCTestCase {
         let (ont, ong) = ontologyGetBalances(address: address)
         XCTAssertTrue(ont > 0 && ong > 0)
 
-        let (ontMain, ongMain) = ontologyGetBalances(endpoint: mainNet, address: address)
+        let (ontMain, ongMain) = ontologyGetBalances(endpoint: ontologyMainNet, address: address)
         XCTAssertTrue(ontMain > 0 && ongMain > 0)
 
         let (ontBad, ongBad) = ontologyGetBalances(address: "bad address")
@@ -337,7 +372,7 @@ class Tests: XCTestCase {
 
     func testGetRawTransaction() {
         let txID = "ea82d1e85303e1d955231b7c863308ce9b580602d386f8aa9bd80bccc0b51b6e"
-        let raw = ontologyGetRawTransaction(endpoint: mainNet, txID: txID)
+        let raw = ontologyGetRawTransaction(endpoint: ontologyMainNet, txID: txID)
         let unknown = "unknown transaction"
         XCTAssertNotEqual(raw, unknown)
     }
@@ -401,6 +436,8 @@ class Tests: XCTestCase {
         XCTAssertFalse(second)
         let sig = a.signMessage(message: "Hello, world!")
         XCTAssertNil(sig)
+        let signed = a.signData(data: originalData ?? Data())
+        XCTAssertNil(signed)
         let publicKey = newWallet().publicKey
         let publicKeyString = newWallet().publicKeyString
         let shared = a.computeSharedSecret(publicKey: publicKey)
@@ -504,6 +541,93 @@ class Tests: XCTestCase {
         XCTAssertEqual(wallet.address, w.address)
     }
 
+    func testNEOInvocations() {
+        let contractHash = "849d095d07950b9e56d0c895ec48ec5100cfdff1"
+
+        DispatchQueue.promises = .global()
+        let bestNode = try? await(getBestNEONode(net: .testNet))
+        if bestNode == nil {
+            XCTFail()
+            return
+        }
+
+        let asset = OEPAssetInterface(contractHash: contractHash, testnet: true, interface: NEO)
+        let result = asset.customRead(operation: "name", args: []).hexToAscii()
+        let name = "TrinityToken"
+        XCTAssertEqual(name, result)
+
+        let address = "AUxBn8n37YpYwkVKVg5rSP6W2BwrJZjU5t"
+        let owner = NVMParameter(type: .Address, value: address)
+        let result2 = asset.customRead(operation: "balanceOf", args: [owner]).hexToDecimal()
+        let balance = 2400000000
+        XCTAssertEqual(balance, result2)
+
+        let wallet = newWallet()
+        let txid = asset.customInvoke(operation: "name", args: [], wif: wallet.wif)
+        XCTAssertNotEqual(txid, "")
+
+        let toAddress = wallet.address
+        let to = NVMParameter(type: .Address, value: toAddress)
+        let amount = NVMParameter(type: .Fixed8, value: 24)
+        let txid2 = asset.customInvoke(operation: "transfer", args: [owner, to, amount], wif: wallet.wif)
+        XCTAssertNotEqual(txid2, "")
+
+        let amount2 = NVMParameter(type: .Fixed9, value: 2.4)
+        let txid3 = asset.customInvoke(operation: "transfer", args: [owner, to, amount2], wif: wallet.wif)
+        XCTAssertNotEqual(txid3, "")
+
+        let amount3 = NVMParameter(type: .Integer, value: 2400000000)
+        let txid4 = asset.customInvoke(operation: "transfer", args: [owner, to, amount3], wif: wallet.wif)
+        XCTAssertNotEqual(txid4, "")
+
+        let result3 = asset.customRead(operation: "transfer", args: [owner, to, amount])
+        let result4 = asset.customRead(operation: "transfer", args: [owner, to, amount2])
+        let result5 = asset.customRead(operation: "transfer", args: [owner, to, amount3])
+        XCTAssertEqual(result3, "")
+        XCTAssertEqual(result4, "")
+        XCTAssertEqual(result5, "")
+
+        let badHash = "\(contractHash)X"
+        let ces1 = CES1Interface(contractHash: contractHash, testnet: false, interface: NEO)
+        let args: [Any] = [address, 1]
+        let ctxid = ces1.transferMulti(args: [args], wif: wallet.wif)
+        XCTAssertNotEqual(ctxid, "")
+
+        let arrayParam = NVMParameter(type: .Array, value: [to, amount])
+        let cresult = ces1.customRead(operation: "transferMulti", args: [arrayParam])
+        XCTAssertEqual(cresult, "")
+
+        let unknown = NVMParameter(type: .Unknown, value: "")
+        let unknownDict = unknown.getIFArg()
+        XCTAssertEqual(unknownDict.keys.count, 0)
+
+        let str = NVMParameter(type: .String, value: "00000000000000000000000000000000000000000000000000000000000000000000000000000000")
+        let boolean = NVMParameter(type: .Boolean, value: true)
+        let bytearray = NVMParameter(type: .ByteArray, value: "262bec084432")
+        let negative = NVMParameter(type: .Integer, value: -1)
+        let array = NVMParameter(type: .Array, value: [])
+        let ctxid2 = ces1.customInvoke(operation: "operation", args: [array, str, boolean, arrayParam, bytearray, negative], wif: wallet.wif)
+        XCTAssertNotEqual(ctxid2, "")
+
+        let longString = "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        let str2 = NVMParameter(type: .String, value: longString)
+
+//        let ctxid3 = ces1.customInvoke(operation: "operation", args: [str2], wif: wallet.wif)
+//        XCTAssertNotEqual(ctxid3, "")
+
+        let script = buildScript(scriptHash: badHash, operation: "operation", args: [str2])
+        let invokeresult = neoInvokeScript(raw: Data(script))
+        XCTAssertTrue(invokeresult.keys.count >= 1)
+
+        let script2 = buildScript(scriptHash: contractHash, operation: "name", args: [])
+        let invokeresult2 = neoInvokeScript(raw: Data(script2))
+        XCTAssertTrue(invokeresult2.keys.count >= 1)
+
+        let badWif = wallet.wif + "XXXX"
+        let res = ces1.customInvoke(operation: "operation", args: [], wif: badWif)
+        XCTAssertEqual(res, "")
+    }
+
     func testNEP2() {
         let password = "12345678"
         guard let e = newEncryptedKey(wif: exampleWallet.wif, password: password) else {
@@ -526,8 +650,17 @@ class Tests: XCTestCase {
         XCTAssertTrue(unlocked)
     }
 
-    func testNEOVMParser() {
-        let parser = NEOVMParser()
+    func testNVMParameterArrayFail() {
+        let param = NVMParameter(type: .Array, value: 5)
+        let args: [NVMParameter] = [param]
+        let res = ontologyInvokeRead(contractHash: "a29564a30043d50620e4c6be61eda834d0acc48b", method: "getTotal", args: args)
+        let num = res.hexToDecimal()
+        XCTAssertGreaterThan(num, 0)
+        print(num)
+    }
+
+    func testNVMParser() {
+        let parser = NVMParser()
         let hex1 = "0101"
         guard let bool = parser.deserialize(hex: hex1) as? Bool else {
             XCTFail()
@@ -564,7 +697,7 @@ class Tests: XCTestCase {
     }
 
     func testOEP10() {
-        let oep5 = OEP5Interface(contractHash: "cae215265a5e348bfd603b8db22893aa74b42417", endpoint: mainNet)
+        let oep5 = OEP5Interface(contractHash: "cae215265a5e348bfd603b8db22893aa74b42417", testnet: false)
         let wallet = newWallet()
         let hash = "edf64937ca304ea8180fa92e2de36dc0a33cc712"
         XCTAssertTrue(oep5.approveContract(hash: hash, wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
@@ -573,7 +706,7 @@ class Tests: XCTestCase {
     }
 
     func testOEP4() {
-        let oep4 = OEP4Interface(contractHash: "78b98deed62aa708eaf6de85843734ecdfb14c1b", endpoint: mainNet)
+        let oep4 = OEP4Interface(contractHash: "78b98deed62aa708eaf6de85843734ecdfb14c1b", testnet: false)
         let address = "ATrApQ3w4xLnc2yDkEDXw1zAk9Ue544Csz"
 
         XCTAssertEqual(oep4.getName(), "SEED")
@@ -608,9 +741,9 @@ class Tests: XCTestCase {
         let allowance = oep4.allowance(owner: wallet.address, spender: address)
         XCTAssertEqual(allowance, 0)
 
-        let from = OntologyParameter(type: .Address, value: address)
-        let to = OntologyParameter(type: .Address, value: wallet.address)
-        let amount = OntologyParameter(type: .Fixed8, value: 1.0)
+        let from = NVMParameter(type: .Address, value: address)
+        let to = NVMParameter(type: .Address, value: wallet.address)
+        let amount = NVMParameter(type: .Fixed8, value: 1.0)
         let res7 = oep4.customInvoke(operation: "transfer", args: [from, to, amount], wallet: wallet)
         XCTAssertNotEqual(res7, "")
 
@@ -624,7 +757,7 @@ class Tests: XCTestCase {
     }
 
     func testOEP5() {
-        let oep5 = OEP5Interface(contractHash: "cae215265a5e348bfd603b8db22893aa74b42417", endpoint: mainNet)
+        let oep5 = OEP5Interface(contractHash: "cae215265a5e348bfd603b8db22893aa74b42417", testnet: false)
         let wallet = newWallet()
         let address = wallet.address
         let tokenId = 87
@@ -658,7 +791,7 @@ class Tests: XCTestCase {
         XCTAssertTrue(oep5.approvalForAll(owner: address, to: ownerAddress, approval: false, wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
 
         let hex = oep5.tokenMetadata(tokenId: tokenId)
-        let parser = NEOVMParser()
+        let parser = NVMParser()
         let raw = parser.deserialize(hex: hex)
         guard let metadata = raw as? [String: Any] else {
             XCTFail("Failed to cast metadata to dict")
@@ -792,7 +925,7 @@ class Tests: XCTestCase {
         let argDict : [[String:Any]] = [["T":"Address", "V":exampleWallet.address], ["T":"String", "V":"Hello!"]]
 
         do {
-            let data =  try JSONSerialization.data(withJSONObject: argDict, options: .prettyPrinted)
+            let data = try JSONSerialization.data(withJSONObject: argDict, options: .prettyPrinted)
             let args = String(data: data, encoding: String.Encoding.utf8)
             let gasPrice = 500
             let gasLimit = 20000
@@ -811,7 +944,7 @@ class Tests: XCTestCase {
     func testOntologyInvocationHelper() {
         let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
         let method = "put"
-        let args: [OntologyParameter] = [OntologyParameter(type: .Address, value: exampleWallet.address), OntologyParameter(type: .String, value: "Hello!")]
+        let args: [NVMParameter] = [NVMParameter(type: .Address, value: exampleWallet.address), NVMParameter(type: .String, value: "Hello!")]
         let gasPrice = 500
         let gasLimit = 20000
 
@@ -833,7 +966,7 @@ class Tests: XCTestCase {
             bytes: [0xD8, 0x00] as [UInt8],
             encoding: String.Encoding.utf16BigEndian)!
 
-        let args: [OntologyParameter] = [OntologyParameter(type: .Address, value: exampleWallet.address), OntologyParameter(type: .String, value: badStr)]
+        let args: [NVMParameter] = [NVMParameter(type: .Address, value: exampleWallet.address), NVMParameter(type: .String, value: badStr)]
         let gasPrice = 500
         let gasLimit = 20000
 
@@ -851,15 +984,6 @@ class Tests: XCTestCase {
             XCTAssertGreaterThan(num, 0)
             print(num)
         }
-    }
-
-    func testOntologyParameterArrayFail() {
-        let param = OntologyParameter(type: .Array, value: 5)
-        let args: [OntologyParameter] = [param]
-        let res = ontologyInvokeRead(contractHash: "a29564a30043d50620e4c6be61eda834d0acc48b", method: "getTotal", args: args)
-        let num = res.hexToDecimal()
-        XCTAssertGreaterThan(num, 0)
-        print(num)
     }
 
     func testOntologyWallet() {
@@ -999,7 +1123,7 @@ class Tests: XCTestCase {
     func testSendRawTransaction() {
         let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
         let method = "put"
-        let args: [OntologyParameter] = [OntologyParameter(type: .Address, value: exampleWallet.address), OntologyParameter(type: .String, value: "Hello!")]
+        let args: [NVMParameter] = [NVMParameter(type: .Address, value: exampleWallet.address), NVMParameter(type: .String, value: "Hello!")]
         let gasPrice = 500
         let gasLimit = 20000
 
@@ -1057,6 +1181,12 @@ class Tests: XCTestCase {
         let b = newWallet()
         let tx = ontologyTransfer(wif: exampleWallet.wif, asset: .ONT, toAddress: b.address, amount: 10)
         print(tx)
+    }
+
+    func testUtils() {
+        let str = "abc"
+        let d = str.dataWithHexString()
+        XCTAssertEqual(d.count, 0)
     }
 
     func testWalletFromPK() {

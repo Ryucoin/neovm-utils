@@ -16,14 +16,13 @@ Implemented in [OEP4.swift](https://github.com/Ryucoin/neovm-utils/blob/master/n
 The `OEP4Interface` class is used to interact with [OEP4](https://github.com/ontio/OEPs/blob/master/OEPS/OEP-4.mediawiki) compliant smart contacts.
 
 ``` swift
-public class OEP4Interface: NSObject
+public class OEP4Interface: OEP10Interface
 ```
 
 ### Properties
 
 ``` swift
 var contractHash: String = ""
-var endpoint: String = ""
 ```
 
 ### Methods

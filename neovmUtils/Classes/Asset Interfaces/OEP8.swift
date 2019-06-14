@@ -12,26 +12,26 @@ public class OEP8Interface: OEP10Interface {
 
     public func getName(tokenId: Any) -> String {
         let token = strOrIntToParam(arg: tokenId)
-        let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "name", args: [token])
+        let hex = interface.read(contractHash: contractHash, operation: "name", args: [token])
         return hex.hexToAscii()
     }
 
     public func getSymbol(tokenId: Any) -> String {
         let token = strOrIntToParam(arg: tokenId)
-        let hex =  ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "symbol", args: [token])
+        let hex = interface.read(contractHash: contractHash, operation: "symbol", args: [token])
         return hex.hexToAscii()
     }
 
     public func getTotalSupply(tokenId: Any) -> Int {
         let token = strOrIntToParam(arg: tokenId)
-        let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "totalSupply", args: [token])
+        let hex = interface.read(contractHash: contractHash, operation: "totalSupply", args: [token])
         return hex.hexToDecimal()
     }
 
     public func getBalance(address: String, tokenId: Any) -> Int {
-        let address = OntologyParameter(type: .Address, value: address)
+        let address = NVMParameter(type: .Address, value: address)
         let token = strOrIntToParam(arg: tokenId)
-        let hex = ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "balanceOf", args: [address, token])
+        let hex = interface.read(contractHash: contractHash, operation: "balanceOf", args: [address, token])
         return hex.hexToDecimal()
     }
 
@@ -40,11 +40,12 @@ public class OEP8Interface: OEP10Interface {
     }
 
     public func transfer(from: String, to: String, tokenId: Any, amount: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
-        let fromAcct = OntologyParameter(type: .Address, value: from)
-        let toAcct = OntologyParameter(type: .Address, value: to)
+        let fromAcct = NVMParameter(type: .Address, value: from)
+        let toAcct = NVMParameter(type: .Address, value: to)
         let token = strOrIntToParam(arg: tokenId)
-        let sending = OntologyParameter(type: .Integer, value: amount)
-        return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "transfer", args: [fromAcct, toAcct, token, sending], gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
+        let sending = NVMParameter(type: .Integer, value: amount)
+        let other: [String: Any] = ["gasPrice": gasPrice, "gasLimit": gasLimit]
+        return interface.invoke(contractHash: contractHash, operation: "transfer", args: [fromAcct, toAcct, token, sending], wif: wif, other: other)
     }
 
     public func transferMulti(args: [OEP8State], gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet) -> String {
@@ -66,21 +67,21 @@ public class OEP8Interface: OEP10Interface {
     }
 
     public func transferMulti(args: [[Any]], gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
-        var params: [OntologyParameter] = []
+        var params: [NVMParameter] = []
         for arg in args {
             guard arg.count == 4 else {
                 continue
             }
 
-            let fromAcct = OntologyParameter(type: .Address, value: arg[0] as? String ?? "")
-            let toAcct = OntologyParameter(type: .Address, value: arg[1] as? String ?? "")
+            let fromAcct = NVMParameter(type: .Address, value: arg[0] as? String ?? "")
+            let toAcct = NVMParameter(type: .Address, value: arg[1] as? String ?? "")
             let token = strOrIntToParam(arg: arg[2])
-            let spending = OntologyParameter(type: .Integer, value: arg[3] as? Int ?? 0)
-            let array = OntologyParameter(type: .Array, value: [fromAcct, toAcct, token, spending])
+            let spending = NVMParameter(type: .Integer, value: arg[3] as? Int ?? 0)
+            let array = NVMParameter(type: .Array, value: [fromAcct, toAcct, token, spending])
             params.append(array)
         }
-
-        return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "transferMulti", args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
+        let other: [String: Any] = ["gasPrice": gasPrice, "gasLimit": gasLimit]
+        return interface.invoke(contractHash: contractHash, operation: "transferMulti", args: params, wif: wif, other: other)
     }
 
     public func approve(from: String, to: String, tokenId: Any, amount: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet) -> String {
@@ -88,12 +89,13 @@ public class OEP8Interface: OEP10Interface {
     }
 
     public func approve(from: String, to: String, tokenId: Any, amount: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
-        let fromAcct = OntologyParameter(type: .Address, value: from)
-        let toAcct = OntologyParameter(type: .Address, value: to)
+        let fromAcct = NVMParameter(type: .Address, value: from)
+        let toAcct = NVMParameter(type: .Address, value: to)
         let token = strOrIntToParam(arg: tokenId)
-        let sending = OntologyParameter(type: .Integer, value: amount)
+        let sending = NVMParameter(type: .Integer, value: amount)
         let params = [fromAcct, toAcct, token, sending]
-        return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "approve", args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
+        let other: [String: Any] = ["gasPrice": gasPrice, "gasLimit": gasLimit]
+        return interface.invoke(contractHash: contractHash, operation: "approve", args: params, wif: wif, other: other)
     }
 
     public func transferFrom(spender: String, from: String, to: String, tokenId: Any, amount: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet) -> String {
@@ -101,19 +103,20 @@ public class OEP8Interface: OEP10Interface {
     }
 
     public func transferFrom(spender: String, from: String, to: String, tokenId: Any, amount: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
-        let spenderAcct = OntologyParameter(type: .Address, value: spender)
-        let fromAcct = OntologyParameter(type: .Address, value: from)
-        let toAcct = OntologyParameter(type: .Address, value: to)
+        let spenderAcct = NVMParameter(type: .Address, value: spender)
+        let fromAcct = NVMParameter(type: .Address, value: from)
+        let toAcct = NVMParameter(type: .Address, value: to)
         let token = strOrIntToParam(arg: tokenId)
-        let sending = OntologyParameter(type: .Integer, value: amount)
-        return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "transferFrom", args: [spenderAcct, fromAcct, toAcct, token, sending], gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
+        let sending = NVMParameter(type: .Integer, value: amount)
+        let other: [String: Any] = ["gasPrice": gasPrice, "gasLimit": gasLimit]
+        return interface.invoke(contractHash: contractHash, operation: "transferFrom", args: [spenderAcct, fromAcct, toAcct, token, sending], wif: wif, other: other)
     }
 
     public func getAllowance(owner: String, spender: String, tokenId: Any) -> Int {
-        let ownerAcct = OntologyParameter(type: .Address, value: owner)
-        let spenderAcct = OntologyParameter(type: .Address, value: spender)
+        let ownerAcct = NVMParameter(type: .Address, value: owner)
+        let spenderAcct = NVMParameter(type: .Address, value: spender)
         let token = strOrIntToParam(arg: tokenId)
-        let hex =  ontologyInvokeRead(endpoint: endpoint, contractHash: contractHash, method: "allowance", args: [ownerAcct, spenderAcct, token])
+        let hex = interface.read(contractHash: contractHash, operation: "allowance", args: [ownerAcct, spenderAcct, token])
         return hex.hexToDecimal()
     }
 
@@ -136,21 +139,21 @@ public class OEP8Interface: OEP10Interface {
     }
 
     public func approveMulti(args: [[Any]], gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
-        var params: [OntologyParameter] = []
+        var params: [NVMParameter] = []
         for arg in args {
             guard arg.count == 4 else {
                 continue
             }
 
-            let fromAcct = OntologyParameter(type: .Address, value: arg[0] as? String ?? "")
-            let toAcct = OntologyParameter(type: .Address, value: arg[1] as? String ?? "")
+            let fromAcct = NVMParameter(type: .Address, value: arg[0] as? String ?? "")
+            let toAcct = NVMParameter(type: .Address, value: arg[1] as? String ?? "")
             let token = strOrIntToParam(arg: arg[2])
-            let spending = OntologyParameter(type: .Integer, value: arg[3] as? Int ?? 0)
-            let array = OntologyParameter(type: .Array, value: [fromAcct, toAcct, token, spending])
+            let spending = NVMParameter(type: .Integer, value: arg[3] as? Int ?? 0)
+            let array = NVMParameter(type: .Array, value: [fromAcct, toAcct, token, spending])
             params.append(array)
         }
-
-        return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "approveMulti", args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
+        let other: [String: Any] = ["gasPrice": gasPrice, "gasLimit": gasLimit]
+        return interface.invoke(contractHash: contractHash, operation: "approveMulti", args: params, wif: wif, other: other)
     }
 
     public func transferFromMulti(args: [[Any]], gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet) -> String {
@@ -158,21 +161,21 @@ public class OEP8Interface: OEP10Interface {
     }
 
     public func transferFromMulti(args: [[Any]], gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
-        var params: [OntologyParameter] = []
+        var params: [NVMParameter] = []
         for arg in args {
             guard arg.count == 5 else {
                 continue
             }
 
-            let spenderAcct = OntologyParameter(type: .Address, value: arg[0] as? String ?? "")
-            let fromAcct = OntologyParameter(type: .Address, value: arg[1] as? String ?? "")
-            let toAcct = OntologyParameter(type: .Address, value: arg[2] as? String ?? "")
+            let spenderAcct = NVMParameter(type: .Address, value: arg[0] as? String ?? "")
+            let fromAcct = NVMParameter(type: .Address, value: arg[1] as? String ?? "")
+            let toAcct = NVMParameter(type: .Address, value: arg[2] as? String ?? "")
             let token = strOrIntToParam(arg: arg[3])
-            let spending = OntologyParameter(type: .Integer, value: arg[4] as? Int ?? 0)
-            let array = OntologyParameter(type: .Array, value: [spenderAcct, fromAcct, toAcct, token, spending])
+            let spending = NVMParameter(type: .Integer, value: arg[4] as? Int ?? 0)
+            let array = NVMParameter(type: .Array, value: [spenderAcct, fromAcct, toAcct, token, spending])
             params.append(array)
         }
-
-        return ontologyInvoke(endpoint: endpoint, contractHash: contractHash, method: "approveMulti", args: params, gasPrice: gasPrice, gasLimit: gasLimit, wif: wif)
+        let other: [String: Any] = ["gasPrice": gasPrice, "gasLimit": gasLimit]
+        return interface.invoke(contractHash: contractHash, operation: "approveMulti", args: params, wif: wif, other: other)
     }
 }

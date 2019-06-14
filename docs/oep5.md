@@ -21,14 +21,13 @@ Implemented in [OEP5.swift](https://github.com/Ryucoin/neovm-utils/blob/master/n
 The `OEP5Interface` class is used to interact with [OEP5](https://github.com/ontio/OEPs/blob/master/OEPS/OEP-5.mediawiki) compliant smart contacts.
 
 ``` swift
-public class OEP5Interface: NSObject
+public class OEP5Interface: OEP10Interface
 ```
 
 ### Properties
 
 ``` swift
 var contractHash: String = ""
-var endpoint: String = ""
 ```
 
 ### Methods
@@ -105,12 +104,12 @@ or
 func transferMulti(args: [[String]], wif: String) -> String {
 ```
 
-Can also call with an array of `State` objects, which contain an `address` and `tokenId`.
+Can also call with an array of `OEP5State` objects, which contain an `address` and `tokenId`.
 
 ``` swift
-func transferMulti(args: [State], wif: String) -> String {
+func transferMulti(args: [OEP5State], wif: String) -> String {
 ```
 or
 ``` swift
-func transferMulti(args: [State], wif: String) -> String {
+func transferMulti(args: [OEP5State], wif: String) -> String {
 ```

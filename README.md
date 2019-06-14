@@ -35,7 +35,7 @@ And import it into your project with:
 import neovmUtils
 ```
 
-**Note:** `neovmUtils` requires iOS 12.0 or higher. Bitcode must also be disabled.
+**Note:** `neovmUtils` requires iOS 12.0 or higher.
 
 An example `Podfile` would look like this:
 
@@ -48,20 +48,44 @@ target :'My_App' do
 end
 ```
 
+### Sub-dependencies
+
+`neovmUtils` requires:
+- [RyuCrypto](https://github.com/Ryucoin/trezor-crypto-ios) - the Ryu fork of the Trezor Crypto library
+- [Socket.IO-Client-Swift](https://github.com/socketio/socket.io-client-swift) - WebSocket tool for iOS to interact with OntMonitor
+  - [Starscream](https://github.com/daltoniam/Starscream) - a WebSocket client for Swift
+- [NetworkUtils](https://github.com/Ryucoin/NetworkUtils) - [axios](https://github.com/axios/axios) style HTTP request package for Swift
+  - `PromisesSwift` - Google's [promises](https://github.com/google/promises) package for Swift
+    - `PromisesObjC` - Google's [promises](https://github.com/google/promises) package for Objective-C
+
 ## Usage
 
 `neovmUtils` offers:
-- [NEO/ONT Wallet](docs/wallet.md)
-- [Ontology Wallet](docs/ont-wallet.md)
-- [OntMonitor](docs/monitor.md)
-- [ONT Identity](docs/ontid.md)
-- [ONT RPC Methods](docs/ont-rpc.md)
-- [ONT Transactions](docs/ont-trans.md)
-- [QR View](docs/qr-view.md)
-- [Mnemonic Creation](docs/mnemonic.md)
-- [OEP4 Interface](docs/oep4.md)
-- [OEP5 Interface](docs/oep5.md)
-- [OEP8 Interface](docs/oep8.md)
+- General NEOVM development tools
+  - [NEO/ONT Wallet](docs/wallet.md)
+  - [Parameter Building](docs/NVMParameter.md)
+  - [Mnemonic Creation](docs/mnemonic.md)
+- Ontology Blockchain Support
+  - [Ontology Wallet File](docs/ont-wallet.md)
+  - [OntMonitor](docs/monitor.md)
+  - [ONT Identity](docs/ontid.md)
+  - [ONT Network Management](docs/ont-network.md)
+  - [ONT RPC Methods](docs/ont-rpc.md)
+  - [ONT TX Invocation](docs/ont-invo.md)
+- NEO Blockchain Support
+  - [NEO Network Management](docs/neo-network.md)
+  - [NEO RPC Methods](docs/neo-rpc.md)
+  - [NEO TX Invocation](docs/neo-invo.md)
+- [Blockchain Interface Protocol](docs/bip.md)
+- Asset Interfaces
+  - [Asset Interface](docs/asset.md)
+  - [General OEP Interface](docs/oep.md)
+  - [OEP4 Interface](docs/oep4.md)
+  - [OEP5 Interface](docs/oep5.md)
+  - [OEP8 Interface](docs/oep8.md)
+  - [OEP10 Interface](docs/oep10.md)
+- Helpful UI Elements
+  - [QR View](docs/qr-view.md)
 - [Utils](docs/utils.md)
 - [Compiled neo-utils golang](#golang)
 

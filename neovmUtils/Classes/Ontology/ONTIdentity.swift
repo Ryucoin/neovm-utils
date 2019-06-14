@@ -1,5 +1,5 @@
 //
-//  OntologyIdentity.swift
+//  ONTIdentity.swift
 //  neovmUtils
 //
 //  Created by Wyatt Mufson on 2/21/19.
@@ -77,7 +77,7 @@ public func createIdentity(label: String = "", password: String? = nil) -> Ident
     return Identity(label: label, password: password, ontid: ontid, publicKey: publicKey, privateKey: privateKey, wif: wif)
 }
 
-public func sendRegister(endpoint: String = testNet, ident: Identity, password: String? = nil, payerAcct: Account, gasLimit: Int = 20000, gasPrice: Int = 500) -> String {
+public func sendRegister(endpoint: String = ontologyTestNet, ident: Identity, password: String? = nil, payerAcct: Account, gasLimit: Int = 20000, gasPrice: Int = 500) -> String {
     var wif = ident.wif
     if ident.locked {
         if let password = password {
@@ -91,7 +91,7 @@ public func sendRegister(endpoint: String = testNet, ident: Identity, password: 
 
     let err = NSErrorPointer(nilLiteral: ())
     let raw = NeoutilsOntologyMakeRegister(gasPrice, gasLimit, wif, payerAcct.wif, err)
-    let e = getEndpoint(def: endpoint)
+    let e = formatONTEndpoint(endpt: endpoint)
     let response = ontologySendRawTransaction(endpoint: e, raw: raw)
     return response
 }
@@ -258,7 +258,7 @@ private func parseDDO(ontid: String, hex: String) -> OntidDescriptionObject {
     return OntidDescriptionObject(ontid: ontid, publicKeys: publicKeys, attributes: attributes, recovery: recovery)
 }
 
-public func sendGetDDO(endpoint: String = testNet, ontid: String) -> OntidDescriptionObject? {
+public func sendGetDDO(endpoint: String = ontologyTestNet, ontid: String) -> OntidDescriptionObject? {
     let err = NSErrorPointer(nilLiteral: ())
     let raw = NeoutilsOntologyBuildGetDDO(ontid, err)
     let response = ontologySendPreExecRawTransaction(endpoint: endpoint, raw: raw)
@@ -268,7 +268,7 @@ public func sendGetDDO(endpoint: String = testNet, ontid: String) -> OntidDescri
     return parseDDO(ontid: ontid, hex: response)
 }
 
-public func sendGetDDO(endpoint: String = testNet, ident: Identity) -> OntidDescriptionObject? {
+public func sendGetDDO(endpoint: String = ontologyTestNet, ident: Identity) -> OntidDescriptionObject? {
     let err = NSErrorPointer(nilLiteral: ())
     let raw = NeoutilsOntologyBuildGetDDO(ident.ontid, err)
     let response = ontologySendPreExecRawTransaction(endpoint: endpoint, raw: raw)
