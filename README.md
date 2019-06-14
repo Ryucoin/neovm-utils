@@ -51,12 +51,12 @@ end
 ### Sub-dependencies
 
 `neovmUtils` requires:
-- `RyuCrypto` - the Ryu [fork of the Trezor Crypto library](https://github.com/Ryucoin/trezor-crypto-ios)
-- `Socket.IO-Client-Swift` - [Socket.io](https://github.com/socketio/socket.io-client-swift) WebSocket tool for iOS to interact with OntMonitor
-  - `Starscream` - [Starscream](https://github.com/daltoniam/Starscream) is a WebSocket client for Swift
-- `NetworkUtils` - Ryu's [NetworkUtils](https://github.com/Ryucoin/NetworkUtils) package is an [axios](https://github.com/axios/axios) style HTTP request package for Swift
-  - `PromisesSwift` - Google's [promise](https://github.com/google/promises) package for Swift
-    - `PromisesObjC` - Google's [promise](https://github.com/google/promises) package for Objective-C
+- [RyuCrypto](https://github.com/Ryucoin/trezor-crypto-ios) - the Ryu fork of the Trezor Crypto library
+- [Socket.IO-Client-Swift](https://github.com/socketio/socket.io-client-swift) - WebSocket tool for iOS to interact with OntMonitor
+  - [Starscream](https://github.com/daltoniam/Starscream) - a WebSocket client for Swift
+- [NetworkUtils](https://github.com/Ryucoin/NetworkUtils) - [axios](https://github.com/axios/axios) style HTTP request package for Swift
+  - `PromisesSwift` - Google's [promises](https://github.com/google/promises) package for Swift
+    - `PromisesObjC` - Google's [promises](https://github.com/google/promises) package for Objective-C
 
 ## Usage
 
