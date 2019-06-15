@@ -204,6 +204,12 @@ class Tests: XCTestCase {
         XCTAssertEqual(ces1.approvalForAll(owner: address, to: address, approval: true, wallet: wallet), approvalForAllError)
         let tokenMetadataError = "CES1 Assets do not support tokenMetadata"
         XCTAssertEqual(ces1.tokenMetadata(tokenId: tokenId), tokenMetadataError)
+
+        let hexEmpty = ces1.tokensOf(address: newWallet().address)
+        XCTAssertEqual(hexEmpty, "")
+        let dynamicEmpty = DynamicList(hex: hexEmpty)
+        let tokensEmpty = dynamicEmpty.flatten()
+        XCTAssertEqual(tokensEmpty.count, 0)
     }
 
     func testClaimONG() {
