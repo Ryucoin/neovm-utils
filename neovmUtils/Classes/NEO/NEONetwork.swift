@@ -35,6 +35,10 @@ public struct o3Chain: Codable {
 
 public let o3api = "https://platform.o3.network/api/v1/nodes"
 
+private func getNgdNode(net: network) -> String {
+    return (net == .mainNet) ? "http://seed1.ngd.network:10332" : "http://seed1.ngd.network:20332"
+}
+
 public func getBestNEONode(api: String = o3api, net: network) -> Promise<String?> {
     return Promise<String?> { fulfill, _ in
         var apiUrl = api
@@ -47,7 +51,7 @@ public func getBestNEONode(api: String = o3api, net: network) -> Promise<String?
             fulfill(json?.result.data.neo.best)
         }.catch { (error) in
             print("Network error with getBestNEONode: \((error as! NetworkError).localizedDescription)")
-            fulfill(nil)
+            fulfill(getNgdNode(net: net))
         }
     }
 }
