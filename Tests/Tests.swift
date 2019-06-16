@@ -43,9 +43,12 @@ class Tests: XCTestCase {
         XCTAssertTrue(result.keys.count == 0)
 
         let expectation = XCTestExpectation(description: "Test bad node")
-        getBestNEONode(api: bad, net: .testNet).then { (result) in
-            XCTAssertNil(result)
-            expectation.fulfill()
+        getBestNEONode(api: bad, net: .mainNet).then { (result) in
+            XCTAssertEqual("http://seed1.ngd.network:10332", result)
+            getBestNEONode(api: bad, net: .testNet).then { (result2) in
+                XCTAssertEqual("http://seed1.ngd.network:20332", result2)
+                expectation.fulfill()
+            }
         }
         self.wait(for: [expectation], timeout: 10)
     }
