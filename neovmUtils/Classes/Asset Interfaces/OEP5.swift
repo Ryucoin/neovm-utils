@@ -94,9 +94,9 @@ public class OEP5Interface: OEP10Interface {
         return interface.invoke(contractHash: contractHash, operation: "approve", args: params, wif: wif, other: other)
     }
 
-    public func allowance(tokenId: Any) -> String {
+    public func getApproved(tokenId: Any) -> String {
         let token = strOrIntToParam(arg: tokenId)
-        let hex = interface.read(contractHash: contractHash, operation: "allowance", args: [token])
+        let hex = interface.read(contractHash: contractHash, operation: "getApproved", args: [token])
         return hex
     }
 

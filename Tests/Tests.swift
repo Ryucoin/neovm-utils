@@ -193,8 +193,14 @@ class Tests: XCTestCase {
         let colorStruct1 = ces1.getColor(tokenId: "A")
         let color1 = colorStruct1.color
         let alpha1 = colorStruct1.alpha
-        XCTAssertEqual(color1, "")
-        XCTAssertEqual(alpha1, "")
+
+        let colorStructD = ces1.getColor(tokenId: 65)
+        let colorD = colorStructD.color
+        let alphaD = colorStructD.alpha
+        XCTAssertEqual(color1, colorD)
+        XCTAssertEqual(alpha1, alphaD)
+        XCTAssertEqual(color1, "8000ff")
+        XCTAssertEqual(alpha1, "ff")
 
         let colorStruct2 = ces1.getColor(tokenId: tokenId)
         let color2 = colorStruct2.color
@@ -791,10 +797,10 @@ class Tests: XCTestCase {
         XCTAssertEqual(oep5.approve(address: address, tokenId: tokenId, wallet: wallet), fault)
         XCTAssertTrue(oep5.clearApproved(tokenId: tokenId, wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
 
-        XCTAssertEqual(oep5.allowance(tokenId: "A"), "00")
-        XCTAssertEqual(oep5.allowance(tokenId: 1.5), "00")
+        XCTAssertEqual(oep5.getApproved(tokenId: "A"), "00")
+        XCTAssertEqual(oep5.getApproved(tokenId: 1.5), "00")
 
-        XCTAssertEqual(oep5.allowance(tokenId: tokenId), "00")
+        XCTAssertEqual(oep5.getApproved(tokenId: tokenId), "00")
         XCTAssertEqual(oep5.tokensOf(address: address), "00")
         XCTAssertTrue(oep5.approvalForAll(owner: address, to: ownerAddress, approval: true, wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
         XCTAssertTrue(oep5.approvalForAll(owner: address, to: ownerAddress, approval: false, wallet: wallet).hasSuffix("no balance enough to cover gas cost 10000000"))
