@@ -46,6 +46,18 @@ public class NVMParser: NSObject {
         return num
     }
 
+    private func readNextLen(hex: String) -> Int {
+        var len = readInt(hex: hex)
+        if len == 0xfd {
+            len = readBytes(hex: hex, count: 2).hexToDecimal()
+        } else if len == 0xfe {
+            len = readBytes(hex: hex, count: 4).hexToDecimal()
+        } else if len == 0xff {
+            len = readBytes(hex: hex, count: 8).hexToDecimal()
+        }
+        return len
+    }
+
     public func deserialize(hex: String) -> Any {
         let byte = readByte(hex: hex)
         if byte == VMType.ByteArray.rawValue {
@@ -53,29 +65,20 @@ public class NVMParser: NSObject {
             return bytes
         } else if byte == VMType.Bool.rawValue {
             let nextByte = readByte(hex: hex)
-            if nextByte == "00" {
-                return false
-            }
-
-            return true
+            return nextByte != "00"
         } else if byte == VMType.Int.rawValue {
             let bytes = readVarBytes(hex: hex)
             return bytes.hexToDecimal()
         } else if byte == VMType.Array.rawValue || byte == VMType.Struct.rawValue {
-            let count = readInt(hex: hex)
+            let count = readNextLen(hex: hex)
             var list: [Any] = []
             for _ in 0..<count {
                 let item = deserialize(hex: hex)
                 list.append(item)
             }
-
-            if byte == VMType.Struct.rawValue {
-                return [list]
-            }
-
             return list
         } else if byte == VMType.Dict.rawValue {
-            let count = readInt(hex: hex)
+            let count = readNextLen(hex: hex)
             var dict: [String: Any] = [:]
             for _ in 0..<count {
                 let key = (deserialize(hex: hex) as? String)?.hexToAscii() ?? "Bad key"

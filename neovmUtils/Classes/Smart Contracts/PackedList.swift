@@ -21,4 +21,23 @@ public final class PackedList: NSObject {
             self.array = array
         }
     }
+
+    private func flatten(arr: [Any]) -> [Any] {
+        var flattened: [Any] = []
+        for item in arr {
+            if let list = item as? [Any] {
+                let flattenedList = flatten(arr: list)
+                for i in flattenedList {
+                    flattened.append(i)
+                }
+            } else {
+                flattened.append(item)
+            }
+        }
+        return flattened
+    }
+
+    public func flatten() -> [Any] {
+        return flatten(arr: self.array)
+    }
 }

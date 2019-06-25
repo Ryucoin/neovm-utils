@@ -35,7 +35,7 @@ public final class DynamicList: NSObject {
     public func flatten() -> [Any] {
         var result: [Any] = []
         for p in packed {
-            for item in p.array {
+            for item in p.flatten() {
                 result.append(item)
             }
         }

@@ -574,8 +574,7 @@ class Tests: XCTestCase {
         let address = "AUxBn8n37YpYwkVKVg5rSP6W2BwrJZjU5t"
         let owner = NVMParameter(type: .Address, value: address)
         let result2 = asset.customRead(operation: "balanceOf", args: [owner]).hexToDecimal()
-        let balance = 2400000000
-        XCTAssertEqual(balance, result2)
+        XCTAssertTrue(result2 > 0)
 
         let wallet = newWallet()
         let txid = asset.customInvoke(operation: "name", args: [], wif: wallet.wif)
@@ -700,7 +699,7 @@ class Tests: XCTestCase {
             return
         }
 
-        XCTAssertEqual(arr.count, 1)
+        XCTAssertEqual(arr.count, 0)
         parser.resetParser()
 
         guard let empty = parser.deserialize(hex: "03") as? String else {
@@ -828,6 +827,29 @@ class Tests: XCTestCase {
 
         let tokenName = "dragon#W"
         XCTAssertEqual(tokenName, name.hexToAscii())
+    }
+
+    func testOEP5Big() {
+        let oep5 = OEP5Interface(contractHash: "463cff118238915e974e0610a3422b32718329ce")
+        let address = "AdKhP9DJkuXTiKPSpWKde3zcL8XVVsMTc8"
+        let address2 = "ASvdG49hEJ9rbA247v9Moa1JSjKAiJZfEH"
+
+        let raw1 = oep5.tokensOf(address: address)
+        let dynamic1 = DynamicList(hex: raw1)
+        let array1 = dynamic1.flatten()
+        let actual1 = array1.count
+        let calculated1 = dynamic1.items
+        XCTAssertEqual(actual1, calculated1)
+
+        let raw2 = oep5.tokensOf(address: address2)
+        let dynamic2 = DynamicList(hex: raw2)
+        let array2 = dynamic2.flatten()
+        let actual2 = array2.count
+        let calculated2 = dynamic2.items
+        XCTAssertEqual(actual2, calculated2)
+
+        XCTAssertTrue(actual1 > 1024)
+        XCTAssertTrue(actual2 > 1024)
     }
 
     func testOEP8() {
