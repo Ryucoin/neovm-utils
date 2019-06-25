@@ -81,7 +81,7 @@ public final class CES1Interface: OEP5Interface {
     }
 }
 
-public struct TokenColor {
+public struct TokenColor: Codable {
     public let color: String
     public let alpha: String
 
