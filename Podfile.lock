@@ -1,19 +1,19 @@
 PODS:
   - neovmUtils (1.4.0):
-    - NetworkUtils (= 0.5.1)
+    - NetworkUtils (= 0.5.2)
     - RyuCrypto (= 0.0.1)
     - Socket.IO-Client-Swift (= 14.0.0)
-  - NetworkUtils (0.5.1):
-    - SwiftPromises (= 0.0.3)
+  - NetworkUtils (0.5.2):
+    - SwiftPromises (= 0.0.4)
   - RyuCrypto (0.0.1)
   - Socket.IO-Client-Swift (14.0.0):
     - Starscream (~> 3.0.6)
   - Starscream (3.0.6)
-  - SwiftPromises (0.0.3)
+  - SwiftPromises (0.0.4)
 
 DEPENDENCIES:
   - neovmUtils (from `./`)
-  - NetworkUtils (= 0.5.1)
+  - NetworkUtils (= 0.5.2)
   - RyuCrypto (= 0.0.1)
   - Socket.IO-Client-Swift (= 14.0.0)
 
@@ -30,13 +30,13 @@ EXTERNAL SOURCES:
     :path: "./"
 
 SPEC CHECKSUMS:
-  neovmUtils: 9f36992f2ab1b4f5f517f551c923006f184e0761
-  NetworkUtils: f2b0eda2eea793cdae4fb206377a54abd7f2880a
+  neovmUtils: 0291ce83dc50d6756ec8bfe4fcf258016da839f2
+  NetworkUtils: 44e0e3934a245b35ee5d4e56f6adbc0d92947810
   RyuCrypto: 4395cd6eba1e291c5ad6b819feb73bc35cdd9402
   Socket.IO-Client-Swift: 21e6a8a23a7d367d5ddfab6cbbd3c679cf3c25d6
   Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
-  SwiftPromises: b1ca651edb7f8aeb59989afc1c3102301826acb8
+  SwiftPromises: 390246636d7e213d0a5beb03f62d5603c795b117
 
-PODFILE CHECKSUM: 5b21ce02737fbb954fb5b833cfd13dc4ff8cbc70
+PODFILE CHECKSUM: 18fc41049418079f3cc1bb7a54c1f2fd9b377a30
 
 COCOAPODS: 1.6.1
