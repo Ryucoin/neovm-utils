@@ -1,9 +1,9 @@
 platform :ios, '12.0'
 use_frameworks!
 target 'neovmUtils_Tests' do
-  pod 'RyuCrypto'
+  pod 'RyuCrypto', '0.0.1'
   pod 'Socket.IO-Client-Swift', '14.0.0'
-  pod 'NetworkUtils', '0.4.1'
+  pod 'NetworkUtils', '0.5.1'
 end
 
 target 'neovmUtilsExample' do

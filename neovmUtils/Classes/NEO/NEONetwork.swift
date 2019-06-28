@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Promises
+import SwiftPromises
 import NetworkUtils
 
 public var neoTestNet = "testNetBestNode"

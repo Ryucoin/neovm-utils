@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Promises
+import SwiftPromises
 import NetworkUtils
 
 private enum RPCMethod: String {
@@ -72,7 +72,6 @@ private func getWriteResult(dict: [String: Any]) -> Bool {
 
 public func neoSendRawTransaction(endpoint: String = neoTestNet, raw: Data) -> Bool {
     var result = false
-    DispatchQueue.promises = .global()
     if let node = try? await(formatNEOEndpoint(endpt: endpoint)) {
         if let dict = try? await(sendRawTransaction(node: node, data: raw)) {
             result = getWriteResult(dict: dict)
@@ -83,7 +82,6 @@ public func neoSendRawTransaction(endpoint: String = neoTestNet, raw: Data) -> B
 
 public func neoInvokeScript(endpoint: String = neoTestNet, raw: Data) -> [String: Any] {
     var result: [String: Any] = [:]
-    DispatchQueue.promises = .global()
     if let node = try? await(formatNEOEndpoint(endpt: endpoint)) {
         if let dict = try? await(invokeScript(node: node, data: raw)) {
             result = dict
@@ -94,7 +92,6 @@ public func neoInvokeScript(endpoint: String = neoTestNet, raw: Data) -> [String
 
 public func neoInvokeFunction(endpoint: String = neoTestNet, scriptHash: String, operation: String, args: [NVMParameter]) -> String {
     var result = ""
-    DispatchQueue.promises = .global()
     if let node = try? await(formatNEOEndpoint(endpt: endpoint)) {
         var params: [Any] = [scriptHash, operation]
         var arguments: [Any] = []

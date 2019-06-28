@@ -1,6 +1,6 @@
 import XCTest
 import Neoutils
-import Promises
+import SwiftPromises
 
 class Tests: XCTestCase {
     var exampleWallet : Wallet = newWallet()
@@ -559,7 +559,6 @@ class Tests: XCTestCase {
     func testNEOInvocations() {
         let contractHash = "849d095d07950b9e56d0c895ec48ec5100cfdff1"
 
-        DispatchQueue.promises = .global()
         let bestNode = try? await(getBestNEONode(net: .testNet))
         if bestNode == nil {
             XCTFail()
