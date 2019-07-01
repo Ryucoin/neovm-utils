@@ -159,68 +159,6 @@ class Tests: XCTestCase {
         XCTAssertEqual("", res)
     }
 
-    func testCES1() {
-        let ces1 = CES1Interface(contractHash: "a47222204212ef759df954f1e1b156528098153d")
-        let wallet = newWallet()
-        let address = "ARCeBHE161cR8Z4YUaxtDGEJbAmt53M24W"
-        let tokenId = 1
-        let rarity = "Common"
-        let name = "Slimey"
-
-        XCTAssertEqual(ces1.getName(), "Ryu NFT Collectibles")
-        XCTAssertEqual(ces1.getSymbol(), "RNC")
-        XCTAssertTrue(ces1.getTotalSupply() > 1)
-        XCTAssertTrue(ces1.getBalance(address: address) > 1)
-
-        XCTAssertEqual(ces1.nameOf(tokenId: tokenId), name)
-        XCTAssertEqual(ces1.getRarity(tokenId: tokenId), rarity)
-        XCTAssertEqual(ces1.mint(tokenName: "Name", address: address, wallet: wallet), fault)
-
-        let hex = ces1.tokensOf(address: address)
-        let dynamic = DynamicList(hex: hex)
-        let tokens = dynamic.flatten()
-        for token in tokens {
-            XCTAssertEqual(ces1.getOwner(tokenId: token).scriptHashToAddress(), address)
-        }
-
-        XCTAssertTrue(ces1.getNameSupply(name: name) >= 1)
-        XCTAssertTrue(ces1.getRaritySupply(rarity: rarity) >= 1)
-        XCTAssertTrue(ces1.getRarityAndNameSupply(rarity: rarity, name: name) >= 1)
-
-        let dna = ces1.getDNA(tokenId: tokenId)
-        XCTAssertTrue(dna.count == 120)
-
-        let colorStruct1 = ces1.getColor(tokenId: "A")
-        let color1 = colorStruct1.color
-        let alpha1 = colorStruct1.alpha
-
-        let colorStructD = ces1.getColor(tokenId: 65)
-        let colorD = colorStructD.color
-        let alphaD = colorStructD.alpha
-        XCTAssertEqual(color1, colorD)
-        XCTAssertEqual(alpha1, alphaD)
-        XCTAssertEqual(color1, "8000ff")
-        XCTAssertEqual(alpha1, "ff")
-
-        let colorStruct2 = ces1.getColor(tokenId: tokenId)
-        let color2 = colorStruct2.color
-        let alpha2 = colorStruct2.alpha
-        XCTAssertEqual(color2, "ffffff")
-        XCTAssertEqual(alpha2, "ff")
-
-        let approvalForAllError = "CES1 Assets do not support approvalForAll"
-        XCTAssertEqual(ces1.approvalForAll(owner: address, to: address, approval: true, wif: wallet.wif), approvalForAllError)
-        XCTAssertEqual(ces1.approvalForAll(owner: address, to: address, approval: true, wallet: wallet), approvalForAllError)
-        let tokenMetadataError = "CES1 Assets do not support tokenMetadata"
-        XCTAssertEqual(ces1.tokenMetadata(tokenId: tokenId), tokenMetadataError)
-
-        let hexEmpty = ces1.tokensOf(address: newWallet().address)
-        XCTAssertEqual(hexEmpty, "")
-        let dynamicEmpty = DynamicList(hex: hexEmpty)
-        let tokensEmpty = dynamicEmpty.flatten()
-        XCTAssertEqual(tokensEmpty.count, 0)
-    }
-
     func testClaimONG() {
         let tx = claimONG(wif: exampleWallet.wif)
         print(tx)
@@ -601,13 +539,13 @@ class Tests: XCTestCase {
         XCTAssertEqual(result5, "")
 
         let badHash = "\(contractHash)X"
-        let ces1 = CES1Interface(contractHash: contractHash, testnet: false, interface: NEO)
+        let res1 = RES1Interface(contractHash: contractHash, testnet: false, interface: NEO)
         let args: [Any] = [address, 1]
-        let ctxid = ces1.transferMulti(args: [args], wif: wallet.wif)
+        let ctxid = res1.transferMulti(args: [args], wif: wallet.wif)
         XCTAssertNotEqual(ctxid, "")
 
         let arrayParam = NVMParameter(type: .Array, value: [to, amount])
-        let cresult = ces1.customRead(operation: "transferMulti", args: [arrayParam])
+        let cresult = res1.customRead(operation: "transferMulti", args: [arrayParam])
         XCTAssertEqual(cresult, "")
 
         let unknown = NVMParameter(type: .Unknown, value: "")
@@ -619,13 +557,13 @@ class Tests: XCTestCase {
         let bytearray = NVMParameter(type: .ByteArray, value: "262bec084432")
         let negative = NVMParameter(type: .Integer, value: -1)
         let array = NVMParameter(type: .Array, value: [])
-        let ctxid2 = ces1.customInvoke(operation: "operation", args: [array, str, boolean, arrayParam, bytearray, negative], wif: wallet.wif)
+        let ctxid2 = res1.customInvoke(operation: "operation", args: [array, str, boolean, arrayParam, bytearray, negative], wif: wallet.wif)
         XCTAssertNotEqual(ctxid2, "")
 
         let longString = "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
         let str2 = NVMParameter(type: .String, value: longString)
 
-//        let ctxid3 = ces1.customInvoke(operation: "operation", args: [str2], wif: wallet.wif)
+//        let ctxid3 = res1.customInvoke(operation: "operation", args: [str2], wif: wallet.wif)
 //        XCTAssertNotEqual(ctxid3, "")
 
         let script = buildScript(scriptHash: badHash, operation: "operation", args: [str2])
@@ -637,7 +575,7 @@ class Tests: XCTestCase {
         XCTAssertTrue(invokeresult2.keys.count >= 1)
 
         let badWif = wallet.wif + "XXXX"
-        let res = ces1.customInvoke(operation: "operation", args: [], wif: badWif)
+        let res = res1.customInvoke(operation: "operation", args: [], wif: badWif)
         XCTAssertEqual(res, "")
     }
 
@@ -1090,6 +1028,68 @@ class Tests: XCTestCase {
         XCTAssertEqual(q5.code, exampleWallet.address)
         XCTAssertEqual(q6.code, exampleWallet.publicKeyString)
         q1.layoutSubviews()
+    }
+
+    func testRES1() {
+        let res1 = RES1Interface(contractHash: "a47222204212ef759df954f1e1b156528098153d")
+        let wallet = newWallet()
+        let address = "ARCeBHE161cR8Z4YUaxtDGEJbAmt53M24W"
+        let tokenId = 1
+        let rarity = "Common"
+        let name = "Slimey"
+
+        XCTAssertEqual(res1.getName(), "Ryu NFT Collectibles")
+        XCTAssertEqual(res1.getSymbol(), "RNC")
+        XCTAssertTrue(res1.getTotalSupply() > 1)
+        XCTAssertTrue(res1.getBalance(address: address) > 1)
+
+        XCTAssertEqual(res1.nameOf(tokenId: tokenId), name)
+        XCTAssertEqual(res1.getRarity(tokenId: tokenId), rarity)
+        XCTAssertEqual(res1.mint(tokenName: "Name", address: address, wallet: wallet), fault)
+
+        let hex = res1.tokensOf(address: address)
+        let dynamic = DynamicList(hex: hex)
+        let tokens = dynamic.flatten()
+        for token in tokens {
+            XCTAssertEqual(res1.getOwner(tokenId: token).scriptHashToAddress(), address)
+        }
+
+        XCTAssertTrue(res1.getNameSupply(name: name) >= 1)
+        XCTAssertTrue(res1.getRaritySupply(rarity: rarity) >= 1)
+        XCTAssertTrue(res1.getRarityAndNameSupply(rarity: rarity, name: name) >= 1)
+
+        let dna = res1.getDNA(tokenId: tokenId)
+        XCTAssertTrue(dna.count == 120)
+
+        let colorStruct1 = res1.getColor(tokenId: "A")
+        let color1 = colorStruct1.color
+        let alpha1 = colorStruct1.alpha
+
+        let colorStructD = res1.getColor(tokenId: 65)
+        let colorD = colorStructD.color
+        let alphaD = colorStructD.alpha
+        XCTAssertEqual(color1, colorD)
+        XCTAssertEqual(alpha1, alphaD)
+        XCTAssertEqual(color1, "8000ff")
+        XCTAssertEqual(alpha1, "ff")
+
+        let colorStruct2 = res1.getColor(tokenId: tokenId)
+        let color2 = colorStruct2.color
+        let alpha2 = colorStruct2.alpha
+        XCTAssertEqual(color2, "ffffff")
+        XCTAssertEqual(alpha2, "ff")
+
+        let approvalForAllError = "RES1 Assets do not support approvalForAll"
+        XCTAssertEqual(res1.approvalForAll(owner: address, to: address, approval: true, wif: wallet.wif), approvalForAllError)
+        XCTAssertEqual(res1.approvalForAll(owner: address, to: address, approval: true, wallet: wallet), approvalForAllError)
+        let tokenMetadataError = "RES1 Assets do not support tokenMetadata"
+        XCTAssertEqual(res1.tokenMetadata(tokenId: tokenId), tokenMetadataError)
+
+        let hexEmpty = res1.tokensOf(address: newWallet().address)
+        XCTAssertEqual(hexEmpty, "")
+        let dynamicEmpty = DynamicList(hex: hexEmpty)
+        let tokensEmpty = dynamicEmpty.flatten()
+        XCTAssertEqual(tokensEmpty.count, 0)
     }
 
     func testSendGetDDO() {

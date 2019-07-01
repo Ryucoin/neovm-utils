@@ -1,5 +1,5 @@
 //
-//  CES1.swift
+//  RES1.swift
 //  neovmUtils
 //
 //  Created by Wyatt Mufson on 6/10/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public final class CES1Interface: OEP5Interface {
+public final class RES1Interface: OEP5Interface {
 
     public func nameOf(tokenId: Any) -> String {
         let token = strOrIntToParam(arg: tokenId)
@@ -69,15 +69,15 @@ public final class CES1Interface: OEP5Interface {
     }
 
     override public func approvalForAll(owner: String, to: String, approval: Bool, gasPrice: Int = 500, gasLimit: Int = 20000, wallet: Wallet) -> String {
-        return "CES1 Assets do not support approvalForAll"
+        return "RES1 Assets do not support approvalForAll"
     }
 
     override public func approvalForAll(owner: String, to: String, approval: Bool, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String) -> String {
-        return "CES1 Assets do not support approvalForAll"
+        return "RES1 Assets do not support approvalForAll"
     }
 
     override public func tokenMetadata(tokenId: Any) -> String {
-        return "CES1 Assets do not support tokenMetadata"
+        return "RES1 Assets do not support tokenMetadata"
     }
 }
 
