@@ -1,5 +1,5 @@
 PODS:
-  - neovmUtils (1.4.1):
+  - neovmUtils (1.4.2):
     - NetworkUtils (= 0.5.3)
     - RyuCrypto (= 0.0.1)
     - Socket.IO-Client-Swift (= 14.0.0)
@@ -30,7 +30,7 @@ EXTERNAL SOURCES:
     :path: "./"
 
 SPEC CHECKSUMS:
-  neovmUtils: 7f0ccb104223bbc147a7e12fb1e620d530cede55
+  neovmUtils: 7a85e961105ce64dcce094b94911fc628964adb8
   NetworkUtils: 7117ce530907ce91a512f4e7da4afe87c6527164
   RyuCrypto: 4395cd6eba1e291c5ad6b819feb73bc35cdd9402
   Socket.IO-Client-Swift: 21e6a8a23a7d367d5ddfab6cbbd3c679cf3c25d6
