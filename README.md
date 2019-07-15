@@ -55,8 +55,7 @@ end
 - [Socket.IO-Client-Swift](https://github.com/socketio/socket.io-client-swift) - WebSocket tool for iOS to interact with OntMonitor
   - [Starscream](https://github.com/daltoniam/Starscream) - a WebSocket client for Swift
 - [NetworkUtils](https://github.com/Ryucoin/NetworkUtils) - [axios](https://github.com/axios/axios) style HTTP request package for Swift
-  - `PromisesSwift` - Google's [promises](https://github.com/google/promises) package for Swift
-    - `PromisesObjC` - Google's [promises](https://github.com/google/promises) package for Objective-C
+  - `SwiftPromises` - the Ryu [promises](https://github.com/Ryucoin/SwiftPromises) package for Swift
 
 ## Usage
 
