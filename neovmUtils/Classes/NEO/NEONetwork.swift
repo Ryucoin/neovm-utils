@@ -46,7 +46,7 @@ public func getBestNEONode(api: String = o3api, net: network) -> Promise<String?
             apiUrl += "?network=test"
         }
 
-        networkUtils.get(dispatchQueue: .global(qos: .userInitiated), apiUrl).then { data in
+        networkUtils.get(apiUrl).then { data in
             let json = try? JSONDecoder().decode(o3Response.self, from: data)
             fulfill(json?.result.data.neo.best)
         }.catch { (error) in
@@ -57,7 +57,7 @@ public func getBestNEONode(api: String = o3api, net: network) -> Promise<String?
 }
 
 public func formatNEOEndpoint(endpt: String) -> Promise<String?> {
-    return Promise<String?> { fulfill, _ in
+    return Promise<String?>(dispatchQueue: .global(qos: .userInitiated)) { fulfill, _ in
         if endpt == neoTestNet {
             getBestNEONode(net: .testNet).then { node in
                 fulfill(node)
