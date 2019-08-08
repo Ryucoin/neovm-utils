@@ -9,7 +9,7 @@ Implemented in [Wallet.swift](https://github.com/Ryucoin/neovm-utils/blob/master
   - [unlock](#unlock)
   - [toData](#to-data)
   - [signMessage](#sign-message)
-  - [verifySignature](#sign-message)
+  - [verifySignature](#verify-signature)
   - [computeSharedSecret](#compute-shared-secret)
   - [privateEncrypt](#private-encrypt)
   - [privateDecrypt](#private-decrypt)
@@ -89,7 +89,7 @@ signMessage(message: String) -> String?
 Verifies a signature for a given public key using ECDSA
 
 ``` swift
-verifySignature(pubKey: Data, signature: String, message: String) -> Bool
+verifySignature(signature: String, message: String) -> Bool
 ```
 
 #### Compute Shared Secret
