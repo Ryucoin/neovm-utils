@@ -145,10 +145,10 @@ public final class Wallet: NSObject, Codable {
         return nil
     }
 
-    public func verifySignature(pubKey: Data, signature: String, message: String) -> Bool {
+    public func verifySignature(signature: String, message: String) -> Bool {
         let data = Data(message.utf8)
         let hash = sha256(data)
-        return NeoutilsVerify(pubKey, signature.hexToBytes, hash)
+        return NeoutilsVerify(publicKey, signature.hexToBytes, hash)
     }
 
     public func computeSharedSecret(publicKey: Data) -> Data? {
