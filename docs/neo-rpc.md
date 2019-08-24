@@ -24,6 +24,10 @@ Invokes a given script. Returns a result JSON
 ``` swift
 neoInvokeScript(endpoint: String = neoTestNet, raw: Data) -> [String: Any]
 ```
+or
+``` swift
+neoInvokeScript(endpoint: String = neoTestNet, avm: String) -> [String: Any]
+```
 
 #### Invoke Function
 

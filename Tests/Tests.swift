@@ -30,9 +30,6 @@ class Tests: XCTestCase {
             XCTFail()
             return
         }
-
-        print(privateKeyStr)
-        print(newPKS)
         let nWallet = walletFromPrivateKey(privateKey: newPK)
         XCTAssertNil(nWallet)
     }
@@ -40,7 +37,7 @@ class Tests: XCTestCase {
     func testBadNEORPC() {
         let bad = "http://badurlasdasd.com"
         let result = neoInvokeScript(endpoint: bad, raw: Data())
-        XCTAssertTrue(result.keys.count == 0)
+        XCTAssertTrue(result.result.stack.count == 0)
 
         let expectation = XCTestExpectation(description: "Test bad node")
         getBestNEONode(api: bad, net: .mainNet).then { (result) in
@@ -560,23 +557,43 @@ class Tests: XCTestCase {
         let ctxid2 = res1.customInvoke(operation: "operation", args: [array, str, boolean, arrayParam, bytearray, negative], wif: wallet.wif)
         XCTAssertNotEqual(ctxid2, "")
 
-        let longString = "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
-        let str2 = NVMParameter(type: .String, value: longString)
-
-//        let ctxid3 = res1.customInvoke(operation: "operation", args: [str2], wif: wallet.wif)
-//        XCTAssertNotEqual(ctxid3, "")
-
-        let script = buildScript(scriptHash: badHash, operation: "operation", args: [str2])
-        let invokeresult = neoInvokeScript(raw: Data(script))
-        XCTAssertTrue(invokeresult.keys.count >= 1)
-
         let script2 = buildScript(scriptHash: contractHash, operation: "name", args: [])
         let invokeresult2 = neoInvokeScript(raw: Data(script2))
-        XCTAssertTrue(invokeresult2.keys.count >= 1)
+        XCTAssertTrue(invokeresult2.result.stack.count >= 1)
 
         let badWif = wallet.wif + "XXXX"
         let res = res1.customInvoke(operation: "operation", args: [], wif: badWif)
         XCTAssertEqual(res, "")
+    }
+
+    func testNEOInvokeScript() {
+        let script = "59c56b09656e756d657261746500c176c97c679105582f17e28f4c10b444c568b842442dde681e6a00527ac4006a51527ac400c176c96a52527ac461616a00c368134e656f2e456e756d657261746f722e4e6578746434006a51c3559f642c006a52c36a00c368124e656f2e4974657261746f722e56616c756561c86a51c351936a51527ac462b6ff6161616a52c36c7566"
+        let res = neoInvokeScript(avm: script)
+        let topStack = res.result.stack
+        XCTAssertEqual(topStack.count, 1)
+        XCTAssertEqual(topStack[0].type, "Array")
+        guard let stack = topStack[0].value as? [StackItem] else {
+            XCTFail()
+            return
+        }
+
+        let count = stack.count
+        XCTAssertEqual(count, 5)
+        for i in 0..<count {
+            let item = stack[i]
+            XCTAssertEqual(item.type, "ByteArray")
+            var value = "76616c75652035"
+            if i == 0 {
+                value = "76616c75652031"
+            } else if i == 1 {
+                value = "76616c75652032"
+            } else if i == 2 {
+                value = "76616c75652033"
+            } else if i == 3 {
+                value = "76616c75652034"
+            }
+            XCTAssertEqual(item.value as? String, value)
+        }
     }
 
     func testNEP2() {

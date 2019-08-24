@@ -48,6 +48,7 @@
 		7FD0FC282216FA8000F52C0F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC272216FA8000F52C0F /* Utils.swift */; };
 		7FD0FC2A2216FAC500F52C0F /* ONTRPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC292216FAC500F52C0F /* ONTRPC.swift */; };
 		7FD0FC2C2216FB3300F52C0F /* ONTInvocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FC2B2216FB3300F52C0F /* ONTInvocation.swift */; };
+		7FD1226D2311E70C00B17EB9 /* NEOInvokeScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD1226C2311E70C00B17EB9 /* NEOInvokeScript.swift */; };
 		7FD3E49D2295AB3A004A136B /* OntMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD3E49C2295AB3A004A136B /* OntMonitor.swift */; };
 		7FD3E49F229ACF3A004A136B /* OEPAssetInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD3E49E229ACF3A004A136B /* OEPAssetInterface.swift */; };
 		7FD3E4A1229AD043004A136B /* OEP10.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD3E4A0229AD043004A136B /* OEP10.swift */; };
@@ -112,6 +113,7 @@
 		7FD0FC272216FA8000F52C0F /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		7FD0FC292216FAC500F52C0F /* ONTRPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ONTRPC.swift; sourceTree = "<group>"; };
 		7FD0FC2B2216FB3300F52C0F /* ONTInvocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ONTInvocation.swift; sourceTree = "<group>"; };
+		7FD1226C2311E70C00B17EB9 /* NEOInvokeScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEOInvokeScript.swift; sourceTree = "<group>"; };
 		7FD3E49C2295AB3A004A136B /* OntMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OntMonitor.swift; sourceTree = "<group>"; };
 		7FD3E49E229ACF3A004A136B /* OEPAssetInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OEPAssetInterface.swift; sourceTree = "<group>"; };
 		7FD3E4A0229AD043004A136B /* OEP10.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OEP10.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				7F601E2D22B0D23100901046 /* Base58.swift */,
 				7F601E3122B0D67800901046 /* NEOInvocation.swift */,
 				7F601E2722B0C1CC00901046 /* NEOInterface.swift */,
+				7FD1226C2311E70C00B17EB9 /* NEOInvokeScript.swift */,
 				7F601E3322B0D6D800901046 /* NEONetwork.swift */,
 				7F601E2B22B0C70700901046 /* OpCodes.swift */,
 				7F601E3522B0D71000901046 /* NEORPC.swift */,
@@ -602,6 +605,7 @@
 				7F601E3822B1C25E00901046 /* TransactionAttribute.swift in Sources */,
 				7F601E2C22B0C70700901046 /* OpCodes.swift in Sources */,
 				7F601E2522B0C0B700901046 /* NVMParameter.swift in Sources */,
+				7FD1226D2311E70C00B17EB9 /* NEOInvokeScript.swift in Sources */,
 				7F6657FB22AED67600472335 /* RES1.swift in Sources */,
 				7F601E2822B0C1CC00901046 /* NEOInterface.swift in Sources */,
 				7F601E1D22B0A2CD00901046 /* ONTNetwork.swift in Sources */,

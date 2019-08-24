@@ -13,7 +13,6 @@ import NetworkUtils
 private enum RPCMethod: String {
     case sendRawTransaction = "sendrawtransaction"
     case invokeFunction = "invokefunction"
-    case invokeScript = "invokescript"
 }
 
 private func rpc(node: String, method: RPCMethod, params: Any) -> Promise<[String: Any]?> {
@@ -37,10 +36,6 @@ private func rpc(node: String, method: RPCMethod, params: Any) -> Promise<[Strin
 
 private func sendRawTransaction(node: String, data: Data) -> Promise<[String: Any]?> {
     return rpc(node: node, method: .sendRawTransaction, params: [data.fullHexString])
-}
-
-private func invokeScript(node: String, data: Data) -> Promise<[String: Any]?> {
-    return rpc(node: node, method: .invokeScript, params: [data.fullHexString])
 }
 
 private func invokeFunction(node: String, args: [Any]) -> Promise<[String: Any]?> {
@@ -75,16 +70,6 @@ public func neoSendRawTransaction(endpoint: String = neoTestNet, raw: Data) -> B
     if let node = try? await(formatNEOEndpoint(endpt: endpoint)) {
         if let dict = try? await(sendRawTransaction(node: node, data: raw)) {
             result = getWriteResult(dict: dict)
-        }
-    }
-    return result
-}
-
-public func neoInvokeScript(endpoint: String = neoTestNet, raw: Data) -> [String: Any] {
-    var result: [String: Any] = [:]
-    if let node = try? await(formatNEOEndpoint(endpt: endpoint)) {
-        if let dict = try? await(invokeScript(node: node, data: raw)) {
-            result = dict
         }
     }
     return result
