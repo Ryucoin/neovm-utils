@@ -11,21 +11,21 @@ import NetworkUtils
 import SwiftPromises
 
 public struct InvokeScriptResponse: Codable {
-    var jsonrpc: String
-    var id: Int
-    var result: InvokeScriptResult
+    public var jsonrpc: String
+    public var id: Int
+    public var result: InvokeScriptResult
 }
 
 public struct InvokeScriptResult: Codable {
-    var gas_consumed: String
-    var script: String
-    var stack: [StackItem]
-    var state: String
+    public var gas_consumed: String
+    public var script: String
+    public var stack: [StackItem]
+    public var state: String
 }
 
 public struct StackItem: Codable {
-    var type: String
-    var value: Any
+    public var type: String
+    public var value: Any
 
     private enum CodingKeys: String, CodingKey {
         case typeKey = "type"
