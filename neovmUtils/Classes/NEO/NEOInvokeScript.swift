@@ -112,3 +112,22 @@ public func neoInvokeScript(endpoint: String = neoTestNet, avm: String) -> Invok
     }
     return result
 }
+
+public func neoInvokeScriptAsync(endpoint: String = neoTestNet, avm: String, timeout: Int = 7000) -> Promise<InvokeScriptResponse> {
+    let timeoutException = NSError(domain: "Timeout exception", code: -1, userInfo: [:])
+    return Promise<InvokeScriptResponse> { fulfill, reject in
+        formatNEOEndpoint(endpt: endpoint).then { (node) in
+            if let node = node {
+                invokeScript(node: node, avm: avm).then { (response) in
+                    fulfill(response ?? emptyResponse)
+                }
+
+                DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(timeout)) {
+                    reject(timeoutException)
+                }
+            } else {
+                reject(timeoutException)
+            }
+        }
+    }
+}

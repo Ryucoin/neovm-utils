@@ -535,7 +535,6 @@ class Tests: XCTestCase {
         XCTAssertEqual(result4, "")
         XCTAssertEqual(result5, "")
 
-        let badHash = "\(contractHash)X"
         let res1 = RES1Interface(contractHash: contractHash, testnet: false, interface: NEO)
         let args: [Any] = [address, 1]
         let ctxid = res1.transferMulti(args: [args], wif: wallet.wif)
@@ -594,6 +593,45 @@ class Tests: XCTestCase {
             }
             XCTAssertEqual(item.value as? String, value)
         }
+    }
+
+    func testNEOInvokeScriptAsync() {
+        let exp = expectation(description: "Neo invoke script async")
+        let script = "59c56b09656e756d657261746500c176c97c679105582f17e28f4c10b444c568b842442dde681e6a00527ac4006a51527ac400c176c96a52527ac461616a00c368134e656f2e456e756d657261746f722e4e6578746434006a51c3559f642c006a52c36a00c368124e656f2e4974657261746f722e56616c756561c86a51c351936a51527ac462b6ff6161616a52c36c7566"
+
+        neoInvokeScriptAsync(avm: script).then { (res) in
+            let topStack = res.result.stack
+            XCTAssertEqual(topStack.count, 1)
+            XCTAssertEqual(topStack[0].type, "Array")
+            guard let stack = topStack[0].value as? [StackItem] else {
+                XCTFail()
+                return
+            }
+
+            let count = stack.count
+            XCTAssertEqual(count, 5)
+            for i in 0..<count {
+                let item = stack[i]
+                XCTAssertEqual(item.type, "ByteArray")
+                var value = "76616c75652035"
+                if i == 0 {
+                    value = "76616c75652031"
+                } else if i == 1 {
+                    value = "76616c75652032"
+                } else if i == 2 {
+                    value = "76616c75652033"
+                } else if i == 3 {
+                    value = "76616c75652034"
+                }
+                XCTAssertEqual(item.value as? String, value)
+            }
+            exp.fulfill()
+        }.catch { _ in
+            XCTFail()
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: 35)
     }
 
     func testNEP2() {
