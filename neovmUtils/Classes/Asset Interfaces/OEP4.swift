@@ -44,10 +44,13 @@ public class OEP4Interface: OEP10Interface {
         let fromAcct = NVMParameter(type: .Address, value: from)
         let toAcct = NVMParameter(type: .String, value: to)
         var type = NVMParameterType.Integer
+        var sending = amount
         if decimals == 8 {
             type = .Fixed8
         } else if decimals == 9 {
             type = .Fixed9
+        } else {
+            sending *= pow(10.0, Double(decimals))
         }
         let spend = NVMParameter(type: type, value: amount)
         let other: [String: Any] = ["gasPrice": gasPrice, "gasLimit": gasLimit, "payer": payer]
