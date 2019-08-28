@@ -65,9 +65,9 @@ private func getWriteResult(dict: [String: Any]) -> Bool {
     return result == 1
 }
 
-public func neoSendRawTransaction(endpoint: String = neoTestNet, raw: Data) -> Bool {
+public func neoSendRawTransaction(dispatchQueue: DispatchQueue? = nil, endpoint: String = neoTestNet, raw: Data) -> Bool {
     var result = false
-    if let node = try? await(formatNEOEndpoint(endpt: endpoint)) {
+    if let node = try? await(formatNEOEndpoint(dispatchQueue: dispatchQueue, endpt: endpoint)) {
         if let dict = try? await(sendRawTransaction(node: node, data: raw)) {
             result = getWriteResult(dict: dict)
         }
@@ -75,9 +75,9 @@ public func neoSendRawTransaction(endpoint: String = neoTestNet, raw: Data) -> B
     return result
 }
 
-public func neoInvokeFunction(endpoint: String = neoTestNet, scriptHash: String, operation: String, args: [NVMParameter]) -> String {
+public func neoInvokeFunction(dispatchQueue: DispatchQueue? = nil, endpoint: String = neoTestNet, scriptHash: String, operation: String, args: [NVMParameter]) -> String {
     var result = ""
-    if let node = try? await(formatNEOEndpoint(endpt: endpoint)) {
+    if let node = try? await(formatNEOEndpoint(dispatchQueue: dispatchQueue, endpt: endpoint)) {
         var params: [Any] = [scriptHash, operation]
         var arguments: [Any] = []
         for arg in args {

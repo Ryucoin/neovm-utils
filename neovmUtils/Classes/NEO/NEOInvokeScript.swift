@@ -66,7 +66,7 @@ public struct StackItem: Codable {
 private let emptyResult = InvokeScriptResult(gas_consumed: "0", script: "", stack: [], state: "")
 private let emptyResponse = InvokeScriptResponse(jsonrpc: "0", id: 0, result: emptyResult)
 
-private func rpc(node: String, params: Any) -> Promise<InvokeScriptResponse?> {
+private func rpc(dispatchQueue: DispatchQueue?, node: String, params: Any) -> Promise<InvokeScriptResponse?> {
     let params: [String: Any] = [
         "jsonrpc": "2.0",
         "id": 2,
@@ -74,7 +74,7 @@ private func rpc(node: String, params: Any) -> Promise<InvokeScriptResponse?> {
         "params": params
     ]
 
-    return Promise<InvokeScriptResponse?>(dispatchQueue: .global(qos: .userInitiated)) { fulfill, _ in
+    return Promise<InvokeScriptResponse?>(dispatchQueue: dispatchQueue) { fulfill, _ in
         networkUtils.post(node, params, 3, "application/json-rpc").then { data in
             let json = try? JSONDecoder().decode(InvokeScriptResponse.self, from: data)
             fulfill(json)
@@ -85,40 +85,40 @@ private func rpc(node: String, params: Any) -> Promise<InvokeScriptResponse?> {
     }
 }
 
-private func invokeScript(node: String, data: Data) -> Promise<InvokeScriptResponse?> {
-    return rpc(node: node, params: [data.fullHexString])
+private func invokeScript(dispatchQueue: DispatchQueue?, node: String, data: Data) -> Promise<InvokeScriptResponse?> {
+    return rpc(dispatchQueue: dispatchQueue, node: node, params: [data.fullHexString])
 }
 
-private func invokeScript(node: String, avm: String) -> Promise<InvokeScriptResponse?> {
-    return rpc(node: node, params: [avm])
+private func invokeScript(dispatchQueue: DispatchQueue?, node: String, avm: String) -> Promise<InvokeScriptResponse?> {
+    return rpc(dispatchQueue: dispatchQueue, node: node, params: [avm])
 }
 
-public func neoInvokeScript(endpoint: String = neoTestNet, raw: Data) -> InvokeScriptResponse {
+public func neoInvokeScript(dispatchQueueA: DispatchQueue? = nil, dispatchQueueB: DispatchQueue? = nil, endpoint: String = neoTestNet, raw: Data) -> InvokeScriptResponse {
     var result: InvokeScriptResponse = emptyResponse
-    if let node = try? await(formatNEOEndpoint(endpt: endpoint)) {
-        if let dict = try? await(invokeScript(node: node, data: raw)) {
+    if let node = try? await(formatNEOEndpoint(dispatchQueue: dispatchQueueA, endpt: endpoint)) {
+        if let dict = try? await(invokeScript(dispatchQueue: dispatchQueueB, node: node, data: raw)) {
             result = dict
         }
     }
     return result
 }
 
-public func neoInvokeScript(endpoint: String = neoTestNet, avm: String) -> InvokeScriptResponse {
+public func neoInvokeScript(dispatchQueueA: DispatchQueue? = nil, dispatchQueueB: DispatchQueue? = nil, endpoint: String = neoTestNet, avm: String) -> InvokeScriptResponse {
     var result: InvokeScriptResponse = emptyResponse
-    if let node = try? await(formatNEOEndpoint(endpt: endpoint)) {
-        if let dict = try? await(invokeScript(node: node, avm: avm)) {
+    if let node = try? await(formatNEOEndpoint(dispatchQueue: dispatchQueueA, endpt: endpoint)) {
+        if let dict = try? await(invokeScript(dispatchQueue: dispatchQueueB, node: node, avm: avm)) {
             result = dict
         }
     }
     return result
 }
 
-public func neoInvokeScriptAsync(endpoint: String = neoTestNet, avm: String, timeout: Int = 7000) -> Promise<InvokeScriptResponse> {
+public func neoInvokeScriptAsync(dispatchQueueA: DispatchQueue? = nil, dispatchQueueB: DispatchQueue? = nil, endpoint: String = neoTestNet, avm: String, timeout: Int = 7000) -> Promise<InvokeScriptResponse> {
     let timeoutException = NSError(domain: "Timeout exception", code: -1, userInfo: [:])
     return Promise<InvokeScriptResponse> { fulfill, reject in
-        formatNEOEndpoint(endpt: endpoint).then { (node) in
+        formatNEOEndpoint(dispatchQueue: dispatchQueueA, endpt: endpoint).then { (node) in
             if let node = node {
-                invokeScript(node: node, avm: avm).then { (response) in
+                invokeScript(dispatchQueue: dispatchQueueB, node: node, avm: avm).then { (response) in
                     fulfill(response ?? emptyResponse)
                 }
 

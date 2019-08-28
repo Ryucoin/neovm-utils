@@ -56,8 +56,8 @@ public func getBestNEONode(api: String = o3api, net: network) -> Promise<String?
     }
 }
 
-public func formatNEOEndpoint(endpt: String) -> Promise<String?> {
-    return Promise<String?>(dispatchQueue: .global(qos: .userInitiated)) { fulfill, _ in
+public func formatNEOEndpoint(dispatchQueue: DispatchQueue? = nil, endpt: String) -> Promise<String?> {
+    return Promise<String?>(dispatchQueue: dispatchQueue) { fulfill, _ in
         if endpt == neoTestNet {
             getBestNEONode(net: .testNet).then { node in
                 fulfill(node)
