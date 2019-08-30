@@ -595,6 +595,64 @@ class Tests: XCTestCase {
         }
     }
 
+    func testNEOInvokeScript2() {
+        let script = "5dc56b14322631399103e714acc7decc2dceda1fb2fcc83c6a00527ac408746f6b656e734f666a00c351c176c97ce101020309116fc6a03067f580e82ecffff0c93a885d836a51527ac4006a52527ac400c176c96a53527ac402e8036a54527ac4006a54c3956a55527ac461616a51c368134e656f2e456e756d657261746f722e4e6578746441006a52c36a54c39f6437006a52c36a55c3a2641f006a53c36a51c368124e656f2e4974657261746f722e56616c756561c8616a52c351936a52527ac462a9ff6161616a53c36c7566"
+        let res = neoInvokeScript(avm: script)
+        let stack = res.result.stack
+        guard let items = stack[0].value as? [StackItem] else {
+            XCTFail()
+            return
+        }
+
+        guard let item = items[0].value as? String else {
+            XCTFail()
+            return
+        }
+
+        let address = "ALM3BjfC1iYJ6rCS9vejqSWnikk5rDJQXQ"
+        XCTAssertEqual(address, item.scriptHashToAddress())
+
+        let res1Interface = RES1Interface(contractHash: "835d883ac9f0ffcf2ee880f56730a0c66f110903", testnet: true, interface: NEO)
+
+        let supply = res1Interface.getTotalSupply()
+        print("Supply: \(supply)")
+        XCTAssertTrue(supply > 0)
+
+        let balance = res1Interface.getBalance(address: "ALM3BjfC1iYJ6rCS9vejqSWnikk5rDJQXQ")
+        print("Balance: \(balance)")
+        XCTAssertTrue(balance > 0)
+
+        let addressParam = NVMParameter(type: .Address, value: "ALM3BjfC1iYJ6rCS9vejqSWnikk5rDJQXQ")
+        let bhex = NEO.read(contractHash: "835d883ac9f0ffcf2ee880f56730a0c66f110903", operation: "balanceOf", args: [addressParam])
+        print("Balance hex: \(bhex)")
+
+        let id = NVMParameter(type: .Integer, value: 1)
+        let params = res1Interface.customRead(operation: "properties", args: [id])
+        let parser = NVMParser()
+        guard let des = parser.deserialize(hex: params) as? [String: Any],
+            let ownerHex = des["Owner"] as? String,
+            let rarityHex = des["Rarity"] as? String,
+            let DNA = des["DNA"] as? String,
+            let nameHex = des["Name"] as? String else {
+            XCTFail()
+            return
+        }
+
+        let expected = "Abxfqq6n12QgkLRXR6ohS89rTPvNvtmtbR"
+        let owner = ownerHex.scriptHashToAddress()
+        XCTAssertEqual(expected, owner)
+
+        let rarity = rarityHex.hexToAscii()
+        XCTAssertEqual("Common", rarity)
+
+        let dna = "ffffffff3bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a9c12cfdc04c74584d787ac3d23772132c18524bc7ab28dec4219b8fc5b425f70"
+        XCTAssertEqual(DNA, dna)
+
+        let slimey = "Slimey"
+        let name = nameHex.hexToAscii()
+        XCTAssertEqual(name, slimey)
+    }
+
     func testNEOInvokeScriptAsync() {
         let exp = expectation(description: "Neo invoke script async")
         let script = "59c56b09656e756d657261746500c176c97c679105582f17e28f4c10b444c568b842442dde681e6a00527ac4006a51527ac400c176c96a52527ac461616a00c368134e656f2e456e756d657261746f722e4e6578746434006a51c3559f642c006a52c36a00c368124e656f2e4974657261746f722e56616c756561c86a51c351936a51527ac462b6ff6161616a52c36c7566"
