@@ -653,6 +653,46 @@ class Tests: XCTestCase {
         XCTAssertEqual(name, slimey)
     }
 
+    func testNEOInvokeScriptEncoding() {
+        let int: StackItem = StackItem(type: "Integer", value: 1)
+        let boolean: StackItem = StackItem(type: "Bool", value: true)
+        let bytearray: StackItem = StackItem(type: "ByteArray", value: "ffffff00")
+        let string: StackItem = StackItem(type: "String", value: "Hello!")
+        let a: StackItem = StackItem(type: "Array", value: [])
+
+        let arrayItems: [StackItem] = [a, int, boolean, bytearray, string]
+        let array: StackItem = StackItem(type: "Array", value: arrayItems)
+        let stack: [StackItem] = [array]
+        let result = InvokeScriptResult(gas_consumed: "1.036", script: "ABCDEFGHIJKLMNOPQRTSTUVWXYZ", stack: stack, state: "HALT")
+        let invokeScriptResponse = InvokeScriptResponse(jsonrpc: "2.0", id: 2, result: result)
+
+        guard let encoded = try? JSONEncoder().encode(invokeScriptResponse) else {
+            XCTFail()
+            return
+        }
+
+        guard let decoded = try? JSONDecoder().decode(InvokeScriptResponse.self, from: encoded) else {
+            XCTFail()
+            return
+        }
+
+        XCTAssertEqual(decoded.jsonrpc, invokeScriptResponse.jsonrpc)
+        XCTAssertEqual(decoded.id, invokeScriptResponse.id)
+        XCTAssertEqual(decoded.result.gas_consumed, invokeScriptResponse.result.gas_consumed)
+        XCTAssertEqual(decoded.result.script, invokeScriptResponse.result.script)
+        XCTAssertEqual(decoded.result.state, invokeScriptResponse.result.state)
+
+        guard decoded.result.stack.count == 1,
+            let arr = decoded.result.stack[0].value as? [StackItem] else {
+            XCTFail()
+            return
+        }
+
+        for item in arr {
+            XCTAssertTrue(arrayItems.contains(item))
+        }
+    }
+
     func testNEOInvokeScriptAsync() {
         let exp = expectation(description: "Neo invoke script async")
         let script = "59c56b09656e756d657261746500c176c97c679105582f17e28f4c10b444c568b842442dde681e6a00527ac4006a51527ac400c176c96a52527ac461616a00c368134e656f2e456e756d657261746f722e4e6578746434006a51c3559f642c006a52c36a00c368124e656f2e4974657261746f722e56616c756561c86a51c351936a51527ac462b6ff6161616a52c36c7566"

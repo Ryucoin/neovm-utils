@@ -23,9 +23,14 @@ public struct InvokeScriptResult: Codable {
     public var state: String
 }
 
-public struct StackItem: Codable {
+public struct StackItem: Codable, Equatable {
     public var type: String
     public var value: Any
+
+    public init(type: String, value: Any) {
+        self.type = type
+        self.value = value
+    }
 
     private enum CodingKeys: String, CodingKey {
         case typeKey = "type"
@@ -60,6 +65,21 @@ public struct StackItem: Codable {
         } else {
             self.value = try container.decode(Bool.self, forKey: .valueKey)
         }
+    }
+
+    public static func == (lhs: StackItem, rhs: StackItem) -> Bool {
+        let typeMatch: Bool = lhs.type == rhs.type
+        var valueMatch: Bool = false
+        if let lstr = lhs.value as? String, let rstr = rhs.value as? String {
+            valueMatch = lstr == rstr
+        } else if let lstr = lhs.value as? Int, let rstr = rhs.value as? Int {
+            valueMatch = lstr == rstr
+        } else if let lstr = lhs.value as? Bool, let rstr = rhs.value as? Bool {
+            valueMatch = lstr == rstr
+        } else if let lstr = lhs.value as? [StackItem], let rstr = rhs.value as? [StackItem] {
+            valueMatch = lstr == rstr
+        }
+        return typeMatch && valueMatch
     }
 }
 
