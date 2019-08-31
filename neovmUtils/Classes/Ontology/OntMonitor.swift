@@ -17,6 +17,7 @@ final public class OntMonitor: NSObject {
     public var totalTx: Int = 0
     public var tps: Double = 0
     public var blockTime: Double = 0
+    public var sinceLastBlock: Double = 0
 
     private var manager: SocketManager!
     private let monitorString: String = "https://monitor.ryu.games"
@@ -33,6 +34,7 @@ final public class OntMonitor: NSObject {
                 self.totalTx = event["totalTransactions"] as? Int ?? 0
                 self.tps = (event["txPerSecond"] as? Double ?? 0).rounded(to: 2)
                 self.blockTime = (event["blockTime"] as? Double ?? 0).rounded(to: 2)
+                self.sinceLastBlock = (event["sinceLastBlock"] as? Double ?? 0).rounded(to: 2)
             }
         }
         socket.connect()

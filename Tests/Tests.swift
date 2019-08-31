@@ -964,6 +964,7 @@ class Tests: XCTestCase {
             print("Found new height #\(num): \(monitor.blockHeight)")
             print("TPS: \(monitor.tps)")
             print("Block time: \(monitor.blockTime)")
+            print("Since last block: \(monitor.sinceLastBlock)")
             exp.fulfill()
         }
 
