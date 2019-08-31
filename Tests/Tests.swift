@@ -965,6 +965,7 @@ class Tests: XCTestCase {
             print("TPS: \(monitor.tps)")
             print("Block time: \(monitor.blockTime)")
             print("Since last block: \(monitor.sinceLastBlock)")
+            print("Status: \(monitor.currentState.name)")
             exp.fulfill()
         }
 

@@ -10,7 +10,7 @@ import UIKit
 import SocketIO
 
 final public class OntMonitor: NSObject {
-    static let shared = OntMonitor()
+    public static let shared = OntMonitor()
     public var blockHeight: Int = 0
     public var elapsedTime: Int = 0
     public var previous: Int = 0
@@ -18,6 +18,8 @@ final public class OntMonitor: NSObject {
     public var tps: Double = 0
     public var blockTime: Double = 0
     public var sinceLastBlock: Double = 0
+
+    public var currentState: OMState = .Calculating
 
     private var manager: SocketManager!
     private let monitorString: String = "https://monitor.ryu.games"
@@ -35,9 +37,31 @@ final public class OntMonitor: NSObject {
                 self.tps = (event["txPerSecond"] as? Double ?? 0).rounded(to: 2)
                 self.blockTime = (event["blockTime"] as? Double ?? 0).rounded(to: 2)
                 self.sinceLastBlock = (event["sinceLastBlock"] as? Double ?? 0).rounded(to: 2)
+
+                if self.sinceLastBlock > 120 {
+                    self.currentState = .Dead
+                } else if self.sinceLastBlock > 30 {
+                    self.currentState = .Lagging
+                } else if self.sinceLastBlock > self.blockTime + 2 {
+                    self.currentState = .Slow
+                } else {
+                    self.currentState = .Fast
+                }
             }
         }
         socket.connect()
+    }
+}
+
+public enum OMState: String {
+    case Calculating
+    case Fast
+    case Slow
+    case Lagging
+    case Dead
+
+    public var name: String {
+        return self.rawValue
     }
 }
 
