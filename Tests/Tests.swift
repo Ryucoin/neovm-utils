@@ -22,18 +22,6 @@ class Tests: XCTestCase {
         XCTAssertEqual("", addressFromPublicKey(publicKey: ""))
     }
 
-    func testBadOntKey() {
-        let privateKeyStr = exampleWallet.privateKeyString
-        let modified = privateKeyStr.dropFirst()
-        let newPKS = "B\(modified)"
-        guard let newPK = newPKS.hexToBytes else {
-            XCTFail()
-            return
-        }
-        let nWallet = walletFromPrivateKey(privateKey: newPK)
-        XCTAssertNil(nWallet)
-    }
-
     func testBadNEORPC() {
         let bad = "http://badurlasdasd.com"
         let result = neoInvokeScript(endpoint: bad, raw: Data())
@@ -48,6 +36,18 @@ class Tests: XCTestCase {
             }
         }
         self.wait(for: [expectation], timeout: 10)
+    }
+
+    func testBadOntKey() {
+        let privateKeyStr = exampleWallet.privateKeyString
+        let modified = privateKeyStr.dropFirst()
+        let newPKS = "B\(modified)"
+        guard let newPK = newPKS.hexToBytes else {
+            XCTFail()
+            return
+        }
+        let nWallet = walletFromPrivateKey(privateKey: newPK)
+        XCTAssertNil(nWallet)
     }
 
     func testBadWif() {
