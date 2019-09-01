@@ -815,6 +815,48 @@ class Tests: XCTestCase {
         XCTAssertEqual(empty, "")
     }
 
+    func testNVMParserIntsEightBytes() {
+        let parser = NVMParser()
+        let arrayByte = "80"
+        let nextByte = "ff"
+        let lengthBytes = "0100000000000000"
+        let baByte = "00"
+        let lvar = "01"
+        let itemByte = "DE"
+        let varBytes = "\(lvar)\(itemByte)"
+
+        let hex = "\(arrayByte)\(nextByte)\(lengthBytes)\(baByte)\(varBytes)"
+        guard let arr = parser.deserialize(hex: hex) as? [String],
+            arr.count == 1 else {
+                XCTFail()
+                return
+        }
+
+        let item = arr[0]
+        XCTAssertEqual(item, itemByte)
+    }
+
+    func testNVMParserIntsFourBytes() {
+        let parser = NVMParser()
+        let arrayByte = "80"
+        let nextByte = "fe"
+        let lengthBytes = "01000000"
+        let baByte = "00"
+        let lvar = "01"
+        let itemByte = "CE"
+        let varBytes = "\(lvar)\(itemByte)"
+
+        let hex = "\(arrayByte)\(nextByte)\(lengthBytes)\(baByte)\(varBytes)"
+        guard let arr = parser.deserialize(hex: hex) as? [String],
+            arr.count == 1 else {
+            XCTFail()
+            return
+        }
+
+        let item = arr[0]
+        XCTAssertEqual(item, itemByte)
+    }
+
     func testOEP10() {
         let oep5 = OEP5Interface(contractHash: "cae215265a5e348bfd603b8db22893aa74b42417", testnet: false)
         let wallet = newWallet()
