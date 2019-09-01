@@ -732,6 +732,21 @@ class Tests: XCTestCase {
         wait(for: [exp], timeout: 35)
     }
 
+    func testNEOScriptBuilderBadHash() {
+        let sb = ScriptBuilder()
+        let sh = "12345"
+        sb.pushTypedContractInvoke(scriptHash: sh, operation: "name", args: [])
+        XCTAssertTrue(sb.rawBytes.count == 0)
+    }
+
+    func testNEOScriptBuilderLargeSize() {
+        let sb = ScriptBuilder()
+        let sh = "a47222204212ef759df954f1e1b156528098153d"
+        let arg = NVMParameter(type: .String, value: "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ")
+        sb.pushTypedContractInvoke(scriptHash: sh, operation: "n", args: [arg])
+        XCTAssertTrue(sb.rawBytes.count > 0)
+    }
+
     func testNEP2() {
         let password = "12345678"
         guard let e = newEncryptedKey(wif: exampleWallet.wif, password: password) else {

@@ -42,21 +42,16 @@ public class ScriptBuilder {
         let stringBytes = stringValue.dataWithHexString().bytes
         let size = stringBytes.count
         if size < OpCode.PUSHBYTES75.rawValue {
-            rawBytes += toByteArrayWithoutTrailingZeros(stringBytes.count)
-            rawBytes += stringBytes
+            // Don't push OpCode
         } else if size < 0x100 {
             pushOPCode(.PUSHDATA1)
-            rawBytes += toByteArrayWithoutTrailingZeros(stringBytes.count)
-            rawBytes += stringBytes
         } else if size < 0x10000 {
             pushOPCode(.PUSHDATA2)
-            rawBytes += toByteArrayWithoutTrailingZeros(stringBytes.count)
-            rawBytes += stringBytes
         } else {
             pushOPCode(.PUSHDATA4)
-            rawBytes += toByteArrayWithoutTrailingZeros(stringBytes.count)
-            rawBytes += stringBytes
         }
+        rawBytes += toByteArrayWithoutTrailingZeros(stringBytes.count)
+        rawBytes += stringBytes
     }
 
     private func pushTypedArray(_ arrayValue: [NVMParameter]) {
@@ -90,6 +85,11 @@ public class ScriptBuilder {
     }
 
     public func pushTypedContractInvoke(scriptHash: String, operation: String, args: [NVMParameter]) {
+        if scriptHash.count != 40 {
+            print("Attempting to invoke invalid contract")
+            return
+        }
+
         if (!args.isEmpty) {
             pushTypedArray(args.reversed())
         } else {
@@ -98,11 +98,6 @@ public class ScriptBuilder {
 
         let hex = operation.unicodeScalars.filter { $0.isASCII }.map { String(format: "%X", $0.value) }.joined()
         pushHexString(hex)
-
-        if scriptHash.count != 40 {
-            print("Attempting to invoke invalid contract")
-            return
-        }
 
         pushOPCode(.APPCALL)
         let toAppendBytes = scriptHash.dataWithHexString().bytes.reversed()
