@@ -29,12 +29,10 @@ public final class RES1Interface: OEP5Interface {
     }
 
     public func getColor(tokenId: Any) -> TokenColor {
-        let dna = getDNA(tokenId: tokenId)
-        if dna.count < 8 {
-            return TokenColor(color: "", alpha: "")
-        }
-        let color = String(dna[0..<6])
-        let alpha = String(dna[6..<8])
+        let dna: String = getDNA(tokenId: tokenId)
+        let formattedCorrectly: Bool = dna.count == 120
+        let color: String = formattedCorrectly ? String(dna[0..<6]) : ""
+        let alpha: String = formattedCorrectly ? String(dna[6..<8]) : ""
         return TokenColor(color: color, alpha: alpha)
     }
 
