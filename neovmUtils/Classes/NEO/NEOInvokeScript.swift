@@ -95,7 +95,7 @@ private func rpc(dispatchQueue: DispatchQueue?, node: String, params: Any) -> Pr
     ]
 
     return Promise<InvokeScriptResponse?>(dispatchQueue: dispatchQueue) { fulfill, _ in
-        networkUtils.post(node, params, 3, "application/json-rpc").then { data in
+        networkUtils.post(node, params, 3, headers: ["Content-Type": "application/json-rpc"]).then { data in
             let json = try? JSONDecoder().decode(InvokeScriptResponse.self, from: data)
             fulfill(json)
         }.catch { (error) in

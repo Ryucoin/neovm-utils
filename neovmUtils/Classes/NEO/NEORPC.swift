@@ -24,7 +24,7 @@ private func rpc(node: String, method: RPCMethod, params: Any) -> Promise<[Strin
     ]
 
     return Promise<[String: Any]?>(dispatchQueue: .global(qos: .userInitiated)) { fulfill, _ in
-        networkUtils.post(node, params, 3, "application/json-rpc").then { data in
+        networkUtils.post(node, params, 3, headers: ["Content-Type": "application/json-rpc"]).then { data in
             let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
             fulfill(json)
         }.catch { (error) in
