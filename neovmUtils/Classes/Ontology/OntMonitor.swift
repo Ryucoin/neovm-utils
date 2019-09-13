@@ -40,7 +40,7 @@ final public class OntMonitor: NSObject {
 
                 if self.sinceLastBlock > 120 {
                     self.currentState = .Dead
-                } else if self.sinceLastBlock > 30 {
+                } else if self.sinceLastBlock > 35 {
                     self.currentState = .Lagging
                 } else if self.sinceLastBlock > self.blockTime + 2 {
                     self.currentState = .Slow
