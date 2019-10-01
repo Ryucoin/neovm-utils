@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
   s.name             = 'neovmUtils'
-  s.version          = '1.5.9'
+  s.version          = '1.6.0'
   s.summary          = 'Swift SDK for the Ontology and NEO blockchains'
 
   s.homepage         = 'https://github.com/Ryucoin/neovm-utils'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'WyattMufson' => 'wyatt@towerbuilders.org' }
+  s.author           = { 'WyattMufson' => 'wyatt@ryu.games' }
   s.source           = { :git => 'https://github.com/Ryucoin/neovm-utils.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '12.0'
