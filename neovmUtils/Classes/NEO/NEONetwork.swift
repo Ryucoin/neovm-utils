@@ -50,7 +50,7 @@ public func getBestNEONode(api: String = o3api, net: network) -> Promise<String?
             let json = try? JSONDecoder().decode(o3Response.self, from: data)
             fulfill(json?.result.data.neo.best)
         }.catch { (error) in
-            print("Network error with getBestNEONode: \((error as! NetworkError).localizedDescription)")
+            print("Network error with getBestNEONode: \(error.localizedDescription)")
             fulfill(getNgdNode(net: net))
         }
     }

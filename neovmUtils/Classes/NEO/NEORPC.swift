@@ -28,7 +28,7 @@ private func rpc(node: String, method: RPCMethod, params: Any) -> Promise<[Strin
             let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
             fulfill(json)
         }.catch { (error) in
-            print("Network error with rpc: \((error as! NetworkError).localizedDescription)")
+            print("Network error with rpc: \(error.localizedDescription)")
             fulfill(nil)
         }
     }

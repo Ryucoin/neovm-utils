@@ -99,7 +99,7 @@ private func rpc(dispatchQueue: DispatchQueue?, node: String, params: Any) -> Pr
             let json = try? JSONDecoder().decode(InvokeScriptResponse.self, from: data)
             fulfill(json)
         }.catch { (error) in
-            print("Network error with rpc: \((error as! NetworkError).localizedDescription)")
+            print("Network error with rpc: \(error.localizedDescription)")
             fulfill(nil)
         }
     }
