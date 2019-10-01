@@ -473,8 +473,6 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-neovmUtils_Tests/Pods-neovmUtils_Tests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/NetworkUtils/NetworkUtils.framework",
@@ -484,8 +482,6 @@
 				"${BUILT_PRODUCTS_DIR}/SwiftPromises/SwiftPromises.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NetworkUtils.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RyuCrypto.framework",
@@ -503,8 +499,6 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-neovmUtilsExample/Pods-neovmUtilsExample-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/NetworkUtils/NetworkUtils.framework",
@@ -515,8 +509,6 @@
 				"${BUILT_PRODUCTS_DIR}/neovmUtils/neovmUtils.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NetworkUtils.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RyuCrypto.framework",

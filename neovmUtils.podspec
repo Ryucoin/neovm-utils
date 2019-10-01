@@ -15,5 +15,5 @@ Pod::Spec.new do |s|
   s.vendored_frameworks = 'neoutils.framework'
   s.dependency 'RyuCrypto', '0.0.1'
   s.dependency 'Socket.IO-Client-Swift', '14.0.0'
-  s.dependency 'NetworkUtils', '0.6.1'
+  s.dependency 'NetworkUtils', '1.0.0'
 end
