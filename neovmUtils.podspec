@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/Ryucoin/neovm-utils.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '12.0'
-  s.swift_version = '5'
+  s.swift_version = '5.1'
 
   s.source_files = 'neovmUtils/Classes/**/*'
   s.vendored_frameworks = 'neoutils.framework'
