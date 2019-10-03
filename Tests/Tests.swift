@@ -140,22 +140,6 @@ class Tests: XCTestCase {
         XCTAssertEqual("", res3)
     }
 
-    func testBuildOntologyInvocationHelperFail() {
-        let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
-        let method = "put"
-
-        let badStr = String(
-            bytes: [0xD8, 0x00] as [UInt8],
-            encoding: String.Encoding.utf16BigEndian)!
-
-        let args: [NVMParameter] = [NVMParameter(type: .Address, value: exampleWallet.address), NVMParameter(type: .String, value: badStr)]
-        let gasPrice = 500
-        let gasLimit = 20000
-
-        let res = buildOntologyInvocationTransaction(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWallet.wif, payer: exampleWallet.address)
-        XCTAssertEqual("", res)
-    }
-
     func testClaimONG() {
         let tx = claimONG(wif: exampleWallet.wif)
         print(tx)
@@ -1142,22 +1126,6 @@ class Tests: XCTestCase {
 
         let res3 = ontologyInvoke(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: "123")
         XCTAssertEqual("", res3)
-    }
-
-    func testOntologyInvocationHelperFail() {
-        let contractHash = "c168e0fb1a2bddcd385ad013c2c98358eca5d4dc"
-        let method = "put"
-
-        let badStr = String(
-            bytes: [0xD8, 0x00] as [UInt8],
-            encoding: String.Encoding.utf16BigEndian)!
-
-        let args: [NVMParameter] = [NVMParameter(type: .Address, value: exampleWallet.address), NVMParameter(type: .String, value: badStr)]
-        let gasPrice = 500
-        let gasLimit = 20000
-
-        let res = ontologyInvoke(contractHash: contractHash, method: method, args: args, gasPrice: gasPrice, gasLimit: gasLimit, wif: exampleWallet.wif, payer: exampleWallet.address)
-        XCTAssertEqual("", res)
     }
 
     func testOntologyInvocationRead() {

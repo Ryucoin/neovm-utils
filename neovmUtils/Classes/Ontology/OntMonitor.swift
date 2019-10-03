@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SocketIO
 
 final public class OntMonitor: NSObject {
     public static let shared = OntMonitor()
