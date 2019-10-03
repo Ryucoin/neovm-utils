@@ -9,5 +9,6 @@ coverage:
   ignore:
     - docs
     - Tests
+    - neovmUtils/Classes/Sockets
     - neovmUtilsExample
     - neovmUtilsExampleUITests
