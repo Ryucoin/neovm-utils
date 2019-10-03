@@ -1,7 +1,7 @@
 coverage:
   precision: 2
   round: down
-  range: 70...100
+  range: 30...75
 
   status:
     project: true
@@ -9,5 +9,6 @@ coverage:
   ignore:
     - docs
     - Tests
+    - neovmUtils/Classes/Sockets
     - neovmUtilsExample
     - neovmUtilsExampleUITests

@@ -52,8 +52,6 @@ end
 
 `neovmUtils` requires:
 - [RyuCrypto](https://github.com/Ryucoin/trezor-crypto-ios) - the Ryu fork of the Trezor Crypto library
-- [Socket.IO-Client-Swift](https://github.com/socketio/socket.io-client-swift) - WebSocket tool for iOS to interact with OntMonitor
-  - [Starscream](https://github.com/daltoniam/Starscream) - a WebSocket client for Swift
 - [NetworkUtils](https://github.com/Ryucoin/NetworkUtils) - [axios](https://github.com/axios/axios) style HTTP request package for Swift
   - `SwiftPromises` - the Ryu [promises](https://github.com/Ryucoin/SwiftPromises) package for Swift
 
