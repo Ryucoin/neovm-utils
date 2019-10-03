@@ -40,6 +40,14 @@
 		7F360B7723456FA600E5D172 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F360B7323456FA600E5D172 /* WebSocket.swift */; };
 		7F360B7823456FA600E5D172 /* Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F360B7423456FA600E5D172 /* Compression.swift */; };
 		7F360B7923456FA600E5D172 /* SSLClientCertificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F360B7523456FA600E5D172 /* SSLClientCertificate.swift */; };
+		7F360B82234576B300E5D172 /* SocketBasicPacketTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F360B7A234576B200E5D172 /* SocketBasicPacketTest.swift */; };
+		7F360B83234576B300E5D172 /* SocketNamespacePacketTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F360B7B234576B200E5D172 /* SocketNamespacePacketTest.swift */; };
+		7F360B84234576B300E5D172 /* SocketParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F360B7C234576B200E5D172 /* SocketParserTest.swift */; };
+		7F360B85234576B300E5D172 /* SocketMangerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F360B7D234576B200E5D172 /* SocketMangerTest.swift */; };
+		7F360B86234576B300E5D172 /* SocketAckManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F360B7E234576B300E5D172 /* SocketAckManagerTest.swift */; };
+		7F360B87234576B300E5D172 /* SocketIOClientConfigurationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F360B7F234576B300E5D172 /* SocketIOClientConfigurationTest.swift */; };
+		7F360B88234576B300E5D172 /* SocketEngineTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F360B80234576B300E5D172 /* SocketEngineTest.swift */; };
+		7F360B89234576B300E5D172 /* SocketSideEffectTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F360B81234576B300E5D172 /* SocketSideEffectTest.swift */; };
 		7F5BDD88228391CC00FDB729 /* OEP5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5BDD87228391CC00FDB729 /* OEP5.swift */; };
 		7F601E1922B09B1B00901046 /* OntologyInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F601E1822B09B1B00901046 /* OntologyInterface.swift */; };
 		7F601E1B22B09BA100901046 /* BlockchainInterfaceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F601E1A22B09BA100901046 /* BlockchainInterfaceProtocol.swift */; };
@@ -133,6 +141,14 @@
 		7F360B7323456FA600E5D172 /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
 		7F360B7423456FA600E5D172 /* Compression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Compression.swift; sourceTree = "<group>"; };
 		7F360B7523456FA600E5D172 /* SSLClientCertificate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSLClientCertificate.swift; sourceTree = "<group>"; };
+		7F360B7A234576B200E5D172 /* SocketBasicPacketTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketBasicPacketTest.swift; sourceTree = "<group>"; };
+		7F360B7B234576B200E5D172 /* SocketNamespacePacketTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketNamespacePacketTest.swift; sourceTree = "<group>"; };
+		7F360B7C234576B200E5D172 /* SocketParserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketParserTest.swift; sourceTree = "<group>"; };
+		7F360B7D234576B200E5D172 /* SocketMangerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketMangerTest.swift; sourceTree = "<group>"; };
+		7F360B7E234576B300E5D172 /* SocketAckManagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketAckManagerTest.swift; sourceTree = "<group>"; };
+		7F360B7F234576B300E5D172 /* SocketIOClientConfigurationTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOClientConfigurationTest.swift; sourceTree = "<group>"; };
+		7F360B80234576B300E5D172 /* SocketEngineTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEngineTest.swift; sourceTree = "<group>"; };
+		7F360B81234576B300E5D172 /* SocketSideEffectTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketSideEffectTest.swift; sourceTree = "<group>"; };
 		7F5BDD87228391CC00FDB729 /* OEP5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OEP5.swift; sourceTree = "<group>"; };
 		7F601E1822B09B1B00901046 /* OntologyInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OntologyInterface.swift; sourceTree = "<group>"; };
 		7F601E1A22B09BA100901046 /* BlockchainInterfaceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockchainInterfaceProtocol.swift; sourceTree = "<group>"; };
@@ -251,6 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				607FACEB1AFB9204008FA782 /* Tests.swift */,
+				7F360B8A234576BA00E5D172 /* SocketTests */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -324,6 +341,21 @@
 				7F360B4523456F2200E5D172 /* SSLSecurity.swift */,
 			);
 			path = SocketIO;
+			sourceTree = "<group>";
+		};
+		7F360B8A234576BA00E5D172 /* SocketTests */ = {
+			isa = PBXGroup;
+			children = (
+				7F360B7E234576B300E5D172 /* SocketAckManagerTest.swift */,
+				7F360B7A234576B200E5D172 /* SocketBasicPacketTest.swift */,
+				7F360B80234576B300E5D172 /* SocketEngineTest.swift */,
+				7F360B7F234576B300E5D172 /* SocketIOClientConfigurationTest.swift */,
+				7F360B7D234576B200E5D172 /* SocketMangerTest.swift */,
+				7F360B7B234576B200E5D172 /* SocketNamespacePacketTest.swift */,
+				7F360B7C234576B200E5D172 /* SocketParserTest.swift */,
+				7F360B81234576B300E5D172 /* SocketSideEffectTest.swift */,
+			);
+			name = SocketTests;
 			sourceTree = "<group>";
 		};
 		7F3AD42E2200627700B45C16 /* Classes */ = {
@@ -674,6 +706,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F360B85234576B300E5D172 /* SocketMangerTest.swift in Sources */,
 				7F601E2322B0A76D00901046 /* AssetInterface.swift in Sources */,
 				7FD0FC262216F99400F52C0F /* Wallet.swift in Sources */,
 				7F601E3222B0D67800901046 /* NEOInvocation.swift in Sources */,
@@ -681,10 +714,12 @@
 				7FD0FC2C2216FB3300F52C0F /* ONTInvocation.swift in Sources */,
 				7F601E2A22B0C6EF00901046 /* ScriptBuilder.swift in Sources */,
 				7F360B6723456F2300E5D172 /* SocketStringReader.swift in Sources */,
+				7F360B89234576B300E5D172 /* SocketSideEffectTest.swift in Sources */,
 				7F360B6523456F2300E5D172 /* SocketEngine.swift in Sources */,
 				7F601E2E22B0D23100901046 /* Base58.swift in Sources */,
 				7FD0FC2A2216FAC500F52C0F /* ONTRPC.swift in Sources */,
 				7F66580D22AEECF400472335 /* NVMParser.swift in Sources */,
+				7F360B82234576B300E5D172 /* SocketBasicPacketTest.swift in Sources */,
 				7F66580F22AEF6AF00472335 /* PackedList.swift in Sources */,
 				7F360B4F23456F2300E5D172 /* SocketTypes.swift in Sources */,
 				7F360B6623456F2300E5D172 /* SocketEngineSpec.swift in Sources */,
@@ -707,11 +742,15 @@
 				7F5BDD88228391CC00FDB729 /* OEP5.swift in Sources */,
 				7F360B5823456F2300E5D172 /* SocketPacket.swift in Sources */,
 				7F360B5123456F2300E5D172 /* SocketEngineClient.swift in Sources */,
+				7F360B83234576B300E5D172 /* SocketNamespacePacketTest.swift in Sources */,
 				7F360B5B23456F2300E5D172 /* SocketRawView.swift in Sources */,
 				7F360B6223456F2300E5D172 /* SocketParsable.swift in Sources */,
 				7F601E3822B1C25E00901046 /* TransactionAttribute.swift in Sources */,
 				7F360B5223456F2300E5D172 /* SocketEnginePollable.swift in Sources */,
 				7F601E2C22B0C70700901046 /* OpCodes.swift in Sources */,
+				7F360B88234576B300E5D172 /* SocketEngineTest.swift in Sources */,
+				7F360B86234576B300E5D172 /* SocketAckManagerTest.swift in Sources */,
+				7F360B87234576B300E5D172 /* SocketIOClientConfigurationTest.swift in Sources */,
 				7F601E2522B0C0B700901046 /* NVMParameter.swift in Sources */,
 				7F360B6423456F2300E5D172 /* SocketLogger.swift in Sources */,
 				7F360B6123456F2300E5D172 /* SocketEnginePacketType.swift in Sources */,
@@ -727,6 +766,7 @@
 				7F360B5E23456F2300E5D172 /* SSLSecurity.swift in Sources */,
 				7F2887A8223C73120049FA4F /* OEP8.swift in Sources */,
 				7F360B5723456F2300E5D172 /* SocketManagerSpec.swift in Sources */,
+				7F360B84234576B300E5D172 /* SocketParserTest.swift in Sources */,
 				7FD3E4A1229AD043004A136B /* OEP10.swift in Sources */,
 				7F601E3022B0D37700901046 /* SHA256.swift in Sources */,
 				7F360B7623456FA600E5D172 /* StarscreamSSLSecurity.swift in Sources */,
