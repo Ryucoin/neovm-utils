@@ -211,6 +211,8 @@ class WalletTests: XCTestCase {
 
     func testLockedWallet() {
         let a = newWallet()
+        let asig = a.signMessage(message: "Hello, world!")
+        XCTAssertNotNil(asig)
         let originalData = a.toData()
         let locked = a.lock(password: "123")
         XCTAssertTrue(locked)
@@ -238,6 +240,10 @@ class WalletTests: XCTestCase {
         XCTAssertTrue(unlocked2)
         let unlocked3 = a.unlock(password: "123")
         XCTAssertFalse(unlocked3)
+
+        print(a.publicKeyString)
+        print(a.address)
+        print(asig)
     }
 
     func testLocking() {
