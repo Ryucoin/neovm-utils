@@ -42,7 +42,7 @@ public class OEP4Interface: OEP10Interface {
 
     public func transfer(from: String, to: String, amount: Double, decimals: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String, payer: String = "") -> String {
         let fromAcct = NVMParameter(type: .Address, value: from)
-        let toAcct = NVMParameter(type: .String, value: to)
+        let toAcct = NVMParameter(type: .Address, value: to)
         var type = NVMParameterType.Integer
         var sending = amount
         if decimals == 8 {
@@ -64,7 +64,7 @@ public class OEP4Interface: OEP10Interface {
     public func transferFrom(spender: String, from: String, to: String, amount: Double, decimals: Int, gasPrice: Int = 500, gasLimit: Int = 20000, wif: String, payer: String = "") -> String {
         let spenderAcct = NVMParameter(type: .Address, value: spender)
         let fromAcct = NVMParameter(type: .Address, value: from)
-        let toAcct = NVMParameter(type: .String, value: to)
+        let toAcct = NVMParameter(type: .Address, value: to)
         var type = NVMParameterType.Integer
         if decimals == 8 {
             type = .Fixed8
@@ -88,7 +88,7 @@ public class OEP4Interface: OEP10Interface {
             }
 
             let fromAcct = NVMParameter(type: .Address, value: arg[0])
-            let toAcct = NVMParameter(type: .String, value: arg[1])
+            let toAcct = NVMParameter(type: .Address, value: arg[1])
             var type = NVMParameterType.Integer
             if decimals == 8 {
                 type = .Fixed8

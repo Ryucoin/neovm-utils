@@ -44,9 +44,9 @@ class Ontology_AssetTests: XCTestCase {
 
         let wallet = newWallet()
         let res = oep4.transfer(from: address, to: wallet.address, amount: 1, decimals: 8, wallet: wallet)
-        XCTAssertEqual(res, fault)
+        XCTAssertTrue(res.hasSuffix("no balance enough to cover gas cost 10000000"))
         let resx = oep4.transfer(from: address, to: wallet.address, amount: 1, decimals: 9, wallet: wallet)
-        XCTAssertEqual(resx, fault)
+        XCTAssertTrue(resx.hasSuffix("no balance enough to cover gas cost 10000000"))
         let args: [Any] = [address, wallet.address, 1]
         let res2 = oep4.transferMulti(args: [args], decimals: 8, wallet: wallet)
         XCTAssertEqual(res2, fault)
@@ -56,6 +56,10 @@ class Ontology_AssetTests: XCTestCase {
         let args3: [Any] = [address, wallet.address, 1, 5]
         let res4 = oep4.transferMulti(args: [args3], decimals: 9, wallet: wallet)
         XCTAssertNotEqual(res4, "")
+
+        let args3b: [Any] = [wallet.address, address, 1, 5]
+        let res4b = oep4.transferMulti(args: [args3b], decimals: 9, wallet: wallet)
+        XCTAssertTrue(res4b.hasSuffix("no balance enough to cover gas cost 10000000"))
 
         let res5 = oep4.approve(owner: wallet.address, spender: address, amount: 1, decimals: 8, wallet: wallet)
         XCTAssertEqual(res5, fault)
@@ -76,8 +80,8 @@ class Ontology_AssetTests: XCTestCase {
 
         let res8 = oep4.transferFrom(spender: address, from: wallet.address, to: address, amount: 1, decimals: 8, wallet: wallet)
         let res9 = oep4.transferFrom(spender: address, from: wallet.address, to: address, amount: 1, decimals: 9, wallet: wallet)
-        XCTAssertEqual(res8, fault)
-        XCTAssertEqual(res9, fault)
+        XCTAssertTrue(res8.hasSuffix("no balance enough to cover gas cost 10000000"))
+        XCTAssertTrue(res9.hasSuffix("no balance enough to cover gas cost 10000000"))
     }
 
     func testOEP5() {
