@@ -211,14 +211,14 @@ class WalletTests: XCTestCase {
 
     func testLockedWallet() {
         let a = newWallet()
-        let asig = a.signMessage(message: "Hello, world!")
+        let asig = a.signMessage(message: "Welcome")
         XCTAssertNotNil(asig)
         let originalData = a.toData()
         let locked = a.lock(password: "123")
         XCTAssertTrue(locked)
         let second = a.lock(password: "456")
         XCTAssertFalse(second)
-        let sig = a.signMessage(message: "Hello, world!")
+        let sig = a.signMessage(message: "Welcome")
         XCTAssertNil(sig)
         let signed = a.signData(data: originalData ?? Data())
         XCTAssertNil(signed)
