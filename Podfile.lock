@@ -1,5 +1,5 @@
 PODS:
-  - neovmUtils (1.7.1):
+  - neovmUtils (1.8.0):
     - NetworkUtils (= 1.1.0)
     - RyuCrypto (= 0.0.1)
   - NetworkUtils (1.1.0):
@@ -23,7 +23,7 @@ EXTERNAL SOURCES:
     :path: "./"
 
 SPEC CHECKSUMS:
-  neovmUtils: 8ad59cc3b5b67390c12c8796606fedb072fc04a8
+  neovmUtils: f66b652fef9bc2ecca08f292faa05ad34c96c520
   NetworkUtils: 98e59b40bcd0cb1c2ecf6f12e66348c2d068b588
   RyuCrypto: 4395cd6eba1e291c5ad6b819feb73bc35cdd9402
   SwiftPromises: 791aca45ea7a946f5d30163d70fc65a55e96c688
