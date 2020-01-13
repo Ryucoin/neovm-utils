@@ -3,7 +3,7 @@
 //  neovmUtils
 //
 //  Created by Wyatt Mufson on 6/10/19.
-//  Copyright © 2019 Ryu Blockchain Technologies. All rights reserved.
+//  Copyright © 2020 Ryu Blockchain Technologies. All rights reserved.
 //
 
 import Foundation
