@@ -1,22 +1,21 @@
 PODS:
   - neovmUtils (1.7.1):
-    - NetworkUtils (= 1.0.0)
+    - NetworkUtils (= 1.1.0)
     - RyuCrypto (= 0.0.1)
-  - NetworkUtils (1.0.0):
-    - SwiftPromises (= 1.0.1)
+  - NetworkUtils (1.1.0):
+    - SwiftPromises (= 1.1.0)
   - RyuCrypto (0.0.1)
-  - SwiftPromises (1.0.1)
+  - SwiftPromises (1.1.0)
 
 DEPENDENCIES:
   - neovmUtils (from `./`)
-  - NetworkUtils (= 1.0.0)
+  - NetworkUtils (= 1.1.0)
   - RyuCrypto (= 0.0.1)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
-    - RyuCrypto
   trunk:
     - NetworkUtils
+    - RyuCrypto
     - SwiftPromises
 
 EXTERNAL SOURCES:
@@ -24,11 +23,11 @@ EXTERNAL SOURCES:
     :path: "./"
 
 SPEC CHECKSUMS:
-  neovmUtils: 850055da07e8d36c91aec9700c6fe9905be09bf2
-  NetworkUtils: 09ce7a4abb4916c7458f8861fe12c4869ef3e284
+  neovmUtils: 8ad59cc3b5b67390c12c8796606fedb072fc04a8
+  NetworkUtils: 98e59b40bcd0cb1c2ecf6f12e66348c2d068b588
   RyuCrypto: 4395cd6eba1e291c5ad6b819feb73bc35cdd9402
-  SwiftPromises: 8c7a2930dafb459e679af48ea667cc067fba9692
+  SwiftPromises: 791aca45ea7a946f5d30163d70fc65a55e96c688
 
-PODFILE CHECKSUM: 191bc122d43f85dbb90a67ac8f82e37162e919c7
+PODFILE CHECKSUM: 9425fd8e3e90bfda7e5136be3d4a89200a4e739d
 
 COCOAPODS: 1.8.0

@@ -14,5 +14,5 @@ Pod::Spec.new do |s|
   s.source_files = 'neovmUtils/Classes/**/*'
   s.vendored_frameworks = 'neoutils.framework'
   s.dependency 'RyuCrypto', '0.0.1'
-  s.dependency 'NetworkUtils', '1.0.0'
+  s.dependency 'NetworkUtils', '1.1.0'
 end
