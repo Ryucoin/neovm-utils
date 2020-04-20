@@ -1,7 +1,16 @@
-# neovmUtils
+<p align="center">
+<img
+src="https://s3.amazonaws.com/ryu-logos/RyuIcon128x128.png?"
+width="128px;">
+</p>
 
-[![Build Status](https://travis-ci.com/Ryucoin/neovm-utils.svg?branch=master)](https://travis-ci.com/Ryucoin/neovm-utils)
-[![codecov](https://codecov.io/gh/Ryucoin/neovm-utils/branch/master/graph/badge.svg)](https://codecov.io/gh/Ryucoin/neovm-utils)
+<h1 align="center">neovmUtils</h1>
+<p align="center">
+iOS SDK for the NEO and Ontology blockchains
+</p>
+
+[![Build Status](https://travis-ci.com/RyuGames/neovm-utils.svg?branch=master)](https://travis-ci.com/RyuGames/neovm-utils)
+[![codecov](https://codecov.io/gh/RyuGames/neovm-utils/branch/master/graph/badge.svg)](https://codecov.io/gh/RyuGames/neovm-utils)
 [![Version](https://img.shields.io/cocoapods/v/neovmUtils.svg?style=flat)](https://cocoapods.org/pods/neovmUtils)
 [![License](https://img.shields.io/cocoapods/l/neovmUtils.svg?style=flat)](https://cocoapods.org/pods/neovmUtils)
 [![Platform](https://img.shields.io/cocoapods/p/neovmUtils.svg?style=flat)](https://cocoapods.org/pods/neovmUtils)
